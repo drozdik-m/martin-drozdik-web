@@ -9,6 +9,7 @@ namespace MartinDrozdik.Services.FilePathProvider.Specific
 {
     public class VersionedFilePathProvider : PackedFilePathProvider
     {
+        /// <inheritdoc/>
         protected string Version
         {
             get
@@ -20,6 +21,7 @@ namespace MartinDrozdik.Services.FilePathProvider.Specific
         }
         private string version = null;
 
+        /// <inheritdoc/>
         public override string PathTo(string path)
         {
             /*var uriBuilder = new UriBuilder(path);

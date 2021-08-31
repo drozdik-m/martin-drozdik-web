@@ -11,6 +11,7 @@ namespace MartinDrozdik.Services.FilePathProvider.Specific
     {
         static readonly DateTimeOffset initDatetime = DateTimeOffset.Now;
 
+        /// <inheritdoc/>
         protected string Version
         {
             get
@@ -22,6 +23,7 @@ namespace MartinDrozdik.Services.FilePathProvider.Specific
         }
         private string version = null;
 
+        /// <inheritdoc/>
         public override string PathTo(string path)
         {
             /*var uriBuilder = new UriBuilder(path);

@@ -8,6 +8,7 @@ namespace MartinDrozdik.Services.FilePathProvider.Specific
 {
     public class RegularFilePathProvider : PackedFilePathProvider
     {
+        /// <inheritdoc/>
         public override string PathTo(string path) => path;
     }
 }

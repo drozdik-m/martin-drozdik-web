@@ -7,8 +7,10 @@ namespace MartinDrozdik.Services.FilePathProvider
 {
     public abstract class PackedFilePathProvider : IFilePathProvider
     {
+        /// <inheritdoc/>
         public string CleanPathTo(string path) => path;
 
+        /// <inheritdoc/>
         public string CleanPathTo(string path, string razorLibName)
         {
             if (!path.StartsWith("/"))
@@ -16,8 +18,10 @@ namespace MartinDrozdik.Services.FilePathProvider
             return CleanPathTo("/_content/" + razorLibName + path);
         }
 
+        /// <inheritdoc/>
         public abstract string PathTo(string path);
 
+        /// <inheritdoc/>
         public string PathTo(string path, string razorLibName)
         {
             if (!path.StartsWith("/"))

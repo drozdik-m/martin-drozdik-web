@@ -2,12 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Web.ViewModels.Home;
 
 namespace MartinDrozdik.Web.ViewModels
 {
     public abstract class ViewModelBase
     {
+        /// <summary>
+        /// Culture provider for this page
+        /// </summary>
+        public ICultureProvider CultureProvider { get; }
+
+        /// <summary>
+        /// Language provider for this page
+        /// </summary>
+        public ILanguageDictionary LanguageDictionary { get; }
+
+        public ViewModelBase(ICultureProvider cultureProvider, ILanguageDictionary languageDictionary)
+        {
+            if (cultureProvider is null)
+                throw new ArgumentNullException(nameof(cultureProvider));
+
+            if (languageDictionary is null)
+                throw new ArgumentNullException(nameof(languageDictionary));
+
+            CultureProvider = cultureProvider;
+            LanguageDictionary = languageDictionary;
+        }
+
         /// <summary>
         /// Description of this page
         /// </summary>

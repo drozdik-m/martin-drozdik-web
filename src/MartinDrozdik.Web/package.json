@@ -1,7 +1,7 @@
 {
   "name": "@drozdik.m/web",
   "version": "1.0.0",
-  "description": "",
+  "description": "My personal website",
   "main": "dist/Module.js",
   "typings": "dist/Module.d.ts",
   "scripts": {
@@ -21,7 +21,13 @@
   "keywords": [],
   "author": "Martin Drozdík <ja@martin-drozdik.cz> (http://martin-drozdik.cz)",
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@drozdik.m/common-mixins": "^1.0.5",
+    "@drozdik.m/google-analytics": "^1.0.1",
+    "@drozdik.m/px-in-rem": "^1.0.1",
+    "@drozdik.m/slow-scroll": "^1.1.0",
+    "@drozdik.m/window-events": "^1.1.2"
+  },
   "devDependencies": {
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0"

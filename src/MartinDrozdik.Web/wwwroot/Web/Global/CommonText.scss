@@ -1,0 +1,76 @@
+﻿@import "../../_Variables.scss";
+
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+$commonGrey: #212121 !default;
+
+//--------------------------------------------------
+//---------HEADING----------------------------------
+//--------------------------------------------------
+.commonH {
+    $cubeDimensions: 2rem;
+    text-align: left;
+    font-size: $pxInRem-32;
+    text-transform: uppercase;
+    margin-bottom: $pxInRem-16;
+    color: $commonGrey;
+    font-weight: normal;
+    position: relative;
+    padding-left: $cubeDimensions + $pxInRem-14;
+
+    &:after {
+        content: " ";
+        font-size: 0;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        margin-top: -$cubeDimensions / 2;
+        width: $cubeDimensions;
+        height: $cubeDimensions;
+        background-color: $mainTheme;
+    }
+}
+
+.commonHBlue {
+    &:after {
+        background-color: $blue;
+    }
+}
+.commonHRed {
+    &:after {
+        background-color: $red;
+    }
+}
+.commonHGreen {
+    &:after {
+        background-color: $green;
+    }
+}
+
+
+@media only screen and (max-width: 37.5rem) {
+    .commonH {
+        font-size: $pxInRem-26;
+        margin-bottom: $pxInRem-10;
+
+        $cubeDimensions: 1.5rem;
+        padding-left: $cubeDimensions + $pxInRem-10;
+
+        &:after {
+            margin-top: -$cubeDimensions / 2;
+            width: $cubeDimensions;
+            height: $cubeDimensions;
+        }
+    }
+}
+//--------------------------------------------------
+//---------PARAGRAPH--------------------------------
+//--------------------------------------------------
+.commonP {
+}
+
+@media only screen and (max-width: 37.5rem) {
+    .commonP {
+    }
+}

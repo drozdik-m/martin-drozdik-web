@@ -1,0 +1,43 @@
+﻿@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+$blockNarrowerMaxWidth: 67rem !default;
+$blockMaxWidth: 75rem !default;
+
+//--------------------------------------------------
+//---------BLOCK------------------------------------
+//--------------------------------------------------
+//WIDTH BLOCKS
+.blockNarrower, .block {
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+@media only screen and (max-width: 50rem) {
+    .blockNarrower, .block {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+}
+
+.blockNarrower {
+    max-width: $blockNarrowerMaxWidth;
+}
+
+.block {
+    max-width: $blockMaxWidth;
+}
+
+
+//BLOCK MARGIN
+.blockMargin {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+
+@media only screen and (max-width: 50rem) {
+    .blockMargin {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
