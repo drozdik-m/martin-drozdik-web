@@ -70,6 +70,27 @@
 </head>
 <body>
 
+    <!--MENU-->
+    @* https://codepen.io/ainalem/pen/wvKOEMV *@
+    <div id="menu" class="menuWrapper desktopMenu">
+        <nav class="menu block">
+            <a href="/" title="Index" class="menuLogo">
+                <img src="@PathProvider.PathTo("/Web/Menu/Logo.png")" alt="Logo" />
+            </a>
+            <div class="hamburger" id="menuToggle">
+                <span class="child1">&nbsp;</span>
+                <span class="child2">&nbsp;</span>
+                <span class="child3">&nbsp;</span>
+                <span class="child4">&nbsp;</span>
+            </div>
+            <ul>
+                <li><a href="/" title="Event 21">Event 21</a></li>
+                @*<li><a href="@(Model.PageId == "Index" ? "" : "/")#products" title="@await Model.LanguageDictionary.GetContentAsync("Products - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Products - Heading")</a></li>*@
+            </ul>
+        </nav>
+    </div>
+
+
     @*<!--COOKIES-->
         @if (!Context.Request.Cookies.TryGetValue("TermsAndConditions", out string cookieValue) || cookieValue != "true")
         {
@@ -97,25 +118,6 @@
             </div>
         </div>
 
-        <!--MENU-->
-        <div id="menu" class="menuWrapper desktopMenu">
-            <nav class="menu block">
-                <a href="/" title="Index" class="menuLogo">
-                    <img src="@PathProvider.PathTo("/Web/Menu/Logo.png")" alt="Logo" />
-                </a>
-                <div class="hamburger" id="menuToggle">
-                    <span class="child1">&nbsp;</span>
-                    <span class="child2">&nbsp;</span>
-                    <span class="child3">&nbsp;</span>
-                    <span class="child4">&nbsp;</span>
-                </div>
-                <ul>
-                    <li><a href="/" title="Event 21">Event 21</a></li>
-                    <li><a href="@(Model.PageId == "Index" ? "" : "/")#products" title="@await Model.LanguageDictionary.GetContentAsync("Products - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Products - Heading")</a></li>
-                    <li><a href="@(Model.PageId == "Index" ? "" : "/")#contact" title="@await Model.LanguageDictionary.GetContentAsync("Contact - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Contact - Heading")</a></li>
-                </ul>
-            </nav>
-        </div>
 
         <!--CONTENT-->
         <main id="content">

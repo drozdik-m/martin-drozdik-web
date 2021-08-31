@@ -1,4 +1,7 @@
 ﻿using Bonsai.Server.Middlewares.Localization;
+using MartinDrozdik.Services.FilePathProvider;
+using MartinDrozdik.Services.FilePathProvider.Specific;
+using MartinDrozdik.Web.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -51,6 +54,18 @@ namespace MartinDrozdik.Web
                 opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
                     new[] { "application/octet-stream" });
             });
+
+            //Web configuration
+            var webConfiguration = Configuration
+                .GetSection("WebConfiguration")
+                .Get<WebConfiguration>();
+            services.AddSingleton<WebConfiguration>(webConfiguration);
+
+            //File path provider service
+            if (Environment.IsDevelopment())
+                services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
+            else
+                services.AddSingleton<IFilePathProvider, VersionedFilePathProvider>();
 
             //Add languages
             services.AddLanguages();
