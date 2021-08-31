@@ -3,28 +3,22 @@
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
 //Font name, font file name, path, weight, style
-@include font-face (Raleway, Raleway-Regular, "/Fonts/Raleway/", normal, normal); //400
-@include font-face (Raleway, Raleway-Bold, "/Fonts/Raleway/", bold, normal); //700
-@include font-face (Raleway, Raleway-Black, "/Fonts/Raleway/", bolder, normal); 
+@include font-face (Raleway, Raleway-Regular, "/Fonts/Raleway/", $fontWeightRegular, normal);
+@include font-face (Raleway, Raleway-SemiBold, "/Fonts/Raleway/", $fontWeightSemiBold, normal);
+@include font-face (Raleway, Raleway-Bold, "/Fonts/Raleway/", $fontWeightBold, normal);
+@include font-face (Raleway, Raleway-Black, "/Fonts/Raleway/", $fontWeightBlack, normal); 
 
 
 html {
-    font-family: 'OpenSans', Verdana, sans-serif;
-    font-weight: normal;
+    font-family: 'Raleway', Verdana, sans-serif;
+    font-weight: $fontWeightRegular;
 }
 
-h1, h2, h3, h4, h5, h6, h7, .b, .bold, .strong, strong, b {
-    font-weight: bold;
+h1, h2, h3, h4, h5, h6, h7{
+    font-weight: $fontWeightBlack;
 }
 
-.i, .italic {
-    font-style: italic;
+strong, b{
+    font-weight: $fontWeightBold;
 }
 
-.u, .underline {
-    text-decoration: underline;
-}
-
-.uppercase {
-    text-transform: uppercase;
-}

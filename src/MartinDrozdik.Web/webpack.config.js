@@ -42,7 +42,7 @@ module.exports = [
     },
 
     //SERVICE WORKER
-    {
+    /*{
         //Entry points
         entry: {
             ServiceWorker: "./wwwroot/_dist/ServiceWorker/ServiceWorkerLink.js"
@@ -62,5 +62,5 @@ module.exports = [
         watchOptions: watchOptions = {
             ignored: /node_modules/
         }
-    }
+    }*/
 ];
