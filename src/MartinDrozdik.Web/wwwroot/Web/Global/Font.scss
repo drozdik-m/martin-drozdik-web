@@ -1,9 +1,11 @@
-﻿@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
-@include font-face (OpenSans, OpenSans-Extrabold, "/Fonts/OpenSans/", bolder);
-@include font-face (OpenSans, OpenSans-Bold, "/Fonts/OpenSans/", bold);
-@include font-face (OpenSans, OpenSans, "/Fonts/OpenSans/", normal);
+//Font name, font file name, path, weight, style
+@include font-face (Raleway, Raleway-Regular, "/Fonts/Raleway/", normal, normal); //400
+@include font-face (Raleway, Raleway-Bold, "/Fonts/Raleway/", bold, normal); //700
+@include font-face (Raleway, Raleway-Black, "/Fonts/Raleway/", bolder, normal); 
 
 
 html {
