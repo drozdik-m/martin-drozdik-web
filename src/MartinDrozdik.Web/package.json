@@ -1,0 +1,29 @@
+{
+  "name": "@drozdik.m/web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/Module.js",
+  "typings": "dist/Module.d.ts",
+  "scripts": {
+    "compile-scripts": "tsc && webpack",
+    "watch-scripts": "tsc && webpack --watch",
+    "compile-styles": "sass --load-path=node_modules --load-path=../ wwwroot/Sitemap:wwwroot/_dist/wwwroot/Sitemap wwwroot/Web:wwwroot/_dist/wwwroot/Web --style compressed",
+    "watch-styles": "sass --load-path=node_modules --load-path=../ --watch wwwroot/Sitemap:wwwroot/_dist/wwwroot/Sitemap wwwroot/Web:wwwroot/_dist/wwwroot/Web --style compressed",
+    "clear": "rmdir /S /Q \"wwwroot/_dist\"",
+    "compile": "npm run compile-scripts && npm run compile-styles",
+    "build": "npm update && npm update -D && npm run compile",
+    "test": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drozdik-m/martin-drozdik-web"
+  },
+  "keywords": [],
+  "author": "Martin Drozdík <ja@martin-drozdik.cz> (http://martin-drozdik.cz)",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^5.51.1",
+    "webpack-cli": "^4.8.0"
+  }
+}

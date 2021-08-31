@@ -1,0 +1,50 @@
+﻿@import "../node_modules/@drozdik.m/px-in-rem/module";
+
+//COLORS
+$grey: #212121;
+$greyHover: #0f0f0f;
+
+$blue: #2497da;
+$blueHover: #2085c0;
+
+$red: #e0292e;
+$redHover: #c9252a;
+
+$green: #8bc33e;
+$greenHover: #7cad38;
+
+$mainTheme: $blue;
+$mainThemeHover: $blueHover;
+
+
+//CLASSIC COLOS
+$commonGreen: #0a7b12;
+$commonGreenHoverDark: #09470d;
+$commonGreenHoverLight: #1ba425;
+$commonGreenHover: $commonGreenHoverDark;
+
+$commonYellow: #f1c817;
+$commonYellowHoverDark: #aaa100;
+$commonYellowHoverLight: #eadf19;
+$commonYellowHover: $commonYellowHoverDark;
+
+$commonRed: #b00606;
+$commonRedHoverDark: #6b0505;
+$commonRedHoverLight: #dc2323;
+$commonRedHover: $commonRedHoverDark;
+
+$commonGrey: #212121;
+$commonGreyHoverDark: #060606;
+$commonGreyHoverLight: #3b3b3b;
+$commonGreyHover: $commonGreyHoverDark;
+
+$commonLightBlue: #2276cb;
+
+$commonDarkBlue: #073f69;
+
+//TRANSITIONS
+$transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
+
+//BLOCK MAX WIDTH
+$blockNarrowerMaxWidth: 67rem;
+$blockMaxWidth: 75rem;

@@ -1,0 +1,146 @@
+﻿@model ViewModelBase
+@inject IFilePathProvider PathProvider
+
+
+
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    @*<!--GENERAL META TAGS-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="@Model.Description" />
+    <meta name="keywords" content="@Model.Keywords" />
+    <meta name="author" content="Bonsai Development" />
+    <meta name="designer" content="Bonsai Development" />
+    <meta name="owner" content="@Model.ClientName" />
+    <meta name="language" content="@Model.LanguageDictionary.Culture.TwoLetterISOLanguageName" />
+    <meta name="robots" content="index, follow" />
+    <!--meta name="copyright" content="clientName"-->
+    <!--TITLE-->
+    <title>@Model.Title</title>
+
+    <!--IOS META TAGS-->
+    <meta name="apple-mobile-web-app-title" content="@Model.SiteName">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--meta name="apple-mobile-web-app-capable" content="yes"-->
+    <!--meta name="apple-touch-fullscreen" content="yes"-->
+    <!--WINDOWS META TAGS-->
+    <meta name="application-name" content="@Model.SiteName" />
+
+    <!--SOCIAL-->
+    <meta property="og:image" content="@WebConfiguration.Domain@Model.OgImage" />
+    <meta property="og:image:secure_url" content="@WebConfiguration.Domain@Model.OgImage" />
+    <meta property="og:type" content="@Model.PageType" />
+    <meta property="og:description" content="@Model.Description" />
+    <meta property="og:title" content="@Model.Title" />
+    <meta property="og:site_name" content="@Model.SiteName" />
+
+    <!--TWITTER-->
+    <meta name="twitter:title" content="@Model.Title">
+    <meta name="twitter:description" content="@Model.Description">
+    <meta name="twitter:image" content="@WebConfiguration.Domain@Model.OgImage">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image:alt" content="@Model.SiteName">
+
+    <!--MANIFEST-->
+    <link rel="manifest" href="@PathProvider.PathTo("/Manifest/Manifest.json")">
+    <meta name="theme-color" content="#ffffff">
+
+    <!--FAVICON-->
+    <link rel="apple-touch-icon" sizes="180x180" href="@PathProvider.PathTo("/Favicon/apple-touch-icon.png")">
+    <link rel="icon" type="image/png" sizes="32x32" href="@PathProvider.PathTo("/Favicon/favicon-32x32.png")">
+    <link rel="icon" type="image/png" sizes="194x194" href="@PathProvider.PathTo("/Favicon/favicon-194x194.png")">
+    <link rel="icon" type="image/png" sizes="192x192" href="@PathProvider.PathTo("/Favicon/android-chrome-192x192.png")">
+    <link rel="icon" type="image/png" sizes="16x16" href="@PathProvider.PathTo("/Favicon/favicon-16x16.png")">
+    <link rel="mask-icon" href="@PathProvider.PathTo("/Favicon/safari-pinned-tab.svg")" color="#347ddb">
+    <link rel="shortcut icon" href="@PathProvider.PathTo("/Favicon/favicon.ico")">
+    <meta name="msapplication-TileColor" content="#347ddb">
+    <meta name="msapplication-TileImage" content="@PathProvider.PathTo("/Favicon/mstile-144x144.png")">
+    <meta name="msapplication-config" content="@PathProvider.PathTo("/Favicon/browserconfig.xml")">
+     *@
+
+    @* GOOGLE ANALYTICS - Change in Global.js *@
+    @* SMART LOOK (optional) *@
+    @* FACEBOOK PIXEL (optional) *@
+
+    @*<!--STYLES-->
+    @RenderSection("Styles", required: false)
+    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/wwwroot/Web/Global/Global.css")" />
+
+    <!--SCRIPTS-->
+    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/common.js")"></script>
+    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/Global.js")"></script>
+    @RenderSection("Scripts", required: false)
+    *@
+
+</head>
+<body>
+
+    @*<!--COOKIES-->
+        @if (!Context.Request.Cookies.TryGetValue("TermsAndConditions", out string cookieValue) || cookieValue != "true")
+        {
+            <div id="cookiesBar" class="cookiesBar">
+                <div class="cookiesBarInner">
+                    <p class="cookiesBarText">@await Model.LanguageDictionary.GetContentAsync(CookieBarDictionary.PanelText)</p>
+                    <button type="button" class="cookiesBarButton">@await Model.LanguageDictionary.GetContentAsync(CookieBarDictionary.ConfirmButton)</button>
+                </div>
+            </div>
+        }
+
+
+        <!--TOP INFO BAR-->
+        <div id="topInfoBar">
+            <div class="block">
+                <ul id="topSocialSites">
+                    <li><a href="https://www.facebook.com/yventech/" target="_blank" title="Facebook"><img src="@PathProvider.PathTo("/Web/TopInfoBar/facebook.png")" alt="Facebook" title="Facebook" /></a></li>
+                    <li><a href="https://www.youtube.com/channel/UCkuKozbUxc56pdN_hV8_SCQ" target="_blank" title="Youtube"><img src="@PathProvider.PathTo("/Web/TopInfoBar/youtube.png")" alt="Youtube" title="Youtube" /></a></li>
+                    <li><a href="https://www.instagram.com/yventech/" target="_blank" title="Instagram"><img src="@PathProvider.PathTo("/Web/TopInfoBar/instagram.png")" alt="Instagram" title="Instagram" /></a></li>
+                </ul>
+                <ul id="topLanguages">
+                    <li><a href="@Url.Action("ChangeLanguage", "Home", new { languageIso = "cs" })" title="Čeština"><img src="@PathProvider.PathTo("/Web/TopInfoBar/czechFlag.png")" alt="Čeština" title="Čeština" /></a></li>
+                    <li><a href="@Url.Action("ChangeLanguage", "Home", new { languageIso = "en" })" title="English"><img src="@PathProvider.PathTo("/Web/TopInfoBar/ukFlag.png")" alt="English" title="English" /></a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!--MENU-->
+        <div id="menu" class="menuWrapper desktopMenu">
+            <nav class="menu block">
+                <a href="/" title="Index" class="menuLogo">
+                    <img src="@PathProvider.PathTo("/Web/Menu/Logo.png")" alt="Logo" />
+                </a>
+                <div class="hamburger" id="menuToggle">
+                    <span class="child1">&nbsp;</span>
+                    <span class="child2">&nbsp;</span>
+                    <span class="child3">&nbsp;</span>
+                    <span class="child4">&nbsp;</span>
+                </div>
+                <ul>
+                    <li><a href="/" title="Event 21">Event 21</a></li>
+                    <li><a href="@(Model.PageId == "Index" ? "" : "/")#products" title="@await Model.LanguageDictionary.GetContentAsync("Products - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Products - Heading")</a></li>
+                    <li><a href="@(Model.PageId == "Index" ? "" : "/")#contact" title="@await Model.LanguageDictionary.GetContentAsync("Contact - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Contact - Heading")</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <!--CONTENT-->
+        <main id="content">
+            @RenderBody()
+        </main>
+
+        <!--FOOTER-->
+        <footer id="footer" class="block blockMargin">
+            <nav>
+                <ul id="footerMenu">
+                    <li><a href="/" title="Index">@await Model.LanguageDictionary.GetContentAsync("Web name")</a></li>
+                    <li><a href="@await Model.LanguageDictionary.GetContentAsync("Contact - YVentech web - URI")" target="_blank" title="Yventech web" rel="nofollow">Yventech</a></li>
+                    <li><a href="@(Model.PageId == "Index" ? "" : "/")#products" title="@await Model.LanguageDictionary.GetContentAsync("Products - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Products - Heading")</a></li>
+                    <li><a href="@(Model.PageId == "Index" ? "" : "/")#contact" title="@await Model.LanguageDictionary.GetContentAsync("Contact - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Contact - Heading")</a></li>
+                </ul>
+            </nav>
+
+            <p id="credits">Yventech &copy;@DateTime.Now.Year all rights reserved. Web by <a href="https://bonsai-development.cz/" rel="nofollow" title="Bonsai Development web" target="_blank" alt="Bonsai logo">Bonsai</a>.</p>
+        </footer>*@
+</body>
+</html>
