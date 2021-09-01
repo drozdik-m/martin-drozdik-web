@@ -72,20 +72,24 @@
 
     <!--MENU-->
     @* https://codepen.io/ainalem/pen/wvKOEMV *@
-    <div id="menu" class="menuWrapper desktopMenu">
-        <nav class="menu block">
-            <a href="/" title="Index" class="menuLogo">
-                <img src="@PathProvider.PathTo("/Web/Menu/Logo.png")" alt="Logo" />
+    <div id="menu" class="desktopMenu">
+        <nav>
+            <a href="/" title="Index" id="menuLogo">
+                <white-logo-icon />
             </a>
-            <div class="hamburger" id="menuToggle">
+            @*<div id="menuHamburger">
                 <span class="child1">&nbsp;</span>
                 <span class="child2">&nbsp;</span>
                 <span class="child3">&nbsp;</span>
                 <span class="child4">&nbsp;</span>
-            </div>
+            </div>*@
             <ul>
-                <li><a href="/" title="Event 21">Event 21</a></li>
-                @*<li><a href="@(Model.PageId == "Index" ? "" : "/")#products" title="@await Model.LanguageDictionary.GetContentAsync("Products - Heading")" class="@(Model.PageId == "Index" ? "slowScroll" : "")">@await Model.LanguageDictionary.GetContentAsync("Products - Heading")</a></li>*@
+                <li><a href="/" title="Martin Drozdík">Martin Drozdík</a></li>
+                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#aboutMe" title="Kdo jsem?" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">O mně</a></li>
+                <li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>
+                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#CV" title="Životopis" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">CV</a></li>
+                <li><a href="@Url.Action("Blog", "Home")" title="Blog">Blog</a></li>
+                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>
             </ul>
         </nav>
     </div>

@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Deterministic>false</Deterministic>
     <AssemblyVersion>1.0.*</AssemblyVersion>
+    <AssemblyName>MartinDrozdik.Web</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -25,6 +25,7 @@
     "@drozdik.m/common-mixins": "^1.0.5",
     "@drozdik.m/form": "^1.1.11",
     "@drozdik.m/google-analytics": "^1.0.1",
+    "@drozdik.m/menu": "^1.0.0",
     "@drozdik.m/px-in-rem": "^1.0.1",
     "@drozdik.m/slow-scroll": "^1.1.0",
     "@drozdik.m/window-events": "^1.1.2"
