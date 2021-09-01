@@ -1,4 +1,4 @@
-﻿@import "../node_modules/@drozdik.m/px-in-rem/module";
+﻿@import "../../node_modules/@drozdik.m/px-in-rem/module";
 
 //COLORS
 $red: #C31432;
@@ -28,3 +28,6 @@ $fontWeightRegular: normal;
 $fontWeightSemiBold: 600;
 $fontWeightBold: bold;
 $fontWeightBlack: 900;
+
+//RADIUSES
+$smallRadius: $pxInRem-6;

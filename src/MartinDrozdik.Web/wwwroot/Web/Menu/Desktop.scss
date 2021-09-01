@@ -1,0 +1,128 @@
+﻿@use "sass:math";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+$desktopMenuHeight: 6rem !default;
+
+//--------------------------------------------------
+//----------DESKTOP MENU----------------------------
+//--------------------------------------------------
+#menu.desktopMenu {
+    height: $desktopMenuHeight;
+    font-size: 0;
+    text-align: center;
+    box-shadow: 0px 0px $pxInRem-20 $pxInRem-5 $black;
+    //INNER MENU <nav>
+    nav {
+        position: relative;
+        max-width: 120rem;
+        text-align: right;
+        margin: 0 auto;
+        //MENU LOGO
+        #menuLogo {
+            float: left;
+            padding-right: 1rem;
+            padding-left: 1.75rem;
+
+            svg {
+                width: auto;
+                $topBottomSpace: 1.5rem;
+                height: $desktopMenuHeight - (2 * $topBottomSpace);
+                margin: $topBottomSpace 0;
+            }
+        }
+        //LIST <ul>
+        ul {
+            display: inline-block;
+
+            li {
+                display: inline-block;
+                vertical-align: middle;
+                text-align: center;
+                @include transition (background-color $transition);
+
+                a {
+                    $height: 3rem;
+                    $padding: $pxInRem-48;
+                    display: block;
+                    font-size: $pxInRem-22;
+                    height: $height;
+                    line-height: $height;
+                    padding: 0 $padding;
+                    margin-top: math.div($desktopMenuHeight - $height, 2);
+                    color: white;
+                    @include transition (color $transition);
+                    font-weight: $fontWeightSemiBold;
+                    position: relative;
+
+                    &:before {
+                        position: absolute;
+                        bottom: -$pxInRem-2;
+                        left: 30%;
+                        right: 30%;
+                        opacity: 0;
+                        height: $pxInRem-2;
+                        background-color: white;
+                        content: " ";
+                        font-size: 0;
+
+                        @include transition(opacity $transition, left $transition, right $transition, bottom $transition, top $transition, height $transition)
+                    }
+
+                    &.contact {
+                        background-color: $red;
+                        @include border-radius(5rem);
+                        $margin: $pxInRem-24;
+                        padding-left: $padding - $margin;
+                        padding-right: $padding - $margin;
+                        margin-left: $margin;
+                        margin-right: $margin;
+
+                        @include transition(background-color $transition, border-radius $transition);
+
+                        &:before {
+                            display: none;
+                        }
+
+                        &:hover {
+                            background-color: $redHover;
+                        }
+
+                        &:active {
+                            background-color: rgba(255, 255, 255, 0.2);
+                            border-radius: 0;
+                        }
+                    }
+
+                    &:hover {
+                        color: white;
+
+                        &:before {
+                            left: $padding - 0.5rem;
+                            right: $padding - 0.5rem;
+                            bottom: 0;
+                            opacity: 0.8;
+                        }
+                    }
+
+                    &:active {
+                        //color: $black;
+
+                        &:before {
+                            left: 0.75rem;
+                            right: 0.75rem;
+                            height: $height;
+                            opacity: 0.2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //HAMBURGER
+    #menuHamburger {
+        display: none;
+    }
+}

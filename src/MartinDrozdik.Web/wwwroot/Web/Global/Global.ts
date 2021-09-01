@@ -1,7 +1,7 @@
 ﻿//import "../../ServiceWorker/ServiceWorkerRegistrator";
 //import "../CookiesBar/CookiesBar";
 //import "../TopInfoBar/TopInfoBar";
-//import "../Menu/Menu";
+import "../Menu/Menu";
 //import "../Footer/Footer";
 //import "./ArticleBase";
 
