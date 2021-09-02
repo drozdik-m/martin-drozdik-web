@@ -10,16 +10,11 @@
 
 #heroHeader {
     $marginLeft: 5%;
-    //position: absolute;
-    //top: 0;
-    //left: 0;
-    //right: 0;
-    //height: 100vh;
     background-color: $red;
     background: linear-gradient(to bottom right, $red, $black);
     font-size: 0;
     padding-bottom: 3rem;
-    //max-height: 66rem;
+    @include box-shadow(0px 0px $pxInRem-30 $pxInRem-23 rgba(0, 0, 0, 0.4));
 
     #heroHeaderContent {
         max-width: 120rem;
@@ -59,6 +54,14 @@
 
         #heroHeaderSE {
         }
+        //LOGO ICON
+        .whiteLogoIcon {
+            float: right;
+            width: 22.5rem;
+            height: 19.6875rem;
+            margin-right: 10%;
+            margin-top: 3%;
+        }
     }
     //HEADER BUTTONS
     #headerButtons {
@@ -74,9 +77,8 @@
             vertical-align: middle;
         }
     }
-
     //CONTACT INFOS
-    .contactInfos{
+    .contactInfos {
         margin-left: $marginLeft;
         margin-top: 13%;
     }

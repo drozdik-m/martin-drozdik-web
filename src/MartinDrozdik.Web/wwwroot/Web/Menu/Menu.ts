@@ -27,7 +27,7 @@ WindowEvents.OnDOMReady.Add(function ()
         .SetWidthBreaking(1300);
 
     //Get list of items
-    var ulElement = menuElement.querySelector("ul")
+    let ulElement = menuElement.querySelector("ul")
     if (!ulElement)
     {
         console.error("Element \"#menu ul\" not found");
@@ -36,25 +36,25 @@ WindowEvents.OnDOMReady.Add(function ()
     var ulDimHelper = new DimensionsHelper(ulElement)
 
     //Get menu logo
-    var menuLogoElement = document.getElementById("menuLogo")
+    let menuLogoElement = document.getElementById("menuLogo")
     if (!menuLogoElement)
     {
         console.error("Element #menuLogoElement not found");
         return;
     }
-    var menuLogoDimHelper = new DimensionsHelper(menuLogoElement)
+    let menuLogoDimHelper = new DimensionsHelper(menuLogoElement)
 
     /**
      * Recalculates margin of the ul menu list
      * */
     function RecalculateUlMargin()
     {
-        var screenHeight = WindowEvents.Height();
-        var logoHeight = menuLogoDimHelper.HeightWithMargin();
-        var ulHeight = ulDimHelper.HeightWithBorder();
+        let screenHeight = WindowEvents.Height();
+        let logoHeight = menuLogoDimHelper.HeightWithMargin();
+        let ulHeight = ulDimHelper.HeightWithBorder();
 
-        var freeSpace = screenHeight - logoHeight - ulHeight;
-        var marginTop = freeSpace / 3;
+        let freeSpace = screenHeight - logoHeight - ulHeight;
+        let marginTop = freeSpace / 3;
 
         ulElement.style.marginTop = marginTop + "px";
     }

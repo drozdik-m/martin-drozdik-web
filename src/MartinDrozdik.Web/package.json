@@ -27,8 +27,11 @@
     "@drozdik.m/form": "^1.1.11",
     "@drozdik.m/google-analytics": "^1.0.1",
     "@drozdik.m/menu": "^1.1.0",
+    "@drozdik.m/pair": "^1.1.0",
     "@drozdik.m/px-in-rem": "^1.0.1",
+    "@drozdik.m/queue": "^1.1.0",
     "@drozdik.m/slow-scroll": "^1.1.0",
+    "@drozdik.m/stack": "^1.0.1",
     "@drozdik.m/window-events": "^1.1.2"
   },
   "devDependencies": {
