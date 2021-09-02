@@ -26,7 +26,8 @@ $mobileMenuHeight: 2.5rem !default;
 
             svg {
                 height: 2.5rem;
-                width: auto;
+                width: 2.8525rem;
+                //width: auto;
             }
         }
         //LIST <ul>
@@ -125,6 +126,9 @@ $mobileMenuHeight: 2.5rem !default;
         @include transition(background-color $transition);
         cursor: pointer;
         z-index: 210;
+        $dimensions: 3.5rem;
+        height: $dimensions;
+        width: $dimensions;
 
         &:hover {
             background-color: #f2f2f2;
@@ -135,8 +139,8 @@ $mobileMenuHeight: 2.5rem !default;
         }
 
         svg {
-            width: 3.5rem;
-            height: auto;
+            width: 100%;
+            height: 100%;
         }
 
         .line {

@@ -1,64 +1,7 @@
-﻿/*@import "../_Variables";
+﻿@import "../_Variables";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
-@import "../../../node_modules/@drozdik.m/common-button/module";
 
 
-$transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1) !default;
 
-$commonGreen: #0a7b12 !default;
-$commonGreenHover: #09470d !default;
 
-$commonYellow: #f1c817 !default;
-$commonYellowHover: #aaa100 !default;
-
-$commonRed: #b00606 !default;
-$commonRedHover: #6b0505 !default;
-
-$commonGrey: #212121 !default;
-$commonGreyHover: #060606 !default;
-
-.commonButton {
-    &.commonButtonGreen {
-        @include commonButtonScheme(white, $commonGreen, white, $commonGreenHover);
-    }
-
-    &.commonButtonRed {
-        @include commonButtonScheme(white, $commonRed, white, $commonRedHover);
-    }
-
-    &.commonButtonYellow {
-        @include commonButtonScheme(white, $commonYellow, white, $commonYellowHover);
-    }
-
-    &.commonButtonGrey {
-        @include commonButtonScheme(white, $commonGrey, white, $commonGreyHover);
-    }
-
-    &.commonButtonPageGreen {
-        @include commonButtonScheme(white, $green, white, $greenHover);
-    }
-
-    &.commonButtonPageGrey {
-        @include commonButtonScheme(white, $grey, white, $greyHover);
-    }
-
-    &.commonButtonPageBlue {
-        @include commonButtonScheme(white, $blue, white, $blueHover);
-    }
-
-    &.commonButtonPageRed {
-        @include commonButtonScheme(white, $red, white, $redHover);
-    }
-
-    &.commonButtonPage {
-        text-transform: uppercase;
-        padding: $pxInRem-8 $pxInRem-16;
-        box-shadow: none;
-
-        &, &:after, &:before {
-            @include border-radius(0);
-        }
-    }
-}
-    */

@@ -25,9 +25,10 @@ $desktopMenuHeight: 6rem !default;
             float: left;
             padding-right: 1rem;
             padding-left: 1.75rem;
+            display: block;
 
             svg {
-                width: auto;
+                width: 3.424375rem;
                 $topBottomSpace: 1.5rem;
                 height: $desktopMenuHeight - (2 * $topBottomSpace);
                 margin: $topBottomSpace 0;

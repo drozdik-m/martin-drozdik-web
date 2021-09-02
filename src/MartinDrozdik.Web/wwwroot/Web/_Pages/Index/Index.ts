@@ -1,4 +1,6 @@
-﻿/*import { WindowEvents } from "@drozdik.m/window-events";
+﻿import "../../HeroHeader/HeroHeader";
+
+/*import { WindowEvents } from "@drozdik.m/window-events";
 
 
 WindowEvents.OnDOMReady.Add(function ()

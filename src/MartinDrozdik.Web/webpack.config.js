@@ -38,7 +38,9 @@ module.exports = [
         watch: false,
         watchOptions: watchOptions = {
             ignored: /node_modules/
-        }
+        },
+
+        target: ["web", "es5"]
     },
 
     //SERVICE WORKER
