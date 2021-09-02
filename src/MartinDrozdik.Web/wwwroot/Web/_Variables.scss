@@ -16,6 +16,8 @@ $blackHover: #000000;
 $mainTheme: $red;
 $mainThemeHover: $redHover;
 
+$green: #90EE90;
+
 //TRANSITIONS
 $transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
 
@@ -30,4 +32,4 @@ $fontWeightBold: bold;
 $fontWeightBlack: 900;
 
 //RADIUSES
-$smallRadius: $pxInRem-6;
+$radiusSmall: $pxInRem-6;

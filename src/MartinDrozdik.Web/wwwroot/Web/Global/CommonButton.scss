@@ -4,4 +4,37 @@
 
 
 
+.commonButton {
+    @include border-radius(3rem);
+    padding: 1.25rem 2.5rem;
+    @include transition(color $transition, background-color $transition, border-radius $transition);
+    text-decoration: none;
+    font-size: $pxInRem-24;
+    font-weight: $fontWeightBold;
 
+    &:active {
+        @include border-radius($radiusSmall);
+    }
+}
+
+@mixin commonButtonScheme($textColor, $textColorHover, $backgroundColor, $backgroundColorHover) {
+    color: $textColor;
+    background-color: $backgroundColor;
+
+    &:hover {
+        color: $textColorHover;
+        background-color: $backgroundColorHover;
+    }
+}
+
+.commonButtonBlack {
+    @include commonButtonScheme(white, white, $black, $blackHover);
+}
+
+.commonButtonRed {
+    @include commonButtonScheme(white, white, $red, $redHover);
+}
+
+.commonButtonDarkRed {
+    @include commonButtonScheme(white, white, $darkRed, $darkRedHover);
+}

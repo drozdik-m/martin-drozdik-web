@@ -8,4 +8,61 @@
 //--------------------------------------------------
 
 
+#heroHeader {
+    $marginLeft: 5%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100vh;
+    background-color: $red;
+    background: linear-gradient(to bottom right, $red, $black);
+    font-size: 0;
+    //HEADER TEXTS
+    #heroHeaderText {
+        margin-top: 15%;
+        margin-left: $marginLeft;
+        margin-bottom: 3%;
+
+        #heroHeaderIAm, #heroHeaderSE, h1 {
+            color: white;
+        }
+
+        #heroHeaderIAm, #heroHeaderSE {
+            display: block;
+        }
+
+
+        h1, #heroHeaderSE {
+            font-weight: $fontWeightBlack;
+            font-size: 5.5rem;
+        }
+
+        #heroHeaderIAm {
+            font-size: 2.25rem;
+            font-weight: $fontWeightSemiBold;
+            margin-block: 1.5rem;
+        }
+
+        h1 {
+            margin-bottom: -$pxInRem-12;
+        }
+
+        #heroHeaderSE {
+        }
+    }
+    //HEADER BUTTONS
+    #headerButtons {
+        margin-left: $marginLeft;
+        
+        .commonButton{
+            text-transform: uppercase;
+            margin-right: 2.5rem;
+        }
+        .commonButton, .freeForWork{
+            display: inline-block;
+            vertical-align: middle;
+        }
+    }
+}
 

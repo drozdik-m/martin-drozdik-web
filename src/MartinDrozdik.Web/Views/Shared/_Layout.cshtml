@@ -96,6 +96,11 @@
         </div>
     </div>
 
+    <!--CONTENT-->
+    <main id="content">
+        @RenderBody()
+    </main>
+
 
     @*<!--COOKIES-->
         @if (!Context.Request.Cookies.TryGetValue("TermsAndConditions", out string cookieValue) || cookieValue != "true")
@@ -125,10 +130,7 @@
         </div>
 
 
-        <!--CONTENT-->
-        <main id="content">
-            @RenderBody()
-        </main>
+
 
         <!--FOOTER-->
         <footer id="footer" class="block blockMargin">
