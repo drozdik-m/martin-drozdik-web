@@ -9,17 +9,17 @@
     margin-left: 0;
 
     &.email {
-        background-size: $pxInRem-38 auto;
+        background-size: $pxInRem-38 $pxInRem-38;
         padding-left: $pxInRem-56;
     }
 
     &.phone {
-        background-size: $pxInRem-30 auto;
+        background-size: $pxInRem-30 $pxInRem-30;
         padding-left: $pxInRem-52;
     }
 
     &.location {
-        background-size: $pxInRem-24 auto;
+        background-size: $pxInRem-24 $pxInRem-24;
         margin-left: $pxInRem-4;
         padding-left: $pxInRem-50;
     }
