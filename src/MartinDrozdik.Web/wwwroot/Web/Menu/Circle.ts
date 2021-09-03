@@ -37,6 +37,15 @@ export class Circle
     }
 
     /**
+     * Sets radius to this circle
+     * @param newRadius The new radius
+     */
+    SetRadius(newRadius: number)
+    {
+        this.element.setAttribute("r", newRadius.toString());
+    }
+
+    /**
      * Returns random number from 0 to max (excluding)
      * @param max The max number (excluding)
      */
@@ -56,7 +65,7 @@ export class Circle
     {
         let cx = this.step * x + this.radius + this.offset;
         let cy = this.step * y + this.radius + this.offset;
-        return `<circle id="${Circle.GetId(x, y)}" cx="${cx}" cy="${cy}" r="${this.radius}" fill="white" fill-opacity="${opacity}" />`;
+        return `<circle id="${Circle.GetId(x, y)}" cx="${cy}" cy="${cx}" r="${this.radius}" fill="white" fill-opacity="${opacity}" />`;
     }
 
     /**
