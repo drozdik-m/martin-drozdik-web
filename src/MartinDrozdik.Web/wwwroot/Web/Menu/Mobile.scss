@@ -15,7 +15,7 @@ $mobileMenuHeight: 2.5rem !default;
         position: fixed;
         top: 0;
         bottom: 0;
-        right: -50%;
+        right: -100%;
         background-color: $black;
         z-index: 209;
         @include transition(right $transition);
@@ -106,7 +106,7 @@ $mobileMenuHeight: 2.5rem !default;
 
     &.openMenu {
         nav {
-            right: 0;
+            right: 0 !important;
         }
     }
 }

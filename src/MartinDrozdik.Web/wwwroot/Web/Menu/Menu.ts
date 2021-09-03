@@ -6,12 +6,21 @@ import { DimensionsHelper } from "@drozdik.m/dimensions-helper"
 WindowEvents.OnDOMReady.Add(function ()
 {
     //Get menu element
-    let menuElement = document.getElementById("menu")
+    let menuElement = document.getElementById("menu");
     if (!menuElement)
     {
         console.error("Element #menu not found");
         return;
     }
+
+    //Get nav element
+    let navElement = menuElement.querySelector("nav");
+    if (!menuElement)
+    {
+        console.error("Element \"#menu nav\" not found");
+        return;
+    }
+    let navDimHelper = new DimensionsHelper(navElement);
 
     //Get menu toggle element
     let menuToggleElement = document.getElementById("menuHamburger");
@@ -33,7 +42,7 @@ WindowEvents.OnDOMReady.Add(function ()
         console.error("Element \"#menu ul\" not found");
         return;
     }
-    var ulDimHelper = new DimensionsHelper(ulElement)
+    let ulDimHelper = new DimensionsHelper(ulElement)
 
     //Get menu logo
     let menuLogoElement = document.getElementById("menuLogo")
@@ -59,11 +68,25 @@ WindowEvents.OnDOMReady.Add(function ()
         ulElement.style.marginTop = marginTop + "px";
     }
 
+    /**
+     * Recalculates position of mobile menu when hidden
+     * */
+    function RecaltulateMenuRight()
+    {
+        let menuWidth = navDimHelper.WidthWithMargin();
+        navElement.style.right = (-menuWidth).toString() + "px";
+    }
+
     WindowEvents.OnResize.Add(function ()
     {
         if (menu.IsOpen() && menu.IsMobile())
             RecalculateUlMargin();
+
+        if (!menu.IsOpen() && menu.IsMobile())
+            RecaltulateMenuRight();
     });
+
+    RecaltulateMenuRight();
 
     menu.OnMenuOpen.Add(function ()
     {

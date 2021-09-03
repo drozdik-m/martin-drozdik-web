@@ -1,7 +1,7 @@
 ﻿
 export class Circle
 {
-    static opacities = [0.0175, 0.05, 0.1, 0.25]
+    static opacities = [0.0175, 0.05, 0.1, 0.2]
     static step = 175;
     static radius = 45;
     static offset = 30;

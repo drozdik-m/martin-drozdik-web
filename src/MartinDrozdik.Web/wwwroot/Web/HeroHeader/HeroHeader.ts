@@ -1,6 +1,6 @@
 ﻿import { WindowEvents } from "@drozdik.m/window-events";
 import { Circle } from "../Menu/Circle";
-
+import "../../../Web/HeroHeader/InnerHTML_polyfill";
 
 let circles: Circle[][] = []
 
@@ -158,5 +158,15 @@ WindowEvents.OnDOMReady.Add(function ()
                 StartCircleWave(x, y, CircleWaveCallback);
             });
         }
+    }
+
+    //Click event for arrow down
+    let arrowDownElement = document.getElementById("heroHeaderArrowDown");
+    if (arrowDownElement)
+    {
+        arrowDownElement.addEventListener("click", function ()
+        {
+            StartCircleWave(waveRootX, waveRootY, CircleWaveCallback);
+        });
     }
 });
