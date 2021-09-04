@@ -30,6 +30,20 @@ $blockMaxWidth: 75rem !default;
 }
 
 
+//BLOCKS WITH BACKGROUND
+.backgroundBlock {
+    padding-top: 3rem;
+    padding-top: 3rem;
+}
+
+@media only screen and (max-width: 50rem) {
+    .blockMargin {
+        padding-top: 1.5rem;
+        padding-top: 1.5rem;
+    }
+}
+
+
 //BLOCK MARGIN
 .blockMargin {
     margin-top: 3rem;

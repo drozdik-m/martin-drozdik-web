@@ -2,76 +2,117 @@
 
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
-/*
-$commonGrey: #212121 !default;
+
 
 //--------------------------------------------------
 //---------HEADING----------------------------------
 //--------------------------------------------------
+@mixin commonHeadingScheme($color) {
+    color: $color;
+
+    &:after {
+        background-color: $color;
+    }
+}
+
 .commonH {
-    $cubeDimensions: 2rem;
     text-align: left;
-    font-size: $pxInRem-32;
-    text-transform: uppercase;
-    margin-bottom: $pxInRem-16;
-    color: $commonGrey;
-    font-weight: normal;
+    font-size: $pxInRem-64;
+    font-weight: $fontWeightBlack;
+    color: $black;
     position: relative;
-    padding-left: $cubeDimensions + $pxInRem-14;
+    padding-block: $pxInRem-4;
+    margin-bottom: $pxInRem-28;
 
     &:after {
         content: " ";
         font-size: 0;
         position: absolute;
         left: 0;
-        top: 50%;
-        margin-top: -$cubeDimensions / 2;
-        width: $cubeDimensions;
-        height: $cubeDimensions;
-        background-color: $mainTheme;
+        bottom: 0;
+        height: $pxInRem-6;
+        width: $pxInRem-57;
+        background-color: $black;
+    }
+
+    &.commonHGradient {
+        display: inline-block;
+        @include commonHeadingScheme($red);
+    }
+
+    &.commonHBlack {
+        @include commonHeadingScheme($black);
+    }
+
+    &.commonHWhite {
+        @include commonHeadingScheme(white);
     }
 }
 
-.commonHBlue {
-    &:after {
-        background-color: $blue;
-    }
-}
-.commonHRed {
-    &:after {
-        background-color: $red;
-    }
-}
-.commonHGreen {
-    &:after {
-        background-color: $green;
+//Do font gradient if the browser suports it
+@supports ((-webkit-background-clip: text) or (-moz-background-clip: text) or (background-clip: text)) and ((-webkit-text-fill-color: transparent) or (-moz-text-fill-color: transparent) or (text-fill-color: transparent)) {
+    .commonHGradient {
+        background-size: 100%;
+        -webkit-background-clip: text;
+        -moz-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-text-fill-color: transparent;
+        text-fill-color: transparent;
+
+        &, &:after {
+            background-image: linear-gradient(to right, $red, $black);
+        }
     }
 }
 
-
-@media only screen and (max-width: 37.5rem) {
+@media only screen and (max-width: 46rem) {
     .commonH {
-        font-size: $pxInRem-26;
-        margin-bottom: $pxInRem-10;
-
-        $cubeDimensions: 1.5rem;
-        padding-left: $cubeDimensions + $pxInRem-10;
+        font-size: $pxInRem-50;
+        padding-block: $pxInRem-4;
+        margin-bottom: $pxInRem-28;
 
         &:after {
-            margin-top: -$cubeDimensions / 2;
-            width: $cubeDimensions;
-            height: $cubeDimensions;
+            height: $pxInRem-4;
+            width: $pxInRem-46;
         }
     }
 }
 //--------------------------------------------------
 //---------PARAGRAPH--------------------------------
 //--------------------------------------------------
-.commonP {
-}
-
-@media only screen and (max-width: 37.5rem) {
-    .commonP {
+@mixin commonPragraphScheme($color) {
+    strong{
+        color: $color;
     }
 }
-    */
+
+.commonP {
+    font-size: $pxInRem-22;
+    font-weight: $fontWeightRegular;
+    max-width: 40.625rem;
+    margin-bottom: 2rem;
+    line-height: 150%;
+
+    strong {
+        font-weight: $fontWeightBold;
+    }
+
+    &.commonPRed {
+        @include commonPragraphScheme($red)
+    }
+
+    &.commonPBlack {
+        @include commonPragraphScheme($black)
+    }
+}
+
+@media only screen and (max-width: 46rem) {
+
+    .commonP {
+        font-size: $pxInRem-18;
+        margin-bottom: 1rem;
+        line-height: 150%;
+    }
+}
+    
