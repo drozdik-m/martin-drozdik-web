@@ -1,0 +1,13 @@
+﻿@import "../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../node_modules/@drozdik.m/common-mixins/_module";
+
+$daskedBorderBlueBase64: "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOTciIGhlaWdodD0iOTciIHZpZXdCb3g9IjAgMCA5NyA5NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTAuMDAwMTIyMDcgMC4wMDAxMjIwN0gxMy4wMDAxVjAuOTk4OTAzSDAuOTk5NTc2VjEzLjAwMDFIMC4wMDAxMjIwN1YwLjAwMDEyMjA3WiIgZmlsbD0iIzI0MEIzNiIvPgo8cGF0aCBkPSJNMCA5N0wtNS42ODI0OGUtMDcgODRMMC45OTg3OCA4NEwwLjk5ODc4MSA5Ni4wMDA1TDEzIDk2LjAwMDVMMTMgOTdMMCA5N1oiIGZpbGw9IiMyNDBCMzYiLz4KPHBhdGggZD0iTTk3LjAwMDEgMEw5Ny4wMDAxIDEzTDk2LjAwMTMgMTNMOTYuMDAxMyAwLjk5OTQ1NEw4NC4wMDAxIDAuOTk5NDUzTDg0LjAwMDEgLTUuNjgyNDhlLTA3TDk3LjAwMDEgMFoiIGZpbGw9IiMyNDBCMzYiLz4KPHBhdGggZD0iTTk3IDk3TDg0IDk3TDg0IDk2LjAwMTJMOTYuMDAwNSA5Ni4wMDEyTDk2LjAwMDUgODRMOTcgODRMOTcgOTdaIiBmaWxsPSIjMjQwQjM2Ii8+CjxyZWN0IHg9IjU3LjAwMDEiIHk9IjAuMDAwMTIyMDciIHdpZHRoPSIxIiBoZWlnaHQ9IjE3IiB0cmFuc2Zvcm09InJvdGF0ZSg5MCA1Ny4wMDAxIDAuMDAwMTIyMDcpIiBmaWxsPSIjMjQwQjM2Ii8+CjxyZWN0IHg9IjEiIHk9IjU3IiB3aWR0aD0iMSIgaGVpZ2h0PSIxNyIgdHJhbnNmb3JtPSJyb3RhdGUoLTE4MCAxIDU3KSIgZmlsbD0iIzI0MEIzNiIvPgo8cmVjdCB4PSI5NyIgeT0iNTciIHdpZHRoPSIxIiBoZWlnaHQ9IjE3IiB0cmFuc2Zvcm09InJvdGF0ZSgtMTgwIDk3IDU3KSIgZmlsbD0iIzI0MEIzNiIvPgo8cmVjdCB4PSI1NyIgeT0iOTYiIHdpZHRoPSIwLjk5NjY0NiIgaGVpZ2h0PSIxNyIgdHJhbnNmb3JtPSJyb3RhdGUoOTAgNTcgOTYpIiBmaWxsPSIjMjQwQjM2Ii8+Cjwvc3ZnPgo=";
+
+@mixin dashedBorder($borderBase64, $outset: 0) {
+    border-image-slice: 27% 27% 27% 27%;
+    border-image-width: 1.5rem 1.5rem 1.5rem 1.5rem;
+    border-image-outset: $outset $outset $outset $outset;
+    border-image-repeat: round round;
+    border-image-source: url($borderBase64);
+    border-style: solid;
+}
