@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 
 //development/production
-const mode = "production"
+const mode = "development"
 
 module.exports = [
     //FRONT-END WEB 
