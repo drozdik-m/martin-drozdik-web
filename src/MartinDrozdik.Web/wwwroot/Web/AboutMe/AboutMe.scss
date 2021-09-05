@@ -1,9 +1,9 @@
-﻿@import "../_Variables.scss";
+﻿@use "../ImportantStats/ImportantStats";
+
+@import "../_Variables.scss";
 @import "../Global/DashedBorder";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
-
-
 
 //--------------------------------------------------
 //---------ABOUT ME---------------------------------
@@ -14,6 +14,12 @@
     background-position: center center;
     background-size: auto auto;
     text-align: center;
+}
+
+//--------------------------------------------------
+//---------ABOUT ME CONTENT-------------------------
+//--------------------------------------------------
+#aboutMe {
     //ABOUT ME CONTENT
     #aboutMeContent {
         display: flex;
@@ -82,7 +88,7 @@
 }
 
 
-@media only screen and (max-width: 66.875rem){
+@media only screen and (max-width: 66.875rem) {
     #aboutMe {
         //ABOUT ME CONTENT
         #aboutMeContent {
@@ -111,6 +117,56 @@
                     top: -$dashSpacing;
                     bottom: -$dashSpacing;
                     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNDQ4IDQ0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjI0IiBjeT0iMjI0IiByPSIyMjMuNSIgc3Ryb2tlPSIjMjQwQjM2IiBzdHJva2UtZGFzaGFycmF5PSIyMCAyMCIgc3Ryb2tlLW9wYWNpdHk9Ii41Ii8+Cjwvc3ZnPgo=");
+                }
+            }
+        }
+    }
+}
+
+//--------------------------------------------------
+//---------ABOUT ME STATS---------------------------
+//--------------------------------------------------
+#aboutMe {
+    //ABOUT ME STATS
+    #aboutMeStats {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-around;
+
+        .importantStat {
+        }
+    }
+}
+
+@media only screen and (max-width: 46.25rem){
+    #aboutMe {
+        //ABOUT ME STATS
+        #aboutMeStats {
+            margin-top: 2rem;
+            display: block;
+
+            .importantStat {
+                &.projectCountStat{
+                    right: -$pxInRem-16;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 23.75rem){
+    #aboutMe {
+        //ABOUT ME STATS
+        #aboutMeStats {
+            margin-top: 0.75rem;
+
+
+            .importantStat {
+
+                @include ImportantStats.importantStatNoIcon();
+                    
+                &.projectCountStat {
+                    right: 0;
                 }
             }
         }

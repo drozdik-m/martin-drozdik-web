@@ -1,6 +1,7 @@
 ﻿@model IndexPageModel
 
 @{
+    //Layout
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -60,12 +61,28 @@
         </div>
     </div>
 
-    <ul id="aboutMeStats">
+    <ul id="aboutMeStats" class="blockNarrower">
         <li class="importantStat programmingExperienceStat">
-            přes <span class="statNumber">7</span> 
+            @{ 
+                //Experience time calculations
+                DateTime dateStartedProgramming = new DateTime(2016, 1, 1);
+                var programmingExperience = DateTime.Today - dateStartedProgramming;
+                var yearCount = programmingExperience.TotalDays / 365;
+                var yearCountRoundedDown = Math.Floor(yearCount);
+                var yearRemainder = yearCount - yearCountRoundedDown;
+
+                string experienceYears = yearCountRoundedDown.ToString();
+                string experiencePrefix = "přes";
+                if (yearRemainder >= 0.75)
+                {
+                    experiencePrefix = "téměř";
+                    experienceYears = (yearCountRoundedDown + 1).ToString();
+                }
+            }
+            @experiencePrefix<span class="statNumber">@experienceYears</span>let zkušeností s programováním
         </li>
         <li class="importantStat projectCountStat">
-
+            přes<span class="statNumber">30</span>dokončených projektů
         </li>
     </ul>
 </div>
