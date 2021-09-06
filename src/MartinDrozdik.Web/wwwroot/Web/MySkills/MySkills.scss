@@ -25,6 +25,7 @@
             $bgTopPadding: 2rem;
             $bgHeight: 4.5rem;
             $bgSpace: 1.5rem;
+            //margin: 0 $pxInRem-6;
 
             background-position: 50% $bgTopPadding;
             background-size: auto $bgHeight;
@@ -60,7 +61,7 @@
             &.importantSkill {
                 background-color: $black;
                 @include dashedBorder($daskedBorderBlueBase64, $pxInRem-20);
-
+                z-index: 2;
                 p, h3 {
                     color: white;
                 }
@@ -89,4 +90,68 @@
     }
 }
 
+@media only screen and (max-width: 70rem){
+    #mySkills {
+        //SKILL LIST
+        #mySkillsList {
+            li {
+                &.importantSkill {
+                    $outset: $pxInRem-12;
+                    border-image-outset: $outset $outset $outset $outset;
+                }
+            }
+        }
+    }
 
+}
+
+@media only screen and (max-width: 60rem){
+    #mySkills {
+        //SKILL LIST
+        #mySkillsList {
+            display: block;
+            padding: $pxInRem-12 0;
+
+            li {
+                text-align: left;
+                max-width: unset;
+                padding: 0;
+                margin: $pxInRem-24 0;
+
+
+                h3, p {
+                    padding: $pxInRem-16;
+                }
+
+                h3 {
+                    margin-bottom: 0;
+                    padding-bottom: 0;
+
+                    &:after {
+                        margin: 0;
+                        margin-top: $pxInRem-6;
+                        width: 2.5rem;
+                        height: $pxInRem-2;
+                    }
+                }
+
+                &.importantSkill {
+                    $outset: $pxInRem-6;
+                    border-image-outset: $outset $outset $outset $outset;
+                }
+                //ICONS
+                &#skillWebDevelopment {
+                    background-image: none;
+                }
+
+                &#skillCodeDesign {
+                    background-image: none;
+                }
+
+                &#skillProjectManagement {
+                    background-image: none;
+                }
+            }
+        }
+    }
+}
