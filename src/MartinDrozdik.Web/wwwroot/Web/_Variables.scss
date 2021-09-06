@@ -18,6 +18,9 @@ $mainThemeHover: $redHover;
 
 $green: #90EE90;
 
+$lightBlack: #F8F4FB;
+$lightRed: #FFF9FA;
+
 //TRANSITIONS
 $transition: 250ms cubic-bezier(0.215, 0.61, 0.355, 1);
 
@@ -26,9 +29,10 @@ $blockNarrowerMaxWidth: 70rem;
 $blockMaxWidth: 80rem;
 
 //FONT WEIGHTS
-$fontWeightRegular: normal;
+$fontWeightRegular: normal; //400
 $fontWeightSemiBold: 600;
-$fontWeightBold: bold;
+$fontWeightBold: bold; //700
+$fontWeightExtraBold: 800;
 $fontWeightBlack: 900;
 
 //RADIUSES
