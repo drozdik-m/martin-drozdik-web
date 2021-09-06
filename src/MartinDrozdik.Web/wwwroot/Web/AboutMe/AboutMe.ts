@@ -14,10 +14,8 @@ WindowEvents.OnDOMReady.Add(function ()
 
     //Iterate over important stats and register them
     let importantStats = aboutMeElement.querySelectorAll(".importantStat");
-    importantStats.forEach(function (item)
-    {
-        RegisterStatForAnimation(item as HTMLElement);
-    });
+    for (let i = 0; i < importantStats.length; i++)
+        RegisterStatForAnimation(importantStats[i] as HTMLElement);
 
     
 });
