@@ -99,11 +99,16 @@
     }
 
     &.commonPRed {
-        @include commonPragraphScheme($red)
+        @include commonPragraphScheme($red);
     }
 
     &.commonPBlack {
-        @include commonPragraphScheme($black)
+        @include commonPragraphScheme($black);
+    }
+
+    &.commonPWhite {
+        color: white;
+        @include commonPragraphScheme(white);
     }
 }
 
