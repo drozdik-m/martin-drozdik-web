@@ -52,9 +52,31 @@
 <div id="aboutMe" class="backgroundBlock">
     <div id="aboutMeContent" class="block">
         <div id="aboutMeText">
+            @{ 
+                var bonsaiStart = new DateTime(2017, 1, 10);
+                var bonsaiTime = DateTime.Today - bonsaiStart;
+                var bonsaiYearCount = bonsaiTime.TotalDays / 365;
+                var bonsaiCountRoundedDown = Math.Floor(bonsaiYearCount);
+                var bonsaiYearRemainder = bonsaiYearCount - bonsaiCountRoundedDown;
+
+                var bonsaiYearPrefix = "Přes";
+                var bonsaiYears = bonsaiCountRoundedDown;
+                if (bonsaiYearRemainder >= 0.75)
+                {
+                    bonsaiYearPrefix = "Téměř";
+                    bonsaiYears = bonsaiCountRoundedDown + 1;
+                }
+
+                var bonsaiYearsWord = "let";
+                if (bonsaiYears <= 4)
+                {
+                    bonsaiYearsWord = "roky";
+                }
+            }
+
             <h2 class="commonH commonHGradient">Kdo jsem?</h2>
-            <p class="commonP commonPRed">Jmenuji se Martin Drozdík a jsem <strong>softwarový engineer</strong>. Programuji již od malička. Mám širokou škálu zkušeností s <strong>programováním webových stránek</strong>, a to jak front-end, tak back-end. Umím si však poradit s programováním všeho druhu, díky kvalitnímu <strong>object-oriented designu a modularizaci</strong>.</p>
-            <p class="commonP commonPRed">Již 6 let vedu skupinu nezávislých freelancerů Bonsai Development. Nejsou mi tedy cizí zkušenosti z pozice <strong>team leader</strong>. Rád komunikuji s klienty a pomáhám realizovat jejich vize. </p>
+            <p class="commonP commonPRed">Jmenuji se Martin Drozdík a jsem <strong>softwarový engineer</strong>. Programuji již od&nbsp;malička. Mám širokou škálu zkušeností sd&nbsp;<strong>programováním webových stránek</strong>, ad&nbsp;tod&nbsp;jak front-end, takd&nbsp;back-end. Umím si však poradit sd&nbsp;programováním všeho druhu, díky kvalitnímu <strong>object-oriented designu ad&nbsp;modularizaci</strong>.</p>
+            <p class="commonP commonPRed">@bonsaiYearPrefix @bonsaiYears&nbsp;@bonsaiYearsWord vedu skupinu nezávislých freelancerů <a class="external" href="https://bonsai-development.cz/" title="Web Bonsai Development" target="_blank" rel="nofollow">Bonsai Development</a>. Nejsou mi tedy cizí zkušenosti z&nbsp;pozice <strong>team&nbsp;leader</strong>. Rád komunikuji s&nbsp;klienty a&nbsp;pomáhám realizovat jejich vize.</p>
         </div>
         <div id="aboutMeImage">
             <img src="~/Web/AboutMe/MartinDrozdik.png" alt="Foto Martina Drozdíka" title="Já, Martin Drozdík" />
@@ -65,18 +87,18 @@
         <li class="importantStat programmingExperienceStat">
             @{ 
                 //Experience time calculations
-                DateTime dateStartedProgramming = new DateTime(2016, 1, 1);
+                var dateStartedProgramming = new DateTime(2016, 2, 1);
                 var programmingExperience = DateTime.Today - dateStartedProgramming;
                 var yearCount = programmingExperience.TotalDays / 365;
                 var yearCountRoundedDown = Math.Floor(yearCount);
                 var yearRemainder = yearCount - yearCountRoundedDown;
 
-                string experienceYears = yearCountRoundedDown.ToString();
-                string experiencePrefix = "přes";
+                var experienceYears = yearCountRoundedDown;
+                var experiencePrefix = "přes";
                 if (yearRemainder >= 0.75)
                 {
                     experiencePrefix = "téměř";
-                    experienceYears = (yearCountRoundedDown + 1).ToString();
+                    experienceYears = yearCountRoundedDown + 1;
                 }
             }
             @experiencePrefix<span class="statNumber">@experienceYears</span>let zkušeností s programováním
@@ -124,7 +146,36 @@
                 <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #hra">Hra</a></li>
             </ul>
 
+            @* Project list *@
+            <ul class="projects">
+                <li>
+                    <img src="https://via.placeholder.com/150" title="Projekt GIT Elekto" alt="Project GIT Elektro" />
+                    <h3>GIT Elektro</h3>
+                    <p></p>
+                    <ul class="tags tagsWhiteBlack">
+                        <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
+                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
+                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
+                    </ul>
+                    <div class="projectActions">
+                        <a href="https://git-elektro.cz/" title="Detail projektu GIT Elektro" class="commonButton commonButtonRed">Detail projektu</a>
+                        <a href="https://git-elektro.cz/" title="GIT Elektro codebase" class="commonButton commonButtonDarkRed commonButtonGithub">GitHub</a>
+                        <a href="https://git-elektro.cz/" title="GIT Elektro živý web" class="commonButton commonButtonDarkRed commonButtonLive">Odkaz</a>
+                    </div>
+                </li>
 
+                <li>
+                    <img src="https://via.placeholder.com/150" title="Projekt GIT Elekto" alt="Project GIT Elektro" />
+                    <h3>GIT Elektro</h3>
+                    <p></p>
+                    <ul class="tags tagsWhiteBlack">
+                        <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
+                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
+                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
+                    </ul>
+                </li>
+
+            </ul>
 
         </div>
     </div>
