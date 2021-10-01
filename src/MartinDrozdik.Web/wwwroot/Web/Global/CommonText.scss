@@ -44,6 +44,10 @@
         @include commonHeadingScheme($black);
     }
 
+    &.commonHRed {
+        @include commonHeadingScheme($red);
+    }
+
     &.commonHWhite {
         @include commonHeadingScheme(white);
     }
@@ -78,6 +82,7 @@
         }
     }
 }
+
 //--------------------------------------------------
 //---------PARAGRAPH--------------------------------
 //--------------------------------------------------
@@ -153,5 +158,26 @@
 
     &:visited {
         color: $linkClicked;
+    }
+}
+
+
+//--------------------------------------------------
+//---------HEADING UNDERLINE------------------------
+//--------------------------------------------------
+.headingUnderlined {
+    position: relative;
+    padding: $pxInRem-10;
+
+    &:after {
+        content: " ";
+        font-size: 0;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: $pxInRem-1;
+        background-color: #E2E2E2;
+
     }
 }

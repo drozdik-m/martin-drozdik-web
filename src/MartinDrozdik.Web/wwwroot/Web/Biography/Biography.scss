@@ -1,0 +1,40 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+@import "../ImportantDottedList/ImportantDottedList";
+
+//--------------------------------------------------
+//---------BIOGRAPHY--------------------------------
+//--------------------------------------------------
+#biography {
+    //List
+    .biographyList {
+        h3 {
+            font-size: $pxInRem-36;
+            color: $black;
+        }
+
+        ul {
+            li {
+                .biographyListHeading {
+                    color: $black;
+                    font-size: $pxInRem-22;
+                    padding-top: $pxInRem-6;
+                    margin-bottom: $pxInRem-8;
+                    display: block;
+                    font-weight: $fontWeightBold;
+                }
+
+                p {
+                    font-size: $pxInRem-16;
+                    line-height: 150%;
+                    color: black;
+                }
+            }
+        }
+    }
+    //Work experience list
+    #biographyWorkExperience {
+    }
+}
+

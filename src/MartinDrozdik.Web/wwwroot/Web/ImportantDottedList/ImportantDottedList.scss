@@ -1,0 +1,47 @@
+﻿@use "sass:math";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+//--------------------------------------------------
+//---------IMPORTANT DOTTED LIST--------------------
+//--------------------------------------------------
+@mixin importantDottedListScheme($dotColor){
+    li{
+        &:before{
+            background-color: $dotColor;
+        }
+    }
+}
+
+.importantDottedList {
+    list-style: none;
+    list-style-type: none;
+
+    li {
+        $dotDiameter: $pxInRem-40;
+        $dotSpace: $pxInRem-30;
+        $dotMiddle: math.div($dotDiameter, 2);
+        margin: $pxInRem-36 0;
+        position: relative;
+        padding-left: $dotDiameter + $dotSpace;
+
+        &:before {
+            content: " ";
+            font-size: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: $dotDiameter;
+            height: $dotDiameter;
+            @include border-radius(50%);
+        }
+    }
+    //Schemes
+    &.importantDottedListRed {
+        @include importantDottedListScheme($red);
+    }
+}
