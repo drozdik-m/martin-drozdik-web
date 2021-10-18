@@ -53,6 +53,19 @@ WindowEvents.OnDOMReady.Add(function ()
     }
     let menuLogoDimHelper = new DimensionsHelper(menuLogoElement)
 
+    //Get menu items
+    let liElements = ulElement.querySelectorAll("li a");
+
+    //Close mobile menu on item click
+    for (let i = 0; i < liElements.length; i++)
+    {
+        let element = liElements[i];
+        element.addEventListener("click", function ()
+        {
+            menu.Close();
+        });
+    }
+
     /**
      * Recalculates margin of the ul menu list
      * */
