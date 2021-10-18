@@ -12,6 +12,29 @@
     //List
     $biographyListItemInfoSpace: $pxInRem-28;
     font-size: 0;
+    position: relative;
+    overflow: hidden;
+
+    //Circle background decoration
+    .biographyCirclesBackground {
+        position: absolute;
+        z-index: 1;
+
+        &#biographyCirclesTopLeft {
+            left: 0;
+            top: 0;
+        }
+
+        &#biographyCirclesBottomRight {
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    #biographyContent{
+        position: relative;
+        z-index: 2;
+    }
 
     .biographyList {
         display: inline-block;
@@ -110,3 +133,61 @@
     }
 }
 
+@media only screen and (max-width: 65.625rem) {
+    #biography {
+
+        .biographyList {
+            display: block;
+            width: auto;
+            margin-right: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 45rem){
+    #biography {
+        .biographyCirclesBackground{
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 35.625rem){
+    #biography {
+
+        .biographyList {
+
+            h3 {
+                font-size: $pxInRem-28;
+            }
+
+            ul {
+                li {
+                    .biographyListHeading {
+                        color: $black;
+                        font-size: $pxInRem-22;
+                        padding-top: $pxInRem-6;
+                        margin-bottom: $pxInRem-16;
+                        display: block;
+                        font-weight: $fontWeightBold;
+                    }
+
+                    p {
+                        font-size: $pxInRem-16;
+                        line-height: 150%;
+                    }
+                    //Info list
+                    .biographyListItemInfos {
+                        margin-bottom: $pxInRem-18;
+
+                        dt {
+                        }
+
+                        dd {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

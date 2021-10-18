@@ -82,3 +82,44 @@
         @include importantDottedListScheme($red);
     }
 }
+
+@media only screen and (max-width: 45rem){
+    .importantDottedList {
+        $dotDiameter: $pxInRem-30;
+        $dotSpace: $pxInRem-18;
+        $dotMiddle: math.div($dotDiameter, 2);
+        $marginLeft: $pxInRem-2;
+
+        li {
+            margin: $pxInRem-26 0;
+            padding-left: $dotDiameter + $dotSpace;
+            margin-left: $marginLeft;
+
+            &:before {
+                width: $dotDiameter;
+                height: $dotDiameter;
+            }
+
+            &.dottedListImportantItem {
+                &:after {
+                    $borderHighlightSpace: $pxInRem-8;
+                    $dimensions: $dotDiameter + $borderHighlightSpace;
+                    width: $dimensions;
+                    height: $dimensions;
+                    left: -(math.div($borderHighlightSpace, 2));
+                    top: -(math.div($borderHighlightSpace, 2));
+                }
+            }
+        }
+        //Left side dash
+        &.importantDottedDashedList {
+            &:before {
+                $width: $pxInRem-2;
+                left: $dotMiddle - math.div($width, 2) + $marginLeft;
+                top: $dotMiddle;
+                width: $width;
+            }
+        }
+    }
+
+}

@@ -37,7 +37,8 @@
     "@drozdik.m/window-events": "^1.1.2"
   },
   "devDependencies": {
-    "webpack": "^5.52.0",
-    "webpack-cli": "^4.8.0"
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1",
+    "sass": "^1.43.2"
   }
 }
