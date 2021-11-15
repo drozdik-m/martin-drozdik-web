@@ -12,6 +12,8 @@ namespace MartinDrozdik.Web.ViewModels.Home
         Project,
         Blog,
         Article,
-        Sitemap
+        Sitemap,
+        TermsAndConditions,
+        DesignAndLogo,
     }
 }

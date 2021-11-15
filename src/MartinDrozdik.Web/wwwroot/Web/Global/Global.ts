@@ -2,7 +2,7 @@
 //import "../CookiesBar/CookiesBar";
 //import "../TopInfoBar/TopInfoBar";
 import "../Menu/Menu";
-//import "../Footer/Footer";
+import "../Footer/Footer";
 //import "./ArticleBase";
 
 import { WindowEvents } from "@drozdik.m/window-events";

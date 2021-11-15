@@ -59,8 +59,9 @@
 
             &.importantSkill {
                 background-color: $black;
-                @include dashedBorder($daskedBorderBlueBase64, $pxInRem-20);
+                @include dashedBorderBlack($pxInRem-20);
                 z-index: 2;
+
                 p, h3 {
                     color: white;
                 }
