@@ -1,0 +1,30 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@import "../Global/DashedBorder";
+@import "../Global/LinkHover";
+
+
+//--------------------------------------------------
+//---------FOOTER CREDITS---------------------------
+//--------------------------------------------------
+
+#mainFooter {
+    #credits{
+        background-color: black;
+        text-align: center;
+        font-size: $pxInRem-22;
+        font-weight: $fontWeightBold;
+        padding: $pxInRem-18 $pxInRem-12;
+        color: white;
+    }
+}
+
+@media only screen and (max-width: 38.75rem) {
+    #mainFooter {
+        #credits{
+            font-size: $pxInRem-18;
+        }
+    }
+}

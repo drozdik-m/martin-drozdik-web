@@ -117,7 +117,7 @@
 
             <ul id="footerContent">
                 <li id="footerContact">
-                    <div class="commonH">Kontakt</div>
+                    <span class="commonH commonHWhite">Kontakt</span>
                     <dl class="contactInfos">
                         <dt>Email</dt>
                         <dd class="email"><a href="mailto:ja@martin-drozdik.cz">ja@martin-drozdik.cz</a></dd>
@@ -140,6 +140,7 @@
                     </svg>
                 </li>
                 <li id="footerInfo">
+                    <span class="commonH commonHWhite">Další informace</span>
                     <nav>
                         <ul>
                             <li><a href="@(Model.PageId == PageId.TermsAndConditions ? "" : Url.Action("TermsAndConditions", "Home"))#termsAndConditions" title="Podmínky užívání webu a zásady ochrany osobních údajů" class="@(Model.PageId == PageId.TermsAndConditions ? "slowScroll" : "")">Zásady ochrany osobních údajů</a></li>
@@ -149,10 +150,9 @@
                     </nav>
                 </li>
             </ul>
-
-            <p id="credits">Copyright&nbsp;&copy;@DateTime.Now.Year Bc.&nbsp;Martin Drozdík. Web by&nbsp;me.</p>
         </div>
 
+        <p id="credits">Copyright&nbsp;&copy;@DateTime.Now.Year Bc.&nbsp;Martin Drozdík. Web by&nbsp;me.</p>
     </footer>
 
 </body>

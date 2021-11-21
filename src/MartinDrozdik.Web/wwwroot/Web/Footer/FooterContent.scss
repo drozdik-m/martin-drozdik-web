@@ -1,0 +1,38 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@import "../Global/DashedBorder";
+@import "../Global/LinkHover";
+
+
+//--------------------------------------------------
+//---------FOOTER INFO------------------------------
+//--------------------------------------------------
+
+
+#mainFooter {
+    #footerContent {
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+        margin: 1.5rem 0;
+
+        li {
+            .commonH {
+                display: block;
+                font-size: $pxInRem-28;
+                font-weight: $fontWeightBlack;
+
+                &:after {
+                    height: $pxInRem-4;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 50rem) {
+    #mainFooter {
+    }
+}
