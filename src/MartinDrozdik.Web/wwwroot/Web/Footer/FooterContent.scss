@@ -1,4 +1,6 @@
-﻿@import "../_Variables.scss";
+﻿@use "../Contact/ContactInfos";
+
+@import "../_Variables.scss";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
@@ -18,21 +20,138 @@
         list-style-type: none;
         margin: 1.5rem 0;
 
-        li {
+        > li {
+            padding: $pxInRem-8 $pxInRem-16;
+
             .commonH {
                 display: block;
                 font-size: $pxInRem-28;
-                font-weight: $fontWeightBlack;
+                font-weight: $fontWeightExtraBold;
+                padding-bottom: $pxInRem-8;
+                margin-bottom: $pxInRem-20;
 
                 &:after {
                     height: $pxInRem-4;
+                }
+            }
+
+            nav {
+                ul {
+                    list-style-type: none;
+
+                    li {
+                        margin: $pxInRem-12 0;
+
+                        a {
+                            color: white;
+                            text-decoration: none;
+                            font-size: $pxInRem-20;
+                            font-weight: $fontWeightSemiBold;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            //Contact
+            &#footerContact {
+            }
+            //Logo
+            &#footerContentLogo {
+                margin-top: 4%;
+                svg{
+                    min-width: 16rem;
+                }
+            }
+            //More info
+            &#footerMoreInfo {
+                .commonH {
+                    //margin-bottom: $pxInRem-30;
                 }
             }
         }
     }
 }
 
-@media only screen and (max-width: 50rem) {
+@media only screen and (max-width: 61.25rem) {
     #mainFooter {
+        
+        #footerContent {
+
+            display: flex;
+            justify-content: space-around;
+
+            > li {
+                //Logo
+                &#footerContentLogo {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 42.5rem){
+    #mainFooter {
+
+        #footerContent {
+           
+
+            > li {
+
+                .commonH {
+                    margin-bottom: $pxInRem-16;
+                }
+
+                nav {
+                    ul {
+
+                        li {
+                            margin: $pxInRem-10 0;
+
+                            a {
+                                font-size: $pxInRem-18;
+
+                                &:hover {
+                                }
+                            }
+                        }
+                    }
+                }
+                //Contact
+                &#footerContact {
+                    @include ContactInfos.contactInfosMobile();
+                }
+                //Logo
+                &#footerContentLogo {
+                }
+                //More info
+                &#footerMoreInfo {
+                    .commonH {
+                        //margin-bottom: $pxInRem-30;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 37.5rem) {
+    #mainFooter {
+
+        #footerContent {
+            display: block;
+
+
+            > li {
+
+                $margin: $pxInRem-14;
+                margin-top: $margin;
+                margin-bottom: $margin;
+            }
+        }
     }
 }
