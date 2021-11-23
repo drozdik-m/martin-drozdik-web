@@ -13,6 +13,8 @@
 
   <ItemGroup>
     <PackageReference Include="MartinDrozdik.Services.LanguageDictionary" Version="1.1.0" />
+    <PackageReference Include="MartinDrozdik.Services.RobotsTXT" Version="1.0.0" />
+    <PackageReference Include="MartinDrozdik.Services.Sitemap" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.18" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.18" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
