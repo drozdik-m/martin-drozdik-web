@@ -1,0 +1,39 @@
+name: .NET
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    # Setting up dotnet environment
+    - uses: actions/checkout@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.x
+
+    # Restore project dependencies (nugets)
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    # Do a release build
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      
+    # Run unit tests
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+    # TODO: create artifact
+    
+    # TODO: upload artifact
+      
+# Nice source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
