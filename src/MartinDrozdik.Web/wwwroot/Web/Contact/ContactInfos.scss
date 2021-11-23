@@ -92,6 +92,13 @@
     }
 }
 
+@mixin contactInfosMobile() {
+    dd {
+        @include contactInfosMobileDimensions();
+    }
+}
+
+
 //--------------------------------------------------
 //---------CONTACT INFOS INLINE---------------------
 //--------------------------------------------------
