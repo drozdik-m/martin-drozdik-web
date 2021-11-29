@@ -1,4 +1,4 @@
-name: .NET
+name: Build and deploy Font-end
 
 on:
   push:
@@ -7,10 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  publishWeb:
 
     runs-on: ubuntu-latest
 
+    env:
+      DAY_OF_WEEK: Mon
     steps:
     
     # Setting up dotnet environment
@@ -26,13 +28,14 @@ jobs:
       
     # Do a release build
     - name: Build
-      run: dotnet build --configuration Release --no-restore
-      
+      run: dotnet build --configuration Release --no-restore --output "WebArtifact" MartinDrozdik.Web 
+       
     # Run unit tests
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal 
       
     # TODO: create artifact
+    
     
     # TODO: upload artifact
       
