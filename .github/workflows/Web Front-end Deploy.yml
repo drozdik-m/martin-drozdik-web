@@ -10,9 +10,7 @@ jobs:
   publishWeb:
 
     runs-on: ubuntu-latest
-
-    env:
-      DAY_OF_WEEK: Mon
+    
     steps:
     
     # Setting up dotnet environment
@@ -28,15 +26,10 @@ jobs:
       
     # Do a release build
     - name: Build
-      run: dotnet build --configuration Release --no-restore --output "WebArtifact" MartinDrozdik.Web 
+      run: dotnet build --configuration Release --no-restore
        
     # Run unit tests
     - name: Test
       run: dotnet test --no-build --verbosity normal 
-      
-    # TODO: create artifact
-    
-    
-    # TODO: upload artifact
-      
+       
 # Nice source: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
