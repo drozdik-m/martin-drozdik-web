@@ -8,7 +8,7 @@
     "compile-scripts": "tsc && webpack",
     "watch-scripts": "tsc && webpack --watch",
     "compile-styles": "sass --load-path=node_modules --load-path=../ wwwroot/Web:wwwroot/_dist/wwwroot/Web --style compressed",
-    "watch-styles": "sass --load-path=node_modules --load-path=../ --watch wwwroot/Sitemap:wwwroot/_dist/wwwroot/Sitemap wwwroot/Web:wwwroot/_dist/wwwroot/Web --style compressed",
+    "watch-styles": "sass --load-path=node_modules --load-path=../ --watch wwwroot/Web/_Pages:wwwroot/_dist/wwwroot/Web/_Pages --style compressed",
     "clear": "rmdir /S /Q \"wwwroot/_dist\"",
     "compile": "npm run compile-scripts && npm run compile-styles",
     "build": "npm update && npm update -D && npm run compile",

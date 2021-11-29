@@ -5,6 +5,8 @@ using Bonsai.Services.Sitemap;
 using Bonsai.Services.Sitemap.Abstraction;
 using Microsoft.Extensions.Caching.Memory;
 using MartinDrozdik.Web.Configuration;
+using MartinDrozdik.Web.ViewModels.Sitemap;
+using Bonsai.Services.LanguageDictionary.Abstraction;
 
 namespace Bonsai.Server.Controllers
 {
@@ -13,12 +15,18 @@ namespace Bonsai.Server.Controllers
         const string SITEMAP_NODES_CACHE_KEY = "SitemapNodesCacheKey";
 
         readonly WebConfiguration webConfiguration;
+        readonly ICultureProvider cultureProvider;
+        readonly ILanguageDictionary languageDictionary;
         readonly IMemoryCache cache;
 
         public SitemapController(WebConfiguration webConfiguration,
-             IMemoryCache cache)
+            ICultureProvider cultureProvider,
+            ILanguageDictionary languageDictionary,
+            IMemoryCache cache)
         {
             this.webConfiguration = webConfiguration;
+            this.cultureProvider = cultureProvider;
+            this.languageDictionary = languageDictionary;
             this.cache = cache;
         }
 
@@ -69,8 +77,7 @@ namespace Bonsai.Server.Controllers
         [Route("/sitemap")]
         public IActionResult Index()
         {
-            return NotFound();
-            //return View(new SitemapPageModel(languageDictionary, GetSitemapRootNode()));
+            return View(new SitemapPageModel(cultureProvider, languageDictionary, GetSitemapRootNode()));
         }
 
         [Route("/sitemap.xml")]

@@ -10,8 +10,8 @@ module.exports = [
         //Entry points
         entry: {
             Global: "./wwwroot/_dist/Web/Global/Global.js",
-            Index: "./wwwroot/_dist/Web/_Pages/Index/Index.js",
-            //Sitemap: "./wwwroot/_dist/Sitemap/Sitemap.js"
+            IndexPage: "./wwwroot/_dist/Web/_Pages/IndexPage/IndexPage.js",
+            SitemapPage: "./wwwroot/_dist/Web/_Pages/SitemapPage/SitemapPage.js",
         },
 
         //Output

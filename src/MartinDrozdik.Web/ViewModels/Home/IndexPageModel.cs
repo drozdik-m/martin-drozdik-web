@@ -31,7 +31,7 @@ namespace MartinDrozdik.Web.ViewModels.Home
             "blog"
         };
 
-        public override string OgImage => "Web/_Pages/Index/IndexOG.png";
+        public override string OgImage => "Web/_Pages/IndexPage/IndexOG.png";
 
         public override PageId PageId => PageId.Index;
     }

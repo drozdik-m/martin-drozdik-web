@@ -145,7 +145,7 @@
                         <ul>
                             @*<li><a href="@(Model.PageId == PageId.TermsAndConditions ? "#termsAndConditions" : Url.Action("TermsAndConditions", "Home"))" title="Podmínky užívání webu a zásady ochrany osobních údajů" class="@(Model.PageId == PageId.TermsAndConditions ? "slowScroll" : "")">Zásady ochrany osobních údajů</a></li>*@
                             @*<li><a href="@(Model.PageId == PageId.DesignAndLogo ? "" : Url.Action("DesignAndLogo", "Home"))#designAndLogo" title="Informace k používání loga a mého designu" class="@(Model.PageId == PageId.DesignAndLogo ? "slowScroll" : "")">Design &amp; Logo</a></li>*@
-                            <li><a href="@(Model.PageId == PageId.Sitemap ? "#sitemap" : Url.Action("Sitemap", "Home"))" title="Kategorická mapa webu" class="@(Model.PageId == PageId.DesignAndLogo ? "slowScroll" : "")">Mapa stránek</a></li>
+                            <li><a href="@(Model.PageId == PageId.Sitemap ? "#sitemap" : Url.Action("Index", "Sitemap"))" title="Kategorická mapa webu" class="@(Model.PageId == PageId.DesignAndLogo ? "slowScroll" : "")">Mapa stránek</a></li>
                         </ul>
                     </nav>
                 </li>
