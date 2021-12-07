@@ -1,4 +1,5 @@
 ﻿@model IndexPageModel
+@inject IFilePathProvider PathProvider
 
 @{
     //Layout
@@ -6,11 +7,11 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/_dist/wwwroot/Web/_Pages/IndexPage/IndexPage.css" />
+    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/wwwroot/Web/_Pages/IndexPage/IndexPage.css")" />
 }
 
 @section Scripts{
-    <script type="text/javascript" src="~/_dist/_pack/IndexPage.js"></script>
+    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/IndexPage.js")"></script>
 }
 
 <header id="heroHeader">
@@ -52,7 +53,7 @@
 <div id="aboutMe" class="backgroundBlock">
     <div id="aboutMeContent" class="block">
         <div id="aboutMeText">
-            @{ 
+            @{
                 var bonsaiStart = new DateTime(2017, 1, 10);
                 var bonsaiTime = DateTime.Today - bonsaiStart;
                 var bonsaiYearCount = bonsaiTime.TotalDays / 365;
@@ -85,7 +86,7 @@
 
     <ul id="aboutMeStats" class="blockNarrower">
         <li class="importantStat programmingExperienceStat">
-            @{ 
+            @{
                 //Experience time calculations
                 var dateStartedProgramming = new DateTime(2016, 2, 1);
                 var programmingExperience = DateTime.Today - dateStartedProgramming;
@@ -338,17 +339,17 @@
 </div>
 
 @*<div id="contact" class="block blockMargin">
-    <h2 class="commonH commonHGradient">Kontakt</h2>
-    <p class="commonP commonPBlack">Neváhejte mě kontaktovat s&nbsp;jakoukoliv záležitostí. Ozvu&nbsp;se vám zpět hned jak to bude možné.</p>
+        <h2 class="commonH commonHGradient">Kontakt</h2>
+        <p class="commonP commonPBlack">Neváhejte mě kontaktovat s&nbsp;jakoukoliv záležitostí. Ozvu&nbsp;se vám zpět hned jak to bude možné.</p>
 
-    <div id="contactBlocks">
-        <div id="contactInfo">
+        <div id="contactBlocks">
+            <div id="contactInfo">
 
+            </div>
+
+            <div id="contactForm">
+
+            </div>
         </div>
 
-        <div id="contactForm">
-
-        </div>
-    </div>
-
-</div>*@
+    </div>*@
