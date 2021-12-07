@@ -12,6 +12,144 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Web\AboutMe\AboutMe.scss" />
+    <Content Remove="wwwroot\Web\Article\ArticleBase.scss" />
+    <Content Remove="wwwroot\Web\Biography\Biography.scss" />
+    <Content Remove="wwwroot\Web\Contact\Contact.scss" />
+    <Content Remove="wwwroot\Web\Contact\ContactInfos.scss" />
+    <Content Remove="wwwroot\Web\Footer\Footer.scss" />
+    <Content Remove="wwwroot\Web\Footer\FooterContent.scss" />
+    <Content Remove="wwwroot\Web\Footer\FooterCredits.scss" />
+    <Content Remove="wwwroot\Web\Footer\FooterNav.scss" />
+    <Content Remove="wwwroot\Web\Global\Animations.scss" />
+    <Content Remove="wwwroot\Web\Global\Block.scss" />
+    <Content Remove="wwwroot\Web\Global\CommonButton.scss" />
+    <Content Remove="wwwroot\Web\Global\CommonText.scss" />
+    <Content Remove="wwwroot\Web\Global\DashedBorder.scss" />
+    <Content Remove="wwwroot\Web\Global\Font.scss" />
+    <Content Remove="wwwroot\Web\Global\Global.scss" />
+    <Content Remove="wwwroot\Web\Global\LinkHover.scss" />
+    <Content Remove="wwwroot\Web\Global\Tags.scss" />
+    <Content Remove="wwwroot\Web\HeroHeader\Circles.scss" />
+    <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
+    <Content Remove="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss" />
+    <Content Remove="wwwroot\Web\ImportantStats\ImportantStats.scss" />
+    <Content Remove="wwwroot\Web\Menu\Desktop.scss" />
+    <Content Remove="wwwroot\Web\Menu\Menu.scss" />
+    <Content Remove="wwwroot\Web\Menu\Mobile.scss" />
+    <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
+    <Content Remove="wwwroot\Web\Projects\ProjetList.scss" />
+    <Content Remove="wwwroot\Web\Sitemap\Sitemap.scss" />
+    <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
+    <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
+    <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
+    <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
+    <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
+    <Content Remove="wwwroot\Web\_Variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Web\AboutMe\AboutMe.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Article\ArticleBase.scss" />
+    <None Include="wwwroot\Web\Biography\Biography.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Contact\Contact.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Contact\ContactInfos.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Footer\Footer.scss" />
+    <None Include="wwwroot\Web\Footer\FooterContent.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Footer\FooterCredits.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Footer\FooterNav.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\Animations.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\Block.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\CommonButton.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\CommonText.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\DashedBorder.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\Font.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\Global.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\LinkHover.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\Tags.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\HeroHeader\Circles.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\HeroHeader\HeroHeader.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\ImportantStats\ImportantStats.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Menu\Desktop.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Menu\Menu.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Menu\Mobile.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\MySkills\MySkills.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Projects\ProjetList.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Sitemap\Sitemap.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\IndexPage\IndexPage.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\IndexPage\Projects.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Variables.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MartinDrozdik.Services.LanguageDictionary" Version="1.1.0" />
     <PackageReference Include="MartinDrozdik.Services.RobotsTXT" Version="1.0.0" />
     <PackageReference Include="MartinDrozdik.Services.Sitemap" Version="1.0.0" />
@@ -26,6 +164,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="package-lock.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
+    <Content Update="tsconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
