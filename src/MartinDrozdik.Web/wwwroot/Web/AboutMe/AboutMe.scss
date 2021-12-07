@@ -1,0 +1,175 @@
+﻿@use "../ImportantStats/ImportantStats";
+
+@import "../_Variables.scss";
+@import "../Global/DashedBorder";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+//--------------------------------------------------
+//---------ABOUT ME---------------------------------
+//--------------------------------------------------
+#aboutMe {
+    background-image: url("/Web/AboutMe/DottedBackground.png");
+    background-repeat: repeat;
+    background-position: center center;
+    background-size: auto auto;
+    text-align: center;
+}
+
+//--------------------------------------------------
+//---------ABOUT ME CONTENT-------------------------
+//--------------------------------------------------
+#aboutMe {
+    //ABOUT ME CONTENT
+    #aboutMeContent {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        #aboutMeText, #aboutMeImage {
+            //display: inline-block;
+            //vertical-align: middle;
+        }
+        //ABOUT ME TEXT
+        #aboutMeText {
+            background-color: white;
+            @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-65 $pxInRem-17 rgba(0, 0, 0, 0.25));
+            padding: 1.75rem $pxInRem-46;
+            padding-bottom: $pxInRem-2;
+            text-align: left;
+        }
+        //MY FOTO
+        #aboutMeImage {
+            position: relative;
+
+            $dashSpacing: $pxInRem-34;
+            $borderWidth: $pxInRem-8;
+            max-width: 23.75rem;
+            font-size: 0;
+            margin: $dashSpacing + $pxInRem-2;
+            margin-left: $dashSpacing + 2rem;
+
+            &, &:before, &:after, img {
+                @include border-radius(50%);
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                position: relative;
+                z-index: 2;
+            }
+
+            &:before, &:after {
+                content: " ";
+                font-size: 0;
+                position: absolute;
+                z-index: 1;
+            }
+
+            &:before {
+                left: -$dashSpacing;
+                right: -$dashSpacing;
+                top: -$dashSpacing;
+                bottom: -$dashSpacing;
+                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNDQ4IDQ0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjI0IiBjeT0iMjI0IiByPSIyMjMuNSIgc3Ryb2tlPSIjMjQwQjM2IiBzdHJva2UtZGFzaGFycmF5PSIyMCAyMCIgc3Ryb2tlLW9wYWNpdHk9Ii41Ii8+Cjwvc3ZnPgo=");
+            }
+
+            &:after {
+                left: -$borderWidth;
+                right: -$borderWidth;
+                top: -$borderWidth;
+                bottom: -$borderWidth;
+                background-image: linear-gradient(to right, $red, $black);
+                @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-68 $pxInRem-17 rgba(0, 0, 0, 0.25));
+            }
+        }
+    }
+}
+
+
+@media only screen and (max-width: 66.875rem) {
+    #aboutMe {
+        //ABOUT ME CONTENT
+        #aboutMeContent {
+            display: block;
+            text-align: center;
+            overflow: hidden;
+            //ABOUT ME TEXT
+            #aboutMeText {
+                padding: 1.25rem $pxInRem-30;
+                padding-bottom: $pxInRem-8;
+                display: inline-block;
+            }
+            //MY FOTO
+            #aboutMeImage {
+                $dashSpacing: $pxInRem-26;
+                margin: ($dashSpacing + $pxInRem-26) auto;
+                width: 80%;
+
+                &, &:before, &:after, img {
+                    @include border-radius(50%);
+                }
+
+                &:before {
+                    left: -$dashSpacing;
+                    right: -$dashSpacing;
+                    top: -$dashSpacing;
+                    bottom: -$dashSpacing;
+                    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNDQ4IDQ0OCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjI0IiBjeT0iMjI0IiByPSIyMjMuNSIgc3Ryb2tlPSIjMjQwQjM2IiBzdHJva2UtZGFzaGFycmF5PSIyMCAyMCIgc3Ryb2tlLW9wYWNpdHk9Ii41Ii8+Cjwvc3ZnPgo=");
+                }
+            }
+        }
+    }
+}
+
+//--------------------------------------------------
+//---------ABOUT ME STATS---------------------------
+//--------------------------------------------------
+#aboutMe {
+    //ABOUT ME STATS
+    #aboutMeStats {
+        margin-top: 4rem;
+        display: flex;
+        justify-content: space-around;
+        overflow: hidden;
+
+        .importantStat {
+            
+        }
+    }
+}
+
+@media only screen and (max-width: 46.25rem){
+    #aboutMe {
+        //ABOUT ME STATS
+        #aboutMeStats {
+            margin-top: 2rem;
+            display: block;
+
+            .importantStat {
+                &.projectCountStat{
+                    right: -$pxInRem-16;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 23.75rem){
+    #aboutMe {
+        //ABOUT ME STATS
+        #aboutMeStats {
+            margin-top: 0.75rem;
+
+
+            .importantStat {
+                @include ImportantStats.importantStatNoIcon();
+                    
+                &.projectCountStat {
+                    right: 0;
+                }
+            }
+        }
+    }
+}

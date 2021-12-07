@@ -1,0 +1,193 @@
+﻿@use "sass:math";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+@import "../ImportantDottedList/ImportantDottedList";
+
+//--------------------------------------------------
+//---------BIOGRAPHY--------------------------------
+//--------------------------------------------------
+#biography {
+    //List
+    $biographyListItemInfoSpace: $pxInRem-28;
+    font-size: 0;
+    position: relative;
+    overflow: hidden;
+
+    //Circle background decoration
+    .biographyCirclesBackground {
+        position: absolute;
+        z-index: 1;
+
+        &#biographyCirclesTopLeft {
+            left: 0;
+            top: 0;
+        }
+
+        &#biographyCirclesBottomRight {
+            bottom: 0;
+            right: 0;
+        }
+    }
+
+    #biographyContent{
+        position: relative;
+        z-index: 2;
+    }
+
+    .biographyList {
+        display: inline-block;
+        vertical-align: top;
+        $listWidth: 40%;
+        $listPerLine: 2;
+        $listMargin: math.div(100% - ($listWidth * 2), $listPerLine);
+        width: $listWidth;
+        margin-right: $listMargin;
+
+        h3 {
+            font-size: $pxInRem-36;
+            color: $black;
+            font-weight: $fontWeightBold;
+        }
+
+        ul {
+            li {
+                .biographyListHeading {
+                    color: $black;
+                    font-size: $pxInRem-22;
+                    padding-top: $pxInRem-6;
+                    margin-bottom: $pxInRem-16;
+                    display: block;
+                    font-weight: $fontWeightBold;
+                }
+
+                p {
+                    font-size: $pxInRem-16;
+                    line-height: 150%;
+                    color: black;
+                }
+                //Info list
+                .biographyListItemInfos {
+                    margin-bottom: $pxInRem-18;
+
+                    dt {
+                        display: none;
+                    }
+
+                    dd {
+                        margin: $pxInRem-8 0;
+                        padding: $pxInRem-1 0 0 0;
+                        padding-left: $biographyListItemInfoSpace;
+                        background-repeat: no-repeat;
+                        background-position: left center;
+                        color: $black;
+                        $fontSize: $pxInRem-17;
+                        font-size: $fontSize;
+                        background-size: $fontSize $pxInRem-20;
+                        //Specific infos
+                        &.placeOfWork {
+                            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMTYgMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im04Ljg5MDIgMTkuNDE5Yy0wLjM2ODMgMC4zODE4LTAuNjc1MiAwLjY4NTEtMC44OTAxNSAwLjg5MzItMC4yMTQ5NS0wLjIwODEtMC41MjE4NS0wLjUxMTQtMC44OTAxNS0wLjg5MzItMC43NDE2Ny0wLjc2ODgtMS43Mjk1LTEuODUyNi0yLjcxNi0zLjExMzYtMC45ODc2OS0xLjI2MjUtMS45NjY0LTIuNjkzLTIuNjk2NC00LjE1NTItMC43MzI0My0xLjQ2NzEtMS4xOTc0LTIuOTMyNC0xLjE5NzQtNC4yNzM3IDAtMi43OTE3IDAuODU3Ny00LjYwNjEgMi4xNjg5LTUuNzMyOCAxLjMyNDktMS4xMzg0IDMuMTkwOS0xLjY0MjIgNS4zMzExLTEuNjQyMiAyLjE0MDIgMCA0LjAwNjIgMC41MDM4IDUuMzMxMSAxLjY0MjIgMS4zMTEyIDEuMTI2NiAyLjE2ODkgMi45NDExIDIuMTY4OSA1LjczMjggMCAxLjM0MTMtMC40NjQ5IDIuODA2Ni0xLjE5NzMgNC4yNzM3LTAuNzMwMSAxLjQ2MjItMS43MDg4IDIuODkyNy0yLjY5NjUgNC4xNTUyLTAuOTg2NiAxLjI2MS0xLjk3NDQgMi4zNDQ4LTIuNzE2IDMuMTEzNnptLTAuODkwMTUtMTcuMjkzYy0yLjQ3OCAwLTQuNSAxLjk3OTItNC41IDQuNDM3NSAwIDIuNDU4NCAyLjAyMiA0LjQzNzUgNC41IDQuNDM3NSAyLjQ3OCAwIDQuNS0xLjk3OTIgNC41LTQuNDM3NSAwLTIuNDU4My0yLjAyMi00LjQzNzUtNC41LTQuNDM3NXoiIHN0cm9rZT0iIzI0MEIzNiIvPgo8L3N2Zz4K");
+                            //background-position-x: $pxInRem-2;
+                            font-weight: $fontWeightSemiBold;
+                        }
+
+                        &.timeOfWork, &.timeOfStudy {
+                            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMTggMTkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im04Ljk5OTkgMTguMDAyYy00Ljk1MTkgMC04Ljk5OTktNC4wNDgxLTguOTk5OS05IDAtNC45NTIgNC4wNDgtOSA4Ljk5OTktOSA0Ljk1MTggMCA4Ljk5OTggNC4wNDggOC45OTk4IDkgMC4wMzkzIDQuOTUxOS00LjAwODcgOS04Ljk5OTggOXptMC0xNy4wNTdjLTQuNDQxIDAtOC4wMTczIDMuNjE1Ny04LjAxNzMgOC4wMTc1IDAgNC40MDE3IDMuNjE1NyA4LjAxNzQgOC4wMTczIDguMDE3NCA0LjQwMTYgMCA4LjAxNzMtMy42MTU3IDguMDE3My04LjAxNzQgMC00LjQwMTgtMy41NzY0LTguMDE3NS04LjAxNzMtOC4wMTc1eiIgZmlsbD0iIzI0MEIzNiIvPgo8cGF0aCBkPSJtOS41NSA0LjczODhjMC4wMjEzNy0wLjg4MDE4LTEuMDYxMS0wLjg4MDE4LTEuMDYxMSAwdjQuNjM2NWMwIDAuODE2OTMgMCAwLjgxMDkzIDAuNjUzOTEgMS40ODM0LTAuMDA3NTEtMC4wMDM4IDIuMTE1MiAyLjE2OTUgMi4xMTUyIDIuMTY5NSAwLjU0NDggMC41NDQ4IDEuMzEzMy0wLjE4MDEgMC43NDY3LTAuNzQ2N2wtMi40NTQ4LTIuNDU0OHYtNS4wODc5eiIgZmlsbD0iIzI0MEIzNiIvPgo8L3N2Zz4K");
+                            opacity: 0.8;
+                        }
+
+                        &.timeOfStudy {
+                            background-position-x: $pxInRem-2;
+                        }
+
+                        &.focusOfStudy {
+                            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjIgMTciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0xOC4zMTcgMTMuOTU3YzAuMDAxMyAwLjAxMTkgMmUtMyAwLjAyNCAwLjAwMjMgMC4wMzU5IDAuMDA1OCAwLjY1NjgtMS4wOTA0IDEuMzA4Ni0yLjMzNDQgMS45MjAyLTEuMDA3OSAwLjQ5NTctMy4wMzEzIDEuMDg2NS00Ljk4NDcgMS4wODY1LTEuOTUzNSAwLTMuOTc2OC0wLjU5MDgtNC45ODQ2LTEuMDg2NS0xLjI0NC0wLjYxMTYtMi4zNDAyLTEuMjYzNS0yLjMzNDUtMS45MjAyIDEuNmUtNCAtMC4wMTE5IDkuNGUtNCAtMC4wMjQgMC4wMDIzLTAuMDM1OWwwLjUzMjE5LTQuODc1NmMwLjAwNTg2LTAuMDUzNyAwLjAyNDEtMC4xMDUyNCAwLjA1MzI0LTAuMTUwNDFzMC4wNjgzNi0wLjA4MjY5IDAuMTE0NDUtMC4xMDk1MWMwLjA0NjA4LTAuMDI2ODIgMC4wOTc3NS0wLjA0MjE4IDAuMTUwNzktMC4wNDQ4NCAwLjA1MzAyLTAuMDAyNjQgMC4xMDU5MSAwLjAwNzQ5IDAuMTU0MzYgMC4wMjk1OWw1LjY4MTUgMi41OTE5YzAuMTk4MyAwLjA5MDQgMC40MTMxIDAuMTM3IDAuNjMwMyAwLjEzN3MwLjQzMi0wLjA0NjYgMC42MzAzLTAuMTM3bDUuNjgxMi0yLjU5MTljMC4wNDg1LTAuMDIyMTEgMC4xMDE1LTAuMDMyMjQgMC4xNTQ0LTAuMDI5NTkgMC4wNTMxIDAuMDAyNjQgMC4xMDQ3IDAuMDE4IDAuMTUwNyAwLjA0NDgzIDAuMDQ2MyAwLjAyNjgyIDAuMDg1NSAwLjA2NDM1IDAuMTE0NiAwLjEwOTUxIDAuMDI5MSAwLjA0NTE3IDAuMDQ3NCAwLjA5NjcgMC4wNTMyIDAuMTUwNDFsMC41MzI0IDQuODc1NnptMy4yMjc5LTkuMjk3Mi05LjkxNDUtNC41MjMyYy0wLjE5ODMtMC4wOTAzMjktMC40MTMxLTAuMTM3MDItMC42MzAzLTAuMTM3MDJzLTAuNDMyIDAuMDQ2NjkyLTAuNjMwMyAwLjEzNzAybC05LjkxNDQgNC41MjMyYy0wLjEzNTYgMC4wNjE4OC0wLjI1MDczIDAuMTYyMzQtMC4zMzE1MSAwLjI4OTI5LTAuMDgwNzc2IDAuMTI2OTUtMC4xMjM3NiAwLjI3NDk2LTAuMTIzNzYgMC40MjYyIDAgMC4xNTEyNSAwLjA0Mjk3OCAwLjI5OTI2IDAuMTIzNzYgMC40MjYyMSAwLjA4MDc3OCAwLjEyNjk1IDAuMTk1OTEgMC4yMjc0MSAwLjMzMTUxIDAuMjg5MjdsOS45MTQ0IDQuNTIzM2MwLjE5ODMgMC4wOTAzIDAuNDEzMSAwLjEzNjkgMC42MzAzIDAuMTM2OXMwLjQzMi0wLjA0NjYgMC42MzAzLTAuMTM2OWw4LjIyOTgtMy43NTQ3djIuOTM0MmMtMC4xMTcyIDAuMDY4NjgtMC4yMTQzIDAuMTY3NTMtMC4yODIgMC4yODY2LTAuMDY3NiAwLjExOTEtMC4xMDMzIDAuMjU0Mi0wLjEwMzMgMC4zOTE3djUuMDk2N2gxLjU0MDl2LTUuMDk2N2MtMWUtNCAtMC4xMzc1LTAuMDM1Ny0wLjI3MjYtMC4xMDMzLTAuMzkxNy0wLjA2NzYtMC4xMTkwNy0wLjE2NDktMC4yMTc5Mi0wLjI4Mi0wLjI4NjZ2LTMuMjg1N2wwLjkxNDQtMC40MTcxYzAuMTM1NS0wLjA2MTg2IDAuMjUwNy0wLjE2MjMyIDAuMzMxNC0wLjI4OTI3IDAuMDgwOC0wLjEyNjk1IDAuMTIzOC0wLjI3NDk2IDAuMTIzOC0wLjQyNjIxIDAtMC4xNTEyNC0wLjA0My0wLjI5OTI1LTAuMTIzOC0wLjQyNjItMC4wODA3LTAuMTI2OTUtMC4xOTU4LTAuMjI3NDEtMC4zMzE0LTAuMjg5Mjl6bS0xMC41NDUtMy44ODQxLTkuOTY5MyA0LjU5MzIgOS45NjkzIDQuNDU2IDEwLjEwNC00LjQ1Ni0xMC4xMDQtNC41OTMyem0tNi4xMjk4IDkuMTE3OCA2LjEyOTggMi43NDIyIDYuMDYyNC0yLjc0MjIgMC40MDQyIDQuMjUwNGMtNi42MDEzIDQuNzk4OC0xMy4wMDEgMC0xMy4wMDEgMGwwLjQwNDE2LTQuMjUwNHoiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzI0MEIzNiIgZmlsbC1ydWxlPSJldmVub2RkIi8+Cjwvc3ZnPgo=");
+                            background-size: ($fontSize + $pxInRem-4) $pxInRem-20;
+                            //background-size: auto $pxInRem-18;
+                            //background-position-x: -$pxInRem-2;
+                        }
+
+                        &.languageLevel {
+                            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjIgMjIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0xMSAwaC0wLjAxMDYtMC4wMDUzLTAuMDEwNWMtNi4wNjU5IDAuMDE1ODY1LTEwLjk3NCA0LjkzNDEtMTAuOTc0IDExIDAgNi4wNjU5IDQuOTA3NyAxMC45ODQgMTAuOTc0IDExaDAuMDEwNSAwLjAwNTMgMC4wMTA2YzYuMDc2NCAwIDExLTQuOTIzNiAxMS0xMSAwLTYuMDc2NC00LjkyMzYtMTEtMTEtMTF6bTAuNDM4OSA2LjU4NDFjMS4xNjg4LTAuMDMxNzMgMi4zMDA1LTAuMTg1MDkgMy4zOTUyLTAuNDQ5NTEgMC4zMjc5IDEuMjk1NyAwLjUzNDIgMi43OTIzIDAuNTY1OSA0LjQzMTdoLTMuOTYxMXYtMy45ODIyem0wLTAuODgzMTd2LTQuNzQ5YzEuMTg0NyAwLjMyNzg5IDIuMzkwNCAxLjkwOTEgMy4xNTIgNC4zMzY1LTEuMDE1NCAwLjI0MzI3LTIuMDY3OCAwLjM4MDc3LTMuMTUyIDAuNDEyNXptLTAuODc3OC00Ljc1OTZ2NC43NjQ5Yy0xLjA5NDgtMC4wMzE3My0yLjE1NzctMC4xNzQ1Mi0zLjE3ODQtMC40MjMwOCAwLjc3MjEyLTIuNDQzMyAxLjk4MzItNC4wMzUxIDMuMTc4NC00LjM0MTh6bTAgNS42NDI4djMuOTc3aC0zLjk4NzVjMC4wMzE3My0xLjYzOTUgMC4yMzc5OC0zLjEzNjEgMC41NjU4Ni00LjQzMTggMS4xIDAuMjY0NDIgMi4yNDc2IDAuNDIzMDcgMy40MjE3IDAuNDU0OHptLTQuODc2IDMuOTc3aC00Ljc5MTRjMC4wOTUxOTItMi4yNjM1IDAuOTQxMzUtNC4zMzY2IDIuMjg5OS01Ljk3NiAwLjk3ODM3IDAuNTM5NDIgMi4wMjAyIDAuOTgzNjUgMy4xMDk2IDEuMzExNS0wLjM1OTYyIDEuNDAxNC0wLjU3MTE1IDIuOTgyNy0wLjYwODE3IDQuNjY0NXptMCAwLjg3NzhjMC4wMzE3MyAxLjY3NjUgMC4yNDMyNyAzLjI2MyAwLjYwMjg4IDQuNjY0NS0xLjA4OTQgMC4zMzMxLTIuMTI2IDAuNzcyMS0zLjEwOTYgMS4zMTE1LTEuMzQ4Ni0xLjYzOTQtMi4xODk0LTMuNzEyNS0yLjI4OTktNS45NzZoNC43OTY2em0wLjg4ODQ2IDBoMy45ODc1djMuOTcxN2MtMS4xNzQxIDAuMDMxNy0yLjMyMTcgMC4xOTA0LTMuNDIxNyAwLjQ2MDEtMC4zMjc4OC0xLjI5NTctMC41MzQxMy0yLjc5MjMtMC41NjU4Ni00LjQzMTh6bTMuOTg3NSA0Ljg1NDl2NC43NzAxYy0xLjE5NTItMC4zMTItMi40MDYzLTEuODk4NS0zLjE3ODQtNC4zNDE4IDEuMDIwNy0wLjI1MzggMi4wODM3LTAuMzk2NiAzLjE3ODQtMC40Mjgzem0wLjg3NzggNC43NTQzdi00Ljc1OTZjMS4wODQyIDAuMDMxNyAyLjEzNjYgMC4xNzQ1IDMuMTU3MyAwLjQxNzctMC43NjY5IDIuNDMyNy0xLjk2NzQgNC4wMTQtMy4xNTczIDQuMzQxOXptMC01LjYzNzV2LTMuOTcxN2gzLjk2MTFjLTAuMDMxNyAxLjYzNDItMC4yMzggMy4xMzA4LTAuNTY1OSA0LjQyNjUtMS4wOTQ3LTAuMjY0NC0yLjIyNjQtMC40MjMxLTMuMzk1Mi0wLjQ1NDh6bTQuODQ0My0zLjk3MTdoNC44MjMxYy0wLjA5NTIgMi4yNjM1LTAuOTQxNCA0LjMzMTMtMi4yOSA1Ljk3Ni0wLjk4ODktMC41NDQ3LTIuMDM2LTAuOTg4OS0zLjEzNi0xLjMyMjEgMC4zNTk2LTEuNDAxNSAwLjU3MTEtMi45Nzc0IDAuNjAyOS00LjY1Mzl6bTAtMC44Nzc4Yy0wLjAzMTgtMS42NzY1LTAuMjQzMy0zLjI1NzctMC41OTc2LTQuNjU5MiAxLjEtMC4zMzMxNyAyLjE0NzEtMC43Nzc0IDMuMTMwNy0xLjMxNjggMS4zNDg2IDEuNjM5NCAyLjE5NDggMy43MTI1IDIuMjkgNS45ODEyaC00LjgyMzF2LTAuMDA1MnptMS45MzAzLTYuNjUyOWMtMC44Nzc5IDAuNDY1MzktMS43OTgxIDAuODUxNDUtMi43NjU5IDEuMTQyMy0wLjUxMy0xLjY1NTMtMS4yMzc1LTMuMDAzOC0yLjA4ODktMy44OTIzIDEuODcyMSAwLjQ0OTUyIDMuNTQzMiAxLjQyMjYgNC44NTQ4IDIuNzV6bS05LjYwMzktMi43Mzk0Yy0wLjg1MTQ1IDAuODgzMTctMS41NzA3IDIuMjMxNy0yLjA3ODQgMy44NzY0LTAuOTU3MjEtMC4yOTA4Ni0xLjg3MjEtMC42NzE2My0yLjczOTQtMS4xMzcgMS4yOTU3LTEuMzIyMSAyLjk1NjItMi4yODk5IDQuODE3OC0yLjczOTR6bS00LjgyMzEgMTYuOTE4YzAuODY3MzEtMC40NjUzIDEuNzg3NS0wLjg0NjEgMi43Mzk0LTEuMTM3IDAuNTEyOTggMS42NSAxLjIzMjIgMi45OTMzIDIuMDgzNyAzLjg4MTctMS44NjE1LTAuNDQ5NS0zLjUyMjEtMS40MTczLTQuODIzMS0yLjc0NDd6bTkuNTcyMiAyLjc1NTNjMC44NTY3LTAuODg4NCAxLjU3NTktMi4yMzcgMi4wOTQyLTMuODk3NiAwLjk2NzggMC4yOTA5IDEuODg4IDAuNjc3IDIuNzY1OSAxLjE0MjMtMS4zMTE2IDEuMzMyNy0yLjk4OCAyLjMwNTgtNC44NjAxIDIuNzU1M3oiIGZpbGw9IiMyNDBCMzYiLz4KPC9zdmc+Cg==");
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //Work experience list
+    #biographyWorkExperience {
+    }
+    //School experience list
+    #biographySchoolExperience {
+        ul {
+            li {
+                .biographyListItemInfos {
+                    dd {
+                        padding-left: $biographyListItemInfoSpace + $pxInRem-5;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 65.625rem) {
+    #biography {
+
+        .biographyList {
+            display: block;
+            width: auto;
+            margin-right: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 45rem){
+    #biography {
+        .biographyCirclesBackground{
+            display: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 35.625rem){
+    #biography {
+
+        .biographyList {
+
+            h3 {
+                font-size: $pxInRem-28;
+            }
+
+            ul {
+                li {
+                    .biographyListHeading {
+                        color: $black;
+                        font-size: $pxInRem-22;
+                        padding-top: $pxInRem-6;
+                        margin-bottom: $pxInRem-16;
+                        display: block;
+                        font-weight: $fontWeightBold;
+                    }
+
+                    p {
+                        font-size: $pxInRem-16;
+                        line-height: 150%;
+                    }
+                    //Info list
+                    .biographyListItemInfos {
+                        margin-bottom: $pxInRem-18;
+
+                        dt {
+                        }
+
+                        dd {
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

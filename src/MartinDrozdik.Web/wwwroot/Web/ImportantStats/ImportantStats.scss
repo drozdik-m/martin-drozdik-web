@@ -1,0 +1,82 @@
+﻿@use "sass:math";
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+//--------------------------------------------------
+//---------IMPORTANT STATS--------------------------
+//--------------------------------------------------
+.importantStat {
+    display: inline-block;
+    text-align: center;
+    font-size: $pxInRem-16;
+    position: relative;
+    font-weight: $fontWeightSemiBold;
+    position: relative;
+    padding: $pxInRem-6 0 $pxInRem-6 $pxInRem-4;
+    background-repeat: no-repeat;
+    background-position: left center;
+    max-width: 10.125rem;
+    margin: $pxInRem-16 0;
+
+    &, .statNumber {
+        color: $black;
+    }
+
+    .statNumber {
+        display: block;
+        font-weight: $fontWeightBlack;
+        font-size: $pxInRem-64;
+        margin-top: -$pxInRem-8;
+        margin-bottom: $pxInRem-4;
+        max-width: 100%;
+    }
+
+    &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: $pxInRem-4;
+        content: " ";
+        font-size: 0;
+        background-color: $black;
+    }
+}
+
+@mixin importantStatNoIcon() {
+    background-image: none;
+    padding-left: $pxInRem-6;
+
+    &:before {
+        left: 0
+    }
+}
+
+//--------------------------------------------------
+//---------SPECIFIC IMPORTANT STATS-----------------
+//--------------------------------------------------
+.importantStat.programmingExperienceStat {
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMTU0IDE0NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0ibTExNS42NCAxMzIuOTNjLTYuMDUgMC0xMS41NS0zLjg3My0xMy43NS05Ljk1OSAwLTAuNTUzLTAuNTUtMS4xMDctMC41NS0xLjEwN2gtNDguOTVjMCAwLjU1NCAwIDEuMTA3LTAuNTUgMS4xMDctMS42NSA2LjA4Ni03LjE1IDkuOTU5LTEzLjIgOS45NTktMy4zIDAtNS41IDIuMjEzLTUuNSA1LjUzM3MyLjIgNS41MzMgNS41IDUuNTMzaDc3YzMuMyAwIDUuNS0yLjIxMyA1LjUtNS41MzNzLTIuMi01LjUzMy01LjUtNS41MzN6IiBmaWxsPSIjMjQwQjM2Ii8+CjxwYXRoIGQ9Im0xMzcuNSAwaC0xMjFjLTkuMzUgMC0xNi41IDcuMTkyOC0xNi41IDE2LjU5OXY4Mi45OTRjMCA5LjQwNjIgNy4xNSAxNi41OTkgMTYuNSAxNi41OTloMTIxYzkuMzUgMCAxNi41LTcuMTkzIDE2LjUtMTYuNTk5di04Mi45OTRjMC05LjQwNi03LjE1LTE2LjU5OS0xNi41LTE2LjU5OXptLTg5LjY1IDUzLjY3LTE2LjUgMTYuNTk5Yy0zLjA2NDMgMi43Mzc3LTcuMzUtMC45OTg4LTMuOTIxNC00LjE2MDVsMTYtMTYuMDk2LTE2LjU3Mi0xNi4zODNjLTIuNTcxNC0yLjU4NjggMi02LjgxMTkgNC40OTI5LTQuMzA0MmwxNi41IDE2LjU5OWMyLjcyMTQgMi42NTE0IDIuNzIxNCA0Ljk1MDggMCA3Ljc0NjF6bTEyLjY1IDE4LjI1OWgyMmM0LjY0MjkgMCA0LjY0MjktNS44MjAzIDAtNS44MjAzaC0yMmMtNC41IDAtNC41IDUuNzQ4NSAwIDUuODIwM3oiIGNsaXAtcnVsZT0iZXZlbm9kZCIgZmlsbD0iIzI0MEIzNiIgZmlsbC1ydWxlPSJldmVub2RkIi8+Cjwvc3ZnPgo=");
+    $bgWidth: 7.5rem;
+    background-size: $bgWidth $bgWidth;
+    $bgSpacing: 3rem;
+    padding-left: $bgWidth + $bgSpacing;
+
+    &:before {
+        left: $bgWidth + math.div($bgSpacing, 2) + $pxInRem-10;
+    }
+}
+
+.importantStat.projectCountStat {
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgOTMgMTQyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJtMzQuMjYzIDE0LjY5di00LjkwNjhjMC01LjM4NDUgNC4zOTM1LTkuNzgyOSA5LjgxMzMtOS43ODI5aDQuODQ3YzUuNDM3OSAwIDkuODEzMyA0LjM4IDkuODEzMyA5Ljc4Mjl2NC45MDY4aDkuODExMmMyLjY5NTcgMCA0Ljg3MzEgMi4xODk5IDQuODczMSA0Ljg5MTR2NC45MDY4YzAgMi43MjM5LTIuMTgxOCA0Ljg5MTQtNC44NzMxIDQuODkxNGgtNDQuMDk2Yy0yLjY5NTcgMC00Ljg3MzEtMi4xOS00Ljg3MzEtNC44OTE0di00LjkwNjhjMC0yLjcyMzkgMi4xODE4LTQuODkxNCA0Ljg3MzEtNC44OTE0aDkuODExMnptNDQuMDUzIDQuODk2NWg0LjkwNzNjNS40MTYxIDAgOS43NzY5IDQuMzkyNCA5Ljc3NjkgOS44MTA3djEwMi43OWMwIDUuNDU0LTQuMzc3MiA5LjgxMS05Ljc3NjkgOS44MTFoLTczLjQ0NmMtNS40MTYgMC05Ljc3NjktNC4zOTItOS43NzY5LTkuODExdi0xMDIuNzljMC01LjQ1MzkgNC4zNzcyLTkuODEwNyA5Ljc3NjktOS44MTA3aDQuOTA3M3YwLjAyMzkgNC44NDg4YzAgNS40MjE3IDQuMzczNyA5LjgxNyA5LjgwMyA5LjgxN2g0NC4wMjZjNS40MTQgMCA5LjgwMy00LjM3NzEgOS44MDMtOS44MTd2LTQuODQ4OC0wLjAyMzl6bS0zMS44MTYtNC44OTY1YzEuMzUxNiAwIDIuNDQ3NC0xLjA5NjIgMi40NDc0LTIuNDQ4MyAwLTEuMzUyMi0xLjA5NTgtMi40NDgzLTIuNDQ3NC0yLjQ0ODNzLTIuNDQ3NCAxLjA5NjEtMi40NDc0IDIuNDQ4M2MwIDEuMzUyMSAxLjA5NTggMi40NDgzIDIuNDQ3NCAyLjQ0ODN6bS0yLjY0MiA4Ny40NTUgMzQuNjEzLTM0LjA0OGMyLjkwMzktMi45MjUzLTEuMzIzNC03LjE2NDEtMy45NjU0LTQuNTE0OGwtMzQuMTA3IDM0LjA4OS0xNy42NzctMTcuNjYzYy0yLjUyODYtMi41MjYxLTYuODY5MyAxLjU1MDEtNC4wMjk0IDQuNDYwN2wxOC4wMzIgMTcuNjc3YzIuMzc3OSAyLjM3NSA0Ljc1NTcgMi4zNzUgNy4xMzM2IDB6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiMyNDBCMzYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K");
+    $bgWidth: 7.5rem;
+    background-size: $bgWidth $bgWidth;
+    $bgSpacing: 1rem;
+    padding-left: $bgWidth + $bgSpacing;
+
+    &:before {
+        left: $bgWidth + math.div($bgSpacing, 2) - $pxInRem-6;
+    }
+}

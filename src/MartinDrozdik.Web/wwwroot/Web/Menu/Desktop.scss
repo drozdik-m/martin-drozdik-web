@@ -1,0 +1,101 @@
+﻿@use "sass:math";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@import "../Global/LinkHover";
+
+$desktopMenuHeight: 6rem !default;
+
+//--------------------------------------------------
+//----------DESKTOP MENU----------------------------
+//--------------------------------------------------
+#menu.desktopMenu {
+    height: $desktopMenuHeight;
+    font-size: 0;
+    text-align: center;
+    box-shadow: 0px 0px $pxInRem-20 $pxInRem-5 $black;
+    //INNER MENU <nav>
+    nav {
+        position: relative;
+        max-width: 120rem;
+        text-align: right;
+        margin: 0 auto;
+        right: 0 !important;
+        //MENU LOGO
+        #menuLogo {
+            float: left;
+            padding-right: 1rem;
+            padding-left: 1.75rem;
+            display: block;
+
+            svg {
+                width: 3.424375rem;
+                $topBottomSpace: 1.5rem;
+                height: $desktopMenuHeight - (2 * $topBottomSpace);
+                margin: $topBottomSpace 0;
+            }
+        }
+        //LIST <ul>
+        ul {
+            display: inline-block;
+
+            li {
+                display: inline-block;
+                vertical-align: middle;
+                text-align: center;
+                @include transition (background-color $transition);
+
+                a {
+                    $height: 3rem;
+                    $padding: $pxInRem-48;
+                    display: block;
+                    font-size: $pxInRem-22;
+                    height: $height;
+                    line-height: $height;
+                    padding: 0 $padding;
+                    margin-top: math.div($desktopMenuHeight - $height, 2);
+                    font-weight: $fontWeightSemiBold;
+                    position: relative;
+                    color: white;
+
+                    @include linkHover($pxInRem-2, $pxInRem-32, 1.3);
+
+                    &.contact {
+                        background-color: $red;
+                        @include border-radius(5rem);
+                        $margin: $pxInRem-24;
+                        padding-left: $padding - $margin;
+                        padding-right: $padding - $margin;
+                        margin-left: $margin;
+                        margin-right: $margin;
+
+                        @include transition(background-color $transition, border-radius $transition);
+
+                        &:before {
+                            display: none;
+                        }
+
+                        &:hover {
+                            background-color: $redHover;
+                        }
+
+                        &:active {
+                            background-color: rgba(255, 255, 255, 0.2);
+                            border-radius: 0;
+                        }
+                    }
+
+                    &:hover {
+                        color: white;
+                    }
+                }
+            }
+        }
+    }
+    //HAMBURGER
+    #menuHamburger {
+        display: none;
+    }
+}

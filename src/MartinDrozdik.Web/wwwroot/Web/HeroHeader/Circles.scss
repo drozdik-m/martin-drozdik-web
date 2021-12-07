@@ -1,0 +1,28 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+#heroHeaderCircles {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+
+    circle {
+        @include transition(fill-opacity $transition, r $transition);
+
+        &:hover {
+            //fill-opacity: 0.5;
+            r: 50;
+        }
+
+        &:active {
+            r: 40;
+        }
+    }
+
+    #headerCircle5-9{
+        fill-opacity: 0 !important;
+    }
+}

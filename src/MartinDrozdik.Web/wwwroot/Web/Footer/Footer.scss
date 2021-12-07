@@ -1,0 +1,27 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@import "../Global/DashedBorder";
+@import "../Global/LinkHover";
+
+@import "./FooterNav";
+@import "./FooterContent";
+@import "./FooterCredits";
+
+//--------------------------------------------------
+//---------FOOTER-----------------------------------
+//--------------------------------------------------
+
+#mainFooter {
+    background-color: $black;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+@media only screen and (max-width: 50rem){
+    #mainFooter {
+
+    }
+
+}

@@ -1,0 +1,44 @@
+{
+  "name": "@drozdik.m/web",
+  "version": "1.0.0",
+  "description": "My personal website",
+  "main": "dist/Module.js",
+  "typings": "dist/Module.d.ts",
+  "scripts": {
+    "compile-scripts": "tsc && webpack",
+    "watch-scripts": "tsc && webpack --watch",
+    "compile-styles": "sass --load-path=node_modules --load-path=../ wwwroot/Web:wwwroot/_dist/wwwroot/Web --style compressed",
+    "watch-styles": "sass --load-path=node_modules --load-path=../ --watch wwwroot/Web/_Pages:wwwroot/_dist/wwwroot/Web/_Pages --style compressed",
+    "clear": "rmdir /S /Q \"wwwroot/_dist\"",
+    "compile": "npm run compile-scripts && npm run compile-styles",
+    "build": "npm update && npm update -D && npm run compile",
+    "test": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drozdik-m/martin-drozdik-web"
+  },
+  "keywords": [],
+  "author": "Martin Drozdík <ja@martin-drozdik.cz> (http://martin-drozdik.cz)",
+  "license": "MIT",
+  "dependencies": {
+    "@drozdik.m/common-mixins": "^1.0.5",
+    "@drozdik.m/dimensions-helper": "^1.0.0",
+    "@drozdik.m/form": "^1.1.11",
+    "@drozdik.m/google-analytics": "^1.0.1",
+    "@drozdik.m/lerp": "^1.0.1",
+    "@drozdik.m/menu": "^1.1.0",
+    "@drozdik.m/on-scroll-to": "^1.1.3",
+    "@drozdik.m/pair": "^1.1.0",
+    "@drozdik.m/px-in-rem": "^1.0.1",
+    "@drozdik.m/queue": "^1.1.0",
+    "@drozdik.m/slow-scroll": "^1.1.0",
+    "@drozdik.m/stack": "^1.0.1",
+    "@drozdik.m/window-events": "^1.1.2"
+  },
+  "devDependencies": {
+    "sass": "^1.43.2",
+    "webpack": "^5.58.2",
+    "webpack-cli": "^4.9.1"
+  }
+}

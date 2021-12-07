@@ -1,0 +1,79 @@
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+.tags {
+    li {
+        display: inline-block;
+        list-style-type: none;
+        vertical-align: middle;
+        margin: $pxInRem-4 0;
+        margin-right: $pxInRem-3;
+
+        a {
+            display: block;
+            border-style: solid;
+            border-width: $pxInRem-1;
+            padding: $pxInRem-6 $pxInRem-12;
+            font-weight: $fontWeightBold;
+            font-size: $pxInRem-16;
+            @include border-radius($pxInRem-3);
+            cursor: pointer;
+            @include transition(border-color $transition, background-color $transition, color $transition);
+            text-decoration: none;
+            position: relative;
+            top: 0;
+
+            &:before {
+                content: "#";
+                @include transition(color $transition);
+            }
+
+            &:active{
+                top: $pxInRem-1;
+            }
+        }
+
+    }
+
+    @mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
+
+        li {
+            a {
+                &, &:before {
+                    color: $details;
+                }
+
+                background-color: $background;
+                border-color: $details;
+            }
+
+            &.selected {
+                a {
+                    &, &:before {
+                        color: $activeDetails;
+                    }
+
+                    background-color: $activeBackground;
+                    border-color: $activeDetails;
+                }
+            }
+
+            &:hover {
+                a {
+                    &, &:before {
+                        color: $hoverDetails;
+                    }
+
+                    background-color: $hoverBackground;
+                    border-color: $hoverDetails;
+                }
+            }
+        }
+    }
+    //SCHEMES
+    &.tagsWhiteBlack {
+        @include tagsScheme($black, #cfcfcf, #cfcfcf, $black, white, $black);
+    }
+}

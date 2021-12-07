@@ -1,0 +1,29 @@
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+@import "Animations";
+@import "Block";
+@import "CommonButton";
+@import "CommonText";
+@import "Font";
+@import "Tags";
+//@import "ArticleBase";
+
+
+@import "../Menu/Menu";
+@import "../Footer/Footer";
+@import "../Contact/ContactInfos";
+@import "../ImportantStats/ImportantStats";
+
+//@import "../../../node_modules/@drozdik.m/dialog-window/module";
+//@import "../../../node_modules/@drozdik.m/common-dialog-window/module";
+//@import "../../../node_modules/@drozdik.m/youtube-dialog-window/module";
+//@import "../../../node_modules/@drozdik.m/loading-animation/module";
+

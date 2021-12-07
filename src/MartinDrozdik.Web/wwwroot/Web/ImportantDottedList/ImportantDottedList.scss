@@ -1,0 +1,125 @@
+﻿@use "sass:math";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+//--------------------------------------------------
+//---------IMPORTANT DOTTED LIST--------------------
+//--------------------------------------------------
+@mixin importantDottedListScheme($dotColor){
+    li{
+        &:before{
+            background-color: $dotColor;
+        }
+    }
+}
+
+.importantDottedList {
+    list-style: none;
+    list-style-type: none;
+    position: relative;
+    $dotDiameter: $pxInRem-40;
+    $dotSpace: $pxInRem-36;
+    $dotMiddle: math.div($dotDiameter, 2);
+
+    li {
+        margin: $pxInRem-36 0;
+        position: relative;
+        padding-left: $dotDiameter + $dotSpace;
+
+        &:before, &:after {
+            content: " ";
+            font-size: 0;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        &:before {
+            width: $dotDiameter;
+            height: $dotDiameter;
+            @include border-radius(50%);
+        }
+
+        &.dottedListImportantItem {
+            &:after {
+                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgNTkgNTkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjI5LjUiIGN5PSIyOS41IiByPSIyOSIgc3Ryb2tlPSIjMjQwQjM2IiBzdHJva2UtZGFzaGFycmF5PSI1IDUiIHN0cm9rZS1vcGFjaXR5PSIuNSIvPgo8L3N2Zz4K");
+                background-repeat: no-repeat;
+                background-position: center center;
+                $borderHighlightSpace: $pxInRem-18;
+                $dimensions: $dotDiameter + $borderHighlightSpace;
+                width: $dimensions;
+                height: $dimensions;
+                background-size: 100% 100%;
+                left: -(math.div($borderHighlightSpace, 2));
+                top: -(math.div($borderHighlightSpace, 2));
+                //background-size: contain;
+            }
+        }
+    }
+    //Left side dash
+    &.importantDottedDashedList {
+        &:before {
+            $width: $pxInRem-2;
+            content: " ";
+            font-size: 0;
+            position: absolute;
+            left: $dotMiddle - math.div($width, 2);
+            top: $dotMiddle;
+            bottom: 0;
+            width: $width;
+            border-left: $pxInRem-2 dashed $black;
+            //background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMiA2NSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGxpbmUgeDE9IjEiIHgyPSIxIiB5MT0iLTQuMzcxMWUtOCIgeTI9IjY1IiBzdHJva2U9IiMyNDBCMzYiIHN0cm9rZS1kYXNoYXJyYXk9IjUgNSIgc3Ryb2tlLXdpZHRoPSIyIi8+Cjwvc3ZnPgo=");
+            //background-repeat: repeat;
+            //background-position: top center;
+        }
+    }
+    //Schemes
+    &.importantDottedListRed {
+        @include importantDottedListScheme($red);
+    }
+}
+
+@media only screen and (max-width: 45rem){
+    .importantDottedList {
+        $dotDiameter: $pxInRem-30;
+        $dotSpace: $pxInRem-18;
+        $dotMiddle: math.div($dotDiameter, 2);
+        $marginLeft: $pxInRem-2;
+
+        li {
+            margin: $pxInRem-26 0;
+            padding-left: $dotDiameter + $dotSpace;
+            margin-left: $marginLeft;
+
+            &:before {
+                width: $dotDiameter;
+                height: $dotDiameter;
+            }
+
+            &.dottedListImportantItem {
+                &:after {
+                    $borderHighlightSpace: $pxInRem-8;
+                    $dimensions: $dotDiameter + $borderHighlightSpace;
+                    width: $dimensions;
+                    height: $dimensions;
+                    left: -(math.div($borderHighlightSpace, 2));
+                    top: -(math.div($borderHighlightSpace, 2));
+                }
+            }
+        }
+        //Left side dash
+        &.importantDottedDashedList {
+            &:before {
+                $width: $pxInRem-2;
+                left: $dotMiddle - math.div($width, 2) + $marginLeft;
+                top: $dotMiddle;
+                width: $width;
+            }
+        }
+    }
+
+}

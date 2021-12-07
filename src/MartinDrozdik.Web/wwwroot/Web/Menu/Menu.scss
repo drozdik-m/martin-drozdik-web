@@ -1,0 +1,29 @@
+﻿@use "sass:math";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+$desktopMenuHeight: 6rem !default;
+$mobileMenuHeight: 2.5rem !default;
+
+//--------------------------------------------------
+//----------GENERAL---------------------------------
+//--------------------------------------------------
+#menu {
+    position: relative;
+    z-index: 210;
+    background-color: $black;
+
+    nav {
+        -webkit-backface-visibility: hidden;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+
+@import "Desktop";
+@import "Mobile";

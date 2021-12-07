@@ -1,0 +1,20 @@
+﻿@model SitemapPageModel
+
+@{
+    //Layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles{
+    <link rel="stylesheet" href="~/_dist/wwwroot/Web/_Pages/SitemapPage/SitemapPage.css" />
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/_dist/_pack/SitemapPage.js"></script>
+}
+
+<div id="sitemap" class="block blockMargin">
+    <h1 class="commonH commonHGradient">Mapa stránek</h1>
+    <p class="commonP commonPRed">Hierarchický list odkazů, z jichž se tento web skládá.</p>
+    @Html.Raw(Model.RootSitemapNode.GenerateHTML())
+</div>

@@ -1,0 +1,54 @@
+﻿@import "../_Variables";
+
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+//--------------------------------------------------
+//---------FANCY LINK HOVER-------------------------
+//--------------------------------------------------
+@mixin linkHover($bottomOffset: 0, $sideOffset: 0, $sideOffsetMultiplicator: 1.5) {
+    display: block;
+    position: relative;
+    text-decoration: none;
+
+    $activeScale: 1.1;
+
+    &:before {
+        position: absolute;
+        bottom: -$pxInRem-2;
+        left: 30%;
+        right: 30%;
+        opacity: 0;
+        height: $pxInRem-2;
+        background-color: white;
+        content: " ";
+        font-size: 0;
+        @include border-radius(0);
+
+        @include transition(opacity $transition, left $transition, right $transition, bottom $transition, border-radius $transition);
+    }
+
+    &:hover {
+        &:before {
+            left: $sideOffset;
+            right: $sideOffset;
+            bottom: $bottomOffset;
+            opacity: 0.8;
+        }
+    }
+
+    &:active {
+        //color: $black;
+        //@include transform(scale($activeScale));
+
+        &:before {
+            left: $sideOffset * $sideOffsetMultiplicator;
+            right: $sideOffset * $sideOffsetMultiplicator;
+            height: $pxInRem-4;
+            opacity: 1;
+            bottom: $bottomOffset * $activeScale;
+            @include border-radius($pxInRem-4);
+        }
+    }
+}
