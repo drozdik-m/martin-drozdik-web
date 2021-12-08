@@ -31,7 +31,7 @@ namespace MartinDrozdik.Web.ViewModels.Sitemap
             "Sitemap"
         };
 
-        public override string OgImage => "Web/_Pages/SitemapPage/SitemapOG.png";
+        public override string OgImage => "/Web/_Pages/SitemapPage/SitemapOG.png";
 
         public override PageId PageId => PageId.Sitemap;
 
