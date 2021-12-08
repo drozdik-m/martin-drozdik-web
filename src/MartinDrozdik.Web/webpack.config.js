@@ -3,23 +3,24 @@ const webpack = require('webpack');
 
 //development/production
 const mode = "development"
+const packPath = path.resolve(__dirname, "./wwwroot/_dist/_pack")
 
 module.exports = [
-    //FRONT-END WEB 
+    //FRONT-END WEB SCRIPTS
     {
         //Entry points
         entry: {
+
+            //Scripts
             Global: "./wwwroot/_dist/Web/Global/Global.js",
             IndexPage: "./wwwroot/_dist/Web/_Pages/IndexPage/IndexPage.js",
             SitemapPage: "./wwwroot/_dist/Web/_Pages/SitemapPage/SitemapPage.js",
-            StyleTest: "./wwwroot/Web/Global/Block.scss"
-            //https://stackoverflow.com/questions/50394789/webpack-4-compile-scss-to-separate-css-file ???
         },
 
         //Output
         output: {
-            filename: "[name].js",
-            path: path.resolve(__dirname, "./wwwroot/_dist/_pack")
+            filename: "js/[name].js",
+            path: packPath
         },
 
         //Mode
@@ -31,7 +32,7 @@ module.exports = [
             //Split chunks
             splitChunks: {
                 chunks: "all",
-                automaticNameDelimiter: '.',
+                automaticNameDelimiter: ".",
                 name: "common"
             }
         },
@@ -44,6 +45,31 @@ module.exports = [
 
         //Target
         target: ["web", "es5"],
+    },
+
+    //FRONT-END WEB STYLES
+    {
+        //Entry points
+        entry: {
+            Global: "./wwwroot/Web/Global/Global.scss",
+            IndexPage: "./wwwroot/Web/_Pages/IndexPage/IndexPage.scss",
+            SitemapPage: "./wwwroot/Web/_Pages/SitemapPage/SitemapPage.scss",
+        },
+
+        //Output
+        output: {
+            filename: "css/[name].js",
+            path: packPath
+        },
+
+        //Mode
+        mode: mode,
+
+        //Watcher
+        watch: false,
+        watchOptions: watchOptions = {
+            ignored: /node_modules/
+        },
 
         //Module
         module: {
@@ -51,17 +77,25 @@ module.exports = [
                 {
                     //SCSS -> CSS compilation
                     test: /\.s[ac]ss$/i,
+                    exclude: /node_modules/,
                     use: [
-                        "style-loader",
-                        "css-loader",
+                        {
+                            loader: "file-loader",
+                            options: { outputPath: 'css/', name: '[name].css' }
+                        },
                         {
                             loader: "sass-loader",
                             options: {
                                 // Prefer `dart-sass`
                                 implementation: require("sass"),
+                                sourceMap: true,
+                                sassOptions: {
+                                    outputStyle: "compressed",
+                                },
                             },
                         },
-                    ],
+                    ]
+
                 },
             ],
         }

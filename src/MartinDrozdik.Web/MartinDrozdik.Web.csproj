@@ -9,71 +9,11 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\_dist\Web\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\AboutMe\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Article\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Biography\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Contact\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Footer\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\HeroHeader\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\ImportantDottedList\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\ImportantStats\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Menu\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\MySkills\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Projects\**" />
-    <Compile Remove="wwwroot\_dist\wwwroot\Web\Sitemap\**" />
     <Content Remove="wwwroot\_dist\Web\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\AboutMe\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Article\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Biography\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Contact\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Footer\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\HeroHeader\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\ImportantDottedList\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\ImportantStats\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Menu\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\MySkills\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Projects\**" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Sitemap\**" />
     <EmbeddedResource Remove="wwwroot\_dist\Web\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\AboutMe\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Article\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Biography\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Contact\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Footer\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\HeroHeader\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\ImportantDottedList\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\ImportantStats\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Menu\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\MySkills\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Projects\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\wwwroot\Web\Sitemap\**" />
     <None Remove="wwwroot\_dist\Web\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\AboutMe\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Article\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Biography\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Contact\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Footer\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\HeroHeader\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\ImportantDottedList\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\ImportantStats\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Menu\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\MySkills\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Projects\**" />
-    <None Remove="wwwroot\_dist\wwwroot\Web\Sitemap\**" />
     <TypeScriptCompile Remove="node_modules\**" />
     <TypeScriptCompile Remove="wwwroot\_dist\Web\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\AboutMe\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Article\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Biography\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Contact\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Footer\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\HeroHeader\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\ImportantDottedList\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\ImportantStats\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Menu\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\MySkills\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Projects\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\wwwroot\Web\Sitemap\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -107,36 +47,13 @@
     <Content Remove="wwwroot\Web\Menu\Mobile.scss" />
     <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
     <Content Remove="wwwroot\Web\Projects\ProjetList.scss" />
-    <Content Remove="wwwroot\Web\Sitemap\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
     <Content Remove="wwwroot\Web\_Variables.scss" />
-    <Content Remove="wwwroot\_dist\keep.js" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Animations.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Animations.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Block.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Block.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\CommonButton.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\CommonButton.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\CommonText.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\CommonText.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\DashedBorder.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\DashedBorder.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Font.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Font.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\LinkHover.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\LinkHover.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Tags.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\Global\Tags.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\_Pages\IndexPage\FreeForWork.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\_Pages\IndexPage\FreeForWork.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\_Pages\IndexPage\Projects.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\_Pages\IndexPage\Projects.css.map" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\_Pages\SitemapPage\Sitemap.css" />
-    <Content Remove="wwwroot\_dist\wwwroot\Web\_Pages\SitemapPage\Sitemap.css.map" />
+    <Content Remove="wwwroot\_dist\temp.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -226,9 +143,6 @@
     <None Include="wwwroot\Web\Projects\ProjetList.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Sitemap\Sitemap.scss">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Include="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -247,9 +161,6 @@
     <None Include="wwwroot\Web\_Variables.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\_dist\wwwroot\Web\Global\Global.css.map" />
-    <None Include="wwwroot\_dist\wwwroot\Web\_Pages\IndexPage\IndexPage.css.map" />
-    <None Include="wwwroot\_dist\wwwroot\Web\_Pages\SitemapPage\SitemapPage.css.map" />
   </ItemGroup>
 
   <ItemGroup>
@@ -267,6 +178,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\_dist\" />
   </ItemGroup>
 
 </Project>
