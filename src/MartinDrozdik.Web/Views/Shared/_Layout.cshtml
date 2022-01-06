@@ -5,8 +5,9 @@
 <!DOCTYPE html>
 <html lang="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
 <head>
+    <meta charset="UTF-8" />
+
     <!--GENERAL META TAGS-->
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="@Model.Description" />
     <meta name="keywords" content="@Model.Keywords" />
@@ -15,14 +16,14 @@
     <meta name="owner" content="@Model.ClientName" />
     <meta name="language" content="@Model.CultureProvider.Culture.TwoLetterISOLanguageName" />
     <meta name="robots" content="index, follow" />
-    <meta name="copyright" content="@Model.ClientName">
+    <meta name="copyright" content="@Model.ClientName" />
 
     <!--TITLE-->
     <title>@Model.Title</title>
 
     <!--IOS META TAGS-->
-    <meta name="apple-mobile-web-app-title" content="@Model.SiteName">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="@Model.SiteName" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <!--WINDOWS META TAGS-->
     <meta name="application-name" content="@Model.SiteName" />
@@ -36,26 +37,26 @@
     <meta property="og:site_name" content="@Model.SiteName" />
 
     <!--TWITTER-->
-    <meta name="twitter:title" content="@Model.Title">
-    <meta name="twitter:description" content="@Model.Description">
-    <meta name="twitter:image" content="@WebConfiguration.Domain@Model.OgImage">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image:alt" content="@Model.SiteName">
+    <meta name="twitter:title" content="@Model.Title" />
+    <meta name="twitter:description" content="@Model.Description" />
+    <meta name="twitter:image" content="@WebConfiguration.Domain@Model.OgImage" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image:alt" content="@Model.SiteName" />
 
     <!--MANIFEST-->
-    <link rel="manifest" href="@PathProvider.PathTo("/Manifest/Manifest.json")">
-    <meta name="theme-color" content="#240b36">
+    <link rel="manifest" href="@PathProvider.PathTo("/Manifest/Manifest.json")" />
+    <meta name="theme-color" content="#240b36" />
 
     <!--FAVICON-->
-    <link rel="apple-touch-icon" sizes="180x180" href="@PathProvider.PathTo("/Favicon/apple-touch-icon.png")">
-    <link rel="icon" type="image/png" sizes="32x32" href="@PathProvider.PathTo("/Favicon/favicon-32x32.png")">
-    <link rel="icon" type="image/png" sizes="192x192" href="@PathProvider.PathTo("/Favicon/android-chrome-192x192.png")">
-    <link rel="icon" type="image/png" sizes="16x16" href="@PathProvider.PathTo("/Favicon/favicon-16x16.png")">
-    <link rel="mask-icon" href="@PathProvider.PathTo("/Favicon/safari-pinned-tab.svg")" color="#5bbad5">
-    <link rel="shortcut icon" href="@PathProvider.PathTo("/Favicon/favicon.ico")">
-    <meta name="msapplication-TileColor" content="#b91d47">
-    <meta name="msapplication-TileImage" content="@PathProvider.PathTo("/Favicon/mstile-144x144.png")">
-    <meta name="msapplication-config" content="@PathProvider.PathTo("/Favicon/browserconfig.xml")">
+    <link rel="apple-touch-icon" sizes="180x180" href="@PathProvider.PathTo("/Favicon/apple-touch-icon.png")" />
+    <link rel="icon" type="image/png" sizes="32x32" href="@PathProvider.PathTo("/Favicon/favicon-32x32.png")" />
+    <link rel="icon" type="image/png" sizes="192x192" href="@PathProvider.PathTo("/Favicon/android-chrome-192x192.png")" />
+    <link rel="icon" type="image/png" sizes="16x16" href="@PathProvider.PathTo("/Favicon/favicon-16x16.png")" />
+    <link rel="mask-icon" href="@PathProvider.PathTo("/Favicon/safari-pinned-tab.svg")" color="#5bbad5" />
+    <link rel="shortcut icon" href="@PathProvider.PathTo("/Favicon/favicon.ico")" />
+    <meta name="msapplication-TileColor" content="#b91d47" />
+    <meta name="msapplication-TileImage" content="@PathProvider.PathTo("/Favicon/mstile-144x144.png")" />
+    <meta name="msapplication-config" content="@PathProvider.PathTo("/Favicon/browserconfig.xml")" />
 
     <!--STYLES-->
     @RenderSection("Styles", required: false)
