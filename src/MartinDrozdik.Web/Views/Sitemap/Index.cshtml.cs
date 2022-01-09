@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 using Bonsai.Services.LanguageDictionary.Abstraction;
 using Bonsai.Services.Sitemap.Abstraction;
 using Bonsai.Sitemap;
-using MartinDrozdik.Web.ViewModels.Home;
 
-namespace MartinDrozdik.Web.ViewModels.Sitemap
+namespace MartinDrozdik.Web.Views.Sitemap
 {
     public class SitemapPageModel : ViewModelBase
     {

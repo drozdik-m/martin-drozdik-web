@@ -5,8 +5,8 @@ using Bonsai.Services.Sitemap;
 using Bonsai.Services.Sitemap.Abstraction;
 using Microsoft.Extensions.Caching.Memory;
 using MartinDrozdik.Web.Configuration;
-using MartinDrozdik.Web.ViewModels.Sitemap;
 using Bonsai.Services.LanguageDictionary.Abstraction;
+using MartinDrozdik.Web.Views.Sitemap;
 
 namespace Bonsai.Server.Controllers
 {

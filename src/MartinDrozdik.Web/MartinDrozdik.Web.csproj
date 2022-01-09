@@ -184,4 +184,10 @@
     <Folder Include="wwwroot\_dist\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="Views\Home\_HeroHeader - Copy.cshtml.cs">
+      <DependentUpon>_HeroHeader.cshtml.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
 </Project>

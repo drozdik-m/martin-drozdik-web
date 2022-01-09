@@ -10,7 +10,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Text;
 using Bonsai.Services.LanguageDictionary.Abstraction;
-using MartinDrozdik.Web.ViewModels.Home;
+using MartinDrozdik.Web.Views.Home;
 
 namespace Bonsai.Server.Controllers
 {
