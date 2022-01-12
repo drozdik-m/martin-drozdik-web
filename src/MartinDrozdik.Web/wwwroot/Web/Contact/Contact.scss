@@ -1,4 +1,6 @@
-﻿@import "../_Variables.scss";
+﻿@use "../Contact/ContactInfos";
+
+@import "../_Variables.scss";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
@@ -7,8 +9,75 @@
 //---------CONTACT----------------------------------
 //--------------------------------------------------
 #contact {
-    
+    #contactInfo, #contactForm {
+        padding: $pxInRem-30 $pxInRem-24;
+
+        > h3, > p {
+            color: white;
+        }
+
+        > h3 {
+            font-size: $pxInRem-32;
+            font-weight: $fontWeightBold;
+            margin-bottom: $pxInRem-14;
+        }
+
+        > p {
+            font-size: $pxInRem-20;
+            line-height: 150%;
+            margin-bottom: $pxInRem-22;
+        }
+    }
+
+
+    #contactInfo {
+        background-color: $black;
+        max-width: 32.5rem;
+
+        .freeForWork {
+            font-size: $pxInRem-22;
+            margin-bottom: 4rem;
+        }
+
+        .contactInfos {
+            dd {
+                &:before {
+                    //@include filter(brightness(0) saturate(100%));
+                    @include filter(brightness(0) saturate(100%) invert(13%) sepia(75%) saturate(5425%) hue-rotate(342deg) brightness(88%) contrast(92%));
+                }
+            }
+        }
+    }
 }
 
+@media only screen and (max-width: 46rem){
+    #contact {
+        #contactInfo, #contactForm {
+            padding: $pxInRem-18 $pxInRem-24;
+
+            > h3, > p {
+                color: white;
+            }
+
+            > h3 {
+                font-size: $pxInRem-24;
+                margin-bottom: $pxInRem-10;
+            }
+
+            > p {
+                font-size: $pxInRem-18;
+                margin-bottom: $pxInRem-10;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 46rem) {
+    #contact {
+        #contactInfo, #contactForm {
+            @include ContactInfos.contactInfosInlineMobile();
+        }
+    }
+}
 
 
