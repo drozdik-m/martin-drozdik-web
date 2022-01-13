@@ -36,10 +36,13 @@
     <Content Remove="wwwroot\Web\Global\DashedBorder.scss" />
     <Content Remove="wwwroot\Web\Global\Font.scss" />
     <Content Remove="wwwroot\Web\Global\Global.scss" />
+    <Content Remove="wwwroot\Web\Global\Icons.scss" />
     <Content Remove="wwwroot\Web\Global\LinkHover.scss" />
     <Content Remove="wwwroot\Web\Global\Tags.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\Circles.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
+    <Content Remove="wwwroot\Web\Icons\GitHubIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icons\LinkedInIconWhite.scss" />
     <Content Remove="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss" />
     <Content Remove="wwwroot\Web\ImportantStats\ImportantStats.scss" />
     <Content Remove="wwwroot\Web\Menu\Desktop.scss" />
@@ -61,6 +64,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Icons\LinkedInIconWhite.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Icons\GitHubIconWhite.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Icons\Icon.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <TypeScriptCompile Include="tsconfig.json">

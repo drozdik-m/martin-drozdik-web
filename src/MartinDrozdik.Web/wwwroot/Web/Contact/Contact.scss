@@ -14,6 +14,8 @@
 
         > h3, > p {
             color: white;
+            position: relative;
+            z-index: 2;
         }
 
         > h3 {
@@ -33,17 +35,57 @@
     #contactInfo {
         background-color: $black;
         max-width: 32.5rem;
+        position: relative;
+        padding-bottom: 10rem;
 
         .freeForWork {
+            position: relative;
+            z-index: 2;
             font-size: $pxInRem-22;
-            margin-bottom: 4rem;
+            margin-bottom: 6rem;
         }
 
         .contactInfos {
+            position: relative;
+            z-index: 2;
+
             dd {
+                margin-top: 3rem;
+
                 &:before {
-                    //@include filter(brightness(0) saturate(100%));
                     @include filter(brightness(0) saturate(100%) invert(13%) sepia(75%) saturate(5425%) hue-rotate(342deg) brightness(88%) contrast(92%));
+                }
+            }
+        }
+
+        #contactInfoCircles {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        #contactInfoLinks {
+            position: absolute;
+            bottom: $pxInRem-30;
+            left: $pxInRem-24;
+
+            .icon {
+                display: inline-block;
+                vertical-align: middle;
+
+
+                &.iconGitHubWhite {
+                    $dimensions: 2.25rem;
+                    height: $dimensions;
+                    width: $dimensions;
+                    margin-right: 1.5rem;
+                }
+
+                &.iconLinkedInWhite {
+                    $dimensions: 1.5rem;
+                    height: $dimensions;
+                    width: $dimensions;
                 }
             }
         }
