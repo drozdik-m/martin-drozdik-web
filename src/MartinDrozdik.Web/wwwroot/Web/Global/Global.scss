@@ -10,14 +10,16 @@
 
 @import "Animations";
 @import "Block";
-@import "CommonButton";
-@import "CommonText";
 @import "Font";
 @import "Tags";
+@import "CommonText";
 
-@import "../Icons/Icon";
-@import "../Icons/GitHubIconWhite";
-@import "../Icons/LinkedInIconWhite";
+@import "../Icon/Icon";
+@import "../Icon/GitHubIconWhite";
+@import "../Icon/LinkedInIconWhite";
+
+@import "../Form/CommonButton";
+
 //@import "ArticleBase";
 
 

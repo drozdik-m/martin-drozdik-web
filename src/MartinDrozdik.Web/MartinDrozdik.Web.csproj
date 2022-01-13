@@ -29,6 +29,7 @@
     <Content Remove="wwwroot\Web\Footer\FooterContent.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterCredits.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterNav.scss" />
+    <Content Remove="wwwroot\Web\Form\ResponsiveBorder.scss" />
     <Content Remove="wwwroot\Web\Global\Animations.scss" />
     <Content Remove="wwwroot\Web\Global\Block.scss" />
     <Content Remove="wwwroot\Web\Global\CommonButton.scss" />
@@ -41,8 +42,8 @@
     <Content Remove="wwwroot\Web\Global\Tags.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\Circles.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
-    <Content Remove="wwwroot\Web\Icons\GitHubIconWhite.scss" />
-    <Content Remove="wwwroot\Web\Icons\LinkedInIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icon\GitHubIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icon\LinkedInIconWhite.scss" />
     <Content Remove="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss" />
     <Content Remove="wwwroot\Web\ImportantStats\ImportantStats.scss" />
     <Content Remove="wwwroot\Web\Menu\Desktop.scss" />
@@ -66,13 +67,16 @@
     <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Icons\LinkedInIconWhite.scss">
+    <None Include="wwwroot\Web\Form\ResponsiveBorder.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Icons\GitHubIconWhite.scss">
+    <None Include="wwwroot\Web\Icon\LinkedInIconWhite.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Icons\Icon.scss">
+    <None Include="wwwroot\Web\Icon\GitHubIconWhite.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Icon\Icon.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <TypeScriptCompile Include="tsconfig.json">
@@ -107,7 +111,7 @@
     <None Include="wwwroot\Web\Global\Block.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Global\CommonButton.scss">
+    <None Include="wwwroot\Web\Form\CommonButton.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Global\CommonText.scss">

@@ -106,6 +106,48 @@
         </div>
 
         <div id="contactForm">
+            <h3>Kontaktní formulář</h3>
+            <p>Kontaktní formulář je zajisté nejrychlejší forma, jak mě kontaktovat. Neváhejte jej vyplnit a odeslat.</p>
+
+            <form target="@Url.Action("SendMail", "Home")" method="post" class="form">
+
+                <div class="formBlock">
+                    <label for="contactNameAndSurname" class="mandatory">Jméno a přijmení</label>
+                    <input type="text" id="contactNameAndSurname" name="Name" placeholder="Jan Svoboda" />
+                    <ul id="contactNameAndSurnameErrorList" class="errorList"></ul>
+                </div>
+                <div class="formBlock">
+                    <label for="contactEmail" class="mandatory">Email</label>
+                    <input type="text" id="contactEmail" name="Email" placeholder="jan.svoboda@seznam.cz" />
+                    <ul id="contactEmailErrorList" class="errorList"></ul>
+                </div>
+                <div class="formBlock">
+                    <label for="contactSubject">Předmět</label>
+                    <input type="text" id="contactSubject" name="Subject" placeholder="Dotaz" />
+                    <ul id="contactSubjectErrorList" class="errorList"></ul>
+                </div>
+
+                <div class="formBlock">
+                    <label for="message" class="mandatory">Zpráva</label>
+                    <textarea id="message" name="Message" placeholder="Dobrý den, ..."></textarea>
+                    <ul id="messageErrorList" class="errorList"></ul>
+                </div>
+
+                <div class="commonButtonWrapper alignLeft sendButton">
+                    <button type="submit" class="commonButton commonButtonPageGrey">Odeslat</button>
+                </div>
+
+                <div id="contactFormRecaptchaDialogWindow">
+                    <h2 class="dialogWindowHeading">Prosím ověřte, že nejste robot</h2>
+                    <div class="formBlock recaptchaFormBlock">
+                        <div id="contactFormRecaptcha"></div>
+                    </div>
+                    <div class="commonButtonWrapper">
+                        <div class="commonButton commonButtonGrey dialogClose">Zavřít</div>
+                    </div>
+                </div>
+
+            </form>
 
         </div>
     </div>
