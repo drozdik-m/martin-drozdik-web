@@ -11,6 +11,7 @@
 #contact {
     #contactInfo, #contactForm {
         padding: $pxInRem-30 $pxInRem-24;
+        
 
         > h3, > p {
             color: white;
@@ -37,6 +38,7 @@
         max-width: 32.5rem;
         position: relative;
         padding-bottom: 10rem;
+        overflow: hidden;
 
         .freeForWork {
             position: relative;
