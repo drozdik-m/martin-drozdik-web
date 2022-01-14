@@ -1,4 +1,4 @@
-﻿@use "../Contact/ContactInfos";
+﻿@use "../Contact/ContactInfoLines";
 @use "../Form/ResponsiveBorder";
 
 @import "../_Variables";
@@ -270,7 +270,7 @@
             display: inline-block;
 
 
-            @include ContactInfos.contactInfosInlineMobile();
+            @include ContactInfoLines.contactInfosInlineMobile();
 
             dd {
                 //font-size: $pxInRem-20;

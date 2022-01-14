@@ -1,0 +1,20 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@import "../Form/Form";
+
+//--------------------------------------------------
+//---------CONTACT----------------------------------
+//--------------------------------------------------
+#contact {
+    #contactForm {
+        max-width: 32.5rem;
+        padding-bottom: 0;
+
+        > h3, > p {
+            color: $black;
+        }
+    }
+}
+

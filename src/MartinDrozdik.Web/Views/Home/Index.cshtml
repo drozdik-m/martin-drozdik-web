@@ -109,7 +109,7 @@
             <h3>Kontaktní formulář</h3>
             <p>Kontaktní formulář je zajisté nejrychlejší forma, jak mě kontaktovat. Neváhejte jej vyplnit a odeslat.</p>
 
-            <form target="@Url.Action("SendMail", "Home")" method="post" class="form">
+            <form id="contactFormElement" target="@Url.Action("SendMail", "Home")" method="post" class="form">
 
                 <div class="formBlock">
                     <label for="contactNameAndSurname" class="mandatory">Jméno a přijmení</label>
@@ -128,8 +128,8 @@
                 </div>
 
                 <div class="formBlock">
-                    <label for="message" class="mandatory">Zpráva</label>
-                    <textarea id="message" name="Message" placeholder="Dobrý den, ..."></textarea>
+                    <label for="contactMessage" class="mandatory">Zpráva</label>
+                    <textarea id="contactMessage" name="Message" placeholder="Dobrý den, ..."></textarea>
                     <ul id="messageErrorList" class="errorList"></ul>
                 </div>
 
@@ -137,15 +137,14 @@
                     <button type="submit" class="commonButton commonButtonSlimFlat commonButtonRed">Odeslat</button>
                 </div>
 
-                @*<div id="contactFormRecaptchaDialogWindow">
-                    <h2 class="dialogWindowHeading">Prosím ověřte, že nejste robot</h2>
+                <div id="contactFormRecaptchaDialogWindow" class="statusWindow">
+                    <span class="statusWindowHeading">Prosím ověřte, že nejste robot</span>
+                    <span class="statusWindowText">Je to nutné, abych neměl schránku přeplněnou spamem. Děkuji za pochopení.</span>
                     <div class="formBlock recaptchaFormBlock">
                         <div id="contactFormRecaptcha"></div>
                     </div>
-                    <div class="commonButtonWrapper">
-                        <div class="commonButton commonButtonGrey dialogClose">Zavřít</div>
-                    </div>
-                </div>*@
+                    <div class="commonButton commonButtonGrey dialogClose">Zavřít</div>
+                </div>
 
             </form>
 

@@ -24,7 +24,9 @@
     <Content Remove="wwwroot\Web\Article\ArticleBase.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
     <Content Remove="wwwroot\Web\Contact\Contact.scss" />
-    <Content Remove="wwwroot\Web\Contact\ContactInfos.scss" />
+    <Content Remove="wwwroot\Web\Contact\ContactForm.scss" />
+    <Content Remove="wwwroot\Web\Contact\ContactInfo.scss" />
+    <Content Remove="wwwroot\Web\Contact\ContactInfoLines.scss" />
     <Content Remove="wwwroot\Web\Footer\Footer.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterContent.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterCredits.scss" />
@@ -52,6 +54,7 @@
     <Content Remove="wwwroot\Web\Menu\Mobile.scss" />
     <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
     <Content Remove="wwwroot\Web\Projects\ProjetList.scss" />
+    <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
@@ -66,6 +69,12 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Contact\ContactForm.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Contact\ContactInfo.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Form\Form.scss">
@@ -83,6 +92,9 @@
     <None Include="wwwroot\Web\Icon\Icon.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\StatusWindow\StatusWindow.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <TypeScriptCompile Include="tsconfig.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </TypeScriptCompile>
@@ -96,7 +108,7 @@
     <None Include="wwwroot\Web\Contact\Contact.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Contact\ContactInfos.scss">
+    <None Include="wwwroot\Web\Contact\ContactInfoLines.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Footer\Footer.scss" />

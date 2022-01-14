@@ -8,14 +8,20 @@ button {
     border: none;
 }
 
+.commonButtonWrapper{
+    text-align: center;
+}
+
 .commonButton {
     $borderRadius: 3rem;
     @include border-radius($borderRadius);
-    padding: 1rem 2rem;
+    padding: 0.75rem 2rem;
     @include transition(color $transition, background-color $transition, border-radius $transition);
     text-decoration: none;
-    font-size: $pxInRem-20;
+    font-size: $pxInRem-18;
     font-weight: $fontWeightBold;
+    display: inline-block;
+    cursor: pointer;
 
     @include ResponsiveBorder.responsiveBorder($borderRadius, white);
 
@@ -58,4 +64,8 @@ button {
 
 .commonButtonDarkRed {
     @include commonButtonScheme(white, white, $darkRed, $darkRedHover);
+}
+
+.commonButtonGreen {
+    @include commonButtonScheme(white, white, $successColor, $sucesssColorFaded);
 }

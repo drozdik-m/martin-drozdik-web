@@ -78,6 +78,10 @@
         &.recaptchaFormBlock {
             text-align: center;
 
+            &, > div {
+                background-image: none !important;
+            }
+
             > div {
                 text-align: left;
                 display: inline-block;
@@ -143,7 +147,7 @@
         cursor: pointer;
     }
 
-    [type="submit"]{
+    [type="submit"] {
         margin-top: $pxInRem-20;
     }
 }
