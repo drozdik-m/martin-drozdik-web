@@ -16,8 +16,14 @@
         bottom: 0;
         @include border-radius($borderRadius);
         pointer-events: none;
-        border: $pxInRem-3 solid $color;
-        @include transition(left $transition, right $transition, top $transition, bottom $transition);
+        border: $pxInRem-3 solid transparent;
+        @include transition(color $transition, left $transition, right $transition, top $transition, bottom $transition);
+    }
+
+    &:hover, &:active {
+        &:after {
+            border-color: $color;
+        }
     }
 
     &:hover {
@@ -39,14 +45,4 @@
             bottom: -$space;
         }
     }
-}
-
-.commonButton {
-    $borderRadius: 3rem;
-    @include border-radius($borderRadius);
-    padding: 1.25rem 2.5rem;
-    @include transition(color $transition, background-color $transition, border-radius $transition);
-    text-decoration: none;
-    font-size: $pxInRem-24;
-    font-weight: $fontWeightBold;
 }

@@ -1,4 +1,5 @@
 ﻿@use "../Contact/ContactInfos";
+@use "../Form/ResponsiveBorder";
 
 @import "../_Variables.scss";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
@@ -10,12 +11,16 @@
 //---------CONTACT----------------------------------
 //--------------------------------------------------
 #contact {
+    #contactBlocks {
+        display: flex;
+        justify-content: center;
+    }
+
     #contactInfo, #contactForm {
         padding: $pxInRem-30 $pxInRem-24;
-        
+
 
         > h3, > p {
-            color: white;
             position: relative;
             z-index: 2;
         }
@@ -40,6 +45,12 @@
         position: relative;
         padding-bottom: 10rem;
         overflow: hidden;
+        margin-right: 3rem;
+        @include box-shadow($pxInRem-4 $pxInRem-4 $pxInRem-18 $pxInRem-2 rgba(0, 0, 0, 0.2));
+
+        > h3, > p {
+            color: white;
+        }
 
         .freeForWork {
             position: relative;
@@ -77,20 +88,36 @@
                 display: inline-block;
                 vertical-align: middle;
 
+                
+
+                @include ResponsiveBorder.responsiveBorder(50%, white);
+
+                $iconDimensions: 2.25rem;
 
                 &.iconGitHubWhite {
-                    $dimensions: 2.25rem;
-                    height: $dimensions;
-                    width: $dimensions;
+                    background-size: $iconDimensions $iconDimensions;
+                    width: $iconDimensions;
+                    height: $iconDimensions;
                     margin-right: 1.5rem;
                 }
 
                 &.iconLinkedInWhite {
                     $dimensions: 1.5rem;
-                    height: $dimensions;
-                    width: $dimensions;
+                    background-size: 1.5rem 1.5rem;
+                    height: $iconDimensions;
+                    width: $iconDimensions;
+                    
                 }
             }
+        }
+    }
+
+    #contactForm {
+        max-width: 32.5rem;
+        padding-bottom: 0;
+
+        > h3, > p {
+            color: $black;
         }
     }
 }
