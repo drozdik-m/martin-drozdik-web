@@ -20,6 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "@drozdik.m/ajax": "^1.2.0",
+    "@drozdik.m/common-interfaces": "^1.2.2",
     "@drozdik.m/common-mixins": "^1.0.7",
     "@drozdik.m/dialog-window": "^1.0.4",
     "@drozdik.m/dimensions-helper": "^1.0.0",

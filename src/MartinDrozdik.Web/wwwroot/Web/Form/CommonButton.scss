@@ -33,6 +33,10 @@ button {
     &.commonButtonSlimFlat {
         padding: 0.6rem 3.5rem;
     }
+
+    &.commonButtonSlim {
+        padding: 0.6rem 2rem;
+    }
 }
 
 @mixin commonButtonScheme($textColor, $textColorHover, $backgroundColor, $backgroundColorHover) {

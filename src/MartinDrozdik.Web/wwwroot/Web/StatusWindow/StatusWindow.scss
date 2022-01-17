@@ -1,13 +1,36 @@
-﻿@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
 .statusWindow {
     text-align: center;
 
-    .statusWindowHeading {
+    .statusWindowHeading, .statusWindowText {
+        display: block;
     }
 
-    .statusWindowText{
+    .statusWindowHeading {
+        font-weight: $fontWeightBold;
+        font-size: $pxInRem-26;
+        margin-bottom: 1.25rem;
+    }
 
+    .statusWindowText {
+        color: $black;
+        font-size: $pxInRem-20;
+        margin-bottom: 1.75rem;
+        font-weight: $fontWeightSemiBold;
+    }
+
+    &.statusWindowSuccess {
+        .statusWindowHeading {
+            color: $successColor;
+        }
+    }
+
+    &.statusWindowError {
+        .statusWindowHeading {
+            color: $errorColor;
+        }
     }
 }

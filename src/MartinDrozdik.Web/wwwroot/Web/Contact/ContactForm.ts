@@ -10,9 +10,18 @@ import { RecaptchaV2 } from "@drozdik.m/recaptcha";
 import { Ajax, AjaxParameter, AjaxResponse } from "@drozdik.m/ajax";
 import { Pipeline } from "@drozdik.m/pipeline";
 import { LoadingAnimation } from "@drozdik.m/loading-animation";
+import { StatusWindowSuccess } from "../StatusWindow/StatusWindowSuccess";
+import { StatusWindowError } from "../StatusWindow/StatusWindowError";
 
 WindowEvents.OnDOMReady.Add(function ()
 {
+    let successDialog = new StatusWindowSuccess("contactFormSuccessDialog",
+        {
+            heading: "Zpráva úspěšně odeslána",
+            message: "Odpovím vám, jakmile to bude možné!",
+            closeButtonText: "Zavřít"
+        });
+    successDialog.Display();
     //RECAPTCHA DIALOG
     let recaptchaDialog = new DialogWindow("contactFormRecaptchaDialogWindow")
 
@@ -62,21 +71,25 @@ WindowEvents.OnDOMReady.Add(function ()
         {
             //Handle success response
             LoadingAnimation.Hide();
-            CommonDialogWindow.Success(
-                "Odpovím vám, jakmile to bude možné",
-                "Zpráva odeslána",
-                "Zavřít"
-            );
+            let successDialog = new StatusWindowSuccess("contactFormSuccessDialog",
+                {
+                    heading: "Zpráva úspěšně odeslána",
+                    message: "Odpovím vám, jakmile to bude možné",
+                    closeButtonText: "Zavřít"
+                });
+            successDialog.Display();
             form.Reset();
         }).Catch(function (error: Error)
         {
             console.error(error);
             LoadingAnimation.Hide();
-            CommonDialogWindow.Error(
-                error.message,
-                "Error při odesílání",
-                "Zavřít"
-            );
+            let errorDialog = new StatusWindowError("contactFormErrorDialog",
+                {
+                    heading: "Odeslání selhalo",
+                    message: "Něco se moc pokazilo :( <br /> " + error.message,
+                    closeButtonText: "Zavřít"
+                });
+            errorDialog.Display();
         });
 
     }
