@@ -61,6 +61,15 @@ namespace MartinDrozdik.Web
                 .Get<WebConfiguration>();
             services.AddSingleton<WebConfiguration>(webConfiguration);
 
+            //Web secrets
+            var webSecrets = new ConfigurationBuilder()
+                .SetBasePath(Environment.ContentRootPath)
+                .AddJsonFile("appsettings.Secrets.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build()
+                .Get<WebSecrets>();
+            services.AddSingleton<WebSecrets>(webSecrets);
+
             //File path provider service
             if (Environment.IsDevelopment())
                 services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();

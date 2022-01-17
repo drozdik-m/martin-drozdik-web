@@ -11,25 +11,29 @@ using System.Threading.Tasks;
 using System.Text;
 using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Web.Views.Home;
+using MartinDrozdik.Web.Configuration;
+using Bonsai.Models.Forms;
 
 namespace Bonsai.Server.Controllers
 {
 
     public class HomeController : Controller
     {
-        const string MAIL_RECIPIENT_KEY = "MainNotificationRecipient";
-
         readonly ILanguageDictionary languageDictionary;
         readonly ICultureProvider cultureProvider;
-        readonly IConfiguration configuration;
+        readonly WebConfiguration webConfig;
+        readonly WebSecrets webSecrets;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider, 
-            IConfiguration configuration)
+            WebConfiguration webConfig,
+            WebSecrets webSecrets
+            )
         {
             this.languageDictionary = languageDictionary;
             this.cultureProvider = cultureProvider;
-            this.configuration = configuration;
+            this.webConfig = webConfig;
+            this.webSecrets = webSecrets;
         }
 
         public async Task<IActionResult> Index()
@@ -40,6 +44,18 @@ namespace Bonsai.Server.Controllers
             };
 
             return View(indexModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendMail(ContactForm contactForm)
+        {
+            //TODO validation (max chars etc)
+
+            //TODO recaptcha validation
+
+            //TODO send mail to myself
+
+            return Ok();
         }
     }
 }
