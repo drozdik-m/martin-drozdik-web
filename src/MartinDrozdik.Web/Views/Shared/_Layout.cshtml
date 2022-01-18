@@ -1,6 +1,6 @@
 ﻿@model ViewModelBase
 @inject IFilePathProvider PathProvider
-@inject WebConfiguration WebConfiguration
+@inject ServerConfiguration ServerConfiguration
 
 <!DOCTYPE html>
 <html lang="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
@@ -29,8 +29,8 @@
     <meta name="application-name" content="@Model.SiteName" />
 
     <!--SOCIAL-->
-    <meta property="og:image" content="@WebConfiguration.Domain@Model.OgImage" />
-    <meta property="og:image:secure_url" content="@WebConfiguration.Domain@Model.OgImage" />
+    <meta property="og:image" content="@ServerConfiguration.Web.Domain@Model.OgImage" />
+    <meta property="og:image:secure_url" content="@ServerConfiguration.Web.Domain@Model.OgImage" />
     <meta property="og:type" content="@Model.PageType" />
     <meta property="og:description" content="@Model.Description" />
     <meta property="og:title" content="@Model.Title" />
@@ -39,7 +39,7 @@
     <!--TWITTER-->
     <meta name="twitter:title" content="@Model.Title" />
     <meta name="twitter:description" content="@Model.Description" />
-    <meta name="twitter:image" content="@WebConfiguration.Domain@Model.OgImage" />
+    <meta name="twitter:image" content="@ServerConfiguration.Web@Model.OgImage" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image:alt" content="@Model.SiteName" />
 

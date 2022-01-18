@@ -7,11 +7,11 @@ namespace Bonsai.Server.Controllers
 {
     public class RobotsTXTController : Controller
     {
-        readonly WebConfiguration webConfiguration;
+        readonly ServerConfiguration serverConfiguration;
 
-        public RobotsTXTController(WebConfiguration webConfiguration)
+        public RobotsTXTController(ServerConfiguration serverConfiguration)
         {
-            this.webConfiguration = webConfiguration;
+            this.serverConfiguration = serverConfiguration;
         }
 
         /// <summary>
@@ -23,7 +23,7 @@ namespace Bonsai.Server.Controllers
             var builder = new RobotsTXTBuilder();
 
             //Add sitemap
-            var sitemapUri = new Uri(webConfiguration.Domain + "/sitemap.xml");
+            var sitemapUri = new Uri(serverConfiguration.Web.Domain + "/sitemap.xml");
             builder.AddSitemap(sitemapUri);
 
             //Allow all

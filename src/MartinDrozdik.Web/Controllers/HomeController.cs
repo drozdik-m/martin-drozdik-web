@@ -13,6 +13,12 @@ using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Web.Views.Home;
 using MartinDrozdik.Web.Configuration;
 using Bonsai.Models.Forms;
+using Bonsai.Services.RecaptchaV2;
+using Bonsai.Services.Email;
+using Bonsai.Utils.String;
+using Bonsai.Services.Email.Messages;
+using Bonsai.Services.RecaptchaV2.Abstraction;
+using Bonsai.Services.Email.Abstraction;
 
 namespace Bonsai.Server.Controllers
 {
@@ -21,19 +27,22 @@ namespace Bonsai.Server.Controllers
     {
         readonly ILanguageDictionary languageDictionary;
         readonly ICultureProvider cultureProvider;
-        readonly WebConfiguration webConfig;
-        readonly WebSecrets webSecrets;
+        readonly ServerConfiguration serverConfig;
+        readonly IRecaptchaV2Validator recaptchaValidator;
+        readonly IEmailSender emailSender;
 
         public HomeController(ILanguageDictionary languageDictionary, 
-            ICultureProvider cultureProvider, 
-            WebConfiguration webConfig,
-            WebSecrets webSecrets
+            ICultureProvider cultureProvider,
+            ServerConfiguration serverConfig,
+            IRecaptchaV2Validator recaptchaValidator,
+            IEmailSender emailSender
             )
         {
             this.languageDictionary = languageDictionary;
             this.cultureProvider = cultureProvider;
-            this.webConfig = webConfig;
-            this.webSecrets = webSecrets;
+            this.serverConfig = serverConfig;
+            this.recaptchaValidator = recaptchaValidator;
+            this.emailSender = emailSender;
         }
 
         public async Task<IActionResult> Index()
@@ -49,11 +58,63 @@ namespace Bonsai.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> SendMail(ContactForm contactForm)
         {
-            //TODO validation (max chars etc)
+            // ----- Text validations -----
+            if (string.IsNullOrWhiteSpace(contactForm.Name))
+                return BadRequest("Jméno musí být vyplněno");
+            if (contactForm.Name.Length >= 256)
+                return BadRequest("Jméno může být dlouhý maximálně 256 znaků");
 
-            //TODO recaptcha validation
+            if (string.IsNullOrWhiteSpace(contactForm.Email))
+                return BadRequest("Email musí být vyplněn");
+            if (contactForm.Email.Length >= 128)
+                return BadRequest("Email může být dlouhý maximálně 128 znaků");
 
-            //TODO send mail to myself
+            if (string.IsNullOrWhiteSpace(contactForm.Message))
+                return BadRequest("Zpráva musí být vyplněna");
+            if (contactForm.Message.Length >= 3072)
+                return BadRequest("Zpráva může být dlouhá maximálně 3072 znaků");
+
+            if (string.IsNullOrWhiteSpace(contactForm.Subject))
+                contactForm.Subject = "*no subject*";
+
+            // ----- Recaptcha validation -----
+            if (string.IsNullOrWhiteSpace(contactForm.RecaptchaResponse))
+                return BadRequest("Validační kód pro reCaptcha musí být vyplněn – byla reCaptcha vyřešena?");
+            try
+            {
+                await recaptchaValidator.ValidateAsync(contactForm.RecaptchaResponse);
+            }
+            catch(Exception e)
+            {
+                return BadRequest("Ověření reCaptcha selhalo: " + e.Message);
+            }
+
+            // ----- Send the email -----
+
+            try
+            {
+                var messageContent =
+                   $"<p><strong>Jméno a příjmení</strong>: {contactForm.Name}</p>" +
+                   $"<p><strong>Email</strong>: {contactForm.Email}</p>" +
+                   $"<p><strong>Předmět</strong>: {contactForm.Subject}</p>" +
+                   $"<p><strong>Zpráva: </strong></p>" +
+                   $"<p>{contactForm.Message?.AsTextWithHTMLBreaks()}</p>";
+
+                var emailMessage = new EmailMessage()
+                {
+                    Recipient = new MailAddress(serverConfig.MainNotificationRecipient, "MD Web Form – " + contactForm.Name, Encoding.UTF8),
+                    Content = messageContent,
+                    ReplyTo = new[] { new MailAddress(contactForm.Email, contactForm.Name, Encoding.UTF8) },
+                    Subject = contactForm.Subject,
+                    IsBodyHTML = true
+                };
+
+                await emailSender.SendAsync(emailMessage);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Email se nepodařilo odeslat: " + e.Message);
+            }
 
             return Ok();
         }
