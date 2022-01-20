@@ -1,1 +1,2 @@
 ﻿import "./ContactForm";
+import "./ContactInfo";
