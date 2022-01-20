@@ -102,7 +102,7 @@ namespace Bonsai.Server.Controllers
 
                 var emailMessage = new EmailMessage()
                 {
-                    Recipient = new MailAddress(serverConfig.MainNotificationRecipient, "MD Web Form – " + contactForm.Name, Encoding.UTF8),
+                    Recipient = new MailAddress(serverConfig.MainNotificationRecipient, contactForm.Name, Encoding.UTF8),
                     Content = messageContent,
                     ReplyTo = new[] { new MailAddress(contactForm.Email, contactForm.Name, Encoding.UTF8) },
                     Subject = contactForm.Subject,
