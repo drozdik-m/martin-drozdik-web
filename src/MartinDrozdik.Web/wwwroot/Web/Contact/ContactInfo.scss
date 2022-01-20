@@ -5,12 +5,12 @@
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
+$mobileTreshold: 56.25rem !default;
 
 //--------------------------------------------------
 //---------CONTACT----------------------------------
 //--------------------------------------------------
 #contact {
-
     #contactInfo {
         background-color: $black;
         max-width: 32.5rem;
@@ -85,9 +85,65 @@
     }
 }
 
+@media only screen and (max-width: 75rem){
+    #contact {
+        #contactInfo {
+            margin-right: 0.5rem;
+
+           
+
+            
+        }
+    }
+}
+
+@media only screen and (max-width: $mobileTreshold) {
+    #contact {
+        #contactInfo {
+            max-width: unset;
+            padding: $pxInRem-18 $pxInRem-24;
+            margin-bottom: $pxInRem-16;
+
+            .freeForWork {
+                margin-bottom: $pxInRem-30;
+            }
+
+            .contactInfos {
+                margin-bottom: $pxInRem-30;
+
+                dd {
+                    margin-top: 0.25rem;
+                }
+            }
+
+            #contactInfoCircles {
+                opacity: 0.5;
+            }
+
+            #contactInfoLinks {
+                position: relative;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
+}
+
 @media only screen and (max-width: 46rem) {
     #contact {
-        #contactInfo, #contactForm {
+        margin-right: 0;
+
+        #contactInfo {
+            margin-bottom: $pxInRem-4;
+
+            > p {
+                margin-bottom: $pxInRem-24;
+            }
+
+            .freeForWork {
+                font-size: $pxInRem-18;
+            }
+
             @include ContactInfoLines.contactInfosInlineMobile();
         }
     }

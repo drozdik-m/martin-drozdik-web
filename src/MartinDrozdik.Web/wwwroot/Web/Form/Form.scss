@@ -151,3 +151,25 @@
         margin-top: $pxInRem-20;
     }
 }
+
+
+@media only screen and (max-width: 46rem){
+    .form {
+
+
+        textarea {
+            max-height: 20rem;
+            min-height: 6rem;
+        }
+
+        //BLOCKS
+        .formBlock {
+            margin: 1.5rem 0;
+
+        }
+
+        [type="submit"] {
+            margin-top: $pxInRem-10;
+        }
+    }
+}

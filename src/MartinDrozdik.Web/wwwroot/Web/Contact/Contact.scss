@@ -5,16 +5,17 @@
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
-@import "./ContactForm";
-@import "./ContactInfo";
+$mobileTreshold: 56.25rem;
 
 //--------------------------------------------------
 //---------CONTACT----------------------------------
 //--------------------------------------------------
 #contact {
     #contactBlocks {
+        font-size: 0;
         display: flex;
         justify-content: center;
+        
     }
 
     #contactInfo, #contactForm {
@@ -41,6 +42,15 @@
 
 
 }
+@media only screen and (max-width: $mobileTreshold) {
+    #contact {
+        #contactBlocks {
+            display: block;
+            max-width: auto;
+        }
+    }
+}
+
 
 @media only screen and (max-width: 46rem){
     #contact {
@@ -65,3 +75,5 @@
 }
 
 
+@import "./ContactForm";
+@import "./ContactInfo";
