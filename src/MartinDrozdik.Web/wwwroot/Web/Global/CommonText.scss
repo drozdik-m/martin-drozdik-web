@@ -146,10 +146,9 @@
         background-repeat: no-repeat;
         background-position: right center;
         $bgWidth: $pxInRem-16;
-        background-size: $bgWidth auto;
+        background-size: $bgWidth $bgWidth;
         $bgSpace: $pxInRem-6;
         padding-right: $bgWidth + $bgSpace;
-
     }
 
     &:hover {

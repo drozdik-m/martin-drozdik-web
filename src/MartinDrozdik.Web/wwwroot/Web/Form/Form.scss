@@ -1,0 +1,175 @@
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+.form {
+    text-align: left;
+
+    select, textarea, [type="text"], [type="number"], [type="file"], label {
+        box-sizing: border-box;
+        outline: none;
+        text-align: left;
+        display: block;
+
+        -webkit-autofill {
+        }
+    }
+
+    textarea, [type="text"], [type="number"] {
+        display: block;
+        position: relative;
+        border: none;
+        border-bottom: $pxInRem-1 solid rgba(36, 11, 54, 0.5);
+        font-size: $pxInRem-16;
+        padding: $pxInRem-6 0 $pxInRem-8 0;
+        width: 100%;
+        @include transition(border-color $transition);
+
+        &:hover {
+            border-color: $black;
+        }
+
+        &:focus, &.validInput, &.invalidInput {
+            margin-top: -$pxInRem-1;
+            border-width: $pxInRem-2;
+            bottom: -$pxInRem-1;
+        }
+
+        &:focus {
+            border-color: $black;
+        }
+    }
+
+    select {
+        background-image: none !important;
+    }
+
+    textarea {
+        max-width: 100%;
+        max-height: 20rem;
+        min-height: 10rem;
+        resize: vertical;
+    }
+
+    label {
+        padding-bottom: $pxInRem-4;
+        font-size: $pxInRem-14;
+        color: $black;
+
+        &, &.mandatory:after {
+            font-weight: $fontWeightBold;
+        }
+
+
+        &.mandatory {
+            &:after {
+                color: $red;
+                content: "*";
+                margin-left: $pxInRem-4;
+                font-size: $pxInRem-20;
+            }
+        }
+    }
+    //BLOCKS
+    .formBlock {
+        margin: 2.15rem 0;
+
+        &.recaptchaFormBlock {
+            text-align: center;
+
+            &, > div {
+                background-image: none !important;
+            }
+
+            > div {
+                text-align: left;
+                display: inline-block;
+            }
+        }
+    }
+
+    .checkboxFormBlock {
+        input, label {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        label {
+            margin: 0;
+            padding: 0;
+        }
+    }
+    //VALIDATION
+    .validInput, .invalidInput {
+        background-position: right center;
+        background-repeat: no-repeat;
+        background-size: $pxInRem-20 $pxInRem-20;
+    }
+
+    .validInput {
+        border-color: $sucesssColorFaded;
+
+        &:hover, &:focus {
+            border-color: $successColor;
+        }
+
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIiBmaWxsPSIjMEE3QjEyIi8+CjxwYXRoIGQ9Im0xMS4wNzggMTYuNjEyYy0wLjEyMTQgN2UtNCAtMC4yNDE4LTAuMDIyNS0wLjM1NDEtMC4wNjg0LTAuMTEyNC0wLjA0NTktMC4yMTQ2LTAuMTEzNi0wLjMwMDgtMC4xOTkxbC0zLjY4OTctMy42ODk2Yy0wLjE3MzY5LTAuMTczNy0wLjI3MTI3LTAuNDA5My0wLjI3MTI3LTAuNjU0OSAwLTAuMjQ1NyAwLjA5NzU4LTAuNDgxMyAwLjI3MTI3LTAuNjU0OSAwLjE3MzctMC4xNzM3IDAuNDA5MjgtMC4yNzEzIDAuNjU0OTItMC4yNzEzczAuNDgxMjIgMC4wOTc2IDAuNjU0OTEgMC4yNzEzbDMuMDM0OCAzLjA0MzkgNS44MDItNS44MTEyYzAuMTczNy0wLjE3MzY5IDAuNDA5Mi0wLjI3MTI3IDAuNjU0OS0wLjI3MTI3IDAuMjQ1NiAwIDAuNDgxMiAwLjA5NzU4IDAuNjU0OSAwLjI3MTI3IDAuMTczNyAwLjE3MzcgMC4yNzEzIDAuNDA5MjggMC4yNzEzIDAuNjU0OTJzLTAuMDk3NiAwLjQ4MTIyLTAuMjcxMyAwLjY1NDkxbC02LjQ1NjkgNi40NTY5Yy0wLjA4NjIgMC4wODU1LTAuMTg4NCAwLjE1MzItMC4zMDA4IDAuMTk5MXMtMC4yMzI3IDAuMDY5MS0wLjM1NDEgMC4wNjg0eiIgZmlsbD0iI2ZmZiIvPgo8L3N2Zz4K");
+    }
+
+    .invalidInput {
+        border-color: $errorColorFaded;
+
+        &:hover, &:focus {
+            border-color: $errorColor;
+        }
+
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMjQgMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEyIiBmaWxsPSIjQjAwNjA2Ii8+CjxwYXRoIGQ9Im0xNy4wMTEgMTcuODgxYy0wLjExMzYgMC0wLjIyNjEtMC4wMjIzLTAuMzMxLTAuMDY1Ny0wLjEwNS0wLjA0MzUtMC4yMDA0LTAuMTA3MS0wLjI4MDctMC4xODc0bC05LjkwNjctOS45MDczYy0wLjA4MjYtMC4wNzk3OC0wLjE0ODQ4LTAuMTc1Mi0wLjE5MzgtMC4yODA3LTAuMDQ1MzItMC4xMDU1MS0wLjA2OTE3LTAuMjE4OTgtMC4wNzAxNy0wLjMzMzgtMWUtMyAtMC4xMTQ4MyAwLjAyMDg4LTAuMjI4NyAwLjA2NDM2LTAuMzM0OTcgMC4wNDM0OC0wLjEwNjI4IDAuMTA3NjktMC4yMDI4MyAwLjE4ODg5LTAuMjg0MDMgMC4wODExOS0wLjA4MTE5IDAuMTc3NzUtMC4xNDU0IDAuMjg0MDItMC4xODg4OSAwLjEwNjI4LTAuMDQzNDggMC4yMjAxNS0wLjA2NTM2IDAuMzM0OTctMC4wNjQzNiAwLjExNDgzIDFlLTMgMC4yMjgzIDAuMDI0ODUgMC4zMzM4IDAuMDcwMTggMC4xMDU1MSAwLjA0NTMyIDAuMjAwOTMgMC4xMTEyIDAuMjgwNyAwLjE5Mzc5bDkuOTA3NCA5LjkwNzNjMC4xMjA4IDAuMTIxIDAuMjAzIDAuMjc1IDAuMjM2MyAwLjQ0MjdzMC4wMTYxIDAuMzQxNi0wLjA0OTMgMC40OTk1Yy0wLjA2NTUgMC4xNTc5LTAuMTc2MyAwLjI5MjktMC4zMTg1IDAuMzg3OS0wLjE0MjEgMC4wOTUtMC4zMDkzIDAuMTQ1Ny0wLjQ4MDIgMC4xNDU4eiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJtNy4xMDM3IDE3Ljg4Yy0wLjE3MDkzLTJlLTQgLTAuMzM3OTctMC4wNTEtMC40ODAwNC0wLjE0NnMtMC4yNTI3OS0wLjIzMDEtMC4zMTgxOC0wLjM4OC0wLjA4MjUxLTAuMzMxNi0wLjA0OTIxLTAuNDk5M2MwLjAzMzMtMC4xNjc2IDAuMTE1NTQtMC4zMjE3IDAuMjM2MzMtMC40NDI2bDkuOTA2Ny05LjkwNzNjMC4xNjIyLTAuMTYyMjMgMC4zODIxLTAuMjUzMzkgMC42MTE1LTAuMjUzNDUgMC4yMjkzLTVlLTUgMC40NDkzIDAuMDkxMDEgMC42MTE2IDAuMjUzMTYgMC4xNjIyIDAuMTYyMTUgMC4yNTM0IDAuMzgyMTEgMC4yNTM0IDAuNjExNDcgMWUtNCAwLjIyOTM3LTAuMDkxIDAuNDQ5MzctMC4yNTMxIDAuNjExNmwtOS45MDczIDkuOTA3M2MtMC4wODAzNCAwLjA4MDMtMC4xNzU3MSAwLjE0MzktMC4yODA2NiAwLjE4NzQtMC4xMDQ5NSAwLjA0MzQtMC4yMTc0MyAwLjA2NTctMC4zMzEwMSAwLjA2NTd6IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo=")
+    }
+
+    .errorList {
+        text-align: left;
+        margin-left: $pxInRem-20;
+        margin-top: $pxInRem-12;
+
+        li {
+            margin: $pxInRem-8 0;
+            list-style-type: disc;
+            color: red;
+        }
+    }
+
+    .submitButtonWrapperCenter {
+        text-align: center;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    [type="submit"] {
+        margin-top: $pxInRem-20;
+    }
+}
+
+
+@media only screen and (max-width: 46rem){
+    .form {
+
+
+        textarea {
+            max-height: 20rem;
+            min-height: 6rem;
+        }
+
+        //BLOCKS
+        .formBlock {
+            margin: 1.5rem 0;
+
+        }
+
+        [type="submit"] {
+            margin-top: $pxInRem-10;
+        }
+    }
+}

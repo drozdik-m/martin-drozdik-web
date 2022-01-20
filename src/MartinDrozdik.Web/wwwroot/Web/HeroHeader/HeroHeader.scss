@@ -1,4 +1,5 @@
-﻿@use "../Contact/ContactInfos";
+﻿@use "../Contact/ContactInfoLines";
+@use "../Form/ResponsiveBorder";
 
 @import "../_Variables";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
@@ -111,43 +112,10 @@
         background-repeat: no-repeat;
         background-position: 50% 54%;
         background-size: 3rem auto;
-        position: absolute;
         bottom: $pxInRem-34;
         right: 13rem + $pxInRem-17;
-
-        &:after {
-            content: " ";
-            font-size: 0;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            @include border-radius(50%);
-            pointer-events: none;
-            border: $pxInRem-3 solid white;
-            @include transition(left $transition, right $transition, top $transition, bottom $transition);
-        }
-
-        &:hover {
-            &:after {
-                $space: $pxInRem-8;
-                left: -$space;
-                right: -$space;
-                top: -$space;
-                bottom: -$space;
-            }
-        }
-
-        &:active {
-            &:after {
-                $space: $pxInRem-4;
-                left: -$space;
-                right: -$space;
-                top: -$space;
-                bottom: -$space;
-            }
-        }
+        @include ResponsiveBorder.responsiveBorder(50%, white);
+        position: absolute;
     }
 }
 
@@ -302,7 +270,7 @@
             display: inline-block;
 
 
-            @include ContactInfos.contactInfosInlineMobile();
+            @include ContactInfoLines.contactInfosInlineMobile();
 
             dd {
                 //font-size: $pxInRem-20;

@@ -1,0 +1,152 @@
+﻿@use "../Contact/ContactInfoLines";
+@use "../Form/ResponsiveBorder";
+
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+$mobileTreshold: 56.25rem !default;
+
+//--------------------------------------------------
+//---------CONTACT----------------------------------
+//--------------------------------------------------
+#contact {
+    #contactInfo {
+        background-color: $black;
+        max-width: 32.5rem;
+        position: relative;
+        padding-bottom: 10rem;
+        overflow: hidden;
+        margin-right: 3rem;
+        @include box-shadow($pxInRem-4 $pxInRem-4 $pxInRem-18 $pxInRem-2 rgba(0, 0, 0, 0.2));
+
+        > h3, > p {
+            color: white;
+        }
+
+        .freeForWork {
+            position: relative;
+            z-index: 2;
+            font-size: $pxInRem-22;
+            margin-bottom: 6rem;
+        }
+
+        .contactInfos {
+            position: relative;
+            z-index: 2;
+
+            dd {
+                margin-top: 3rem;
+
+                &:before {
+                    @include filter(brightness(0) saturate(100%) invert(13%) sepia(75%) saturate(5425%) hue-rotate(342deg) brightness(88%) contrast(92%));
+                }
+            }
+        }
+
+        #contactInfoCircles {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            z-index: 1;
+        }
+
+        #contactInfoLinks {
+            position: absolute;
+            bottom: $pxInRem-30;
+            left: $pxInRem-24;
+
+            .icon {
+                display: inline-block;
+                vertical-align: middle;
+
+                
+
+                @include ResponsiveBorder.responsiveBorder(50%, white);
+
+                $iconDimensions: 2.25rem;
+
+                &.iconGitHubWhite {
+                    background-size: $iconDimensions $iconDimensions;
+                    width: $iconDimensions;
+                    height: $iconDimensions;
+                    margin-right: 1.5rem;
+                }
+
+                &.iconLinkedInWhite {
+                    $dimensions: 1.5rem;
+                    background-size: 1.5rem 1.5rem;
+                    height: $iconDimensions;
+                    width: $iconDimensions;
+                    
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 75rem){
+    #contact {
+        #contactInfo {
+            margin-right: 0.5rem;
+
+           
+
+            
+        }
+    }
+}
+
+@media only screen and (max-width: $mobileTreshold) {
+    #contact {
+        #contactInfo {
+            max-width: unset;
+            padding: $pxInRem-18 $pxInRem-24;
+            margin-bottom: $pxInRem-16;
+
+            .freeForWork {
+                margin-bottom: $pxInRem-30;
+            }
+
+            .contactInfos {
+                margin-bottom: $pxInRem-30;
+
+                dd {
+                    margin-top: 0.25rem;
+                }
+            }
+
+            #contactInfoCircles {
+                opacity: 0.5;
+            }
+
+            #contactInfoLinks {
+                position: relative;
+                bottom: 0;
+                left: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 46rem) {
+    #contact {
+        margin-right: 0;
+
+        #contactInfo {
+            margin-bottom: $pxInRem-4;
+
+            > p {
+                margin-bottom: $pxInRem-24;
+            }
+
+            .freeForWork {
+                font-size: $pxInRem-18;
+            }
+
+            @include ContactInfoLines.contactInfosInlineMobile();
+        }
+    }
+}
+
+

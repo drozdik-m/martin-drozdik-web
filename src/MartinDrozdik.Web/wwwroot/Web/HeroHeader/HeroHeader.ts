@@ -1,5 +1,5 @@
 ﻿import { WindowEvents } from "@drozdik.m/window-events";
-import { Circle } from "../Menu/Circle";
+import { Circle } from "./Circle";
 import "../../../Web/HeroHeader/InnerHTML_polyfill";
 
 let circles: Circle[][] = []

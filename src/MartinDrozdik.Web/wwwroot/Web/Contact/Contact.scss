@@ -1,11 +1,79 @@
-﻿@import "../_Variables.scss";
+﻿@use "../Contact/ContactInfoLines";
+@use "../Form/ResponsiveBorder";
+
+@import "../_Variables.scss";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
+$mobileTreshold: 56.25rem;
 
 //--------------------------------------------------
-//---------CONTACT-----------------------------------
+//---------CONTACT----------------------------------
 //--------------------------------------------------
+#contact {
+    #contactBlocks {
+        font-size: 0;
+        display: flex;
+        justify-content: center;
+        
+    }
+
+    #contactInfo, #contactForm {
+        padding: $pxInRem-30 $pxInRem-24;
 
 
+        > h3, > p {
+            position: relative;
+            z-index: 2;
+        }
 
+        > h3 {
+            font-size: $pxInRem-32;
+            font-weight: $fontWeightBold;
+            margin-bottom: $pxInRem-14;
+        }
+
+        > p {
+            font-size: $pxInRem-20;
+            line-height: 150%;
+            margin-bottom: $pxInRem-22;
+        }
+    }
+
+
+}
+@media only screen and (max-width: $mobileTreshold) {
+    #contact {
+        #contactBlocks {
+            display: block;
+            max-width: auto;
+        }
+    }
+}
+
+
+@media only screen and (max-width: 46rem){
+    #contact {
+        #contactInfo, #contactForm {
+            padding: $pxInRem-18 $pxInRem-24;
+
+            > h3, > p {
+                color: white;
+            }
+
+            > h3 {
+                font-size: $pxInRem-24;
+                margin-bottom: $pxInRem-10;
+            }
+
+            > p {
+                font-size: $pxInRem-18;
+                margin-bottom: $pxInRem-10;
+            }
+        }
+    }
+}
+
+
+@import "./ContactForm";
+@import "./ContactInfo";

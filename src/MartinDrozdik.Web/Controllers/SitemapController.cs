@@ -5,8 +5,8 @@ using Bonsai.Services.Sitemap;
 using Bonsai.Services.Sitemap.Abstraction;
 using Microsoft.Extensions.Caching.Memory;
 using MartinDrozdik.Web.Configuration;
-using MartinDrozdik.Web.ViewModels.Sitemap;
 using Bonsai.Services.LanguageDictionary.Abstraction;
+using MartinDrozdik.Web.Views.Sitemap;
 
 namespace Bonsai.Server.Controllers
 {
@@ -14,17 +14,17 @@ namespace Bonsai.Server.Controllers
     {
         const string SITEMAP_NODES_CACHE_KEY = "SitemapNodesCacheKey";
 
-        readonly WebConfiguration webConfiguration;
+        readonly ServerConfiguration serverConfiguration;
         readonly ICultureProvider cultureProvider;
         readonly ILanguageDictionary languageDictionary;
         readonly IMemoryCache cache;
 
-        public SitemapController(WebConfiguration webConfiguration,
+        public SitemapController(ServerConfiguration serverConfiguration,
             ICultureProvider cultureProvider,
             ILanguageDictionary languageDictionary,
             IMemoryCache cache)
         {
-            this.webConfiguration = webConfiguration;
+            this.serverConfiguration = serverConfiguration;
             this.cultureProvider = cultureProvider;
             this.languageDictionary = languageDictionary;
             this.cache = cache;
@@ -36,7 +36,7 @@ namespace Bonsai.Server.Controllers
         /// <returns></returns>
         protected ISitemapNode CreateSitemapNode()
         {
-            SitemapNode home = new SitemapNode(webConfiguration.WebName, new Uri(webConfiguration.Domain), SitemapChangeFrequency.Monthly, 1);
+            SitemapNode home = new SitemapNode(serverConfiguration.Web.Name, new Uri(serverConfiguration.Web.Domain), SitemapChangeFrequency.Monthly, 1);
 
             return home;
         }

@@ -1,4 +1,7 @@
 ﻿using Bonsai.Server.Middlewares.Localization;
+using Bonsai.Services.Email.Extensions;
+using Bonsai.Services.RecaptchaV2.Configuration;
+using Bonsai.Services.RecaptchaV2.Extensions;
 using MartinDrozdik.Services.FilePathProvider;
 using MartinDrozdik.Services.FilePathProvider.Specific;
 using MartinDrozdik.Web.Configuration;
@@ -24,8 +27,15 @@ namespace MartinDrozdik.Web
 
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
-            Configuration = configuration;
             Environment = environment;
+
+            Configuration = new ConfigurationBuilder()
+                .SetBasePath(Environment.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json", optional: true)
+                .AddJsonFile("appsettings.Secrets.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables()
+                .Build();
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -55,11 +65,16 @@ namespace MartinDrozdik.Web
                     new[] { "application/octet-stream" });
             });
 
-            //Web configuration
-            var webConfiguration = Configuration
-                .GetSection("WebConfiguration")
-                .Get<WebConfiguration>();
-            services.AddSingleton<WebConfiguration>(webConfiguration);
+            //Server configuration
+            var serverConfiguration = Configuration
+                .Get<ServerConfiguration>();
+            services.AddSingleton<ServerConfiguration>(serverConfiguration);
+
+            //Recaptcha validator
+            services.AddRecaptchaV2Validator(serverConfiguration.Recaptcha);
+
+            //Email sender
+            services.AddEmailSender(serverConfiguration.EmailSender);
 
             //File path provider service
             if (Environment.IsDevelopment())

@@ -1,0 +1,40 @@
+﻿@model HeroHeaderModel  
+
+<header id="heroHeader">
+
+    <div id="heroHeaderContent">
+
+        <svg id="heroHeaderCircles" width="1920" height="1030" viewBox="0 0 1920 1030" fill="none" xmlns="http://www.w3.org/2000/svg"></svg>
+
+        <div id="heroHeaderText">
+
+            <white-logo-icon />
+            <span id="heroHeaderIAm">Ahoj, já jsem</span>
+            <h1>Martin Drozdík</h1>
+            <span id="heroHeaderSE">Software engineer</span>
+
+        </div>
+
+        <div id="headerButtons">
+            <a href="#contact" class="slowScroll commonButton commonButtonThick commonButtonBlack">Kontaktujte mě</a>
+            @if (Model.FreeForWork)
+            {
+                <span class="freeForWork">Volný pro práci</span>
+            }
+        </div>
+
+        <dl class="contactInfos inline">
+            <dt>Email</dt>
+            <dd class="email"><a href="" data-email-link></a></dd>
+            <dt>Telefon</dt>
+            <dd class="phone"><a href="" data-phone-link></a></dd>
+            <dt>Lokace</dt>
+            <dd class="location">Česká republika</dd>
+        </dl>
+
+        <a id="heroHeaderArrowDown" href="#aboutMe" class="slowScroll">↓</a>
+
+    </div>
+
+
+</header>

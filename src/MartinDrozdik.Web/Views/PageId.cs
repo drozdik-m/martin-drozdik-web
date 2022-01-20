@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MartinDrozdik.Web.ViewModels.Home
+namespace MartinDrozdik.Web.Views
 {
     public enum PageId
     {

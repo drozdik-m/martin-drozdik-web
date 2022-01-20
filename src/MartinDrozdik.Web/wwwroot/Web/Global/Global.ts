@@ -5,9 +5,12 @@ import "../Menu/Menu";
 import "../Footer/Footer";
 //import "./ArticleBase";
 
+import "../Contact/ContactValuesFiller";
+
 import { WindowEvents } from "@drozdik.m/window-events";
 import { SlowScroll } from "@drozdik.m/slow-scroll";
 import { GoogleAnalytics, StorageType } from "@drozdik.m/google-analytics";
+
 
 WindowEvents.OnDOMReady.Add(function ()
 {

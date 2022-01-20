@@ -1,0 +1,66 @@
+﻿@model AboutMeModel
+
+<div id="aboutMe" class="backgroundBlock">
+    <div id="aboutMeContent" class="block">
+        <div id="aboutMeText">
+            @{
+                var bonsaiStart = Model.BonsaiStart;
+                var bonsaiTime = DateTime.Today - bonsaiStart;
+                var bonsaiYearCount = bonsaiTime.TotalDays / 365;
+                var bonsaiCountRoundedDown = Math.Floor(bonsaiYearCount);
+                var bonsaiYearRemainder = bonsaiYearCount - bonsaiCountRoundedDown;
+
+                var bonsaiYearPrefix = "Přes";
+                var bonsaiYears = bonsaiCountRoundedDown;
+                if (bonsaiYearRemainder >= 0.75)
+                {
+                    bonsaiYearPrefix = "Téměř";
+                    bonsaiYears = bonsaiCountRoundedDown + 1;
+                }
+
+                var bonsaiYearsWord = "let";
+                if (bonsaiYears <= 1)
+                {
+                    bonsaiYearsWord = "rok";
+                }
+                else if (bonsaiYears <= 4)
+                {
+                    bonsaiYearsWord = "roky";
+                }
+
+            }
+
+            <h2 class="commonH commonHGradient">Kdo jsem?</h2>
+            <p class="commonP commonPRed">Jmenuji se Martin Drozdík a jsem <strong>softwarový engineer</strong>. Programuji již od&nbsp;malička. Mám širokou škálu zkušeností s&nbsp;<strong>programováním webových stránek</strong>, a&nbsp;to&nbsp;jak front-end, tak&nbsp;back-end. Umím si však poradit s&nbsp;programováním všeho druhu, díky kvalitnímu <strong>object-oriented designu a&nbsp;modularizaci</strong>.</p>
+            <p class="commonP commonPRed">@bonsaiYearPrefix @bonsaiYears&nbsp;@bonsaiYearsWord vedu skupinu nezávislých freelancerů <a class="external" href="https://bonsai-development.cz/" title="Web Bonsai Development" target="_blank" rel="noopener">Bonsai Development</a>. Nejsou mi tedy cizí zkušenosti z&nbsp;pozice <strong>team&nbsp;leader</strong>. Rád komunikuji s&nbsp;klienty a&nbsp;pomáhám realizovat jejich vize.</p>
+        </div>
+        <div id="aboutMeImage">
+            <img src="~/Web/AboutMe/MartinDrozdik.jpg" alt="Fotografie Martina Drozdíka" title="Já, Martin Drozdík" />
+        </div>
+    </div>
+
+    <ul id="aboutMeStats" class="blockNarrower">
+        <li class="importantStat programmingExperienceStat">
+            @{
+                //Experience time calculations
+                var dateStartedProgramming = Model.ProgrammingStart;
+                var programmingExperience = DateTime.Today - dateStartedProgramming;
+                var yearCount = programmingExperience.TotalDays / 365;
+                var yearCountRoundedDown = Math.Floor(yearCount);
+                var yearRemainder = yearCount - yearCountRoundedDown;
+
+                var experienceYears = yearCountRoundedDown;
+                var experiencePrefix = "přes";
+                if (yearRemainder >= 0.75)
+                {
+                    experiencePrefix = "téměř";
+                    experienceYears = yearCountRoundedDown + 1;
+                }
+            }
+            @experiencePrefix<span class="statNumber">@experienceYears</span>let zkušeností s programováním
+        </li>
+        <li class="importantStat projectCountStat">
+            přes<span class="statNumber">@Model.CompletedProjectsCount</span>dokončených projektů
+        </li>
+    </ul>
+</div>

@@ -1,12 +1,13 @@
 ﻿@model ViewModelBase
 @inject IFilePathProvider PathProvider
-@inject WebConfiguration WebConfiguration
+@inject ServerConfiguration ServerConfiguration
 
 <!DOCTYPE html>
 <html lang="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
 <head>
+    <meta charset="UTF-8" />
+
     <!--GENERAL META TAGS-->
-    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="@Model.Description" />
     <meta name="keywords" content="@Model.Keywords" />
@@ -15,55 +16,55 @@
     <meta name="owner" content="@Model.ClientName" />
     <meta name="language" content="@Model.CultureProvider.Culture.TwoLetterISOLanguageName" />
     <meta name="robots" content="index, follow" />
-    <meta name="copyright" content="@Model.ClientName">
+    <meta name="copyright" content="@Model.ClientName" />
 
     <!--TITLE-->
     <title>@Model.Title</title>
 
     <!--IOS META TAGS-->
-    <meta name="apple-mobile-web-app-title" content="@Model.SiteName">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="@Model.SiteName" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
     <!--WINDOWS META TAGS-->
     <meta name="application-name" content="@Model.SiteName" />
 
     <!--SOCIAL-->
-    <meta property="og:image" content="@WebConfiguration.Domain@Model.OgImage" />
-    <meta property="og:image:secure_url" content="@WebConfiguration.Domain@Model.OgImage" />
+    <meta property="og:image" content="@ServerConfiguration.Web.Domain@Model.OgImage" />
+    <meta property="og:image:secure_url" content="@ServerConfiguration.Web.Domain@Model.OgImage" />
     <meta property="og:type" content="@Model.PageType" />
     <meta property="og:description" content="@Model.Description" />
     <meta property="og:title" content="@Model.Title" />
     <meta property="og:site_name" content="@Model.SiteName" />
 
     <!--TWITTER-->
-    <meta name="twitter:title" content="@Model.Title">
-    <meta name="twitter:description" content="@Model.Description">
-    <meta name="twitter:image" content="@WebConfiguration.Domain@Model.OgImage">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image:alt" content="@Model.SiteName">
+    <meta name="twitter:title" content="@Model.Title" />
+    <meta name="twitter:description" content="@Model.Description" />
+    <meta name="twitter:image" content="@ServerConfiguration.Web@Model.OgImage" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image:alt" content="@Model.SiteName" />
 
     <!--MANIFEST-->
-    <link rel="manifest" href="@PathProvider.PathTo("/Manifest/Manifest.json")">
-    <meta name="theme-color" content="#240b36">
+    <link rel="manifest" href="@PathProvider.PathTo("/Manifest/Manifest.json")" />
+    <meta name="theme-color" content="#240b36" />
 
     <!--FAVICON-->
-    <link rel="apple-touch-icon" sizes="180x180" href="@PathProvider.PathTo("/Favicon/apple-touch-icon.png")">
-    <link rel="icon" type="image/png" sizes="32x32" href="@PathProvider.PathTo("/Favicon/favicon-32x32.png")">
-    <link rel="icon" type="image/png" sizes="192x192" href="@PathProvider.PathTo("/Favicon/android-chrome-192x192.png")">
-    <link rel="icon" type="image/png" sizes="16x16" href="@PathProvider.PathTo("/Favicon/favicon-16x16.png")">
-    <link rel="mask-icon" href="@PathProvider.PathTo("/Favicon/safari-pinned-tab.svg")" color="#5bbad5">
-    <link rel="shortcut icon" href="@PathProvider.PathTo("/Favicon/favicon.ico")">
-    <meta name="msapplication-TileColor" content="#b91d47">
-    <meta name="msapplication-TileImage" content="@PathProvider.PathTo("/Favicon/mstile-144x144.png")">
-    <meta name="msapplication-config" content="@PathProvider.PathTo("/Favicon/browserconfig.xml")">
+    <link rel="apple-touch-icon" sizes="180x180" href="@PathProvider.PathTo("/Favicon/apple-touch-icon.png")" />
+    <link rel="icon" type="image/png" sizes="32x32" href="@PathProvider.PathTo("/Favicon/favicon-32x32.png")" />
+    <link rel="icon" type="image/png" sizes="192x192" href="@PathProvider.PathTo("/Favicon/android-chrome-192x192.png")" />
+    <link rel="icon" type="image/png" sizes="16x16" href="@PathProvider.PathTo("/Favicon/favicon-16x16.png")" />
+    <link rel="mask-icon" href="@PathProvider.PathTo("/Favicon/safari-pinned-tab.svg")" color="#5bbad5" />
+    <link rel="shortcut icon" href="@PathProvider.PathTo("/Favicon/favicon.ico")" />
+    <meta name="msapplication-TileColor" content="#b91d47" />
+    <meta name="msapplication-TileImage" content="@PathProvider.PathTo("/Favicon/mstile-144x144.png")" />
+    <meta name="msapplication-config" content="@PathProvider.PathTo("/Favicon/browserconfig.xml")" />
 
     <!--STYLES-->
     @RenderSection("Styles", required: false)
-    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/wwwroot/Web/Global/Global.css")" />
+    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/Global.css")" />
 
     <!--SCRIPTS-->
-    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/common.js")"></script>
-    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/Global.js")"></script>
+    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/common.js")"></script>
+    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/Global.js")"></script>
     @RenderSection("Scripts", required: false)
 
 
@@ -83,7 +84,7 @@
                 @*<li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>*@
                 <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#biography" title="Životopis" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">CV</a></li>
                 @*<li><a href="@Url.Action("Blog", "Home")" title="Blog">Blog</a></li>*@
-                @*<li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>*@
+                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>
             </ul>
         </nav>
 
@@ -111,7 +112,7 @@
                     @*<li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>*@
                     <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#biography" title="Životopis" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">CV</a></li>
                     @*<li><a href="@Url.Action("Blog", "Home")" title="Blog">Blog</a></li>*@
-                    @*<li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>*@
+                    <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>
                 </ul>
             </nav>
 
@@ -120,9 +121,9 @@
                     <span class="commonH commonHWhite">Kontakt</span>
                     <dl class="contactInfos">
                         <dt>Email</dt>
-                        <dd class="email"><a href="mailto:ja@martin-drozdik.cz">ja@martin-drozdik.cz</a></dd>
+                        <dd class="email"><a href="" data-email-link></a></dd>
                         <dt>Telefon</dt>
-                        <dd class="phone"><a href="tel:+420737416525">+420 737 416 525</a></dd>
+                        <dd class="phone"><a href="" data-phone-link></a></dd>
                         <dt>Lokace</dt>
                         <dd class="location">Česká republika</dd>
                     </dl>

@@ -7,10 +7,10 @@
 @include font-face (Raleway, Raleway-SemiBold, "/Fonts/Raleway/", $fontWeightSemiBold, normal);
 @include font-face (Raleway, Raleway-Bold, "/Fonts/Raleway/", $fontWeightBold, normal);
 @include font-face (Raleway, Raleway-ExtraBold, "/Fonts/Raleway/", $fontWeightExtraBold, normal);
-@include font-face (Raleway, Raleway-Black, "/Fonts/Raleway/", $fontWeightBlack, normal); 
+@include font-face (Raleway, Raleway-Black, "/Fonts/Raleway/", $fontWeightBlack, normal);
 
 
-html {
+html, textarea {
     font-family: 'Raleway', Verdana, sans-serif;
     font-weight: $fontWeightRegular;
 }

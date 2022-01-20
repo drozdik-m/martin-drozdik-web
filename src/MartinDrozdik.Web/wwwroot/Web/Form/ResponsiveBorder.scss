@@ -1,0 +1,48 @@
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+@mixin responsiveBorder($borderRadius, $color) {
+    position: relative;
+
+    &:after {
+        content: " ";
+        font-size: 0;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        @include border-radius($borderRadius);
+        pointer-events: none;
+        border: $pxInRem-3 solid transparent;
+        @include transition(color $transition, left $transition, right $transition, top $transition, bottom $transition);
+    }
+
+    &:hover, &:active {
+        &:after {
+            border-color: $color;
+        }
+    }
+
+    &:hover {
+        &:after {
+            $space: $pxInRem-6;
+            left: -$space;
+            right: -$space;
+            top: -$space;
+            bottom: -$space;
+        }
+    }
+
+    &:active {
+        &:after {
+            $space: $pxInRem-4;
+            left: -$space;
+            right: -$space;
+            top: -$space;
+            bottom: -$space;
+        }
+    }
+}

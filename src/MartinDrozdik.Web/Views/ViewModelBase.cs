@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bonsai.Services.LanguageDictionary.Abstraction;
-using MartinDrozdik.Web.ViewModels.Home;
 
-namespace MartinDrozdik.Web.ViewModels
+namespace MartinDrozdik.Web.Views
 {
     public abstract class ViewModelBase
     {

@@ -1,4 +1,5 @@
 ﻿@model SitemapPageModel
+@inject IFilePathProvider PathProvider
 
 @{
     //Layout
@@ -6,11 +7,11 @@
 }
 
 @section Styles{
-    <link rel="stylesheet" href="~/_dist/wwwroot/Web/_Pages/SitemapPage/SitemapPage.css" />
+    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/SitemapPage.css")" />
 }
 
 @section Scripts{
-    <script type="text/javascript" src="~/_dist/_pack/SitemapPage.js"></script>
+    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/SitemapPage.js")"></script>
 }
 
 <div id="sitemap" class="block blockMargin">

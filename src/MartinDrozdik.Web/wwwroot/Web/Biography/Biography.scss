@@ -14,7 +14,6 @@
     font-size: 0;
     position: relative;
     overflow: hidden;
-
     //Circle background decoration
     .biographyCirclesBackground {
         position: absolute;
@@ -31,12 +30,12 @@
         }
     }
 
-    #biographyContent{
+    #biographyContent {
         position: relative;
         z-index: 2;
     }
 
-    .biographyList {
+    .biographyColumn {
         display: inline-block;
         vertical-align: top;
         $listWidth: 40%;
@@ -44,7 +43,9 @@
         $listMargin: math.div(100% - ($listWidth * 2), $listPerLine);
         width: $listWidth;
         margin-right: $listMargin;
+    }
 
+    .biographyList {
         h3 {
             font-size: $pxInRem-36;
             color: $black;
@@ -136,7 +137,7 @@
 @media only screen and (max-width: 65.625rem) {
     #biography {
 
-        .biographyList {
+        .biographyColumn {
             display: block;
             width: auto;
             margin-right: 0;

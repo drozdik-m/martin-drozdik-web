@@ -1,0 +1,216 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@mixin contactInfosInitialDimensions() {
+    $verticalPadding: $pxInRem-6;
+    padding: $verticalPadding 0;
+    padding-left: $pxInRem-56;
+    font-size: $pxInRem-22;
+    margin-left: 0;
+
+    &:before {
+        top: $verticalPadding;
+        bottom: $verticalPadding;
+    }
+
+
+    &.email {
+        $space: $pxInRem-56;
+
+        &:before {
+            width: $space;
+        }
+
+        background-size: $pxInRem-38 $pxInRem-38;
+        padding-left: $space;
+    }
+
+    &.phone {
+        $space: $pxInRem-52;
+
+        &:before {
+            width: $space;
+            left: $pxInRem-6;
+        }
+
+        background-size: $pxInRem-30 $pxInRem-30;
+        padding-left: $space;
+    }
+
+    &.location {
+        $space: $pxInRem-50;
+
+        &:before {
+            width: $space;
+            left: $pxInRem-8;
+        }
+
+        background-size: $pxInRem-24 $pxInRem-24;
+        padding-left: $space;
+    }
+}
+
+@mixin contactInfosMobileDimensions() {
+    $verticalPadding: $pxInRem-6;
+    padding: $verticalPadding 0;
+    padding-left: $pxInRem-50;
+    font-size: $pxInRem-18;
+    margin-left: 0;
+
+    &:before {
+        top: $verticalPadding;
+        bottom: $verticalPadding;
+    }
+
+    &.email {
+        $space: $pxInRem-42;
+
+        &:before {
+            width: $space;
+        }
+
+        background-size: $pxInRem-30 auto;
+        padding-left: $space;
+    }
+
+    &.phone {
+        $space: $pxInRem-36;
+
+        &:before {
+            width: $space;
+            left: $pxInRem-4;
+        }
+
+        background-size: $pxInRem-22 auto;
+        padding-left: $space;
+    }
+
+
+    &.location {
+        $space: $pxInRem-36;
+
+        &:before {
+            width: $space;
+            left: $pxInRem-6;
+        }
+
+        background-size: $pxInRem-20 auto;
+        padding-left: $space;
+    }
+}
+
+
+//--------------------------------------------------
+//---------CONTACT INFOS----------------------------
+//--------------------------------------------------
+.contactInfos {
+    dt {
+        display: none;
+    }
+
+    dd {
+        &, a {
+            color: white;
+        }
+
+        a {
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        &:before {
+            background-repeat: no-repeat;
+            background-position: left center;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            content: "";
+            font-size: 0;
+        }
+
+        @include contactInfosInitialDimensions();
+        font-weight: $fontWeightSemiBold;
+        position: relative;
+
+        &.email {
+            &:before {
+                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDQ0IDMwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KPHBhdGggZD0ibTIyIDE3Ljk2MiAyMC42MjUtMTcuOTUyaC00MS4yNWwyMC42MjUgMTcuOTUyem0tNS41NzA4LTEuOTg3MyA1LjU3MDggNC41OTI0IDUuNDgzNi00LjU5MjQgMTUuMTQxIDEzLjAzNWgtNDEuMjVsMTUuMDU0LTEzLjAzNXptLTE2LjQyOSAxMS42NTR2LTI2LjIzOGwxNS4xMjUgMTMuMTE5LTE1LjEyNSAxMy4xMTl6bTQ0IDB2LTI2LjIzOGwtMTUuMTI1IDEzLjExOSAxNS4xMjUgMTMuMTE5eiIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsPSIjZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz4NCjwvc3ZnPg0K");
+            }
+        }
+
+        &.phone {
+            &:before {
+                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDMwIDMxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KPHBhdGggZD0ibTYuMDQyMSAxMy4wMDJjMi40IDQuNzE2NiA2LjI1ODMgOC41NzUgMTAuOTgzIDEwLjk3NWwzLjY2NjctMy42NzVjMC40NTgzLTAuNDU4NCAxLjExNjctMC41OTE3IDEuNjkxNy0wLjQwODQgMS44NjY2IDAuNjE2NyAzLjg3NSAwLjk1IDUuOTUgMC45NSAwLjkyNSAwIDEuNjY2NiAwLjc0MTcgMS42NjY2IDEuNjY2N3Y1LjgzMzNjMCAwLjkyNS0wLjc0MTYgMS42NjY3LTEuNjY2NiAxLjY2NjctMTUuNjUgMC0yOC4zMzMtMTIuNjgzLTI4LjMzMy0yOC4zMzMgMC0wLjkyNSAwLjc1LTEuNjY2NyAxLjY2NjctMS42NjY3aDUuODMzM2MwLjkyNSAwIDEuNjY2NyAwLjc0MTY3IDEuNjY2NyAxLjY2NjcgMCAyLjA3NSAwLjMzMzM0IDQuMDgzMyAwLjk1MDAxIDUuOTUgMC4xODMzIDAuNTc1IDAuMDUgMS4yMzMzLTAuNDA4MzQgMS42OTE3bC0zLjY2NjcgMy42ODM0eiIgZmlsbD0iI2ZmZiIvPg0KPC9zdmc+DQo=");
+            }
+        }
+
+        &.location {
+            &:before {
+                background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjxzdmcgZmlsbD0ibm9uZSIgdmlld0JveD0iMCAwIDI1IDM0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPg0KPHBhdGggZD0ibTEyLjUgMzMuMDFzMTIuNS0xMS41MTMgMTIuNS0yMC42MjVjMC05LjExMjEtNS41OTU4LTEyLjM3NS0xMi41LTEyLjM3NS02LjkwNDEgMC0xMi41IDMuMjYyOS0xMi41IDEyLjM3NSAwIDkuMTEyMSAxMi41IDIwLjYyNSAxMi41IDIwLjYyNXptLTYuMjUtMjIuNjg4YzAtMy40MTc2IDIuNzk3OS02LjE4NzUgNi4yNS02LjE4NzUgMy40NTIxIDAgNi4yNSAyLjc2OTkgNi4yNSA2LjE4NzUgMCAzLjQxNzYtMi43OTc5IDYuMTg3NS02LjI1IDYuMTg3NS0zLjQ1MjEgMC02LjI1LTIuNzY5OS02LjI1LTYuMTg3NXoiIGZpbGw9IiNmZmYiLz4NCjwvc3ZnPg0K");
+            }
+        }
+    }
+}
+
+@mixin contactInfosMobile() {
+    dd {
+        @include contactInfosMobileDimensions();
+    }
+}
+
+//--------------------------------------------------
+//---------CONTACT INFOS INLINE---------------------
+//--------------------------------------------------
+.contactInfos.inline {
+    dd {
+        display: inline-block;
+        position: relative;
+        $space: $pxInRem-32;
+        padding-right: $space;
+        margin-left: $space;
+
+        &:after {
+            position: absolute;
+            $verticalPadding: $pxInRem-3;
+            right: 0;
+            top: $verticalPadding;
+            bottom: $verticalPadding;
+            width: $pxInRem-2;
+            content: " ";
+            font-size: 0;
+            background-color: white;
+        }
+
+        &:nth-child(2) {
+            margin-left: 0;
+        }
+
+        &:nth-child(6) {
+            &:after {
+                display: none;
+            }
+        }
+
+        &.location {
+            padding-left: $pxInRem-44;
+        }
+    }
+}
+
+@mixin contactInfosInlineMobile() {
+    dd {
+        display: block;
+        text-align: left;
+
+        &:after {
+            display: none;
+        }
+
+        @include contactInfosMobileDimensions();
+    }
+}

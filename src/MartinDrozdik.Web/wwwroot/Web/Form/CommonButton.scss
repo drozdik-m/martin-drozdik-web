@@ -1,51 +1,41 @@
-﻿@import "../_Variables";
+﻿@use "./ResponsiveBorder";
+
+@import "../_Variables";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
+button {
+    border: none;
+}
 
+.commonButtonWrapper{
+    text-align: center;
+}
 
 .commonButton {
     $borderRadius: 3rem;
     @include border-radius($borderRadius);
-    padding: 1.25rem 2.5rem;
+    padding: 0.75rem 2rem;
     @include transition(color $transition, background-color $transition, border-radius $transition);
     text-decoration: none;
-    font-size: $pxInRem-24;
+    font-size: $pxInRem-18;
     font-weight: $fontWeightBold;
-    position: relative;
+    display: inline-block;
+    cursor: pointer;
 
-    &:after {
-        content: " ";
-        font-size: 0;
-        position: absolute;
-        left: 0;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        @include border-radius($borderRadius);
-        pointer-events: none;
-        border: $pxInRem-3 solid white;
-        @include transition(left $transition, right $transition, top $transition, bottom $transition);
+    @include ResponsiveBorder.responsiveBorder($borderRadius, white);
+
+    &.commonButtonThick {
+        padding: 1.25rem 2.5rem;
+        font-size: $pxInRem-24;
     }
 
-    &:hover {
-        &:after {
-            $space: $pxInRem-6;
-            left: -$space;
-            right: -$space;
-            top: -$space;
-            bottom: -$space;
-        }
+    &.commonButtonSlimFlat {
+        padding: 0.6rem 3.5rem;
     }
 
-    &:active {
-        &:after {
-            $space: $pxInRem-4;
-            left: -$space;
-            right: -$space;
-            top: -$space;
-            bottom: -$space;
-        }
+    &.commonButtonSlim {
+        padding: 0.6rem 2rem;
     }
 }
 
@@ -78,4 +68,8 @@
 
 .commonButtonDarkRed {
     @include commonButtonScheme(white, white, $darkRed, $darkRedHover);
+}
+
+.commonButtonGreen {
+    @include commonButtonScheme(white, white, $successColor, $sucesssColorFaded);
 }
