@@ -212,6 +212,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Bonsai.RazorPages.Error\Bonsai.RazorPages.Error.csproj" />
     <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
   </ItemGroup>
 

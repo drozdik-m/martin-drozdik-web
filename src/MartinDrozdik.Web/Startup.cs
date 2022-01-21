@@ -90,12 +90,13 @@ namespace MartinDrozdik.Web
         {
             app.UseResponseCompression();
 
-            //Exception pages
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
+            {
                 app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
-
+            }
 
             //Add https redirect, files and auth
             app.UseHttpsRedirection();
