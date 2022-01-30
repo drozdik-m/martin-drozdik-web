@@ -1,4 +1,5 @@
-﻿using Bonsai.Server.Middlewares.Localization;
+﻿using Bonsai.DataPersistence.DbContexts;
+using Bonsai.Server.Middlewares.Localization;
 using Bonsai.Services.Email.Extensions;
 using Bonsai.Services.RecaptchaV2.Configuration;
 using Bonsai.Services.RecaptchaV2.Extensions;
@@ -12,10 +13,14 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using MartinDrozdik.Data.Models.UserIdentity;
+using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 
 namespace MartinDrozdik.Web
 {
@@ -75,6 +80,41 @@ namespace MartinDrozdik.Web
 
             //Email sender
             services.AddEmailSender(serverConfiguration.EmailSender);
+
+            //Connection string
+            var connectionString = serverConfiguration.ConnectionStrings.Production;
+
+            //Database context
+            services.AddDbContext<AppDb>(options =>
+                options.UseSqlServer(connectionString));
+
+            //Seeds
+            services.AddSingleton(serverConfiguration.SeedUsers);
+            services.AddScoped<UserSeed>();
+
+
+            //Identity setup
+            services.AddDbContext<IdentityDb>(options =>
+                options.UseSqlServer(connectionString));
+            services.AddDefaultIdentity<AppUser>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = false;
+            })
+            .AddEntityFrameworkStores<IdentityDb>();
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/user/login";
+                //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+            });
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 8;
+                options.User.RequireUniqueEmail = true;
+            });
 
             //File path provider service
             if (Environment.IsDevelopment())

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Bonsai.Services.Email.Configuration;
 using Bonsai.Services.RecaptchaV2.Configuration;
+using MartinDrozdik.Data.DbContexts.Configuration;
 
 namespace MartinDrozdik.Web.Configuration
 {
@@ -27,5 +28,15 @@ namespace MartinDrozdik.Web.Configuration
         /// Email that should recieve all important notifications
         /// </summary>
         public string MainNotificationRecipient { get; set; }
+
+        /// <summary>
+        /// Connection strings setup
+        /// </summary>
+        public ConnectionStringsConfiguration ConnectionStrings { get; set; }
+
+        /// <summary>
+        /// User configurations to be seeded when the application starts up
+        /// </summary>
+        public SeedUserConfiguration[] SeedUsers { get; set; }
     }
 }
