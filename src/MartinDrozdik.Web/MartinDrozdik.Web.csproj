@@ -217,7 +217,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
-    <ProjectReference Include="..\MartinDrozdik.Pages.Error\MartinDrozdík.Pages.Error.csproj" />
+    <ProjectReference Include="..\MartinDrozdik.Pages.Error\MartinDrozdik.Pages.Error.csproj" />
     <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
   </ItemGroup>
 
