@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Bonsai.Models
+namespace MartinDrozdik.Models
 {
     /// <summary>
     /// Base class for all entities
