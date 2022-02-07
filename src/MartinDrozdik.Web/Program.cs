@@ -19,9 +19,6 @@ namespace MartinDrozdik.Web
             //Create the host
             var host = CreateHostBuilder(args).Build();
 
-            //Seed the database
-            SeedDatabase(host).Wait();
-
             //Run the server
             host.Run();
         }
@@ -37,18 +34,5 @@ namespace MartinDrozdik.Web
                 {
                     webBuilder.UseStartup<Startup>();
                 });
-
-        /// <summary>
-        /// Seeds the host database
-        /// </summary>
-        /// <param name="host"></param>
-        /// <returns></returns>
-        private static async Task SeedDatabase(IHost host)
-        {
-            var seedLoader = new SeedLoader(host);
-
-            //Load user seeds
-            await seedLoader.LoadSeed<UserSeed>();
-        }
     }
 }

@@ -33,10 +33,5 @@ namespace MartinDrozdik.Web.Configuration
         /// Connection strings setup
         /// </summary>
         public ConnectionStringsConfiguration ConnectionStrings { get; set; }
-
-        /// <summary>
-        /// User configurations to be seeded when the application starts up
-        /// </summary>
-        public SeedUserConfiguration[] SeedUsers { get; set; }
     }
 }

@@ -33,6 +33,7 @@ namespace MartinDrozdik.Web
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Environment = environment;
+            Configuration = configuration;
 
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.ContentRootPath)
@@ -88,34 +89,6 @@ namespace MartinDrozdik.Web
             services.AddDbContext<AppDb>(options =>
                 options.UseSqlServer(connectionString));
 
-            //Seeds
-            services.AddSingleton(serverConfiguration.SeedUsers);
-            services.AddScoped<UserSeed>();
-
-
-            //Identity setup
-            services.AddDbContext<IdentityDb>(options =>
-                options.UseSqlServer(connectionString));
-            services.AddDefaultIdentity<AppUser>(options =>
-            {
-                options.SignIn.RequireConfirmedAccount = false;
-            })
-            .AddEntityFrameworkStores<IdentityDb>();
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/user/login";
-                //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            });
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 8;
-                options.User.RequireUniqueEmail = true;
-            });
-
             //File path provider service
             if (Environment.IsDevelopment())
                 services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
@@ -136,6 +109,7 @@ namespace MartinDrozdik.Web
             else
             {
                 app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
+                app.UseHsts();
             }
 
             //Add https redirect, files and auth
