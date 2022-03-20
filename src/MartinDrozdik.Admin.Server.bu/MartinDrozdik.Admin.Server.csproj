@@ -20,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MartinDrozdik.Admin.Client\MartinDrozdik.Admin.Client.csproj" />
     <ProjectReference Include="..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
     <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
   </ItemGroup>
