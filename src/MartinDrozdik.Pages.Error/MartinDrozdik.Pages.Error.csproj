@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <AssemblyName>MartinDrozdik.Pages.Error</AssemblyName>
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
@@ -55,7 +55,7 @@
   <ItemGroup>
     <PackageReference Include="MartinDrozdik.Services.LanguageDictionary" Version="1.0.3" />
     <PackageReference Include="MartinDrozdik.Utils.String" Version="1.5.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
