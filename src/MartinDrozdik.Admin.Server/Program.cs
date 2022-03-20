@@ -19,7 +19,7 @@ namespace MartinDrozdik.Admin.Server
             var host = CreateHostBuilder(args).Build();
 
             //Seed the database
-            SeedDatabase(host).Wait();
+            //SeedDatabase(host).Wait();
 
             //Run the server
             host.Run();

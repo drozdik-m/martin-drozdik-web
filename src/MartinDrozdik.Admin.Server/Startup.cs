@@ -27,13 +27,13 @@ namespace MartinDrozdik.Admin.Server
             Environment = environment;
             Configuration = configuration;
 
-            Configuration = new ConfigurationBuilder()
+            /*Configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{Environment.EnvironmentName}.json", optional: true)
                 .AddJsonFile("appsettings.Secrets.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
-                .Build();
+                .Build();*/
         }
 
 
@@ -61,15 +61,15 @@ namespace MartinDrozdik.Admin.Server
             var connectionString = serverConfiguration.ConnectionStrings.Production;
 
             //Database context
-            services.AddDbContext<AppDb>(options =>
-                options.UseSqlServer(connectionString));
+            /*services.AddDbContext<AppDb>(options =>
+                options.UseSqlServer(connectionString));*/
 
             //Seeds
-            services.AddSingleton(serverConfiguration.SeedUsers);
-            services.AddScoped<UserSeed>();
+            /*services.AddSingleton(serverConfiguration.SeedUsers);
+            services.AddScoped<UserSeed>();*/
 
             //Identity setup
-            services.AddDbContext<IdentityDb>(options =>
+            /*services.AddDbContext<IdentityDb>(options =>
                 options.UseSqlServer(connectionString));
             services.AddDefaultIdentity<AppUser>(options =>
             {
@@ -89,7 +89,7 @@ namespace MartinDrozdik.Admin.Server
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 8;
                 options.User.RequireUniqueEmail = true;
-            });
+            });*/
 
             //File path provider service
             if (Environment.IsDevelopment())
@@ -112,7 +112,7 @@ namespace MartinDrozdik.Admin.Server
             else
             {
                 app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
-                app.UseHsts();
+                //app.UseHsts();
             }
 
             //Add https redirect, files and auth
@@ -120,9 +120,9 @@ namespace MartinDrozdik.Admin.Server
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
             app.UseRouting();
-            app.UseIdentityServer();
-            app.UseAuthentication();
-            app.UseAuthorization();
+            //app.UseIdentityServer();
+            //app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

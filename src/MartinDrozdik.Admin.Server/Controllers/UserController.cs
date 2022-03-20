@@ -59,7 +59,6 @@ namespace Bonsai.Server.Controllers.Localization
             if (user == null)
                 return AuthenticationStateData.NoUser();
 
-           
             var res = new AuthenticationStateData
             {
                 IsAuthenticated = User.Identity.IsAuthenticated,

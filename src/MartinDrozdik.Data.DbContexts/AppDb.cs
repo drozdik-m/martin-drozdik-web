@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Bonsai.Models;
+using MartinDrozdik.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bonsai.DataPersistence.DbContexts
