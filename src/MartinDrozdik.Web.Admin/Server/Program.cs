@@ -36,13 +36,14 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Identity setup
 builder.Services
-    .AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddDefaultIdentity<AppUser>()
     .AddEntityFrameworkStores<IdentityDb>();
-/*services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = "/user/login";
-                //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
-            });*/
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    //options.LoginPath = "/user/login";
+    //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.Cookie.SameSite = SameSiteMode.Strict;
+});
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = true;
@@ -51,19 +52,11 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = true;
     options.Password.RequiredLength = 8;
     options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = true;
 });
 
-//Identity server
-builder.Services
-    .AddIdentityServer()
-    .AddApiAuthorization<AppUser, IdentityDb>();
-
 //Add authentication
-//https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-api-authorization?view=aspnetcore-6.0#deploy-to-production
-//https://devblogs.microsoft.com/dotnet/asp-net-core-authentication-with-identityserver4/
-builder.Services
-    .AddAuthentication()
-    .AddIdentityServerJwt();
+builder.Services.AddAuthentication();
 
 //Add controller views and razor pages
 builder.Services.AddControllersWithViews();
@@ -100,7 +93,6 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseIdentityServer();
 app.UseAuthentication();
 app.UseAuthorization();
 
