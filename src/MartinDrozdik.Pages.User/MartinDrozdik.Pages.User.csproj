@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <AssemblyName>Bonsai_RazorPages_User</AssemblyName>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/_content/MartinDrozdik_Pages_User</StaticWebAssetBasePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Images\Logo.png" />
+    <Content Remove="wwwroot\temp.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="builder.data.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Web\Global\Global.ts" />
+    <None Include="wwwroot\Web\Login\Login.ts" />
+    <None Include="wwwroot\Web\Register\Register.ts" />
+    <None Include="wwwroot\Web\Global\Global.scss" />
+    <None Include="wwwroot\Web\Login\Login.scss" />
+    <None Include="wwwroot\Web\Register\Register.scss" />
+    <None Include="wwwroot\Web\Global\UserPagesWindow.scss" />
+    <None Include="wwwroot\Web\_Functions.scss" />
+    <None Include="wwwroot\Web\_Variables.scss" />
+    <None Include="wwwroot\temp.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MartinDrozdik.Services.LanguageDictionary" Version="1.0.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\_out\" />
+  </ItemGroup>
+
+</Project>

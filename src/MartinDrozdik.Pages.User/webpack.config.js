@@ -10,11 +10,9 @@ module.exports = [
     {
         //Entry points
         entry: {
-
-            //Scripts
             Global: "./wwwroot/_dist/Web/Global/Global.js",
-            ErrorPage: "./wwwroot/_dist/Web/ErrorPage/ErrorPage.js",
-            OfflinePage: "./wwwroot/_dist/Web/OfflinePage/OfflinePage.js",
+            Login: "./wwwroot/_dist/Web/Logic/Login.js",
+            Register: "./wwwroot/_dist/Web/Register/Register.js"
         },
 
         //Output
@@ -52,8 +50,8 @@ module.exports = [
         //Entry points
         entry: {
             Global: "./wwwroot/Web/Global/Global.scss",
-            IndexPage: "./wwwroot/Web/ErrorPage/ErrorPage.scss",
-            SitemapPage: "./wwwroot/Web/OfflinePage/OfflinePage.scss",
+            IndexPage: "./wwwroot/Web/Login/Login.scss",
+            SitemapPage: "./wwwroot/Web/Register/Register.scss",
         },
 
         //Output

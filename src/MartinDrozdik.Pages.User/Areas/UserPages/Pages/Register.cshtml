@@ -1,0 +1,77 @@
+﻿@page "/user/register"
+@model Bonsai.RazorPages.User.Areas.UserPages.Pages.RegisterModel
+
+@{
+    Layout = "_UserPagesLayout";
+}
+
+
+@section Styles {
+    <link href="@Model.PathProvider.PathTo("/Styles/_dist/Pages/Register.css", LibraryInfo.Name)" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="@Model.PathProvider.PathTo("/Scripts/_dist/_pack/Register.js", LibraryInfo.Name)"></script>
+}
+
+<div class="windowFormWrapper">
+
+    <!--FORM-->
+    <form asp-controller="UserIdentity" asp-action="Register" method="post" id="registerForm" class="windowForm" role="form">
+        <div class="windowFormIcon">&nbsp;</div>
+
+        @Html.AntiForgeryToken()
+
+        <h1>@Model.Heading</h1>
+
+        <div class="formBlock">
+            <ul asp-validation-summary="All" class="errorList">
+                @*<li>Test error</li>*@
+                @if (TempData["ErrorMessages"] != null)
+                {
+                    foreach (string errorMessage in TempData["ErrorMessages"] as IList<string>)
+                    {
+                        <li>@errorMessage</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="formBlock">
+            <label for="email">@Model.EmailLabel</label>
+            <input type="text" id="email" placeholder="@Model.EmailPlaceholder" name="email"
+                   value="@(TempData["UserIdentityEmail"] != null ? TempData["UserIdentityEmail"] : string.Empty)"/>
+            <script>
+                var lang_emailNotEmpty = "@Model.EmailNotEmpty";
+                var lang_emailWrongFormat = "@Model.EmailWrongFormat";
+            </script>
+        </div>
+
+        <div class="formBlock">
+            <label for="password">@Model.PasswordLabel</label>
+            <input type="password" id="password" name="password" />
+            <script>
+                var lang_passwordNotEmpty = "@Model.PasswordNotEmpty";
+            </script>
+        </div>
+
+        <div class="formBlock">
+            <label for="passwordConfirm">@Model.ConfirmPassword</label>
+            <input type="password" id="passwordConfirm" name="confirmPassword" />
+            <script>
+                var lang_passwordNotSame = "@Model.ConfirmPasswordSame";
+            </script>
+        </div>
+
+        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" /> 
+
+        <div class="formBlock formSubmitBlock">
+            <div class="commonButtonWrapper">
+                <input type="submit" class="commonButton userWindowCommonButton" value="@Model.RegisterButton" />
+            </div>
+        </div>
+    </form>
+
+    <!--CREDITS-->
+    <p class="credits">Web by <a href="http://bonsai-development.cz/" target="_blank" title="Bonsai Development web">Bonsai</a></p>
+</div>

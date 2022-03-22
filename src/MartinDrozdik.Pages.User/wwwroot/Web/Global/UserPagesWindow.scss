@@ -1,0 +1,150 @@
+﻿@use "sass:math";
+
+@import "../_Variables";
+@import "../_Functions";
+@import "@drozdik.m/px-in-rem/_module";
+@import "@drozdik.m/common-mixins/_module";
+@import "@drozdik.m/common-button/module";
+
+body {
+    background-color: $mainTheme;
+    height: 100vh;
+
+    h1, a, label, p, span, input {
+        color: $commonGrey;
+    }
+}
+
+.windowFormWrapper {
+    padding: $pxInRem-8;
+    padding-top: 1rem;
+    text-align: center;
+    margin-top: 3rem;
+    position: relative;
+    top: 15%;
+    //CREDITS
+    .credits {
+        text-align: center;
+        padding-top: $pxInRem-10;
+        margin-top: $pxInRem-10;
+        font-size: $pxInRem-13;
+        background-image: url($pathPrefix + "Images/CreditsLogo.png");
+        background-position: bottom right;
+        background-repeat: no-repeat;
+        background-size: 1.5rem auto;
+        padding-right: $pxInRem-28;
+        display: inline-block;
+        line-height: $pxInRem-13;
+        font-weight: bolder;
+
+        a {
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+.windowForm {
+    text-align: left;
+    max-width: 100%;
+    width: 20rem;
+    background-color: #e6e6e6;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    padding-top: 3.25rem;
+    padding-bottom: $pxInRem-1;
+    @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-10 0 rgba(0,0,0,.35));
+    @include border-radius(1rem);
+    //BUTTON
+    .commonButton {
+        &.userWindowCommonButton {
+            @include commonButtonScheme(white, $commonGrey, white, $commonGreyHover);
+        }
+    }
+    //ICON
+    .windowFormIcon {
+        $dimensions: 5rem;
+        height: $dimensions;
+        width: $dimensions;
+        position: absolute;
+        top: -(math.div($dimensions, 2));
+        left: 50%;
+        margin-left: -(math.div($dimensions, 2));
+        background-image: url($pathPrefix + "Images/Logo.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        border: 1px solid #212227;
+        @include border-radius(50%);
+        @include box-shadow($pxInRem-2 $pxInRem-2 $pxInRem-2 0 rgba(0,0,0,.35));
+    }
+    //HEADING
+    h1 {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: $pxInRem-21;
+    }
+    //FORM BLOCK AND FORM ELEMENTS
+    .formBlock {
+        margin: $pxInRem-16 $pxInRem-24;
+
+        .listError {
+            li {
+                color: red;
+            }
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: $pxInRem-4 $pxInRem-9;
+            font-size: $pxInRem-15;
+            outline: none;
+            border: $pxInRem-2 solid white;
+            @include box-sizing(border-box);
+            @include border-radius($pxInRem-7);
+            @include transition (border-color $transition);
+            @include webkit-autofill(white, $commonGrey);
+
+            &.invalidInput {
+                border-color: $commonRed;
+            }
+
+            &.validInput {
+                border-color: $commonGreen;
+            }
+        }
+
+        label {
+            display: block;
+            padding-left: $pxInRem-4;
+            font-size: $pxInRem-14;
+            text-transform: uppercase;
+            margin-bottom: $pxInRem-6;
+            font-weight: bold;
+        }
+    }
+    //SUBMIT BLOCK
+    .formSubmitBlock {
+        margin-top: $pxInRem-30;
+    }
+    //ERROR LIST
+    .errorList {
+        li {
+            color: $commonRed;
+            list-style-type: disc;
+            font-size: $pxInRem-15;
+            margin-top: $pxInRem-5;
+            margin-bottom: $pxInRem-5;
+            margin-left: 1.5rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 43.75rem){
+    .windowFormWrapper {
+        top: 0;
+    }
+}

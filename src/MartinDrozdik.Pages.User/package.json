@@ -1,7 +1,7 @@
 {
-  "name": "@drozdik.m/error-pages",
+  "name": "@drozdik.m/user-pages",
   "version": "1.0.0",
-  "description": ".NET core 3 razor class library with error pages",
+  "description": ".NET core 3 razor class library with user pages",
   "main": "dist/Module.js",
   "typings": "dist/Module.d.ts",
   "scripts": {
@@ -16,7 +16,7 @@
     "url": "https://github.com/drozdik-m/martin-drozdik-web"
   },
   "keywords": [
-    "ErrorPages",
+    "UserPages",
     "SCSS",
     "JavaScript",
     "TypeScript"
@@ -34,6 +34,8 @@
   "dependencies": {
     "@drozdik.m/common-button": "^1.0.3",
     "@drozdik.m/common-mixins": "^1.0.5",
-    "@drozdik.m/px-in-rem": "^1.0.1"
+    "@drozdik.m/form": "^1.1.9",
+    "@drozdik.m/px-in-rem": "^1.0.1",
+    "@drozdik.m/window-events": "^1.1.2"
   }
 }

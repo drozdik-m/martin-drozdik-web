@@ -1,0 +1,69 @@
+﻿@page "/user/login"
+@model Bonsai.RazorPages.User.Areas.UserPages.Pages.LoginModel
+
+
+@{
+    Layout = "_UserPagesLayout";
+}
+
+
+@section Styles {
+    <link href="@Model.PathProvider.PathTo("/Styles/_dist/Pages/Login.css", LibraryInfo.Name)" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="@Model.PathProvider.PathTo("/Scripts/_dist/_pack/Login.js", LibraryInfo.Name)"></script>
+}
+
+<div class="windowFormWrapper">
+
+    <!--FORM-->
+    <form asp-controller="UserIdentity" asp-action="Login" method="post" id="loginForm" class="windowForm" role="form">
+        <div class="windowFormIcon">&nbsp;</div>
+
+        @Html.AntiForgeryToken()
+
+        <h1>@Model.Heading</h1>
+
+        <div class="formBlock">
+            <ul asp-validation-summary="All" class="errorList">
+                @if (TempData["ErrorMessages"] != null)
+                {
+                    foreach (string errorMessage in TempData["ErrorMessages"] as IList<string>)
+                    {
+                        <li>@errorMessage</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="formBlock">
+            <label for="email">@Model.EmailLabel</label>
+            <input type="text" id="email" placeholder="@Model.EmailPlaceholder" name="email"
+                   value="@(TempData["UserIdentityEmail"] != null ? TempData["UserIdentityEmail"] : string.Empty)" />
+            <script>
+                var lang_emailNotEmpty = "@Model.EmailNotEmpty";
+                var lang_emailWrongFormat = "@Model.EmailWrongFormat";
+            </script>
+        </div>
+
+        <div class="formBlock">
+            <label for="password">@Model.PasswordLabel</label>
+            <input type="password" id="password" name="password" />
+            <script>
+                var lang_passwordNotEmpty = "@Model.PasswordNotEmpty";
+            </script>
+        </div>
+
+        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
+        <div class="formBlock formSubmitBlock">
+            <div class="commonButtonWrapper">
+                <button type="submit" class="commonButton userWindowCommonButton">@Model.LoginButton</button>
+            </div>
+        </div>
+    </form>
+
+    <!--CREDITS-->
+    <p class="credits">Web by <a href="http://martin-drozdik.cz/" target="_blank" title="Martin Drozdík">Bonsai</a></p>
+</div>
