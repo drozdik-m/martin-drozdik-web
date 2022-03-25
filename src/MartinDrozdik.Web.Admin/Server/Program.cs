@@ -1,7 +1,11 @@
 ﻿using Bonsai.DataPersistence.DbContexts;
+using Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages;
+using Bonsai.RazorPages.User.Services.LanguageDictionary;
 using MartinDrozdik.Data.DbContexts.Seeds;
 using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 using MartinDrozdik.Data.Models.UserIdentity;
+using MartinDrozdik.Services.FilePathProvider;
+using MartinDrozdik.Services.FilePathProvider.Specific;
 using MartinDrozdik.Web.Admin.Server.Configuration;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -18,6 +22,24 @@ var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.Secrets.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables()
                 .Build();
+
+//MVC service
+builder.Services.AddMvc().AddNewtonsoftJson();
+
+//Controllers view builder
+var controllersViewBuilder = builder.Services.AddControllersWithViews();
+if (builder.Environment.IsDevelopment())
+    controllersViewBuilder.AddRazorRuntimeCompilation();
+controllersViewBuilder.AddNewtonsoftJson();
+
+//Razor pages builder
+var razorPagesBuilder = builder.Services.AddRazorPages();
+if (builder.Environment.IsDevelopment())
+    razorPagesBuilder.AddRazorRuntimeCompilation();
+razorPagesBuilder.AddNewtonsoftJson();
+
+//HTTPS
+builder.Services.AddHttpsRedirection(options => options.HttpsPort = 443);
 
 //Server configuration
 var serverConfiguration = configuration
@@ -66,6 +88,12 @@ builder.Services.AddRazorPages();
 builder.Services.AddSingleton(serverConfiguration.SeedUsers);
 builder.Services.AddScoped<UserSeed>();
 
+//Set file path provider
+builder.Services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
+
+//Provide user language
+builder.Services.AddSingleton<IUserLanguageDictionary, CzechUserLanguageDictionary>();
+
 //Create the app
 var app = builder.Build();
 
@@ -98,6 +126,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
-app.MapFallbackToFile("index.html");
+//app.MapFallbackToFile("index.html");
 
 app.Run();

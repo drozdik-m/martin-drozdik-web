@@ -8,17 +8,17 @@
 
 
 @section Styles {
-    <link href="@Model.PathProvider.PathTo("/Styles/_dist/Pages/Login.css", LibraryInfo.Name)" rel="stylesheet" />
+    <link href="@Model.PathProvider.PathTo("/_out/css/Login.css", StaticResources.Namespace)" rel="stylesheet" />
 }
 
 @section Scripts{
-    <script src="@Model.PathProvider.PathTo("/Scripts/_dist/_pack/Login.js", LibraryInfo.Name)"></script>
+    <script src="@Model.PathProvider.PathTo("/_out/js/Login.js", StaticResources.Namespace)"></script>
 }
 
 <div class="windowFormWrapper">
 
     <!--FORM-->
-    <form asp-controller="UserIdentity" asp-action="Login" method="post" id="loginForm" class="windowForm" role="form">
+    <form asp-controller="User" asp-action="Login" method="post" id="loginForm" class="windowForm" role="form">
         <div class="windowFormIcon">&nbsp;</div>
 
         @Html.AntiForgeryToken()

@@ -11,7 +11,7 @@ module.exports = [
         //Entry points
         entry: {
             Global: "./wwwroot/_dist/Web/Global/Global.js",
-            Login: "./wwwroot/_dist/Web/Logic/Login.js",
+            Login: "./wwwroot/_dist/Web/Login/Login.js",
             Register: "./wwwroot/_dist/Web/Register/Register.js"
         },
 

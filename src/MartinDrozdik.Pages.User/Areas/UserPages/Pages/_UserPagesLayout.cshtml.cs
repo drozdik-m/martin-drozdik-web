@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Bonsai.RazorPages.User.Services.LanguageDictionary;
-using Bonsai.Services.Abstraction;
+using MartinDrozdik.Services.FilePathProvider;
 
 namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 {
@@ -22,8 +22,6 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 
         public abstract string OgImagePath { get; }
 
-        public string LogoPath => PathProvider.PathTo("/Image/Logo.png", LibraryInfo.Name);
-
-        public string CreditsLogoPath => PathProvider.PathTo("/Image/CreditsLogo.png", LibraryInfo.Name);
+        public string LogoPath => PathProvider.PathTo("/Web/Global/OG/Logo.png", StaticResources.Namespace);
     }
 }

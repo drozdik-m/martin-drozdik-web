@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using Bonsai.RazorPages.User.Services.LanguageDictionary;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Bonsai.Services.Abstraction;
+using MartinDrozdik.Services.FilePathProvider;
 
 namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 {
@@ -27,7 +27,7 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 
         public override string Keywords => "Register";
 
-        public override string OgImagePath => PathProvider.PathTo("/Images/OG/OgRegistration.jpg", LibraryInfo.Name);
+        public override string OgImagePath => PathProvider.PathTo("/Images/OG/OgRegistration.jpg", StaticResources.Namespace);
 
         public string Heading => LanguageDictionary.GetContent(UserLanguageDictionary.LoginHeading);
 
@@ -46,7 +46,7 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 
         public string ReturnUrl { get; set; }
 
-        public void OnGet(string returnUrl)
+        public void OnGet(string returnUrl = "")
         {
             ReturnUrl = returnUrl;
         }

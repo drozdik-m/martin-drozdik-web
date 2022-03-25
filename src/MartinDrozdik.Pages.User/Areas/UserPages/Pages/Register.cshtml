@@ -7,17 +7,17 @@
 
 
 @section Styles {
-    <link href="@Model.PathProvider.PathTo("/Styles/_dist/Pages/Register.css", LibraryInfo.Name)" rel="stylesheet" />
+    <link href="@Model.PathProvider.PathTo("/_out/css/Register.css", StaticResources.Namespace)" rel="stylesheet" />
 }
 
 @section Scripts{
-    <script src="@Model.PathProvider.PathTo("/Scripts/_dist/_pack/Register.js", LibraryInfo.Name)"></script>
+    <script src="@Model.PathProvider.PathTo("/_out/js/Register.js", StaticResources.Namespace)"></script>
 }
 
 <div class="windowFormWrapper">
 
     <!--FORM-->
-    <form asp-controller="UserIdentity" asp-action="Register" method="post" id="registerForm" class="windowForm" role="form">
+    <form asp-controller="User" asp-action="Register" method="post" id="registerForm" class="windowForm" role="form">
         <div class="windowFormIcon">&nbsp;</div>
 
         @Html.AntiForgeryToken()

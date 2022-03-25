@@ -33,24 +33,25 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <!--FAVICON-->
-    <link rel="apple-touch-icon" sizes="180x180" href="@Model.PathProvider.PathTo("/Favicon/apple-touch-icon.png", LibraryInfo.Name)">
-    <link rel="icon" type="image/png" sizes="32x32" href="@Model.PathProvider.PathTo("/Favicon/favicon-32x32.png", LibraryInfo.Name)">
-    <link rel="icon" type="image/png" sizes="16x16" href="@Model.PathProvider.PathTo("/Favicon/favicon-16x16.png", LibraryInfo.Name)">
-    <link rel="mask-icon" href="@Model.PathProvider.PathTo("/Favicon/safari-pinned-tab.svg", LibraryInfo.Name)" color="#5bbad5">
-    <link rel="shortcut icon" href="@Model.PathProvider.PathTo("/Favicon/favicon.ico", LibraryInfo.Name)">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="msapplication-TileImage" content="@Model.PathProvider.PathTo("/Favicon/mstile-144x144.png", LibraryInfo.Name)">
-    <meta name="msapplication-config" content="@Model.PathProvider.PathTo("/Favicon/browserconfig.xml", LibraryInfo.Name)">
+    <link rel="apple-touch-icon" sizes="180x180" href="@Model.PathProvider.PathTo("/Favicon/apple-touch-icon.png", StaticResources.Namespace)">
+    <link rel="icon" type="image/png" sizes="32x32" href="@Model.PathProvider.PathTo("/Favicon/favicon-32x32.png", StaticResources.Namespace)">
+    <link rel="icon" type="image/png" sizes="16x16" href="@Model.PathProvider.PathTo("/Favicon/favicon-16x16.png", StaticResources.Namespace)">
+    <link rel="mask-icon" href="@Model.PathProvider.PathTo("/Favicon/safari-pinned-tab.svg", StaticResources.Namespace)" color="#5bbad5">
+    <link rel="shortcut icon" href="@Model.PathProvider.PathTo("/Favicon/favicon.ico", StaticResources.Namespace)">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="msapplication-config" content="@Model.PathProvider.PathTo("/Favicon/browserconfig.xml", StaticResources.Namespace)">
+    <meta name="theme-color" content="#C31432">
 
-    <meta name="theme-color" content="#1a93d8">
-    <link rel="manifest" href="@Model.PathProvider.PathTo("/Favicon/manifest.json", LibraryInfo.Name)">
+    <meta name="theme-color" content="#C31432">
+    <link rel="manifest" href="@Model.PathProvider.PathTo("/Favicon/manifest.json", StaticResources.Namespace)">
 
     <!--STYLES-->
-    <link href="@Model.PathProvider.PathTo("/_out/css/Global.css", LibraryInfo.Name)" rel="stylesheet" />
+    <link href="@Model.PathProvider.PathTo("/_out/css/Global.css", StaticResources.Namespace)" rel="stylesheet" />
     @RenderSection("Styles", required: false)
 
     <!--SCRIPTS-->
-    <script src="@Model.PathProvider.PathTo("/_out/css/Global.js", LibraryInfo.Name)"></script>
+    <script src="@Model.PathProvider.PathTo("/_out/js/Global.js", StaticResources.Namespace)"></script>
+    <script src="@Model.PathProvider.PathTo("/_out/js/common.js", StaticResources.Namespace)"></script>
     @RenderSection("Scripts", required: false)
 </head>
 <body>

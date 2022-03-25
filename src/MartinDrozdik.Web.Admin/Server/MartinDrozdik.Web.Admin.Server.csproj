@@ -9,11 +9,15 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
+    <ProjectReference Include="..\..\MartinDrozdik.Pages.Error\MartinDrozdik.Pages.Error.csproj" />
+    <ProjectReference Include="..\..\MartinDrozdik.Pages.User\MartinDrozdik.Pages.User.csproj" />
     <ProjectReference Include="..\Client\MartinDrozdik.Web.Admin.Client.csproj" />
     <ProjectReference Include="..\Shared\MartinDrozdik.Web.Admin.Shared.csproj" />
   </ItemGroup>

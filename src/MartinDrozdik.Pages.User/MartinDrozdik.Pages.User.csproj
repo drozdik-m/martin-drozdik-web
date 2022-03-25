@@ -9,7 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\Images\Logo.png" />
     <Content Remove="wwwroot\temp.ts" />
   </ItemGroup>
 

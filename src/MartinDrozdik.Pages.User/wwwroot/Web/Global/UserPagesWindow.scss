@@ -28,7 +28,7 @@ body {
         padding-top: $pxInRem-10;
         margin-top: $pxInRem-10;
         font-size: $pxInRem-13;
-        background-image: url($pathPrefix + "Images/CreditsLogo.png");
+        background-image: url(pathTo("/Web/Global/CreditsLogo.png"));
         background-position: bottom right;
         background-repeat: no-repeat;
         background-size: 1.5rem auto;
@@ -37,8 +37,13 @@ body {
         line-height: $pxInRem-13;
         font-weight: bolder;
 
+        &, a {
+            color: white;
+        }
+
         a {
             text-decoration: none;
+
             &:hover {
                 text-decoration: underline;
             }
@@ -73,11 +78,11 @@ body {
         top: -(math.div($dimensions, 2));
         left: 50%;
         margin-left: -(math.div($dimensions, 2));
-        background-image: url($pathPrefix + "Images/Logo.jpg");
+        background-image: url(pathTo("/Web/Global/Logo.png"));
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
-        border: 1px solid #212227;
+        border: 1px solid $black;
         @include border-radius(50%);
         @include box-shadow($pxInRem-2 $pxInRem-2 $pxInRem-2 0 rgba(0,0,0,.35));
     }

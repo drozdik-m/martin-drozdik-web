@@ -9,9 +9,9 @@
 //--------------------------------------------------
 //---------FONTS------------------------------------
 //--------------------------------------------------
-@include font-face (OpenSans, OpenSans-Extrabold, pathTo("Fonts/OpenSans/"), bolder);
-@include font-face (OpenSans, OpenSans-Bold, pathTo("Fonts/OpenSans/"), bold);
-@include font-face (OpenSans, OpenSans, pathTo("Fonts/OpenSans/"), normal);
+@include font-face (OpenSans, OpenSans-Extrabold, pathTo("/Fonts/OpenSans/"), bolder);
+@include font-face (OpenSans, OpenSans-Bold, pathTo("/Fonts/OpenSans/"), bold);
+@include font-face (OpenSans, OpenSans, pathTo("/Fonts/OpenSans/"), normal);
 
 
 html {
@@ -43,6 +43,6 @@ h1, h2, h3, h4, h5, h6, h7, .b, .bold, strong, b {
     padding: 0;
 }
 body {
-    background-color: $blue;
+    background: linear-gradient(to bottom right, $red, $black);
 }
 
