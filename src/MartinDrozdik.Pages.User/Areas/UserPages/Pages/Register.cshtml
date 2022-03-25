@@ -26,7 +26,6 @@
 
         <div class="formBlock">
             <ul asp-validation-summary="All" class="errorList">
-                @*<li>Test error</li>*@
                 @if (TempData["ErrorMessages"] != null)
                 {
                     foreach (string errorMessage in TempData["ErrorMessages"] as IList<string>)
@@ -72,6 +71,5 @@
         </div>
     </form>
 
-    <!--CREDITS-->
-    <p class="credits">Web by <a href="http://bonsai-development.cz/" target="_blank" title="Bonsai Development web">Bonsai</a></p>
+    <partial name="_Credits" />
 </div>

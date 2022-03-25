@@ -38,8 +38,7 @@ namespace MartinDrozdik.Data.Models.Authentication
         /// Returns instance of state data belonging to no user
         /// </summary>
         /// <returns></returns>
-        public static AuthenticationStateData NoUser() => noUserInstance;
-        static readonly AuthenticationStateData noUserInstance = new AuthenticationStateData
+        public static AuthenticationStateData NoUser { get; } = new AuthenticationStateData
         {
             IsAuthenticated = false
         };

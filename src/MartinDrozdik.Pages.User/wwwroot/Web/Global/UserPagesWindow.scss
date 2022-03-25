@@ -11,7 +11,7 @@ body {
     height: 100vh;
 
     h1, a, label, p, span, input {
-        color: $commonGrey;
+        color: $black;
     }
 }
 
@@ -31,7 +31,7 @@ body {
         background-image: url(pathTo("/Web/Global/CreditsLogo.png"));
         background-position: bottom right;
         background-repeat: no-repeat;
-        background-size: 1.5rem auto;
+        background-size: 1.25rem auto;
         padding-right: $pxInRem-28;
         display: inline-block;
         line-height: $pxInRem-13;
@@ -59,14 +59,14 @@ body {
     display: block;
     margin: 0 auto;
     position: relative;
-    padding-top: 3.25rem;
+    padding-top: 3.5rem;
     padding-bottom: $pxInRem-1;
     @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-10 0 rgba(0,0,0,.35));
     @include border-radius(1rem);
     //BUTTON
     .commonButton {
         &.userWindowCommonButton {
-            @include commonButtonScheme(white, $commonGrey, white, $commonGreyHover);
+            @include commonButtonScheme(white, $black, white, $blackHover);
         }
     }
     //ICON
@@ -82,7 +82,7 @@ body {
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
-        border: 1px solid $black;
+        //border: 1px solid $black;
         @include border-radius(50%);
         @include box-shadow($pxInRem-2 $pxInRem-2 $pxInRem-2 0 rgba(0,0,0,.35));
     }

@@ -7,6 +7,7 @@ using MartinDrozdik.Data.Models.UserIdentity;
 using MartinDrozdik.Services.FilePathProvider;
 using MartinDrozdik.Services.FilePathProvider.Specific;
 using MartinDrozdik.Web.Admin.Server.Configuration;
+using MartinDrozdik.Web.Facades.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -58,12 +59,15 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Identity setup
 builder.Services
-    .AddDefaultIdentity<AppUser>()
-    .AddEntityFrameworkStores<IdentityDb>();
+    .AddIdentity<AppUser, IdentityRole>()
+    .AddEntityFrameworkStores<IdentityDb>()
+    .AddDefaultTokenProviders();
+//.AddDefaultIdentity<AppUser>()
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    //options.LoginPath = "/user/login";
-    //options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.LoginPath = "/user/login";
+    options.AccessDeniedPath = "/user/denied";
     options.Cookie.SameSite = SameSiteMode.Strict;
 });
 builder.Services.Configure<IdentityOptions>(options =>
@@ -93,6 +97,9 @@ builder.Services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
 
 //Provide user language
 builder.Services.AddSingleton<IUserLanguageDictionary, CzechUserLanguageDictionary>();
+
+//Facades
+builder.Services.AddTransient<UserFacade>();
 
 //Create the app
 var app = builder.Build();

@@ -21,15 +21,13 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
             PathProvider = pathProvider;
         }
 
-        public override string Title => LanguageDictionary.GetContent(UserLanguageDictionary.LoginHeading);
+        public override string Title => LanguageDictionary.GetContent(UserLanguageDictionary.RegisterHeading);
 
         public override string Description => "Register page";
 
         public override string Keywords => "Register";
 
-        public override string OgImagePath => PathProvider.PathTo("/Images/OG/OgRegistration.jpg", StaticResources.Namespace);
-
-        public string Heading => LanguageDictionary.GetContent(UserLanguageDictionary.LoginHeading);
+        public string Heading => LanguageDictionary.GetContent(UserLanguageDictionary.RegisterHeading);
 
         public string RegisterButton => LanguageDictionary.GetContent(UserLanguageDictionary.RegisterButton);
 

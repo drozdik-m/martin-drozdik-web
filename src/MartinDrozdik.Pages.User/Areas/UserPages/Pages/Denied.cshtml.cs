@@ -9,23 +9,23 @@ using MartinDrozdik.Services.FilePathProvider;
 
 namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 {
-    public class LoginModel : UserPagesLayoutModel
+    public class DeniedModel : UserPagesLayoutModel
     {
-        public LoginModel(IUserLanguageDictionary languageDictionary, IFilePathProvider pathProvider)
+        public DeniedModel(IUserLanguageDictionary languageDictionary, IFilePathProvider pathProvider)
         {
             LanguageDictionary = languageDictionary;
             PathProvider = pathProvider;
         }
 
-        public override string Title => LanguageDictionary.GetContent(UserLanguageDictionary.LoginHeading);
+        public override string Title => LanguageDictionary.GetContent(UserLanguageDictionary.DeniedHeading);
 
-        public override string Description => "Login page";
+        public override string Description => "Denied page";
 
-        public override string Keywords => "Login";
+        public override string Keywords => "Denied";
 
-        public string Heading => LanguageDictionary.GetContent(UserLanguageDictionary.LoginHeading);
+        public string Heading => LanguageDictionary.GetContent(UserLanguageDictionary.DeniedHeading);
 
-        public string LoginButton => LanguageDictionary.GetContent(UserLanguageDictionary.LoginButton);
+        public string Button => LanguageDictionary.GetContent(UserLanguageDictionary.LoginButton);
 
         public string EmailLabel => LanguageDictionary.GetContent(UserLanguageDictionary.Email);
         public string EmailPlaceholder => LanguageDictionary.GetContent(UserLanguageDictionary.EmailPlaceholder);

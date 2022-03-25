@@ -20,8 +20,6 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 
         public abstract string Keywords { get; }
 
-        public abstract string OgImagePath { get; }
-
-        public string LogoPath => PathProvider.PathTo("/Web/Global/OG/Logo.png", StaticResources.Namespace);
+        public string OgImagePath => PathProvider.PathTo("/Web/Global/OG/OgIndex.png", StaticResources.Namespace);
     }
 }
