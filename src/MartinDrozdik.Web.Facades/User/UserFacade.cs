@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -75,6 +76,45 @@ namespace MartinDrozdik.Web.Facades.User
         public async Task LogOutAsync()
         {
             await signInManager.SignOutAsync();
+        }
+
+        /// <summary>
+        /// Adds a role to a user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
+        public async Task AddRole(string email, string roleName)
+        {
+            var user = await userManager.FindByNameAsync(email);
+            if (user == null)
+                throw new UserException(new string[] { $"The user {email} has not been found" });
+
+            await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
+        }
+
+        /// <summary>
+        /// Removes a role from a user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="roleName"></param>
+        /// <returns></returns>
+        public async Task RemoveRole(string email, string roleName)
+        {
+            var user = await userManager.FindByNameAsync(email);
+            if (user == null)
+                throw new UserException(new string[] { $"The user {email} has not been found" });
+
+            var claims = await userManager.GetClaimsAsync(user);
+            var claimToRemove = claims
+                .Where(e => e.Type == ClaimTypes.Role)
+                .Where(e => e.Value == roleName)
+                .SingleOrDefault();
+
+            if (claimToRemove == null)
+                throw new UserException(new string[] { $"The user {email} does not have a role with the name {roleName}" });
+
+            await userManager.RemoveClaimAsync(user, claimToRemove);
         }
     }
 }

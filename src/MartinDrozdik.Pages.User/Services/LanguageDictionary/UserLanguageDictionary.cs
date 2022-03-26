@@ -23,5 +23,20 @@ namespace Bonsai.RazorPages.User.Services.LanguageDictionary
 
         public const string PasswordConfirm = "User pages - Confirm password";
         public const string PasswordConfirmSame = "User pages - Confirm password - Error - Must be same";
+
+        public const string DeniedHeading = "User pages - Denied - Heading";
+        public const string DeniedText = "User pages - Denied - Text";
+
+        public const string ReturnButton = "User pages - Return button";
+        public const string WebButton = "User pages - Web button";
+
+        public const string ChangePasswordHeading = "User pages - Change password";
+        public const string ChangePasswordButton = "User pages - Change password - Button";
+        public const string OldPassword = "User pages - Old password";
+        public const string OldPasswordNotEmpty = "User pages - Old password - Empty";
+        public const string NewPassword = "User pages - New password";
+        public const string NewPasswordNotEmpty = "User pages - New password - Empty";
+        public const string ConfirmNewPasswordLabel = "User pages - Confirm new password";
+        public const string ConfirmNewPasswordSame = "User pages - Confirm new password - Empty";
     }
 }

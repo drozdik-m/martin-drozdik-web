@@ -15,7 +15,7 @@ namespace Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages
 
         }
 
-        public static readonly Dictionary<string, string> dictionary = new Dictionary<string, string>()
+        public static readonly Dictionary<string, string> dictionary = new()
         {
             //USER
             { UserLanguageDictionary.RegisterHeading, "Registrace" },
@@ -29,7 +29,19 @@ namespace Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages
             { UserLanguageDictionary.Password, "Heslo" },
             { UserLanguageDictionary.PasswordNotEmpty, "Heslo musí být vyplněno" },
             { UserLanguageDictionary.PasswordConfirm, "Potvrzení hesla" },
-            { UserLanguageDictionary.PasswordConfirmSame, "Heslo a jeho potvrzení se musí shodovat" }
+            { UserLanguageDictionary.PasswordConfirmSame, "Heslo a jeho potvrzení se musí shodovat" },
+            { UserLanguageDictionary.DeniedHeading, "Přístup zakázan" },
+            { UserLanguageDictionary.DeniedText, "Bohužel, k tomuto zdroji nemáte přístup" },
+            { UserLanguageDictionary.ReturnButton, "Zpět" },
+            { UserLanguageDictionary.WebButton, "Na web" },
+            { UserLanguageDictionary.ChangePasswordHeading, "Změna hesla" },
+            { UserLanguageDictionary.ChangePasswordButton, "Změnit heslo" },
+            { UserLanguageDictionary.OldPassword, "Staré heslo" },
+            { UserLanguageDictionary.OldPasswordNotEmpty, "Staré heslo musí být vyplněno" },
+            { UserLanguageDictionary.NewPassword, "Nové heslo" },
+            { UserLanguageDictionary.NewPasswordNotEmpty, "Nové heslo musí být vyplněno" },
+            { UserLanguageDictionary.ConfirmNewPasswordLabel, "Potvrzení nového hesla" },
+            { UserLanguageDictionary.ConfirmNewPasswordSame, "Heslo a jeho potvrzení se musí shodovat" },
         };
     }
 }

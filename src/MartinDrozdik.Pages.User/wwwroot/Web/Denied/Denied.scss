@@ -1,0 +1,19 @@
+﻿@use "sass:math";
+
+@import "../_Variables";
+@import "../_Functions";
+@import "@drozdik.m/px-in-rem/_module";
+@import "@drozdik.m/common-mixins/_module";
+@import "@drozdik.m/common-button/module";
+
+.windowFormWrapper {
+    #deniedForm {
+        .windowFormIcon {
+            background-image: url(pathTo("/Web/Denied/Denied.png"));
+        }
+
+        h1{
+            color: $red;
+        }
+    }
+}

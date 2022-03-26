@@ -12,7 +12,9 @@ module.exports = [
         entry: {
             Global: "./wwwroot/_dist/Web/Global/Global.js",
             Login: "./wwwroot/_dist/Web/Login/Login.js",
-            Register: "./wwwroot/_dist/Web/Register/Register.js"
+            Register: "./wwwroot/_dist/Web/Register/Register.js",
+            Denied: "./wwwroot/_dist/Web/Denied/Denied.js",
+            ChangePassword: "./wwwroot/_dist/Web/ChangePassword/ChangePassword.js",
         },
 
         //Output
@@ -50,8 +52,10 @@ module.exports = [
         //Entry points
         entry: {
             Global: "./wwwroot/Web/Global/Global.scss",
-            IndexPage: "./wwwroot/Web/Login/Login.scss",
-            SitemapPage: "./wwwroot/Web/Register/Register.scss",
+            Login: "./wwwroot/Web/Login/Login.scss",
+            Register: "./wwwroot/Web/Register/Register.scss",
+            Denied: "./wwwroot/Web/Denied/Denied.scss",
+            ChangePassword: "./wwwroot/Web/ChangePassword/ChangePassword.scss",
         },
 
         //Output

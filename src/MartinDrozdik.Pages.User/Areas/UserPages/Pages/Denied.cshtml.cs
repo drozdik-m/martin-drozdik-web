@@ -25,15 +25,11 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 
         public string Heading => LanguageDictionary.GetContent(UserLanguageDictionary.DeniedHeading);
 
-        public string Button => LanguageDictionary.GetContent(UserLanguageDictionary.LoginButton);
+        public string ReturnButton => LanguageDictionary.GetContent(UserLanguageDictionary.ReturnButton);
+        public string WebButton => LanguageDictionary.GetContent(UserLanguageDictionary.WebButton);
+        public string LoginButton => LanguageDictionary.GetContent(UserLanguageDictionary.LoginButton);
 
-        public string EmailLabel => LanguageDictionary.GetContent(UserLanguageDictionary.Email);
-        public string EmailPlaceholder => LanguageDictionary.GetContent(UserLanguageDictionary.EmailPlaceholder);
-        public string EmailWrongFormat => LanguageDictionary.GetContent(UserLanguageDictionary.EmailFormatError);
-        public string EmailNotEmpty => LanguageDictionary.GetContent(UserLanguageDictionary.EmailNotEmpty);
-
-        public string PasswordLabel => LanguageDictionary.GetContent(UserLanguageDictionary.Password);
-        public string PasswordNotEmpty => LanguageDictionary.GetContent(UserLanguageDictionary.PasswordNotEmpty);
+        public string DeniedText => LanguageDictionary.GetContent(UserLanguageDictionary.DeniedText);
 
         public string ReturnUrl { get; set; }
 

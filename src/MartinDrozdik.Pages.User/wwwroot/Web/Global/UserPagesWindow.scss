@@ -63,8 +63,17 @@ body {
     padding-bottom: $pxInRem-1;
     @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-10 0 rgba(0,0,0,.35));
     @include border-radius(1rem);
+    //TEXT
+    p {
+        text-align: center;
+        font-size: $pxInRem-18;
+    }
     //BUTTON
     .commonButton {
+        &.userWindowRedButton {
+            @include commonButtonScheme(white, $red, white, $redHover);
+        }
+
         &.userWindowCommonButton {
             @include commonButtonScheme(white, $black, white, $blackHover);
         }
