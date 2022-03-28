@@ -15,6 +15,7 @@ module.exports = [
             Register: "./wwwroot/_dist/Web/Register/Register.js",
             Denied: "./wwwroot/_dist/Web/Denied/Denied.js",
             ChangePassword: "./wwwroot/_dist/Web/ChangePassword/ChangePassword.js",
+            ConfirmLogout: "./wwwroot/_dist/Web/ConfirmLogout/ConfirmLogout.js",
         },
 
         //Output
@@ -56,6 +57,7 @@ module.exports = [
             Register: "./wwwroot/Web/Register/Register.scss",
             Denied: "./wwwroot/Web/Denied/Denied.scss",
             ChangePassword: "./wwwroot/Web/ChangePassword/ChangePassword.scss",
+            ConfirmLogout: "./wwwroot/Web/ConfirmLogout/ConfirmLogout.scss",
         },
 
         //Output

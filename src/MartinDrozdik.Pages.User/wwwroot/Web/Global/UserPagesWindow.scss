@@ -77,6 +77,10 @@ body {
         &.userWindowCommonButton {
             @include commonButtonScheme(white, $black, white, $blackHover);
         }
+
+        &.userWindowGreenButton {
+            @include commonButtonScheme(white, $successColor, white, $successColorHover);
+        }
     }
     //ICON
     .windowFormIcon {

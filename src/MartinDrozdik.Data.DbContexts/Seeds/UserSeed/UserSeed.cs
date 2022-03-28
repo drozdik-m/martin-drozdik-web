@@ -35,8 +35,13 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeed
                     EmailConfirmed = true
                 };
 
-                //Add the users
+                //Add the user
                 await AddUser(user, userConfig.Password);
+
+                //Get the user back
+                user = await userManager.FindByNameAsync(user.UserName);
+                if (user == null)
+                    throw new Exception("The seeded user could not be retrieved for some reason");
 
                 //Add the roles
                 foreach(var role in userConfig.Roles)
@@ -56,24 +61,25 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeed
             var result = await userManager.CreateAsync(user, password);
 
             if (!result.Succeeded)
-                throw new Exception(result.Errors.ToString());
+                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
         }
 
         async Task AddRole(AppUser user, string roleName)
         {
             var claims = await userManager.GetClaimsAsync(user);
+
+            //Search for the role
             var existingRoleClaims = claims
                 .Where(e => e.Type == ClaimTypes.Role)
                 .Where(e => e.Value == roleName);
 
+            //Add the role if not already set
             if (!existingRoleClaims.Any())
-            
-
-            
-
-            //await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
-
-
+            {
+                var result = await userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, roleName));
+                if (!result.Succeeded)
+                    throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+            }
         }
     }
 }

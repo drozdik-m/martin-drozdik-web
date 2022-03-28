@@ -34,9 +34,15 @@ namespace Bonsai.RazorPages.User.Services.LanguageDictionary
         public const string ChangePasswordButton = "User pages - Change password - Button";
         public const string OldPassword = "User pages - Old password";
         public const string OldPasswordNotEmpty = "User pages - Old password - Empty";
-        public const string NewPassword = "User pages - New password";
+        public const string NewPasswordLabel = "User pages - New password";
         public const string NewPasswordNotEmpty = "User pages - New password - Empty";
         public const string ConfirmNewPasswordLabel = "User pages - Confirm new password";
-        public const string ConfirmNewPasswordSame = "User pages - Confirm new password - Empty";
+        public const string ConfirmNewPasswordSame = "User pages - Confirm new password - Same";
+
+        public const string LogoutSuccessHeading = "User pages - Logout success";
+        public const string LogoutSuccessText = "User pages - Logout success - Text";
+
+        
+            
     }
 }

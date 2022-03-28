@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Bonsai.RazorPages.User.Services.LanguageDictionary;
 using MartinDrozdik.Services.FilePathProvider;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 {
+    [Authorize]
     public class ChangePasswordModel : UserPagesLayoutModel
     {
         public ChangePasswordModel(IUserLanguageDictionary languageDictionary, IFilePathProvider pathProvider)
@@ -30,7 +32,7 @@ namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
         public string OldPasswordLabel => LanguageDictionary.GetContent(UserLanguageDictionary.OldPassword);
         public string OldPasswordNotEmpty => LanguageDictionary.GetContent(UserLanguageDictionary.OldPasswordNotEmpty);
 
-        public string NewPasswordLabel => LanguageDictionary.GetContent(UserLanguageDictionary.NewPassword);
+        public string NewPasswordLabel => LanguageDictionary.GetContent(UserLanguageDictionary.NewPasswordLabel);
         public string NewPasswordNotEmpty => LanguageDictionary.GetContent(UserLanguageDictionary.NewPasswordNotEmpty);
 
         public string ConfirmNewPasswordLabel => LanguageDictionary.GetContent(UserLanguageDictionary.ConfirmNewPasswordLabel);

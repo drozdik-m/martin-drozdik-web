@@ -1,0 +1,41 @@
+﻿@page "/user/confirm-logout"
+@model Bonsai.RazorPages.User.Areas.UserPages.Pages.ConfirmLogoutModel
+
+
+@{
+    Layout = "_UserPagesLayout";
+}
+
+
+@section Styles {
+    <link href="@Model.PathProvider.PathTo("/_out/css/ConfirmLogout.css", StaticResources.Namespace)" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="@Model.PathProvider.PathTo("/_out/js/ConfirmLogout.js", StaticResources.Namespace)"></script>
+}
+
+<div class="windowFormWrapper">
+
+    <!--FORM-->
+    <div id="deniedForm" class="windowForm">
+        <div class="windowFormIcon">&nbsp;</div>
+
+        @Html.AntiForgeryToken()
+
+        <h1>@Model.Heading</h1>
+
+        <partial name="_ValidationSummary" />
+
+        <p>@Model.LogoutSuccessText</p>
+
+        <div class="formBlock formSubmitBlock">
+            <div class="commonButtonWrapper">
+                <a href="/user/login" class="commonButton userWindowGreenButton">@Model.LoginButton</a>
+                <a href="/" class="commonButton userWindowCommonButton">@Model.WebButton</a>
+            </div>
+        </div>
+    </div>
+
+    <partial name="_Credits" />
+</div>

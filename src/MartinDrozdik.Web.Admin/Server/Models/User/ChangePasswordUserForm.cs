@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MartinDrozdik.Web.Admin.Server.Models.User
 {
-    public class ChangePasswordForm
+    public class ChangePasswordUserForm
     {
         public string OldPassword { get; set; } = string.Empty;
 

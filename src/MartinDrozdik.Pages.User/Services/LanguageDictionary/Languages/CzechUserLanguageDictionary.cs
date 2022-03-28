@@ -17,7 +17,6 @@ namespace Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages
 
         public static readonly Dictionary<string, string> dictionary = new()
         {
-            //USER
             { UserLanguageDictionary.RegisterHeading, "Registrace" },
             { UserLanguageDictionary.RegisterButton, "Registrovat" },
             { UserLanguageDictionary.LoginHeading, "Přihlášení" },
@@ -38,10 +37,12 @@ namespace Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages
             { UserLanguageDictionary.ChangePasswordButton, "Změnit heslo" },
             { UserLanguageDictionary.OldPassword, "Staré heslo" },
             { UserLanguageDictionary.OldPasswordNotEmpty, "Staré heslo musí být vyplněno" },
-            { UserLanguageDictionary.NewPassword, "Nové heslo" },
+            { UserLanguageDictionary.NewPasswordLabel, "Nové heslo" },
             { UserLanguageDictionary.NewPasswordNotEmpty, "Nové heslo musí být vyplněno" },
             { UserLanguageDictionary.ConfirmNewPasswordLabel, "Potvrzení nového hesla" },
             { UserLanguageDictionary.ConfirmNewPasswordSame, "Heslo a jeho potvrzení se musí shodovat" },
+            { UserLanguageDictionary.LogoutSuccessHeading, "Odhlášení úspěšné" },
+            { UserLanguageDictionary.LogoutSuccessText, "Nyní jste bezpečně odhlášen/a z vašeho účtu" },
         };
     }
 }

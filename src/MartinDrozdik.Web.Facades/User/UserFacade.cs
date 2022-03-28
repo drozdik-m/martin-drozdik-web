@@ -70,6 +70,33 @@ namespace MartinDrozdik.Web.Facades.User
         }
 
         /// <summary>
+        /// Changes password of a user
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="currentPassword"></param>
+        /// <param name="newPassword"></param>
+        /// <param name="newPasswordConfirmation"></param>
+        /// <returns></returns>
+        /// <exception cref="UserException"></exception>
+        public async Task ChangePassword(string email, string currentPassword, string newPassword, string newPasswordConfirmation)
+        {
+            //Validate
+            if (newPassword != newPasswordConfirmation)
+                throw new UserException(new string[] { "Passwords don't match" });
+
+            //Get the user
+            var user = await userManager.FindByNameAsync(email);
+            if (user == null)
+                throw new UserException(new string[] { $"The user {email} has not been found" });
+
+            //Change the password
+            var result = await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+
+            if (!result.Succeeded)
+                throw new UserException(result.Errors.Select(e => e.Description));
+        }
+
+        /// <summary>
         /// Logs out the current user
         /// </summary>
         /// <returns></returns>
