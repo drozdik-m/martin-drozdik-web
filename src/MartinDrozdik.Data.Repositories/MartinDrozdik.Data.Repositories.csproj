@@ -2,11 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MartinDrozdik.Models.Abstraction" Version="1.0.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
   </ItemGroup>
 
 </Project>
