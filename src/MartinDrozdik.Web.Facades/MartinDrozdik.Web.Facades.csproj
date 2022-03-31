@@ -14,4 +14,8 @@
     <ProjectReference Include="..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tags\" />
+  </ItemGroup>
+
 </Project>

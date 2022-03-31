@@ -49,7 +49,9 @@ namespace Bonsai.DataPersistence.Repositories.Traits
                 if (Equals(id, default(TKey)))
                     throw new DefaultKeyException();
 
-                var entities = EntitySet.Where(IdPredicate(id));
+                var entities = EntitySet
+                    .AsNoTracking()
+                    .Where(IdPredicate(id));
                 var searchedEntity = await entities.FirstOrDefaultAsync();
 
                 //Not found

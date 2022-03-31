@@ -94,7 +94,7 @@ namespace MartinDrozdik.Data.Repositories
         /// <inheritdoc/>
         public async Task<IEnumerable<TEntity>> GetAsync()
         {
-            var allEntities = await IncludeRelationsAsync(EntitySet);
+            var allEntities = await IncludeRelationsAsync(EntitySet.AsNoTracking());
             var processedEntities = await ProcessReturnedEntitiesAsync(allEntities);
             return await processedEntities.ToListAsync();
         }
@@ -105,7 +105,9 @@ namespace MartinDrozdik.Data.Repositories
             if (Equals(id, default(TKey)))
                 throw new DefaultKeyException();
 
-            var entities = EntitySet.Where(IdPredicate(id));
+            var entities = EntitySet
+                .AsNoTracking()
+                .Where(IdPredicate(id));
             var includedEntities = await IncludeRelationsAsync(entities);
             var processedEntities = await ProcessReturnedEntitiesAsync(includedEntities);
             var searchedEntity = await processedEntities.FirstOrDefaultAsync();

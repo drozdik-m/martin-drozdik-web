@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using Bonsai.DataPersistence.DbContexts;
 using Bonsai.DataPersistence.Repositories.Blog;
-using MartinDrozdik.Data.Models.Tags.Projects;
+using MartinDrozdik.Data.Models.Projects;
 using Microsoft.EntityFrameworkCore;
 
-namespace MartinDrozdik.Data.Repositories.Models.Tags.Projects
+namespace MartinDrozdik.Data.Repositories.Models.Projects
 {
     public class ProjectTagRepository : TagRepository<ProjectTag>
     {

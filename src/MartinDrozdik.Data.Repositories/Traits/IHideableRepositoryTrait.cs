@@ -45,7 +45,9 @@ namespace Bonsai.DataPersistence.Repositories.Traits
             if (Equals(itemToModify, default(TKey)))
                 throw new DefaultKeyException();
 
-            var entities = EntitySet.Where(IdPredicate(itemToModify));
+            var entities = EntitySet
+                .Where(IdPredicate(itemToModify))
+                .AsNoTracking();
             var searchedEntity = await entities.FirstOrDefaultAsync();
 
             //Not found

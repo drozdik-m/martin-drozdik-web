@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using MartinDrozdik.Data.Models.Tags.Projects;
+using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Models;
 using Microsoft.EntityFrameworkCore;
 
