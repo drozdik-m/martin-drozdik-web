@@ -19,18 +19,18 @@ namespace Bonsai.DataPersistence.Repositories.Traits.Abstraction
 
         protected abstract DbSet<TEntity> EntitySet { get; }
 
-        protected Task<IQueryable<TEntity>> TIncludeRelationsAsync(IQueryable<TEntity> entities);
+        protected Task<IQueryable<TEntity>> IncludeRelationsAsync(IQueryable<TEntity> entities);
 
-        protected Task<TEntity> TUpdateRelationsAsync(TEntity entity);
+        protected Task<TEntity> UpdateRelationsAsync(TEntity entity);
 
-        protected Task<TEntity> TProcessNewEntityAsync(TEntity entity);
+        protected Task<TEntity> ProcessNewEntityAsync(TEntity entity);
 
-        protected Task<IQueryable<TEntity>> TProcessReturnedEntitiesAsync(IQueryable<TEntity> entities);
+        protected Task<IQueryable<TEntity>> ProcessReturnedEntitiesAsync(IQueryable<TEntity> entities);
 
-        protected Task<TEntity> TProcessUpdatedEntityAsync(TEntity entity);
+        protected Task<TEntity> ProcessUpdatedEntityAsync(TEntity entity);
 
-        protected Task<TEntity> TProcessDeletedEntityAsync(TEntity entity);
+        protected Task<TEntity> ProcessDeletedEntityAsync(TEntity entity);
 
-        protected Expression<Func<TEntity, bool>> TIdPredicate(TKey targetId);
+        protected Expression<Func<TEntity, bool>> IdPredicate(TKey targetId);
     }
 }

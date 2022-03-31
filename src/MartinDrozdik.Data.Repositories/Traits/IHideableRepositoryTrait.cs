@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Bonsai.DataPersistence.Repositories.Traits.Abstraction;
 using Bonsai.Models.Abstraction;
 using Bonsai.Models.Abstraction.Entities;
+using Bonsai.Models.Abstraction.Exceptions.Services.CRUD;
 using Bonsai.Models.Abstraction.Services;
 using Bonsai.Models.Exceptions.CRUD;
 using MartinDrozdik.Data.Repositories.Abstraction;
@@ -19,33 +20,70 @@ namespace Bonsai.DataPersistence.Repositories.Traits
         where TEntity : class, IIdentifiable<TKey>, IHideable
         where TContext : DbContext
     {
-        public async Task<IEnumerable<TEntity>> TGetVisibleAsync()
+        /// <summary>
+        /// Returns all visible items
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<TEntity>> GetVisibleAsync()
         {
-            var allEntities = await TIncludeRelationsAsync(EntitySet);
+            var allEntities = await IncludeRelationsAsync(EntitySet);
             var shownEntities = allEntities.Where(e => !e.IsHidden);
-            var processedEntities = await TProcessReturnedEntitiesAsync(shownEntities);
+            var processedEntities = await ProcessReturnedEntitiesAsync(shownEntities);
             return await processedEntities.ToListAsync();
         }
 
-        public async Task THideAsync(TKey itemToHide)
+        /// <summary>
+        /// Sets a visibility for an item
+        /// </summary>
+        /// <param name="itemToModify"></param>
+        /// <param name="newValueGetter"></param>
+        /// <returns></returns>
+        /// <exception cref="DefaultKeyException"></exception>
+        /// <exception cref="NotFoundException"></exception>
+        private async Task SetHidden(TKey itemToModify, Func<bool, bool> newValueGetter)
         {
-            var entity = await GetAsync(itemToHide);
-            entity.IsHidden = true;
-            await UpdateAsync(entity.Id, entity);
+            if (Equals(itemToModify, default(TKey)))
+                throw new DefaultKeyException();
+
+            var entities = EntitySet.Where(IdPredicate(itemToModify));
+            var searchedEntity = await entities.FirstOrDefaultAsync();
+
+            //Not found
+            if (searchedEntity == default)
+                throw new NotFoundException();
+
+            //Hide
+            searchedEntity.IsHidden = newValueGetter.Invoke(searchedEntity.IsHidden);
+
+            //Set modified state
+            Context.Entry(searchedEntity).State = EntityState.Modified;
+
+            //Process before update
+            await ProcessUpdatedEntityAsync(searchedEntity);
+
+            //Save changes
+            await Context.SaveChangesAsync();
         }
 
-        public async Task TShowAsync(TKey itemToShow)
-        {
-            var entity = await GetAsync(itemToShow);
-            entity.IsHidden = false;
-            await UpdateAsync(entity.Id, entity);
-        }
+        /// <summary>
+        /// Hides an item
+        /// </summary>
+        /// <param name="itemToHide"></param>
+        /// <returns></returns>
+        public Task HideAsync(TKey itemToHide) => SetHidden(itemToHide, _ => true);
 
-        public async Task TToggleVisibilityAsync(TKey itemToToggle)
-        {
-            var entity = await GetAsync(itemToToggle);
-            entity.IsHidden = !entity.IsHidden;
-            await UpdateAsync(entity.Id, entity);
-        }
+        /// <summary>
+        /// Shows an item
+        /// </summary>
+        /// <param name="itemToShow"></param>
+        /// <returns></returns>
+        public Task ShowAsync(TKey itemToShow) => SetHidden(itemToShow, _ => false);
+
+        /// <summary>
+        /// Toggles items' visibility
+        /// </summary>
+        /// <param name="itemToToggle"></param>
+        /// <returns></returns>
+        public Task ToggleVisibilityAsync(TKey itemToToggle) => SetHidden(itemToToggle, e => !e);
     }
 }
