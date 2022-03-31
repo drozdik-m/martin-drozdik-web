@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Bonsai.DataPersistence.Repositories.Traits
 {
     interface IHideableRepositoryTrait<TEntity, TKey, TContext>
-        : ICRUDRepositoryTrait<TEntity, TKey, TContext>
+        : ICRUDRepositoryTrait<TEntity, TKey, TContext>, IHideableRepository<TEntity, TKey>
         where TEntity : class, IIdentifiable<TKey>, IHideable
         where TContext : DbContext
     {
@@ -24,7 +24,7 @@ namespace Bonsai.DataPersistence.Repositories.Traits
         /// Returns all visible items
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<TEntity>> GetVisibleAsync()
+        public new async Task<IEnumerable<TEntity>> GetVisibleAsync()
         {
             var allEntities = await IncludeRelationsAsync(EntitySet);
             var shownEntities = allEntities.Where(e => !e.IsHidden);
@@ -70,20 +70,20 @@ namespace Bonsai.DataPersistence.Repositories.Traits
         /// </summary>
         /// <param name="itemToHide"></param>
         /// <returns></returns>
-        public Task HideAsync(TKey itemToHide) => SetHidden(itemToHide, _ => true);
+        public new Task HideAsync(TKey itemToHide) => SetHidden(itemToHide, _ => true);
 
         /// <summary>
         /// Shows an item
         /// </summary>
         /// <param name="itemToShow"></param>
         /// <returns></returns>
-        public Task ShowAsync(TKey itemToShow) => SetHidden(itemToShow, _ => false);
+        public new Task ShowAsync(TKey itemToShow) => SetHidden(itemToShow, _ => false);
 
         /// <summary>
         /// Toggles items' visibility
         /// </summary>
         /// <param name="itemToToggle"></param>
         /// <returns></returns>
-        public Task ToggleVisibilityAsync(TKey itemToToggle) => SetHidden(itemToToggle, e => !e);
+        public new Task ToggleVisibilityAsync(TKey itemToToggle) => SetHidden(itemToToggle, e => !e);
     }
 }

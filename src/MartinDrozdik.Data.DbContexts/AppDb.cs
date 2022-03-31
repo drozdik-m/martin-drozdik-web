@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MartinDrozdik.Data.Models.Tags.Projects;
 using MartinDrozdik.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,6 +12,9 @@ namespace Bonsai.DataPersistence.DbContexts
 {
     public class AppDb : DbContext
     {
+        // -------- PROJECTS --------
+        public DbSet<ProjectTag> ProjectTags { get; set; }
+
 
         public AppDb(DbContextOptions<AppDb> options) : base(options)
         {

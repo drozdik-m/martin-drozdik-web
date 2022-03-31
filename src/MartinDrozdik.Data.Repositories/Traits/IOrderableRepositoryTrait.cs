@@ -10,12 +10,13 @@ using Bonsai.Models.Abstraction.Entities;
 using Bonsai.Models.Abstraction.Exceptions.Services.CRUD;
 using Bonsai.Models.Abstraction.Services;
 using Bonsai.Models.Exceptions.CRUD;
+using MartinDrozdik.Data.Repositories.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bonsai.DataPersistence.Repositories.Traits
 {
     interface IOrderableRepositoryTrait<TEntity, TKey, TContext>
-            : ICRUDRepositoryTrait<TEntity, TKey, TContext>
+            : ICRUDRepositoryTrait<TEntity, TKey, TContext>, IOrderableRepository<TEntity, TKey>
         where TEntity : class, IIdentifiable<TKey>, IOrderable
         where TContext : DbContext
     {
@@ -37,7 +38,7 @@ namespace Bonsai.DataPersistence.Repositories.Traits
         /// <param name="newOrder"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public async Task ReorderAsync(IEnumerable<TKey> newOrder)
+        public new async Task ReorderAsync(IEnumerable<TKey> newOrder)
         {
             if (newOrder == null)
                 throw new ArgumentNullException(nameof(newOrder));
