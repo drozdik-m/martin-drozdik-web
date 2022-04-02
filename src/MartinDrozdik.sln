@@ -38,7 +38,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppLogic", "AppLogic", "{01
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartinDrozdik.Web.Facades", "MartinDrozdik.Web.Facades\MartinDrozdik.Web.Facades.csproj", "{83FC933D-6F78-4406-8335-479062382B7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MartinDrozdik.Data.Repositories", "MartinDrozdik.Data.Repositories\MartinDrozdik.Data.Repositories.csproj", "{F3801601-7DDD-4189-ADE0-9DBB7D6180ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MartinDrozdik.Data.Repositories", "MartinDrozdik.Data.Repositories\MartinDrozdik.Data.Repositories.csproj", "{F3801601-7DDD-4189-ADE0-9DBB7D6180ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

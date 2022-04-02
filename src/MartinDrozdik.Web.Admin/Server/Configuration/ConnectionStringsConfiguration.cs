@@ -5,6 +5,6 @@
         /// <summary>
         /// Connection string to the production database
         /// </summary>
-        public string Production { get; set; }
+        public string Production { get; set; } = string.Empty;
     }
 }

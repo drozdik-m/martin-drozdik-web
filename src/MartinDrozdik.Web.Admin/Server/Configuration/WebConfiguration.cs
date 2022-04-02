@@ -9,11 +9,11 @@ namespace MartinDrozdik.Web.Admin.Server.Configuration
         /// <summary>
         /// Name of this website
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The domain where the website is currently running
         /// </summary>
-        public string Domain { get; set; }
+        public string Domain { get; set; } = string.Empty;
     }
 }

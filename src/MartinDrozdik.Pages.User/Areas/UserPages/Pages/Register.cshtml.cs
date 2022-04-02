@@ -9,10 +9,11 @@ using Bonsai.RazorPages.User.Services.LanguageDictionary;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using MartinDrozdik.Services.FilePathProvider;
+using MartinDrozdik.Data.Models.Authentication;
 
 namespace Bonsai.RazorPages.User.Areas.UserPages.Pages
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
     public class RegisterModel : UserPagesLayoutModel
     {
         public RegisterModel(IUserLanguageDictionary languageDictionary, IFilePathProvider pathProvider)

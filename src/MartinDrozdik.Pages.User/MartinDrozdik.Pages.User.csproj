@@ -54,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MartinDrozdik.Data.Models\MartinDrozdik.Data.Models.csproj" />
     <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
   </ItemGroup>
 
