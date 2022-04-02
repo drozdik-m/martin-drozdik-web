@@ -9,7 +9,7 @@ using Bonsai.Models.Abstraction.Entities;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bonsai.DataPersistence.Repositories.Traits.Abstraction
+namespace MartinDrozdik.Data.Repositories.Traits
 {
     interface ICRUDRepositoryTrait<TEntity, TKey, TContext> : ICRUDRepository<TEntity, TKey>
         where TEntity : class, IIdentifiable<TKey>

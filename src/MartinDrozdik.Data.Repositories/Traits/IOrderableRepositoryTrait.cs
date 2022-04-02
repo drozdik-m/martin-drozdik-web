@@ -4,7 +4,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.DataPersistence.Repositories.Traits.Abstraction;
 using Bonsai.Models.Abstraction;
 using Bonsai.Models.Abstraction.Entities;
 using Bonsai.Models.Abstraction.Exceptions.Services.CRUD;
@@ -13,7 +12,7 @@ using Bonsai.Models.Exceptions.CRUD;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bonsai.DataPersistence.Repositories.Traits
+namespace MartinDrozdik.Data.Repositories.Traits
 {
     interface IOrderableRepositoryTrait<TEntity, TKey, TContext>
             : ICRUDRepositoryTrait<TEntity, TKey, TContext>, IOrderableRepository<TEntity, TKey>

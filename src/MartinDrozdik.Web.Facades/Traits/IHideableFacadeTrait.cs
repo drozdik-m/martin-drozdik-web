@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Bonsai.AppLogic.Facades.Traits
 {
     interface IHideableFacadeTrait<TEntity, TKey>
-        : ICRUDFacadeTrait<TEntity, TKey>
+        : IHideableFacade<TEntity, TKey>
         where TEntity : class, IIdentifiable<TKey>, IHideable
     {
         protected abstract IHideableRepository<TEntity, TKey> HideableRepository { get; }

@@ -7,11 +7,11 @@ using Bonsai.DataPersistence.DbContexts;
 using Bonsai.Models.Abstraction.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Bonsai.DataPersistence.Repositories.Traits;
 using Bonsai.Models.Abstraction.Localization;
 using MartinDrozdik.Data.Repositories;
 using MartinDrozdik.Data.Models.Tags;
 using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Data.Repositories.Traits;
 
 namespace Bonsai.DataPersistence.Repositories.Blog
 {
