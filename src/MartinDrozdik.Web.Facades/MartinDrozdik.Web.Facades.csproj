@@ -12,10 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Tags\" />
+    <ProjectReference Include="..\MartinDrozdik.Data.Repositories\MartinDrozdik.Data.Repositories.csproj" />
   </ItemGroup>
 
 </Project>
