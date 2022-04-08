@@ -1,7 +1,23 @@
 ﻿@inherits LayoutComponentBase
 
+@code {
+    bool drawerOpen = false;
+    private MudTheme theme = new();
+    private bool isDarkMode;
+
+    void DrawerToggle()
+    {
+        drawerOpen = !drawerOpen;
+    }
+
+    void ThemeModeToggle()
+    {
+        isDarkMode = !isDarkMode;
+    }
+}
+
 @* MudBlazor *@
-<MudThemeProvider/>
+<MudThemeProvider @bind-IsDarkMode="@isDarkMode" Theme="theme"/>
 <MudDialogProvider/>
 <MudSnackbarProvider/>
 
@@ -12,6 +28,28 @@
     <MudAppBar Elevation="1" Dense="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(e => DrawerToggle())" />
         <MudSpacer />
+
+        @* Light/Dark mode *@
+        @if (!isDarkMode)
+        {
+            <MudTooltip Class="my-5" Text="Switch to dark mode">
+                <MudIconButton Icon="@Icons.Material.Outlined.DarkMode" Color="Color.Inherit" Edge="Edge.End"
+                               OnClick="@(e => ThemeModeToggle())"/>
+            </MudTooltip>
+        }
+        else
+        {
+            <MudTooltip Text="Switch to light mode">
+                <MudIconButton Icon="@Icons.Material.Filled.LightMode" Color="Color.Inherit" Edge="Edge.End"
+                               OnClick="@(e => ThemeModeToggle())"/>
+            </MudTooltip>
+        }
+
+        @* Repo link *@
+        <MudTooltip Text="GitHub repository">
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End" 
+                               Target="_blank" Href="https://github.com/drozdik-m/martin-drozdik-web" />
+        </MudTooltip>
 
         @* Web redirect *@
         <MudTooltip Text="Open web">
@@ -28,7 +66,7 @@
     </MudAppBar>
 
     @* Left drawer *@
-    <MudDrawer @bind-Open="_drawerOpen" Elevation="2" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
+    <MudDrawer @bind-Open="drawerOpen" Elevation="2" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
         <MudNavMenu>
             <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Filled.Home">Admin</MudNavLink>
             <MudNavLink Match="NavLinkMatch.All" Icon="@Icons.Filled.Tag">Project tags</MudNavLink>
@@ -39,11 +77,3 @@
     </MudMainContent>
 </MudLayout>
 
-@code {
-    bool _drawerOpen = false;
-
-    void DrawerToggle()
-    {
-        _drawerOpen = !_drawerOpen;
-    }
-}

@@ -2,22 +2,32 @@
     <Router AppAssembly="@typeof(App).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
+
+                @* Not authorized *@
                 <NotAuthorized>
-                    @if (context.User.Identity?.IsAuthenticated != true)
-                    {
-                        <p>Insert redirect to login here</p>
+                    @{ 
+                        string loginURI = $"/user/login";
                     }
-                    else
-                    {
-                        <p role="alert">You are not authorized to access this resource.</p>
-                    }
+                    <h1>Unauthorized access</h1>
+                    <p class="mb-3">You need to <a href="@loginURI" title="Login page">log in</a> to gain access to this resource.</p>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@loginURI">Log in</MudButton>
                 </NotAuthorized>
+
+                @* Authorization in progress *@
+                <Authorizing>
+                    <h1>Authorization in progress</h1>
+                    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-3" />
+                </Authorizing>
+
             </AuthorizeRouteView>
             <FocusOnNavigate RouteData="@routeData" Selector="h1" />
         </Found>
+
+        @* Page not found *@
         <NotFound>
             <PageTitle>Not found</PageTitle>
             <LayoutView Layout="@typeof(MainLayout)">
+                <h1>Page not found</h1>
                 <p role="alert">Sorry, there's nothing at this address.</p>
             </LayoutView>
         </NotFound>
