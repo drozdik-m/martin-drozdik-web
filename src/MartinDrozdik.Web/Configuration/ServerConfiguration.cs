@@ -15,6 +15,11 @@ namespace MartinDrozdik.Web.Configuration
         public WebConfiguration Web { get; set; }
 
         /// <summary>
+        /// The domain where the website is currently running
+        /// </summary>
+        public string Domain { get; set; }
+
+        /// <summary>
         /// Email configuration for a sending email account
         /// </summary>
         public EmailSenderConfiguration EmailSender { get; set; }

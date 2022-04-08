@@ -21,7 +21,6 @@
     <ProjectReference Include="..\..\MartinDrozdik.Pages.User\MartinDrozdik.Pages.User.csproj" />
     <ProjectReference Include="..\..\MartinDrozdik.Web.Facades\MartinDrozdik.Web.Facades.csproj" />
     <ProjectReference Include="..\Client\MartinDrozdik.Web.Admin.Client.csproj" />
-    <ProjectReference Include="..\Shared\MartinDrozdik.Web.Admin.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>

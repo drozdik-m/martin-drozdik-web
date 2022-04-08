@@ -10,10 +10,5 @@ namespace MartinDrozdik.Web.Configuration
         /// Name of this website
         /// </summary>
         public string Name { get; set; }
-
-        /// <summary>
-        /// The domain where the website is currently running
-        /// </summary>
-        public string Domain { get; set; }
     }
 }

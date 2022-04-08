@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MartinDrozdik.Web.Admin.Server.Controllers
 {
-
+    [Route("user")]
     public class UserController : Controller
     {
         readonly UserManager<AppUser> userManager;
@@ -99,7 +99,7 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers
         }
 
         [Authorize]
-        [HttpPost("/logout")]
+        [HttpGet("logout")]
         public async Task<IActionResult> LogOutAsync()
         {
             await facade.LogOutAsync();

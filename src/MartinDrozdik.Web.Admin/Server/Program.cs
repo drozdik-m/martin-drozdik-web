@@ -43,8 +43,7 @@ razorPagesBuilder.AddNewtonsoftJson();
 builder.Services.AddHttpsRedirection(options => options.HttpsPort = 443);
 
 //Server configuration
-var serverConfiguration = configuration
-    .Get<ServerConfiguration>();
+var serverConfiguration = configuration.Get<ServerConfiguration>();
 builder.Services.AddSingleton<ServerConfiguration>(serverConfiguration);
 
 //Connection string
@@ -133,6 +132,6 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.MapControllers();
-//app.MapFallbackToFile("index.html");
+app.MapFallbackToFile("index.html");
 
 app.Run();
