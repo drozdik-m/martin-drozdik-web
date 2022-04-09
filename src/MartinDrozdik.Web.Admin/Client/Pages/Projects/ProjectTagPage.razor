@@ -1,0 +1,59 @@
+﻿@page "/project-tag"
+@inherits RootPage
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3">Project tags</MudText>
+
+@* Error space *@
+@if(!(lastException is null))
+{
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+}
+
+@* Add new item *@
+<MudFab Class="fabBottomRight" Color="Color.Primary" 
+    OnClick="@(async e => await AddItemAsync())" 
+    StartIcon="@Icons.Material.Filled.Add" />
+<MudDialog @bind-IsVisible="addNewDialogOpen" Options=@(new() { FullWidth = true }) >
+    <TitleContent>
+        <MudText Typo="Typo.h6"><MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3"/>Add item</MudText>
+    </TitleContent>
+    <DialogContent>
+
+        <MudOverlay Visible="false" DarkBackground="true" Absolute="true">
+            <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+        </MudOverlay>
+
+         
+        <MudTextField @bind-Value="addItem.Name" Label="Name" Variant="Variant.Text" 
+            Immediate="true" HelperText="The name of this tag" 
+            Required="true" RequiredError="A name is required" />
+    </DialogContent>
+    <DialogActions>
+        <MudButton Variant="Variant.Text" Color="Color.Dark" OnClick="e => addNewDialogOpen = false" Class="px-10">Close</MudButton>
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(async e => await AddItemConfirmAsync())" Class="px-10">Create</MudButton>
+    </DialogActions>
+</MudDialog>
+
+@*<MudSimpleTable Dense="@dense" Hover="@hover" Bordered="@bordered" Striped="@striped" Style="overflow-x: auto;">
+    <thead>
+        <tr>
+            @foreach (var h in headings)
+            {
+                <th>@h</th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in rows)
+        {
+            <tr>
+                @foreach (var x in row.Split())
+                {
+                    <td>@x</td>
+                }
+            </tr>
+        }
+    </tbody>
+</MudSimpleTable>*@
