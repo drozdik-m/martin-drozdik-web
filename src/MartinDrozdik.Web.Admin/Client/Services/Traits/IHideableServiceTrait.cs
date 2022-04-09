@@ -11,16 +11,11 @@ using Bonsai.Models.Abstraction.Services;
 using Bonsai.Models.Exceptions.CRUD;
 using Bonsai.Utils.JSON;
 
-namespace Bonsai.RazorPages.Admin.Services.Traits
+namespace MartinDrozdik.Web.Admin.Client.Services.Traits
 {
-    interface IHideableServiceTrait<TEntity, TKey> : IHideableService<TEntity>
+    interface IHideableServiceTrait<TEntity, TKey> : IServiceTrait, IHideableService<TEntity>
         where TEntity : class, IIdentifiable<TKey>, IHideable
     {
-
-        protected abstract string ApiUri { get; }
-
-        protected abstract HttpClient Http { get; }
-
         public new async Task HideAsync(TEntity itemToHide)
         {
             var response = await Http.PutAsync($"{ApiUri}/{itemToHide.Id}/visibility", true.ToJsonContent());

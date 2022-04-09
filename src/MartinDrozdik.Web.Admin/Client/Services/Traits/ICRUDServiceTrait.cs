@@ -14,14 +14,11 @@ using Bonsai.Models.Exceptions.CRUD;
 using Bonsai.Utils.JSON;
 using Newtonsoft.Json;
 
-namespace Bonsai.RazorPages.Admin.Services.Traits
+namespace MartinDrozdik.Web.Admin.Client.Services.Traits
 {
-    interface ICRUDServiceTrait<TEntity, TKey> : ICRUDService<TEntity, TKey>
+    interface ICRUDServiceTrait<TEntity, TKey> : IServiceTrait, ICRUDService<TEntity, TKey>
         where TEntity : class, IIdentifiable<TKey>
     {
-        protected abstract string ApiUri { get; }
-
-        protected abstract HttpClient Http { get; }
 
         public new async Task<IEnumerable<TEntity>> GetAsync()
         {

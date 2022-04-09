@@ -4,9 +4,11 @@ using Bonsai.RazorPages.User.Services.LanguageDictionary;
 using MartinDrozdik.Data.DbContexts.Seeds;
 using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 using MartinDrozdik.Data.Models.UserIdentity;
+using MartinDrozdik.Data.Repositories;
 using MartinDrozdik.Services.FilePathProvider;
 using MartinDrozdik.Services.FilePathProvider.Specific;
 using MartinDrozdik.Web.Admin.Server.Configuration;
+using MartinDrozdik.Web.Facades;
 using MartinDrozdik.Web.Facades.User;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -63,6 +65,7 @@ builder.Services
     .AddDefaultTokenProviders();
 //.AddDefaultIdentity<AppUser>()
 
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/user/login";
@@ -97,8 +100,11 @@ builder.Services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
 //Provide user language
 builder.Services.AddSingleton<IUserLanguageDictionary, CzechUserLanguageDictionary>();
 
+//Repositories
+builder.Services.AddRepositories();
+
 //Facades
-builder.Services.AddTransient<UserFacade>();
+builder.Services.AddFacades();
 
 //Create the app
 var app = builder.Build();

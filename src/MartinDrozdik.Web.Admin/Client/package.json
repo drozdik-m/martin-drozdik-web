@@ -1,0 +1,33 @@
+{
+  "name": "@drozdik.m/web-admin",
+  "version": "1.0.0",
+  "description": "Admin app for my personal website",
+  "main": "dist/Module.js",
+  "typings": "dist/Module.d.ts",
+  "scripts": {
+    "compile": "tsc && webpack",
+    "watch": "tsc && webpack --watch",
+    "clear": "rmdir /S /Q \"wwwroot/_dist\"",
+    "build": "npm install && npm run compile",
+    "test": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/drozdik-m/martin-drozdik-web"
+  },
+  "keywords": [],
+  "author": "Martin Drozdík <ja@martin-drozdik.cz> (http://martin-drozdik.cz)",
+  "license": "MIT",
+  "dependencies": {
+    "@drozdik.m/common-interfaces": "^1.2.2",
+    "@drozdik.m/common-mixins": "^1.0.7",
+    "@drozdik.m/px-in-rem": "^1.0.1"
+  },
+  "devDependencies": {
+    "file-loader": "^6.2.0",
+    "sass": "^1.48.0",
+    "sass-loader": "^12.4.0",
+    "webpack": "^5.66.0",
+    "webpack-cli": "^4.9.1"
+  }
+}

@@ -1,4 +1,5 @@
 ﻿using MartinDrozdik.Web.Admin.Client;
+using MartinDrozdik.Web.Admin.Client.Services;
 using MartinDrozdik.Web.Admin.Client.Services.Authentication;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -17,9 +18,8 @@ builder.Services.AddMudServices();
 //Supply HttpClient instances
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
-//Add auth provider
-builder.Services.AddAuthorizationCore();
-builder.Services.AddScoped<AuthenticationStateProvider, ServerAuthenticationStateProvider>();
+//Add a bundle of services
+builder.Services.AddClientServices();
 
 //Run and build
 await builder.Build().RunAsync();

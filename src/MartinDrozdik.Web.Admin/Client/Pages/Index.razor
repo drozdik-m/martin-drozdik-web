@@ -1,6 +1,24 @@
 ﻿@page "/"
-@attribute [Authorize]
+@inherits RootPage
 
-<h1>Hello, world!</h1>
+<MudText Typo="Typo.h3">Martin Drozdík Admin</MudText>
 
-Welcome to your new app.
+<MudText Class="mb-3">This is an administration of Martin Drozdíks' web portfolio.</MudText>
+
+<MudText Typo="Typo.h4">Projects</MudText>
+
+<MudText Class="mb-3">Project-related admin sections. Projects are exciting pieces of work done by Martin Drozdík. </MudText>
+
+<MudGrid>
+    <MudItem xs="3">
+        <MudCard>
+            <MudCardContent>
+                <MudText Typo="Typo.h5">Project tags</MudText>
+                <MudText Typo="Typo.body2">Tags for individual projects.</MudText>
+            </MudCardContent>
+            <MudCardActions>
+                <MudButton Variant="Variant.Text" Color="Color.Primary" Href="project-tag">Discover</MudButton>
+            </MudCardActions>
+        </MudCard>
+    </MudItem>
+</MudGrid>
