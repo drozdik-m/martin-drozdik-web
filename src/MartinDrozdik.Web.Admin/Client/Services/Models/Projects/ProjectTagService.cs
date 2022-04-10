@@ -27,20 +27,20 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Projects
             orderableTrait = this;
         }
 
-        protected override string ApiUri { get; set; } = "/api/projectTag/";
+        protected override string ApiUri { get; set; } = "/api/projectTag";
 
         #region CRUD trait
 
-        public Task<IEnumerable<ProjectTag>> GetAsync() => crudTrait.GetAsync();
-        public Task<ProjectTag> GetAsync(int id) => crudTrait.GetAsync(id);
-        public Task AddAsync(ProjectTag item) => crudTrait.AddAsync(item);
-        public Task DeleteAsync(int id) => crudTrait.DeleteAsync(id);
-        public Task UpdateAsync(int id, ProjectTag item) => crudTrait.UpdateAsync(id, item);
+        public Task<IEnumerable<ProjectTag>> GetAsync() => crudTrait.TGetAsync();
+        public Task<ProjectTag> GetAsync(int id) => crudTrait.TGetAsync(id);
+        public Task AddAsync(ProjectTag item) => crudTrait.TAddAsync(item);
+        public Task DeleteAsync(int id) => crudTrait.TDeleteAsync(id);
+        public Task UpdateAsync(int id, ProjectTag item) => crudTrait.TUpdateAsync(id, item);
 
         #endregion
 
         #region Orderable trait
-        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.ReorderAsync(newOrder);
+        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
 
         #endregion
 

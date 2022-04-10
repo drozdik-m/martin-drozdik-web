@@ -16,7 +16,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
     interface IHideableServiceTrait<TEntity, TKey> : IServiceTrait, IHideableService<TEntity>
         where TEntity : class, IIdentifiable<TKey>, IHideable
     {
-        public new async Task HideAsync(TEntity itemToHide)
+        public async Task THideAsync(TEntity itemToHide)
         {
             var response = await Http.PutAsync($"{ApiUri}/{itemToHide.Id}/visibility", true.ToJsonContent());
             response.EnsureSuccessStatusCode();
@@ -24,7 +24,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
             itemToHide.IsHidden = true;
         }
 
-        public new async Task ShowAsync(TEntity itemToShow)
+        public async Task TShowAsync(TEntity itemToShow)
         {
             var response = await Http.PutAsync($"{ApiUri}/{itemToShow.Id}/visibility", false.ToJsonContent());
             response.EnsureSuccessStatusCode();
@@ -32,7 +32,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
             itemToShow.IsHidden = false;
         }
 
-        public new async Task ToggleVisibilityAsync(TEntity itemToToggle)
+        public async Task TToggleVisibilityAsync(TEntity itemToToggle)
         {
             var response = await Http.PutAsync($"{ApiUri}/{itemToToggle.Id}/visibility", (!itemToToggle.IsHidden).ToJsonContent());
             response.EnsureSuccessStatusCode();

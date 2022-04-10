@@ -17,7 +17,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
     interface IOrderableServiceTrait<TEntity, TKey> : IServiceTrait, IOrderableService<TKey>
         where TEntity : class, IIdentifiable<TKey>, IOrderable
     {
-        public new async Task ReorderAsync(IEnumerable<TKey> newOrder)
+        public async Task TReorderAsync(IEnumerable<TKey> newOrder)
         {
             var response = await Http.PostAsync(ApiUri + "reorder", newOrder.ToJsonContent());
             response.EnsureSuccessStatusCode();

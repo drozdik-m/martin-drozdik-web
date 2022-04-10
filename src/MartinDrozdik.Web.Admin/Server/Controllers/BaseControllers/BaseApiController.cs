@@ -77,7 +77,7 @@ namespace Bonsai.Server.Controllers.BaseControllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(TKey id)
         {
             try

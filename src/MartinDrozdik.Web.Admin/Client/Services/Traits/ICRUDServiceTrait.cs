@@ -20,7 +20,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
         where TEntity : class, IIdentifiable<TKey>
     {
 
-        public new async Task<IEnumerable<TEntity>> GetAsync()
+        public async Task<IEnumerable<TEntity>> TGetAsync()
         {
             var response = await Http.GetAsync(ApiUri);
             response.EnsureSuccessStatusCode();
@@ -29,7 +29,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
             return content.DeserializeJson<List<TEntity>>();
         }
 
-        public new async Task<TEntity> GetAsync(TKey id)
+        public async Task<TEntity> TGetAsync(TKey id)
         {
             var response = await Http.GetAsync($"{ApiUri}/{id}");
             response.EnsureSuccessStatusCode();
@@ -38,19 +38,19 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
             return content.DeserializeJson<TEntity>();
         }
 
-        public new async Task AddAsync(TEntity item)
+        public async Task TAddAsync(TEntity item)
         {
             var response = await Http.PostAsync(ApiUri, item.ToJsonContent());
             response.EnsureSuccessStatusCode();
         }
 
-        public new async Task DeleteAsync(TKey id)
+        public async Task TDeleteAsync(TKey id)
         {
-            var response = await Http.GetAsync($"{ApiUri}/{id}");
+            var response = await Http.DeleteAsync($"{ApiUri}/{id}");
             response.EnsureSuccessStatusCode();
         }
 
-        public new async Task UpdateAsync(TKey id, TEntity item)
+        public async Task TUpdateAsync(TKey id, TEntity item)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}", item.ToJsonContent());
             response.EnsureSuccessStatusCode();
