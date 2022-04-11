@@ -19,7 +19,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
     {
         public async Task TReorderAsync(IEnumerable<TKey> newOrder)
         {
-            var response = await Http.PostAsync(ApiUri + "reorder", newOrder.ToJsonContent());
+            var response = await Http.PutAsync(ApiUri + "/reorder", newOrder.ToJsonContent());
             response.EnsureSuccessStatusCode();
         }
     }

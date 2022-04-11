@@ -21,7 +21,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
     {
         protected abstract IOrderableFacade<TEntity, TKey> OrderableFacade { get; }
 
-        public async Task ReorderAsync(IEnumerable<TKey> newOrder)
+        public async Task TReorderAsync(IEnumerable<TKey> newOrder)
         {
             try
             {

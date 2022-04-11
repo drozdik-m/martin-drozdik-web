@@ -37,7 +37,7 @@ namespace MartinDrozdik.Data.Repositories.Traits
         /// <param name="newOrder"></param>
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
-        public new async Task ReorderAsync(IEnumerable<TKey> newOrder)
+        public async Task TReorderAsync(IEnumerable<TKey> newOrder)
         {
             if (newOrder == null)
                 throw new ArgumentNullException(nameof(newOrder));

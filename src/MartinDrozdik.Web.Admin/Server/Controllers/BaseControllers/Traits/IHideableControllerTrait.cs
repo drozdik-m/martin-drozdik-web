@@ -22,7 +22,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
     {
         protected abstract IHideableFacade<TEntity, TKey> HideableFacade { get; }
 
-        public async Task HideAsync(TKey itemToHide)
+        public async Task THideAsync(TKey itemToHide)
         {
             try
             {
@@ -39,7 +39,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
 
         }
 
-        public async Task ShowAsync(TKey itemToHide)
+        public async Task TShowAsync(TKey itemToHide)
         {
             try
             {
@@ -55,7 +55,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
             }
         }
 
-        public async Task ToggleVisibilityAsync(TKey itemToToggle)
+        public async Task TToggleVisibilityAsync(TKey itemToToggle)
         {
             try
             {

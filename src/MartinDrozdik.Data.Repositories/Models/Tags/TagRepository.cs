@@ -30,6 +30,14 @@ namespace Bonsai.DataPersistence.Repositories.Blog
         protected override Expression<Func<TTag, bool>> IdPredicate(int targetId)
             => e => e.Id == targetId;
 
+        protected override async Task<TTag> ProcessNewEntityAsync(TTag entity)
+        {
+            entity = await base.ProcessNewEntityAsync(entity);
+            var entityCount = await EntitySet.CountAsync();
+            entity.OrderIndex = entityCount;
+            return entity;
+        }
+
         protected override async Task<IQueryable<TTag>> ProcessReturnedEntitiesAsync(IQueryable<TTag> entities)
         {
             entities = await base.ProcessReturnedEntitiesAsync(entities);
@@ -38,7 +46,7 @@ namespace Bonsai.DataPersistence.Repositories.Blog
 
         #region Orderable trait
 
-        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.ReorderAsync(newOrder);
+        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
 
         #endregion
     }

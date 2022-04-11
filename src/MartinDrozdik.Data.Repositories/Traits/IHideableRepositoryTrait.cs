@@ -23,7 +23,7 @@ namespace MartinDrozdik.Data.Repositories.Traits
         /// Returns all visible items
         /// </summary>
         /// <returns></returns>
-        public new async Task<IEnumerable<TEntity>> GetVisibleAsync()
+        public async Task<IEnumerable<TEntity>> TGetVisibleAsync()
         {
             var allEntities = await IncludeRelationsAsync(EntitySet);
             var shownEntities = allEntities.Where(e => !e.IsHidden);
@@ -71,20 +71,20 @@ namespace MartinDrozdik.Data.Repositories.Traits
         /// </summary>
         /// <param name="itemToHide"></param>
         /// <returns></returns>
-        public new Task HideAsync(TKey itemToHide) => SetHidden(itemToHide, _ => true);
+        public Task THideAsync(TKey itemToHide) => SetHidden(itemToHide, _ => true);
 
         /// <summary>
         /// Shows an item
         /// </summary>
         /// <param name="itemToShow"></param>
         /// <returns></returns>
-        public new Task ShowAsync(TKey itemToShow) => SetHidden(itemToShow, _ => false);
+        public Task TShowAsync(TKey itemToShow) => SetHidden(itemToShow, _ => false);
 
         /// <summary>
         /// Toggles items' visibility
         /// </summary>
         /// <param name="itemToToggle"></param>
         /// <returns></returns>
-        public new Task ToggleVisibilityAsync(TKey itemToToggle) => SetHidden(itemToToggle, e => !e);
+        public Task TToggleVisibilityAsync(TKey itemToToggle) => SetHidden(itemToToggle, e => !e);
     }
 }

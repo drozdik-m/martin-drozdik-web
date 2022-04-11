@@ -33,8 +33,8 @@ namespace Bonsai.Server.Controllers.Localization
 
         IOrderableFacade<ProjectTag, int> IOrderableControllerTrait<ProjectTag, int>.OrderableFacade => facade;
 
-        [HttpPost("reorder")]
-        public virtual Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.ReorderAsync(newOrder);
+        [HttpPut("reorder")]
+        public virtual Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
 
         #endregion
 

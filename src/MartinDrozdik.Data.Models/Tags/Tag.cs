@@ -14,6 +14,6 @@ namespace MartinDrozdik.Data.Models.Tags
 
         public string Name { get; set; } = string.Empty;
 
-        public int OrderIndex { get; set; } = 1;
+        public int OrderIndex { get; set; } = 0;
     }
 }
