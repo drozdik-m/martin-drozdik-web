@@ -52,7 +52,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
 
         public async Task TUpdateAsync(TKey id, TEntity item)
         {
-            var response = await Http.PostAsync($"{ApiUri}/{id}", item.ToJsonContent());
+            var response = await Http.PutAsync($"{ApiUri}/{id}", item.ToJsonContent());
             response.EnsureSuccessStatusCode();
         }
     }

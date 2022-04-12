@@ -95,7 +95,7 @@ namespace Bonsai.Server.Controllers.BaseControllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<ActionResult> UpdateAsync(TKey id, TEntity item)
         {
             try

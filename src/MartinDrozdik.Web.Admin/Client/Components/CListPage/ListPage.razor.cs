@@ -10,25 +10,12 @@ using Microsoft.AspNetCore.Components;
 using MudBlazor;
 using MudBlazor.Utilities;
 
-namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
+namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
 {
-    [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
-    public partial class ProjectTagPage: RootPage
+    public partial class ListPage<TModel, TKey> : RootComponent
     {
         [Inject]
-        ProjectTagService ProjectTagService { get; set; }
-
-        [Inject]
         ISnackbar Snackbar { get; set; }
-
-        public static BreadcrumbItem BreadcrumbItem { get; }
-            = new BreadcrumbItem("Project tags", href: "/project-tag", icon: Icons.Material.Filled.Tag);
-
-        protected List<BreadcrumbItem> breadcrumbItems = new()
-        {
-            Index.BreadcrumbItem,
-            BreadcrumbItem,
-        };
 
         protected override async Task OnInitializedAsync()
         {
@@ -36,17 +23,51 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
             await base.OnInitializedAsync();
         }
 
+        /// <summary>
+        /// Tells if any loading is in progress
+        /// </summary>
+        protected bool AnyLoading => addLoading || deleteLoading || reloadLoading || reorderLoading;
+
+
+        /// <summary>
+        /// Getter expression for the key
+        /// </summary>
+        [Parameter, EditorRequired]
+        public Expression<Func<TModel, TKey>> KeyGetter { get; set; }
+
         #region Error
+        /// <summary>
+        /// The last exception that occured
+        /// </summary>
         Exception? lastException = default;
         #endregion
 
         #region Get
         bool reloadLoading = false;
-        
-        IGetAllService<ProjectTag> GetService => ProjectTagService;
-        List<ProjectTag> Entities { get; set; } = new List<ProjectTag>();
 
-        public async Task ReloadAsync()
+        /// <summary>
+        /// Fragment to display the items in a table or other
+        /// </summary>
+        [Parameter]
+        public RenderFragment<ListPageDisplayContext<TModel>> DisplayItems { get; set; }
+
+        /// <summary>
+        /// A service for getting all the entities
+        /// </summary>
+        [Parameter, EditorRequired]
+        public IGetAllService<TModel> GetService { get; set; }
+
+        /// <summary>
+        /// List of loaded entities 
+        /// </summary>
+        protected List<TModel> Entities { get; set; } = new List<TModel>();
+
+        /// <summary>
+        /// Reloads all entities using the getter service
+        /// </summary>
+        /// <param name="verbose">If true, success notification messages will be used</param>
+        /// <returns></returns>
+        public async Task ReloadAsync(bool verbose = false)
         {
             try
             {
@@ -55,6 +76,9 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
                 reloadLoading = false;
 
                 StateHasChanged();
+
+                if (verbose)
+                    Snackbar.Add("Items successfuly reloaded", Severity.Success);
             }
             catch (Exception ex)
             {
@@ -74,15 +98,45 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
         bool addFormValid = false;
         bool addLoading = false;
         MudForm addForm;
-        ProjectTag addItem;
-        IAddService<ProjectTag> AddService => ProjectTagService;
+        TModel addItem;
+
+        /// <summary>
+        /// Section for inputs of added model
+        /// </summary>
+        [Parameter]
+        public RenderFragment<ListPageAddContext<TModel>> AddInputs { get; set; }
+
+        /// <summary>
+        /// The means of providing new entity instance for adding
+        /// </summary>
+        [Parameter]
+        public Func<TModel> EntityCreator { get; set; }
+
+        /// <summary>
+        /// Service for adding new entities
+        /// </summary>
+        [Parameter]
+        public IAddService<TModel> AddService { get; set; }
+
+        /// <summary>
+        /// Starts the process of creating an item
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public Task AddItemAsync()
         {
+            if (EntityCreator is null)
+                throw new Exception("EntityCreator is not defined");
+
             addNewDialogOpen = true;
-            addItem = new ProjectTag();
+            addItem = EntityCreator();
             return Task.CompletedTask;
         }
 
+        /// <summary>
+        /// Confirms and adds new item
+        /// </summary>
+        /// <returns></returns>
         public async Task AddItemConfirmAsync()
         {
             try
@@ -117,14 +171,31 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
         #region Delete
         bool deleteDialogOpen = false;
         bool deleteLoading = false;
-        IDeleteByKeyService<int> DeleteService => ProjectTagService;
-        int toDelete;
-        public Task DeleteAsync(int id)
+        TKey toDelete;
+
+        /// <summary>
+        /// The service for deleting existing entities
+        /// </summary>
+        [Parameter]
+        public IDeleteByKeyService<TKey> DeleteService { get; set; }
+
+        /// <summary>
+        /// Starts the deletion process
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Task DeleteAsync(TKey id)
         {
             toDelete = id;
             deleteDialogOpen = true;
+            StateHasChanged();
             return Task.CompletedTask;
         }
+
+        /// <summary>
+        /// Finishes the deletion process
+        /// </summary>
+        /// <returns></returns>
         protected async Task ConfirmDeleteAsync()
         {
             try
@@ -134,7 +205,7 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
                 //await Task.Delay(4000);
                 deleteLoading = false;
 
-                Snackbar.Add("Item deleted added", Severity.Success);
+                Snackbar.Add("Item deleted", Severity.Success);
                 deleteDialogOpen = false;
 
                 await ReloadAsync();
@@ -145,7 +216,7 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
                 Snackbar.Add("Something went wrong :(", Severity.Error);
                 deleteDialogOpen = false;
             }
-            finally 
+            finally
             {
                 deleteLoading = false;
             }
@@ -155,21 +226,54 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
         #region Reorder
         bool reordering = false;
         bool reorderLoading = false;
-        MudDropContainer<ProjectTag> reorderContainer;
-        Expression<Func<ProjectTag, int>> OrderExpression { get; set; } = e => e.OrderIndex;
+        MudDropContainer<TModel> reorderContainer;
         int[] originalOrder = Array.Empty<int>();
-        IEnumerable<ProjectTag> DisplayEntities => OrderExpression is null 
-            ? Entities 
-            : Entities.OrderBy(OrderExpression.Compile());
-        IOrderableService<int> ReorderService => ProjectTagService;
 
+        /// <summary>
+        /// Section for display of reordered item
+        /// </summary>
+        [Parameter]
+        public RenderFragment<TModel> ReorderItem { get; set; }
+
+        /// <summary>
+        /// Expression that identifies the order property (e => e.OrderIndex)
+        /// </summary>
+        [Parameter]
+        public Expression<Func<TModel, int>> OrderExpression { get; set; }
+
+        /// <summary>
+        /// Service for reordering
+        /// </summary>
+        [Parameter]
+        public IOrderableService<TKey> ReorderService { get; set; }
+
+        /// <summary>
+        /// Property for displaying entities
+        /// </summary>
+        protected IEnumerable<TModel> DisplayEntities => OrderExpression is null
+            ? Entities
+            : Entities.OrderBy(OrderExpression.Compile());
+
+        /// <summary>
+        /// Method for the order control button
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         protected async Task OrderControlButton()
         {
+            if (OrderExpression is null)
+                throw new Exception("OrderExpression is not defined");
+
             if (reordering)
                 await ConfirmReorderingAsync();
             else
                 await StartReorderingAsync();
         }
+
+        /// <summary>
+        /// Starts the reordering process
+        /// </summary>
+        /// <returns></returns>
         public Task StartReorderingAsync()
         {
             reordering = true;
@@ -178,6 +282,11 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
                 .ToArray();
             return Task.CompletedTask;
         }
+
+        /// <summary>
+        /// Ends the reordering process and saves the new order
+        /// </summary>
+        /// <returns></returns>
         public async Task ConfirmReorderingAsync()
         {
             //Check if the order is the same
@@ -194,7 +303,7 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
                 reorderLoading = true;
                 var orderIds = Entities
                     .OrderBy(OrderExpression.Compile())
-                    .Select(e => e.Id);
+                    .Select(KeyGetter.Compile());
                 await ReorderService.ReorderAsync(orderIds);
                 //await Task.Delay(4000);
                 reorderLoading = false;
@@ -214,18 +323,32 @@ namespace MartinDrozdik.Web.Admin.Client.Pages.Projects
                 reorderLoading = false;
             }
         }
-        public async Task RevertReorderAsync()
+
+        /// <summary>
+        /// Reverts the ordering process
+        /// </summary>
+        /// <returns></returns>
+        public Task RevertReorderAsync()
         {
             reordering = false;
             var i = 0;
-            foreach(var item in Entities)
+            foreach (var item in Entities)
             {
-                var orderableItem = item as IOrderable;
-                item.OrderIndex = originalOrder[i];
+                if (item is not IOrderable orderableItem)
+                    throw new Exception("Could not convert the item into IOrderable");
+
+                orderableItem.OrderIndex = originalOrder[i];
                 i++;
             }
+
+            return Task.CompletedTask;
         }
-        protected void ReorderUpdated(MudItemDropInfo<ProjectTag> dropItem)
+
+        /// <summary>
+        /// Callback for the ordering component
+        /// </summary>
+        /// <param name="dropItem"></param>
+        protected void ReorderUpdated(MudItemDropInfo<TModel> dropItem)
         {
             Entities.UpdateOrder(dropItem, OrderExpression);
         }

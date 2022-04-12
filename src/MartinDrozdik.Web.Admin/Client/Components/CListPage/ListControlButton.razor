@@ -1,0 +1,26 @@
+﻿@inherits RootComponent
+
+@code{
+    [Parameter]
+    public Action<MouseEventArgs>? OnDelete { get; set; } = null;
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public string? HrefEdit { get; set; } = null;
+}
+
+<MudButtonGroup OverrideStyles="false">
+    @if(OnDelete is not null)
+    {
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" 
+            OnClick="OnDelete" Disabled="Disabled">Delete</MudButton>
+    }
+
+    @if(HrefEdit is not null)
+    {
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Info" 
+            Href="@HrefEdit">Edit</MudButton>
+    }
+</MudButtonGroup>

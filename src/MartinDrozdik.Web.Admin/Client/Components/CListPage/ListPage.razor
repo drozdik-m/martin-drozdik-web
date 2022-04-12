@@ -1,0 +1,171 @@
+﻿@inherits RootComponent
+@typeparam TModel
+@typeparam TKey
+
+@* Error space *@
+@if(!(lastException is null))
+{
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+}
+
+@* Reorder *@
+@if(ReorderService is not null)
+{
+    <MudButtonGroup OverrideStyles="false" Class="me-3">
+    <MudButton Variant="Variant.Filled" 
+        Color="@(reordering ? Color.Success : Color.Primary)" 
+        Disabled="AnyLoading"
+        StartIcon="@(reordering ? Icons.Material.Filled.Check : Icons.Material.Filled.Height)" 
+        OnClick="async _ => await OrderControlButton()">
+        @if (reorderLoading)
+        {
+            <MudText Class="me-3">Saving order</MudText>
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+        }
+        else if(reordering)
+        {
+            <MudText>Confirm order</MudText>
+        }
+        else
+        {
+            <MudText>Reorder</MudText>
+        }
+    </MudButton>
+    @if (reordering)
+    {
+        <MudButton Disabled="reorderLoading" Variant="Variant.Filled" Color="Color.Error" 
+            StartIcon="@Icons.Material.Filled.Clear" 
+            OnClick="async _ => await RevertReorderAsync()">
+            Cancel
+        </MudButton>
+    }                     
+</MudButtonGroup>
+}
+
+@* Reload *@
+@if(!reordering)
+{
+    <MudButtonGroup OverrideStyles="false">
+        <MudButton Variant="Variant.Outlined" 
+            Color="Color.Primary" 
+            Disabled="AnyLoading"
+            StartIcon="@Icons.Material.Filled.Cached" 
+            OnClick="async _ => await ReloadAsync(verbose: true)">
+            @if (reloadLoading)
+            {
+                <MudText Class="me-3">Reloading</MudText>
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+            }
+            else
+            {
+                <MudText>Reload</MudText>
+            }
+        </MudButton>                 
+    </MudButtonGroup>
+}
+
+
+@* Item list *@
+<div class="relative my-5">
+    @if(reordering && ReorderService is not null)
+    {
+        <MudDropContainer T="TModel" @ref="reorderContainer" ItemIsDisabled="@(_ => reorderLoading)" Items="@Entities" ItemsSelector="@((item, dropzone) => true)" ItemDropped="ReorderUpdated" >
+		    <ChildContent>
+			    <MudList Clickable="false">
+			        <MudListSubheader>Drop Zone</MudListSubheader>
+					<MudDropZone T="ProjectTag" Identifier="reorder" AllowReorder="true" />
+				</MudList>
+		    </ChildContent>
+		    <ItemRenderer>
+                @ReorderItem(context)
+		    </ItemRenderer>
+	    </MudDropContainer>
+    }
+    else
+    {
+        <div class="relative">
+            @if(reloadLoading)
+            {
+                <MudOverlay Visible="true" DarkBackground="true" Absolute="true">
+                    <MudProgressCircular Color="Color.Secondary" Indeterminate="true" />
+                </MudOverlay>
+            }
+
+            @DisplayItems(new ListPageDisplayContext<TModel>(){
+                Entities = DisplayEntities,
+                Loading = AnyLoading
+            })
+        </div>
+        
+        
+    }
+</div>
+
+@* Delete *@
+@if(DeleteService is not null)
+{
+    <MudDialog @bind-IsVisible="deleteDialogOpen" Options=@(new() { FullWidth = true }) >
+        <TitleContent>
+            <MudText Typo="Typo.h6"><MudIcon Icon="@Icons.Material.Filled.Delete" Class="mr-3"/>Delete item</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudText>Are you sure you want to delete this item?</MudText>
+        </DialogContent>
+        <DialogActions>
+            <MudButton OnClick="_ => deleteDialogOpen = false">Cancel</MudButton>
+            <MudButton Color="@Color.Error" Variant="Variant.Filled" Disabled="AnyLoading" EndIcon="@Icons.Material.Filled.Delete" OnClick="@(async _ => await ConfirmDeleteAsync())">
+                @if (deleteLoading)
+                {
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                    <MudText Class="ms-2">Deleting</MudText>
+                }
+                else
+                {
+                    <MudText>Delete</MudText>
+                }
+            </MudButton>
+        </DialogActions>
+    </MudDialog>
+}
+
+@* Add new item *@
+@if(AddService is not null)
+{
+    @* Add FAB *@
+    <MudFab Class="fabBottomRight" Color="Color.Primary" 
+        OnClick="@(async e => await AddItemAsync())" 
+        StartIcon="@Icons.Material.Filled.Add" />
+
+    @* Add dialog *@
+    <MudDialog @bind-IsVisible="addNewDialogOpen" Options=@(new() { FullWidth = true }) >
+        <TitleContent>
+            <MudText Typo="Typo.h6"><MudIcon Icon="@Icons.Material.Filled.Edit" Class="mr-3"/>Add item</MudText>
+        </TitleContent>
+        <DialogContent>
+            <MudForm @ref="addForm" @bind-IsValid="@addFormValid">
+
+
+                @AddInputs(new ListPageAddContext<TModel>(){
+                    Model = addItem,
+                    Loading = addLoading
+                })
+
+                <div class="d-flex justify-end my-3">
+                    <MudButton Variant="Variant.Text" Color="Color.Dark" Disabled="addLoading" OnClick="e => addNewDialogOpen = false" Class="mr-2 px-3">Close</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="AnyLoading" OnClick="@(async _ => await AddItemConfirmAsync())" EndIcon="@Icons.Material.Filled.Add">
+                            @if (addLoading)
+                            {
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                                <MudText Class="ms-2">Processing</MudText>
+                            }
+                            else
+                            {
+                                <MudText>Create</MudText>
+                            }
+                    </MudButton>
+                </div>
+            </MudForm>
+            
+        </DialogContent>
+    </MudDialog>
+}
