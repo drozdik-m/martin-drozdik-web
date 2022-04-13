@@ -9,7 +9,7 @@ using MartinDrozdik.Data.Models.Media.Images;
 
 namespace MartinDrozdik.Data.Models.Media.Files
 {
-    public class MediaFile : MediaBase, IOrderable, IHideable, INameable
+    public abstract class MediaFile : MediaBase, IOrderable, IHideable, INameable
     {
         public Image? Image { get; set; } = null;
 

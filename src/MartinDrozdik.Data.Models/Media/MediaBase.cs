@@ -9,21 +9,36 @@ using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Media
 {
-    public class MediaBase : EntityBase, IIdentifiable<int>
+    public abstract class MediaBase : EntityBase, IIdentifiable<int>
     {
         /// <inheritdoc/>
         public int Id { get; set; }
 
+        /// <summary>
+        /// The folder where the media is stored
+        /// </summary>
         [MaxLength(256)]
-        public string FolderPath { get; set; } = string.Empty;
+        public abstract string FolderPath { get; }
 
+        /// <summary>
+        /// The filename of the media 
+        /// </summary>
         [MaxLength(128)]
         public string FileName { get; set; } = string.Empty;
 
+        /// <summary>
+        /// The full path of where the media is stored (Folder + Name)
+        /// </summary>
         public string FullPath => Path.Combine(FolderPath + FileName);
 
-        public string Uri => "/" + FullPath;
+        /// <summary>
+        /// The URI of this media
+        /// </summary>
+        public string Uri => Path.Combine("/", FullPath);
 
+        /// <summary>
+        /// Tells if any file has been uploaded or not
+        /// </summary>
         public bool Uploaded { get; set; } = false;
     }
 }

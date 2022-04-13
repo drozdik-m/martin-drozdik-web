@@ -4,6 +4,7 @@ using Bonsai.DataPersistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20220413185202_Add people")]
+    partial class Addpeople
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,49 +48,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.Property<int>("OrderIndex")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProfilePictureId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfilePictureId");
 
                     b.ToTable("People");
-                });
-
-            modelBuilder.Entity("MartinDrozdik.Data.Models.People.PersonImage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("AlternativeText")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
-
-                    b.Property<DateTime>("LastEditAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Uploaded")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PeopleImages");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.Project", b =>
@@ -159,17 +121,6 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("ProjectProjectTag");
-                });
-
-            modelBuilder.Entity("MartinDrozdik.Data.Models.People.Person", b =>
-                {
-                    b.HasOne("MartinDrozdik.Data.Models.People.PersonImage", "ProfilePicture")
-                        .WithMany()
-                        .HasForeignKey("ProfilePictureId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProfilePicture");
                 });
 
             modelBuilder.Entity("ProjectProjectTag", b =>

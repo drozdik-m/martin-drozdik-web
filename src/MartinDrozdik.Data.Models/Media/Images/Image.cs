@@ -9,18 +9,16 @@ using Bonsai.Models.Abstraction.Entities;
 
 namespace MartinDrozdik.Data.Models.Media.Images
 {
-    public class Image : ImageBase, IOrderable, IHideable
+    public abstract class Image : MediaBase, INameable
     {
+        /// <summary>
+        /// The name of the image (title)
+        /// </summary>
         public string Name { get; set; } = string.Empty;
 
-        public int OrderIndex { get; set; } = 0;
-
+        /// <summary>
+        /// What text should be displayed when the image could not be loaded
+        /// </summary>
         public string AlternativeText { get; set; } = string.Empty;
-
-        public ImageThumbnail? Thumbnail { get; set; } = null;
-
-        public bool HasThumbnail => Thumbnail != null;
-
-        public bool IsHidden { get; set; } = false;
     }
 }

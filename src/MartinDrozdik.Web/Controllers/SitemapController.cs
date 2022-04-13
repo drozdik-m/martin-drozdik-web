@@ -36,7 +36,7 @@ namespace Bonsai.Server.Controllers
         /// <returns></returns>
         protected ISitemapNode CreateSitemapNode()
         {
-            SitemapNode home = new SitemapNode(serverConfiguration.Web.Name, new Uri(serverConfiguration.Web.Domain), SitemapChangeFrequency.Monthly, 1);
+            SitemapNode home = new SitemapNode(serverConfiguration.Web.Name, new Uri(serverConfiguration.Domain), SitemapChangeFrequency.Monthly, 1);
 
             return home;
         }
