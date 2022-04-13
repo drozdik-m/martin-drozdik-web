@@ -15,7 +15,7 @@ using MartinDrozdik.Data.Repositories.Traits;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Media.Images;
 
-namespace Bonsai.DataPersistence.Repositories.Blog
+namespace MartinDrozdik.Data.Repositories.Models.Media.Images
 {
     public abstract class ImageRepository<TMedia> : CRUDRepository<TMedia, int, AppDb>
         where TMedia : Image

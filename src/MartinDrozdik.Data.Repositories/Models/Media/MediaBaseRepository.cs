@@ -14,7 +14,7 @@ using Bonsai.Models.Abstraction.Entities;
 using MartinDrozdik.Data.Repositories.Traits;
 using MartinDrozdik.Data.Models.Media;
 
-namespace Bonsai.DataPersistence.Repositories.Blog
+namespace MartinDrozdik.Data.Repositories.Models.Media
 {
     public abstract class MediaBaseRepository<TMedia> : CRUDRepository<TMedia, int, AppDb>
         where TMedia : MediaBase

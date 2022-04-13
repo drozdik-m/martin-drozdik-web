@@ -5,10 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bonsai.AppLogic.Facades.Traits;
-using Bonsai.DataPersistence.Repositories.Blog;
 using Bonsai.Models.Abstraction.Localization;
 using MartinDrozdik.Data.Models.Tags;
 using MartinDrozdik.Data.Repositories.Abstraction;
+using MartinDrozdik.Data.Repositories.Models.Tags;
 using MartinDrozdik.Web.Facades.Traits;
 using Microsoft.AspNetCore.Hosting;
 

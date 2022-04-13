@@ -13,7 +13,7 @@ using MartinDrozdik.Data.Models.Tags;
 using Bonsai.Models.Abstraction.Entities;
 using MartinDrozdik.Data.Repositories.Traits;
 
-namespace Bonsai.DataPersistence.Repositories.Blog
+namespace MartinDrozdik.Data.Repositories.Models.Tags
 {
     public abstract class TagRepository<TTag> : CRUDRepository<TTag, int, AppDb>,
         IOrderableRepositoryTrait<TTag, int, AppDb>

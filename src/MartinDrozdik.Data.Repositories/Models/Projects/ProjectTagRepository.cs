@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bonsai.DataPersistence.DbContexts;
-using Bonsai.DataPersistence.Repositories.Blog;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Data.Repositories.Models.Tags;
 using Microsoft.EntityFrameworkCore;
 
 namespace MartinDrozdik.Data.Repositories.Models.Projects
