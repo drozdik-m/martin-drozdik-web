@@ -28,12 +28,12 @@ namespace MartinDrozdik.Data.Models.People
         /// <summary>
         /// Profile picture of the person
         /// </summary>
-        public PersonImage ProfilePicture { get; set; } = new PersonImage();
+        public PersonProfileImage ProfileImage { get; set; } = new PersonProfileImage();
 
         /// <summary>
         /// Id of the profile picture object
         /// </summary>
-        [ForeignKey("ProfilePicture")]
-        public int ProfilePictureId { get; set; }
+        [ForeignKey("ProfileImage")]
+        public int ProfileImageId { get; set; }
     }
 }
