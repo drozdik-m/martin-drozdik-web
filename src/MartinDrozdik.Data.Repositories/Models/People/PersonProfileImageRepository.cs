@@ -18,8 +18,7 @@ using MartinDrozdik.Data.Models.People;
 
 namespace MartinDrozdik.Data.Repositories.Models.People
 {
-    public abstract class PersonProfileImageRepository<TMedia> : CRUDRepository<TMedia, int, AppDb>
-        where TMedia : PersonProfileImage
+    public abstract class PersonProfileImageRepository: PersonImageRepository<PersonProfileImage>
     {
         public PersonProfileImageRepository(AppDb context)
             : base(context)

@@ -17,7 +17,7 @@ using MartinDrozdik.Data.Models.Media.Images;
 
 namespace MartinDrozdik.Data.Repositories.Models.Media.Images
 {
-    public abstract class ImageRepository<TMedia> : CRUDRepository<TMedia, int, AppDb>
+    public abstract class ImageRepository<TMedia> : MediaBaseRepository<TMedia>
         where TMedia : Image
     {
         public ImageRepository(AppDb context)

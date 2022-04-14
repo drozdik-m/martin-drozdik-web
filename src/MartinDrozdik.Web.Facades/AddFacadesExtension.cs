@@ -15,6 +15,7 @@ namespace MartinDrozdik.Web.Facades
         {
             serviceCollection = serviceCollection.AddScoped<ProjectTagFacade>();
             serviceCollection = serviceCollection.AddScoped<UserFacade>();
+            serviceCollection = serviceCollection.AddScoped<PersonProfileImageFacade>();
 
             return serviceCollection;
         }
