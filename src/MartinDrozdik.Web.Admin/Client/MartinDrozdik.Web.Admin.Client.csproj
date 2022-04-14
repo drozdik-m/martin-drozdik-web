@@ -4,9 +4,11 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <!--BlazorEnableTimeZoneSupport>false</BlazorEnableTimeZoneSupport-->
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="package-lock.json" />
     <Content Remove="package.json" />
     <Content Remove="wwwroot\Web\Global\FAB.scss" />
     <Content Remove="wwwroot\Web\Global\Global.scss" />

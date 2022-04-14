@@ -33,8 +33,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Tags
         protected override async Task<TTag> ProcessNewEntityAsync(TTag entity)
         {
             entity = await base.ProcessNewEntityAsync(entity);
-            var entityCount = await EntitySet.CountAsync();
-            entity.OrderIndex = entityCount;
+            var maxOrder = await EntitySet.MaxAsync(e => e.OrderIndex);
+            entity.OrderIndex = maxOrder + 1;
             return entity;
         }
 

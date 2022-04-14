@@ -9,11 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
+    <Content Remove="tsconfig.json" />
     <Content Remove="wwwroot\temp.ts" />
     <Content Remove="wwwroot\Web\ChangePassword\ChangePassword.scss" />
     <Content Remove="wwwroot\Web\ChangePassword\ChangePassword.ts" />
     <Content Remove="wwwroot\Web\ConfirmLogout\ConfirmLogout.scss" />
     <Content Remove="wwwroot\Web\ConfirmLogout\ConfirmLogout.ts" />
+    <Content Remove="wwwroot\Web\Denied\Denied.png" />
     <Content Remove="wwwroot\Web\Denied\Denied.scss" />
     <Content Remove="wwwroot\Web\Denied\Denied.ts" />
   </ItemGroup>
@@ -27,8 +31,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="package.json" />
+    <None Include="tsconfig.json" />
     <None Include="wwwroot\Web\ChangePassword\ChangePassword.scss" />
     <None Include="wwwroot\Web\ChangePassword\ChangePassword.ts" />
+    <None Include="wwwroot\Web\Denied\Denied.png" />
     <None Include="wwwroot\Web\Denied\Denied.scss" />
     <None Include="wwwroot\Web\Denied\Denied.ts" />
     <None Include="wwwroot\Web\Global\Global.ts" />

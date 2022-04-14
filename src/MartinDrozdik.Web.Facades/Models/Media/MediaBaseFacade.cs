@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bonsai.AppLogic.Facades.Traits;
 using Bonsai.Models.Abstraction.Localization;
+using Bonsai.Utils.String;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Tags;
 using MartinDrozdik.Data.Repositories.Abstraction;
@@ -31,21 +32,46 @@ namespace MartinDrozdik.Web.Facades.Models.Media
             this.repository = repository;
         }
 
-        public void AddMedia()
+        /// <summary>
+        /// Adds media with the media data
+        /// </summary>
+        /// <param name="mediaData"></param>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        public virtual async Task AddMediaAsync(TMedia mediaData, Stream data, string dataName)
         {
-            throw new NotImplementedException();
+            //Delete the old media if exists
+            DeletePhysicalMediaFile(mediaData);
+
+            //Ensure the target exists
+            mediaData.FileName = dataName.ToUrlFriendlyFileName();
+            EnsureTargetFolderExists(mediaData);
+
+            //Update the data model
+            mediaData.Uploaded = true;
+            await repository.UpdateAsync(mediaData.Id, mediaData);
         }
 
-        public void DeleteMedia()
+        /// <summary>
+        /// Deletes the media of a media entity
+        /// </summary>
+        /// <param name="mediaData"></param>
+        /// <returns></returns>
+        public async Task DeleteMedia(TMedia mediaData)
         {
-            throw new NotImplementedException();
+            //Delete the physical media
+            DeletePhysicalMediaFile(mediaData);
+
+            //Update the data model
+            mediaData.Uploaded = false;
+            await repository.UpdateAsync(mediaData.Id, mediaData);
         }
 
         /// <summary>
         /// Deletes the media saved to the file system
         /// </summary>
         /// <param name="media"></param>
-        public void DeletePhysicalMediaFile(TMedia media)
+        protected void DeletePhysicalMediaFile(TMedia media)
         {
             var path = Path.Combine(hostEnvironment.ContentRootPath, media.FullPath);
             if (File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory)
@@ -56,7 +82,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// Ensures that the folder for media exists
         /// </summary>
         /// <param name="media"></param>
-        public void EnsureTargetFolderExists(TMedia media)
+        protected void EnsureTargetFolderExists(TMedia media)
         {
             Directory.CreateDirectory(Path.Combine(hostEnvironment.ContentRootPath, media.FolderPath));
         }
