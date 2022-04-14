@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MartinDrozdik.Services.ImageProcessing" Version="1.0.2" />
     <PackageReference Include="MartinDrozdik.Utils.String" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
