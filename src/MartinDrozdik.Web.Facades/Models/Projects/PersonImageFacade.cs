@@ -16,6 +16,7 @@ using MartinDrozdik.Data.Models.Tags;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using MartinDrozdik.Data.Repositories.Models.Media;
 using MartinDrozdik.Data.Repositories.Models.Media.Images;
+using MartinDrozdik.Data.Repositories.Models.People;
 using MartinDrozdik.Data.Repositories.Models.Tags;
 using MartinDrozdik.Web.Facades.Models.Media.Images;
 using MartinDrozdik.Web.Facades.Traits;
@@ -28,12 +29,12 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         where TMedia : PersonImage
     {
         readonly IHostEnvironment hostEnvironment;
-        readonly ImageRepository<TMedia> repository;
+        readonly PersonImageRepository<TMedia> repository;
         readonly IImageSaver imageSaver;
         readonly IImageConfiguration imageConfiguration;
 
         public PersonImageFacade(IHostEnvironment hostEnvironment,
-            ImageRepository<TMedia> repository,
+            PersonImageRepository<TMedia> repository,
             IImageSaver imageSaver,
             IImageConfiguration imageConfiguration)
             : base(hostEnvironment, repository, imageSaver, imageConfiguration)

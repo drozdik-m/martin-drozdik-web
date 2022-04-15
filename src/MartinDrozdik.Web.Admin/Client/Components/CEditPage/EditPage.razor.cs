@@ -134,6 +134,10 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CEditPage
         {
             try
             {
+                await editForm.Validate();
+                if (!editForm.IsValid)
+                    Snackbar.Add("There are errors in the form", Severity.Warning);
+
                 editLoading = true;
                 await UpdateService.UpdateAsync(Id, Entity);
                 editLoading = false;

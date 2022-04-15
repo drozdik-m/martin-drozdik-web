@@ -1,11 +1,11 @@
-﻿@page "/project-tag"
+﻿@page "/people"
 @inherits RootPage
 @attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
-@inject ProjectTagService Service 
+@inject PersonService Service 
 
 @code {
     public static BreadcrumbItem BreadcrumbItem { get; }
-        = new BreadcrumbItem("Project tags", href: "/project-tag", icon: Icons.Material.Filled.Tag);
+        = new BreadcrumbItem("People", href: "/people", icon: Icons.Material.Filled.Person);
 
     protected List<BreadcrumbItem> breadcrumbItems = new()
     {
@@ -13,17 +13,17 @@
         BreadcrumbItem,
     };
 
-    ListPage<ProjectTag, int> listPage;
+    ListPage<Person, int> listPage;
 }
 
 <MudBreadcrumbs Items="breadcrumbItems" />
 
-<MudText Typo="Typo.h3" Class="mb-1">Project tags</MudText>
-<MudText Class="mb-4">Tags are for projects to group relevant topics.</MudText>
+<MudText Typo="Typo.h3" Class="mb-1">People</MudText>
+<MudText Class="mb-4">People relevant in projects as developers and so on...</MudText>
 
-<ListPage @ref="listPage" TModel="ProjectTag" TKey="int" KeyGetter="e => e.Id"
+<ListPage @ref="listPage" TModel="Person" TKey="int" KeyGetter="e => e.Id"
     GetService="Service"
-    AddService="Service" EntityCreator="() => new ProjectTag()"
+    AddService="Service" EntityCreator="() => new Person()"
     DeleteService="Service" 
     ReorderService="Service" OrderExpression="e => e.OrderIndex">
 
@@ -32,7 +32,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Assigned projects</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -52,11 +51,10 @@
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td>@item.Projects.Count</td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
-                                HrefEdit="@($"/project-tag/{item.Id}")"/>
+                                HrefEdit="@($"/people/{item.Id}")"/>
                         </td>
                     </tr>
                 }
@@ -66,7 +64,7 @@
     
     <AddInputs>
         <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
-                        Immediate="true" HelperText="The name of this tag" 
+                        Immediate="true" HelperText="The full name of this person" 
                         Required="true" RequiredError="A name is required" />
     </AddInputs>
 

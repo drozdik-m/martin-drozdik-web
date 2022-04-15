@@ -17,6 +17,7 @@ using MartinDrozdik.Data.Models.Tags;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using MartinDrozdik.Data.Repositories.Models.Media;
 using MartinDrozdik.Data.Repositories.Models.Media.Images;
+using MartinDrozdik.Data.Repositories.Models.People;
 using MartinDrozdik.Data.Repositories.Models.Tags;
 using MartinDrozdik.Web.Facades.Traits;
 using Microsoft.AspNetCore.Hosting;
@@ -24,15 +25,14 @@ using Microsoft.Extensions.Hosting;
 
 namespace MartinDrozdik.Web.Facades.Models.Projects
 {
-    public class PersonProfileImageFacade<TMedia> : PersonImageFacade<TMedia>
-        where TMedia : PersonImage
+    public class PersonProfileImageFacade : PersonImageFacade<PersonProfileImage>
     {
         readonly IHostEnvironment hostEnvironment;
-        readonly ImageRepository<TMedia> repository;
+        readonly PersonProfileImageRepository repository;
         readonly IImageSaver imageSaver;
 
         public PersonProfileImageFacade(IHostEnvironment hostEnvironment,
-            ImageRepository<TMedia> repository,
+            PersonProfileImageRepository repository,
             IImageSaver imageSaver)
             : base(hostEnvironment, repository, imageSaver, new ImageConfiguration()
             {

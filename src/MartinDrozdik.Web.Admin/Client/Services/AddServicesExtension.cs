@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MartinDrozdik.Web.Admin.Client.Services.Authentication;
+using MartinDrozdik.Web.Admin.Client.Services.Models.People;
 using MartinDrozdik.Web.Admin.Client.Services.Models.Projects;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +20,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services
 
             //Add model services
             serviceCollection = serviceCollection.AddScoped<ProjectTagService>();
+            serviceCollection = serviceCollection.AddScoped<PersonService>();
 
             return serviceCollection;
         }

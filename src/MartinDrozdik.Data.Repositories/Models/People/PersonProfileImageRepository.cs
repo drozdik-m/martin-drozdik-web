@@ -18,12 +18,14 @@ using MartinDrozdik.Data.Models.People;
 
 namespace MartinDrozdik.Data.Repositories.Models.People
 {
-    public abstract class PersonProfileImageRepository: PersonImageRepository<PersonProfileImage>
+    public class PersonProfileImageRepository: PersonImageRepository<PersonProfileImage>
     {
         public PersonProfileImageRepository(AppDb context)
             : base(context)
         {
 
         }
+
+        protected override DbSet<PersonProfileImage> EntitySet => Context.PeopleProfileImages;
     }
 }

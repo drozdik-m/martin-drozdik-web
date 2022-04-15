@@ -9,7 +9,7 @@
 }
 
 @* Reorder *@
-@if(ReorderService is not null)
+@if(ReorderService is not null && DisplayEntities.Count() >= 2)
 {
     <MudButtonGroup OverrideStyles="false" Class="me-3">
     <MudButton Variant="Variant.Filled" 
@@ -73,7 +73,7 @@
 		    <ChildContent>
 			    <MudList Clickable="false">
 			        <MudListSubheader>Drop Zone</MudListSubheader>
-					<MudDropZone T="ProjectTag" Identifier="reorder" AllowReorder="true" />
+					<MudDropZone T="TModel" Identifier="reorder" AllowReorder="true" />
 				</MudList>
 		    </ChildContent>
 		    <ItemRenderer>

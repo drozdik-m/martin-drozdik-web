@@ -1,6 +1,7 @@
 ﻿using Bonsai.DataPersistence.DbContexts;
 using Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages;
 using Bonsai.RazorPages.User.Services.LanguageDictionary;
+using Bonsai.Services.ImageProcessing.Extensions;
 using MartinDrozdik.Data.DbContexts.Seeds;
 using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 using MartinDrozdik.Data.Models.UserIdentity;
@@ -99,6 +100,9 @@ builder.Services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
 
 //Provide user language
 builder.Services.AddSingleton<IUserLanguageDictionary, CzechUserLanguageDictionary>();
+
+//Add image saver
+builder.Services.AddImageSaver();
 
 //Repositories
 builder.Services.AddRepositories();

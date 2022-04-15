@@ -31,6 +31,25 @@ namespace MartinDrozdik.Data.Repositories.Traits
         }
 
         /// <summary>
+        /// Sets the initial order index for an entity
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns></returns>
+        internal async Task<TEntity> SetInitialOrderAsync(TEntity entity)
+        {
+            var entityCount = await EntitySet.CountAsync();
+            if (entityCount == 0)
+                entity.OrderIndex = 0;
+            else
+            {
+                var maxOrder = await EntitySet.MaxAsync(e => e.OrderIndex);
+                entity.OrderIndex = maxOrder + 1;
+            }
+
+            return entity;
+        }
+
+        /// <summary>
         /// Orders items in the same order as in the recieved array.
         /// The array can be a subset of all entities and orders from one to n.
         /// </summary>

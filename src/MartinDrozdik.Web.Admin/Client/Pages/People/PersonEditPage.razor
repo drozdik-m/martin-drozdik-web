@@ -1,0 +1,68 @@
+﻿@page "/people/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject PersonService Service
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/people/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        PersonPage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    Person entity;
+
+    protected void OnEntityLoad(Person entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else 
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Editing: @entity.Name</MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="false" PanelClass="pa-6" Color="@Color.Primary">
+
+            @* General info *@
+            <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
+                <MudTextField @bind-Value="context.Entity.Name" Disabled="context.Disabled" Label="Name" 
+                    Variant="Variant.Text"
+                    Immediate="true" HelperText="The full name of this person" 
+                    Required="true" RequiredError="A name is required" />
+            </MudTabPanel>
+
+            @* Picture image *@
+            <MudTabPanel Text="Profile picture" Icon="@Icons.Material.Filled.Image">
+                <ImageEditor Image="context.Entity.ProfileImage" ReadOnly="context.Disabled">
+                    <ImageDisplay Context="image">
+                        <MudText>*Image here*</MudText>
+                    </ImageDisplay>
+                </ImageEditor>
+            </MudTabPanel>
+        </MudTabs>
+
+        
+    </Editor>
+</EditPage>

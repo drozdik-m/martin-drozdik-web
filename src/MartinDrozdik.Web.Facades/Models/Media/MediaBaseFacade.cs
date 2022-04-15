@@ -57,7 +57,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// </summary>
         /// <param name="mediaData"></param>
         /// <returns></returns>
-        public async Task DeleteMedia(TMedia mediaData)
+        public async Task DeleteMediaAsync(TMedia mediaData)
         {
             //Delete the physical media
             DeletePhysicalMediaFile(mediaData);

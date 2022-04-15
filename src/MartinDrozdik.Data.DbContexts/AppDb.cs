@@ -18,7 +18,7 @@ namespace Bonsai.DataPersistence.DbContexts
 
         // -------- PEOPLE --------
         public DbSet<Person> People { get; set; }
-        public DbSet<PersonProfileImage> PeopleImages { get; set; }
+        public DbSet<PersonProfileImage> PeopleProfileImages { get; set; }
 
         public AppDb(DbContextOptions<AppDb> options) : base(options)
         {

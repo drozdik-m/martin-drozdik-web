@@ -16,6 +16,7 @@ namespace MartinDrozdik.Data.Repositories
         {
             serviceCollection = serviceCollection.AddScoped<ProjectTagRepository>();
             serviceCollection = serviceCollection.AddScoped<PersonProfileImageRepository>();
+            serviceCollection = serviceCollection.AddScoped<PersonRepository>();
 
             return serviceCollection;
         }

@@ -5,23 +5,24 @@ using System.Resources;
 using System.Threading.Tasks;
 using Bonsai.Server.Controllers.BaseControllers;
 using Bonsai.Server.Controllers.BaseControllers.Traits;
+using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Web.Facades.Abstraction;
-using MartinDrozdik.Web.Facades.Models.Projects;
+using MartinDrozdik.Web.Facades.Models.People;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
 {
-    public class ProjectTagController : BaseApiController<ProjectTag, int>,
-        IOrderableControllerTrait<ProjectTag, int>
+    public class PersonController : BaseApiController<Person, int>,
+        IOrderableControllerTrait<Person, int>
     {
-        readonly ProjectTagFacade facade;
+        readonly PersonFacade facade;
 
-        readonly IOrderableControllerTrait<ProjectTag, int> orderableTrait;
+        readonly IOrderableControllerTrait<Person, int> orderableTrait;
 
-        public ProjectTagController(ProjectTagFacade facade)
+        public PersonController(PersonFacade facade)
             : base(facade)
         {
             this.facade = facade;
@@ -31,7 +32,7 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
 
         #region Orderable trait
 
-        IOrderableFacade<ProjectTag, int> IOrderableControllerTrait<ProjectTag, int>.OrderableFacade => facade;
+        IOrderableFacade<Person, int> IOrderableControllerTrait<Person, int>.OrderableFacade => facade;
 
         [HttpPut("reorder")]
         public virtual Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);

@@ -1,0 +1,51 @@
+﻿@inherits RootComponent
+@typeparam TImage
+
+<MudGrid>
+
+    @* Name *@
+    <MudItem xs="6">    
+        <MudTextField @bind-Value="ImageCast.Name" Disabled="ReadOnly" Label="Image name" 
+                    Variant="Variant.Text"
+                    Immediate="true" HelperText="@("For example \"a beautiful forest\"")" />
+    </MudItem>
+
+    @* Alternative text *@
+    <MudItem xs="6">
+        <MudTextField @bind-Value="ImageCast.AlternativeText" Disabled="ReadOnly" Label="Alternative text" 
+                    Variant="Variant.Text"
+                    Immediate="true" HelperText="@("Text for visually challenged (bots etc.), for example, \"Beautiful photo of the Colosseum\"")" />
+    </MudItem>
+
+    @*Extra inputs*@
+    @if(ExtraInputs is not null)
+    {
+        <MudItem xs="12">
+             @ExtraInputs(new ImageEditorInputsContext<TImage>(){
+                 Image = Image,
+                 ReadOnly = ReadOnly
+             })
+        </MudItem>
+    }
+
+    @* Upload button *@
+    @*<MudItem xs="12">
+        <InputFile id="fileInput" OnChange="UploadFiles" hidden multiple />
+        <MudButton HtmlTag="label"
+        Variant="Variant.Filled"
+        Color="Color.Primary"
+        StartIcon="@Icons.Filled.CloudUpload"
+        for="fileInput">
+        Upload Image
+        </MudButton>
+        </MudItem>*@
+
+    @* Image display *@
+    @if (ImageCast.Uploaded)
+    {
+        <MudItem xs="12">
+            @ImageDisplay(Image)
+        </MudItem>
+    }
+
+</MudGrid>
