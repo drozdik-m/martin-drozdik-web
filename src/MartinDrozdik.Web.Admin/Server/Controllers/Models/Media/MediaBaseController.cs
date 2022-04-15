@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Bonsai.Models.Abstraction.Exceptions.Services.CRUD;
 using Bonsai.Server.Controllers.BaseControllers;
 using Bonsai.Server.Controllers.BaseControllers.Traits;
+using MartinDrozdik.Data.Models.Files;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Web.Facades.Abstraction;
@@ -29,16 +30,15 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Media
         }
 
         [HttpPost("{id}/media")]
-        public async Task<ActionResult> UploadMediaAsync(int id, List<IFormFile> file)
+        public async Task<ActionResult> UploadMediaAsync(int id, [FromBody] UploadFileData file)
         {
-            if (file == null || file.Count != 1)
-                return BadRequest("File not delivered or too many images were delivered");
+            if (file is null)
+                return BadRequest("File not delivered");
 
             try
             {
                 var media = await facade.GetAsync(id);
-                var firstFile = file.First();
-                await facade.AddMediaAsync(media, firstFile.OpenReadStream(), firstFile.FileName);
+                await facade.AddMediaAsync(media, file.Bytes, file.FileName);
                 return Ok();
             }
             catch (NotFoundException)

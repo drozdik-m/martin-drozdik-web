@@ -3,13 +3,16 @@ using Bonsai.Models.Abstraction.Entities;
 using Bonsai.Models.Abstraction.Services;
 using Bonsai.Models.Abstraction.Services.CRUD;
 using MartinDrozdik.Data.Models.Authentication;
+using MartinDrozdik.Data.Models.Files;
 using MartinDrozdik.Data.Models.Media.Images;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Web.Admin.Client.Pages;
 using MartinDrozdik.Web.Admin.Client.Pages.Projects;
+using MartinDrozdik.Web.Admin.Client.Services.Models.Media.Images;
 using MartinDrozdik.Web.Admin.Client.Services.Models.Projects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using MudBlazor;
 using MudBlazor.Utilities;
 
@@ -29,6 +32,12 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
         /// </summary>
         [Parameter, EditorRequired]
         public RenderFragment<TImage> ImageDisplay { get; set; }
+
+        /// <summary>
+        /// Service for the image
+        /// </summary>
+        [Parameter, EditorRequired]
+        public ImageService<TImage> Service { get; set; }
 
         /// <summary>
         /// Tells of the inputs of this components are disabled
@@ -54,6 +63,30 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
 
                 return res;
             }
+        }
+
+        protected UploadFileData selectedFile = new();
+
+        /// <summary>
+        /// Callback for file selection
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        protected async Task UploadFiles(InputFileChangeEventArgs e)
+        {
+            var file = e.GetMultipleFiles().FirstOrDefault();
+            if (file is null)
+                return;
+
+            //Create he upload file data
+            var fileData = new UploadFileData();
+            var buffers = new byte[file.Size];
+            await file.OpenReadStream().ReadAsync(buffers);
+            fileData.FileName = file.Name;
+            fileData.FileSize = file.Size;
+            fileData.FileType = file.ContentType;
+            fileData.Bytes = buffers;
+            selectedFile = fileData;
         }
 
         /*IList<IBrowserFile> files = new List<IBrowserFile>();

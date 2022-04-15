@@ -42,9 +42,17 @@ namespace MartinDrozdik.Data.Repositories.Models.People
             return entity;
         }
 
+        protected override async Task<Person> ProcessUpdatedEntityAsync(Person entity)
+        {
+            entity = await base.ProcessUpdatedEntityAsync(entity);
+            Context.Entry(entity.ProfileImage).State = EntityState.Modified;
+            return entity;
+        }
+
         protected override async Task<IQueryable<Person>> ProcessReturnedEntitiesAsync(IQueryable<Person> entities)
         {
             entities = await base.ProcessReturnedEntitiesAsync(entities);
+            entities = entities.Include(e => e.ProfileImage);
             return orderableTrait.Order(entities);
         }
 

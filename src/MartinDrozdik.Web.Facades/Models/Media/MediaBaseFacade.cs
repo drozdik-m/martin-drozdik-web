@@ -37,6 +37,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// </summary>
         /// <param name="mediaData"></param>
         /// <param name="data"></param>
+        /// <param name="dataName"></param>
         /// <returns></returns>
         public virtual async Task AddMediaAsync(TMedia mediaData, Stream data, string dataName)
         {
@@ -50,6 +51,19 @@ namespace MartinDrozdik.Web.Facades.Models.Media
             //Update the data model
             mediaData.Uploaded = true;
             await repository.UpdateAsync(mediaData.Id, mediaData);
+        }
+
+        /// <summary>
+        /// Adds media with the media data
+        /// </summary>
+        /// <param name="mediaData"></param>
+        /// <param name="data"></param>
+        /// <param name="dataName"></param>
+        /// <returns></returns>
+        public virtual async Task AddMediaAsync(TMedia mediaData, IEnumerable<byte> data, string dataName)
+        {
+            using Stream stream = new MemoryStream(data.ToArray());
+            await AddMediaAsync(mediaData, stream, dataName);
         }
 
         /// <summary>

@@ -29,16 +29,29 @@
     }
 
     @* Upload button *@
-    @*<MudItem xs="12">
+    <MudItem xs="12">
         <InputFile id="fileInput" OnChange="UploadFiles" hidden multiple />
         <MudButton HtmlTag="label"
-        Variant="Variant.Filled"
-        Color="Color.Primary"
-        StartIcon="@Icons.Filled.CloudUpload"
-        for="fileInput">
-        Upload Image
-        </MudButton>
-        </MudItem>*@
+            Variant="Variant.Filled"
+            Color="Color.Primary"
+            StartIcon="@Icons.Filled.CloudUpload"
+            for="fileInput">
+                Upload Image
+            </MudButton>
+      @*@if ((saveFile?.Files?.Count ?? 0) > 0)
+        {
+            <MudPaper Class="d-flex justify-center py-2 px-1">
+                @foreach (var item in saveFile?.Files)
+                {
+                    <MudPaper Class="pa-2 mx-2">
+                        <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(_ => RemoveImg(item))" aria-label="delete"></MudIconButton>
+ 
+                        <img width="150" height="150" src="@($"data:{item.FileType};base64,{Convert.ToBase64String(item.ImageBytes)}")">
+                    </MudPaper>
+                }
+            </MudPaper>
+        }*@
+    </MudItem>
 
     @* Image display *@
     @if (ImageCast.Uploaded)
