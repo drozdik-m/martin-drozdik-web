@@ -1,26 +1,26 @@
-﻿@page "/people/{id:int}"
+﻿@page "/technology/{id:int}"
 @inherits RootPage
 @attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
-@inject PersonService Service
-@inject PersonProfileImageService ProfileImageService
+@inject TechnologyService Service
+@inject TechnologyLogoService LogoService
 
 @code{
     [Parameter]
     public int Id { get; set; }
 
     public static BreadcrumbItem BreadcrumbItem(int id, string name)
-        => new(name, href: $"/people/{id}", icon: Icons.Material.Filled.Edit);
+        => new(name, href: $"/technology/{id}", icon: Icons.Material.Filled.Edit);
 
     protected List<BreadcrumbItem> breadcrumbItems = new()
     {
         MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
-        PersonPage.BreadcrumbItem,
+        TechnologyPage.BreadcrumbItem,
         PredefinedBreadcrumbs.Loading
     };
 
-    Person entity;
+    Technology entity;
 
-    protected void OnEntityLoad(Person entity)
+    protected void OnEntityLoad(Technology entity)
     {
         this.entity = entity;
         breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
@@ -37,11 +37,7 @@
 else 
 {
     <MudText Typo="Typo.h3" Class="mb-4">
-        Editing: @entity.Name 
-        @if(entity.IsMe)
-        {
-            <MudChip Color="Color.Primary" Class="ml-3">Me!</MudChip>
-        }
+        Editing: @entity.Name
     </MudText>
 }
 
@@ -55,24 +51,25 @@ else
             @* General info *@
             <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
                 
-                <MudSwitch @bind-Checked="context.Entity.IsMe" Disabled="context.Disabled" Label="Is this me?"
-                    Color="Color.Primary" />
-
                 <MudTextField @bind-Value="context.Entity.Name" Disabled="context.Disabled" Label="Name" 
                     Variant="Variant.Text"
-                    Immediate="true" HelperText="The full name of this person" 
+                    Immediate="true" HelperText="The name of this technology" 
                     Required="true" RequiredError="A name is required" />
+
+                <MudTextField @bind-Value="context.Entity.Description" Disabled="context.Disabled" Label="Description" 
+                    Variant="Variant.Text"
+                    Immediate="true" HelperText="Very short description of the technology" />
 
             </MudTabPanel>
 
             @* Picture image *@
-            <MudTabPanel Text="Profile picture" Icon="@Icons.Material.Filled.Image">
-                <ImageEditor Id="context.Entity.ProfileImageId" @bind-Image="context.Entity.ProfileImage"
+            <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
+                <ImageEditor Id="context.Entity.LogoId" @bind-Image="context.Entity.Logo"
                     ReadOnly="context.Disabled"
-                    AddService="ProfileImageService" 
-                    DeleteService="ProfileImageService"
-                    GetService="ProfileImageService"
-                    UpdateService="ProfileImageService"> 
+                    AddService="LogoService" 
+                    DeleteService="LogoService"
+                    GetService="LogoService"
+                    UpdateService="LogoService"> 
 
                     <ImageDisplay Context="image">
                         <MudImage Height="256" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />

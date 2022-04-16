@@ -35,6 +35,24 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
         [Parameter, EditorRequired]
         public Expression<Func<TModel, TKey>> KeyGetter { get; set; }
 
+        [Parameter]
+        public Func<List<TModel>, IEnumerable<TModel>> CustomOrder { get; set; }
+
+        /// <summary>
+        /// Property for displaying entities
+        /// </summary>
+        protected IEnumerable<TModel> DisplayEntities
+        {
+            get
+            {
+                if (OrderExpression is not null)
+                    return Entities.OrderBy(OrderExpression.Compile());
+                else if (CustomOrder is not null)
+                    return CustomOrder(Entities);
+                return Entities;
+            }
+        }
+
         #region Error
         /// <summary>
         /// The last exception that occured
@@ -252,13 +270,6 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
         /// </summary>
         [Parameter]
         public IOrderableService<TKey> ReorderService { get; set; }
-
-        /// <summary>
-        /// Property for displaying entities
-        /// </summary>
-        protected IEnumerable<TModel> DisplayEntities => OrderExpression is null
-            ? Entities
-            : Entities.OrderBy(OrderExpression.Compile());
 
         /// <summary>
         /// Method for the order control button

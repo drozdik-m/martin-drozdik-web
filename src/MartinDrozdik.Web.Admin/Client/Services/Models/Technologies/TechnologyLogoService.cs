@@ -17,7 +17,7 @@ using MartinDrozdik.Web.Admin.Client.Services.Models.Media;
 using MartinDrozdik.Web.Admin.Client.Services.Traits;
 using Newtonsoft.Json;
 
-namespace MartinDrozdik.Web.Admin.Client.Services.Models.People
+namespace MartinDrozdik.Web.Admin.Client.Services.Models.Technologies
 {
     public class TechnologyLogoService : MediaBaseService<TechnologyLogo>
     {

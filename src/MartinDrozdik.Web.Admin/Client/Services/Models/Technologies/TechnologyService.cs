@@ -12,7 +12,7 @@ using MartinDrozdik.Data.Models.Technologies;
 using MartinDrozdik.Web.Admin.Client.Services.Traits;
 using Newtonsoft.Json;
 
-namespace MartinDrozdik.Web.Admin.Client.Services.Models.People
+namespace MartinDrozdik.Web.Admin.Client.Services.Models.Technologies
 {
     public class TechnologyService : BaseApiService<Technology, int>,
         ICRUDServiceTrait<Technology, int>,

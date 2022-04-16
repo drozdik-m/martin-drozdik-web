@@ -1,11 +1,11 @@
-﻿@page "/people"
+﻿@page "/technology"
 @inherits RootPage
 @attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
-@inject PersonService Service 
+@inject TechnologyService Service 
 
 @code {
     public static BreadcrumbItem BreadcrumbItem { get; }
-        = new BreadcrumbItem("People", href: "/people", icon: Icons.Material.Filled.Person);
+        = new BreadcrumbItem("Technology", href: "/technology", icon: Icons.Material.Filled.Analytics);
 
     protected List<BreadcrumbItem> breadcrumbItems = new()
     {
@@ -13,24 +13,25 @@
         BreadcrumbItem,
     };
 
-    ListPage<Person, int> listPage;
+    ListPage<Technology, int> listPage;
 }
 
 <MudBreadcrumbs Items="breadcrumbItems" />
 
-<MudText Typo="Typo.h3" Class="mb-1">People</MudText>
-<MudText Class="mb-4">People relevant in projects as developers and so on...</MudText>
+<MudText Typo="Typo.h3" Class="mb-1">Technology</MudText>
+<MudText Class="mb-4">For referencing when talking about projects and stuff.</MudText>
 
-<ListPage @ref="listPage" TModel="Person" TKey="int" KeyGetter="e => e.Id"
+<ListPage @ref="listPage" TModel="Technology" TKey="int" KeyGetter="e => e.Id"
     GetService="Service"
-    AddService="Service" EntityCreator="() => new Person()"
+    AddService="Service" EntityCreator="() => new Technology()"
     DeleteService="Service"
-    CustomOrder="e => e.Where(e => e.IsMe).OrderBy(e => e.Name).Concat(e.Where(e => !e.IsMe).OrderBy(e => e.Name))">
+    CustomOrder="e => e.OrderBy(e => e.Name)">
 
     <DisplayItems>
         <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
             <thead>
                 <tr>
+                    <th>Logo</th>
                     <th>Name</th>
                     <th>Actions</th>
                 </tr>
@@ -51,16 +52,17 @@
                 {
                     <tr>
                         <td>
-                            @item.Name
-                            @if(item.IsMe)
+                            @if (item.Logo.Uploaded)
                             {
-                                <MudChip Color="Color.Secondary" Class="ml-3">Me</MudChip>
+                                var image = item.Logo;
+                                <MudImage Height="48" Src="@image.Uri" Alt="@image.AlternativeText" />
                             }
                         </td>
+                        <td>@item.Name</td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
-                                HrefEdit="@($"/people/{item.Id}")"/>
+                                HrefEdit="@($"/technology/{item.Id}")"/>
                         </td>
                     </tr>
                 }
@@ -70,7 +72,7 @@
     
     <AddInputs>
         <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
-                        Immediate="true" HelperText="The full name of this person" 
+                        Immediate="true" HelperText="The name of this technology" 
                         Required="true" RequiredError="A name is required" />
     </AddInputs>
 
