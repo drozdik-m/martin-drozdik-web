@@ -47,7 +47,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media.Images
         {
             await base.AddMediaAsync(mediaData, data, dataName);
 
-            var path = Path.Combine(hostEnvironment.ContentRootPath, mediaData.FullPath);
+            var path = Path.Combine(ContentFolderPath, mediaData.FullPath);
             imageSaver.Save(path, System.Drawing.Image.FromStream(data), imageConfiguration);
         }
     }

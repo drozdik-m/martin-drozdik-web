@@ -2,6 +2,7 @@
 @inherits RootPage
 @attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
 @inject PersonService Service
+@inject PersonProfileImageService ProfileImageService
 
 @code{
     [Parameter]
@@ -55,10 +56,20 @@ else
 
             @* Picture image *@
             <MudTabPanel Text="Profile picture" Icon="@Icons.Material.Filled.Image">
-                <ImageEditor Image="context.Entity.ProfileImage" ReadOnly="context.Disabled">
+                <ImageEditor Id="context.Entity.ProfileImageId" @bind-Image="context.Entity.ProfileImage"
+                    ReadOnly="context.Disabled"
+                    AddService="ProfileImageService" 
+                    DeleteService="ProfileImageService"
+                    GetService="ProfileImageService"
+                    UpdateService="ProfileImageService"> 
+
                     <ImageDisplay Context="image">
-                        <MudText>*Image here*</MudText>
+                        <MudImage Height="144" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                        <div class="d-flex justify-center">
+                            
+                        </div>
                     </ImageDisplay>
+
                 </ImageEditor>
             </MudTabPanel>
         </MudTabs>

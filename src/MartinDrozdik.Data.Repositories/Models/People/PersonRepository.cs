@@ -56,6 +56,14 @@ namespace MartinDrozdik.Data.Repositories.Models.People
             return orderableTrait.Order(entities);
         }
 
+        protected override async Task<Person> ProcessDeletedEntityAsync(Person entity)
+        {
+            entity = await base.ProcessDeletedEntityAsync(entity);
+            Context.Entry(entity.ProfileImage).State = EntityState.Deleted;
+
+            return entity;
+        }
+
         #region Orderable trait
 
         public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);

@@ -1,5 +1,12 @@
 ﻿@inherits RootComponent
 @typeparam TImage
+@typeparam TKey
+
+@* Error space *@
+@if(!(lastException is null))
+{
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+}
 
 <MudGrid>
 
@@ -7,7 +14,7 @@
     <MudItem xs="6">    
         <MudTextField @bind-Value="ImageCast.Name" Disabled="ReadOnly" Label="Image name" 
                     Variant="Variant.Text"
-                    Immediate="true" HelperText="@("For example \"a beautiful forest\"")" />
+                    Immediate="true" HelperText="@("For example \"A beautiful forest\"")" />
     </MudItem>
 
     @* Alternative text *@
@@ -28,37 +35,88 @@
         </MudItem>
     }
 
-    @* Upload button *@
-    <MudItem xs="12">
-        <InputFile id="fileInput" OnChange="UploadFiles" hidden multiple />
-        <MudButton HtmlTag="label"
-            Variant="Variant.Filled"
-            Color="Color.Primary"
-            StartIcon="@Icons.Filled.CloudUpload"
-            for="fileInput">
-                Upload Image
-            </MudButton>
-      @*@if ((saveFile?.Files?.Count ?? 0) > 0)
-        {
-            <MudPaper Class="d-flex justify-center py-2 px-1">
-                @foreach (var item in saveFile?.Files)
-                {
-                    <MudPaper Class="pa-2 mx-2">
-                        <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(_ => RemoveImg(item))" aria-label="delete"></MudIconButton>
- 
-                        <img width="150" height="150" src="@($"data:{item.FileType};base64,{Convert.ToBase64String(item.ImageBytes)}")">
-                    </MudPaper>
-                }
-            </MudPaper>
-        }*@
-    </MudItem>
-
     @* Image display *@
-    @if (ImageCast.Uploaded)
+    @if (uploadLoading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+    }
+    else if (ImageCast.Uploaded)
     {
         <MudItem xs="12">
             @ImageDisplay(Image)
         </MudItem>
     }
+
+    @* Controls *@
+    @if(AddService is not null || DeleteService is not null)
+    {
+        <MudItem xs="12">
+            <InputFile id="fileInput" OnChange="UploadMediaAsync" hidden accept="image/*" />
+            
+            <MudButtonGroup OverrideStyles="false">
+
+                @* Add media button *@
+                @if(AddService is not null)
+                {
+                    <MudButton HtmlTag="label"
+                        Variant="Variant.Filled"
+                        Color="Color.Primary"
+                        Disabled="AnyLoading"
+                        StartIcon="@Icons.Filled.CloudUpload"
+                        for="fileInput">
+                            @if (uploadLoading)
+                            {
+                                <MudText Class="me-3">Uploading</MudText>
+                                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                            }
+                            else
+                            {
+                                <MudText>Upload Image</MudText>
+                            }
+                    
+                    </MudButton>
+                }
+
+                @* Delete media button *@
+                @if(DeleteService is not null && ImageCast.Uploaded)
+                {
+                    <MudButton Color="@Color.Error" Variant="Variant.Filled" Disabled="AnyLoading" 
+                        StartIcon="@Icons.Material.Filled.Delete" OnClick="@(async _ => await DeleteMediaAsync())">
+                        @if (deleteLoading)
+                        {
+                            <MudText Class="me-3">Deleting</MudText>
+                            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                        }
+                        else
+                        {
+                            <MudText>Delete Image</MudText>
+                        }
+                    </MudButton>
+                }
+            </MudButtonGroup>
+            
+
+            @*@if(selectedFile is not null)
+            {
+                
+            }*@
+            @*@if ((saveFile?.Files?.Count ?? 0) > 0)
+            {
+                <MudPaper Class="d-flex justify-center py-2 px-1">
+                    @foreach (var item in saveFile?.Files)
+                    {
+                        <MudPaper Class="pa-2 mx-2">
+                            <MudIconButton Color="Color.Error" Icon="@Icons.Material.Filled.Delete" OnClick="@(_ => RemoveImg(item))" aria-label="delete"></MudIconButton>
+ 
+                            <img width="150" height="150" src="@($"data:{item.FileType};base64,{Convert.ToBase64String(item.ImageBytes)}")">
+                        </MudPaper>
+                    }
+                </MudPaper>
+            }*@
+        </MudItem>
+    }
+
+    
+    
 
 </MudGrid>

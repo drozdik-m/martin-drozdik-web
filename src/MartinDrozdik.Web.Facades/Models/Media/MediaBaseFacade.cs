@@ -33,6 +33,11 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         }
 
         /// <summary>
+        /// Path to the folder with content
+        /// </summary>
+        protected string ContentFolderPath => Path.Combine(hostEnvironment.ContentRootPath, "wwwroot");
+
+        /// <summary>
         /// Adds media with the media data
         /// </summary>
         /// <param name="mediaData"></param>
@@ -87,7 +92,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// <param name="media"></param>
         protected void DeletePhysicalMediaFile(TMedia media)
         {
-            var path = Path.Combine(hostEnvironment.ContentRootPath, media.FullPath);
+            var path = Path.Combine(ContentFolderPath, media.FullPath);
             if (File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory)
                 File.Delete(path);
         }
@@ -98,7 +103,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// <param name="media"></param>
         protected void EnsureTargetFolderExists(TMedia media)
         {
-            Directory.CreateDirectory(Path.Combine(hostEnvironment.ContentRootPath, media.FolderPath));
+            Directory.CreateDirectory(Path.Combine(ContentFolderPath, media.FolderPath));
         }
     }
 }

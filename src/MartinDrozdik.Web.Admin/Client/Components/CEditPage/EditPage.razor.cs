@@ -102,6 +102,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CEditPage
 
                 if (verbose)
                     Snackbar.Add("Item successfuly loaded", Severity.Success);
+
+                lastException = null;
             }
             catch (Exception ex)
             {
@@ -147,6 +149,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CEditPage
                 StateHasChanged();
 
                 Snackbar.Add("Changes successfuly saved", Severity.Success);
+
+                lastException = null;
             }
             catch (Exception ex)
             {

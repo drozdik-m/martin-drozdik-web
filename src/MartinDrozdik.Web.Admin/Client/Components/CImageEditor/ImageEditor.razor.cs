@@ -6,6 +6,7 @@ using MartinDrozdik.Data.Models.Authentication;
 using MartinDrozdik.Data.Models.Files;
 using MartinDrozdik.Data.Models.Media.Images;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Web.Admin.Client.Models.Services;
 using MartinDrozdik.Web.Admin.Client.Pages;
 using MartinDrozdik.Web.Admin.Client.Pages.Projects;
 using MartinDrozdik.Web.Admin.Client.Services.Models.Media.Images;
@@ -18,8 +19,10 @@ using MudBlazor.Utilities;
 
 namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
 {
-    public partial class ImageEditor<TImage> : RootComponent
+    public partial class ImageEditor<TImage, TKey> : RootComponent
     {
+        [Inject]
+        ISnackbar Snackbar { get; set; }
 
         /// <summary>
         /// The part with inputs and other tools to edit the entity
@@ -34,10 +37,10 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
         public RenderFragment<TImage> ImageDisplay { get; set; }
 
         /// <summary>
-        /// Service for the image
+        /// Delete service for the image
         /// </summary>
-        [Parameter, EditorRequired]
-        public ImageService<TImage> Service { get; set; }
+        [Parameter]
+        public IDeleteMediaService<TKey> DeleteService { get; set; }
 
         /// <summary>
         /// Tells of the inputs of this components are disabled
@@ -48,8 +51,25 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
         /// <summary>
         /// The image
         /// </summary>
-        [Parameter, EditorRequired]
+        [Parameter]
         public TImage Image { get; set; }
+
+        /// <summary>
+        /// Image change callback
+        /// </summary>
+        [Parameter]
+        public EventCallback<TImage> ImageChanged { get; set; }
+
+        /// <summary>
+        /// Image Id
+        /// </summary>
+        [Parameter, EditorRequired]
+        public TKey Id { get; set; }
+
+        /// <summary>
+        /// Tells if anything is loading
+        /// </summary>
+        protected bool AnyLoading => uploadLoading || deleteLoading;
 
         /// <summary>
         /// Cast image into the Image object
@@ -65,40 +85,138 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
             }
         }
 
-        protected UploadFileData selectedFile = new();
+        #region Error
+        /// <summary>
+        /// The last error the occurred
+        /// </summary>
+        Exception? lastException = default;
+        #endregion
+
+        #region Update
+        /// <summary>
+        /// The service for updating the image
+        /// </summary>
+        [Parameter]
+        public IUpdateService<TImage, TKey> UpdateService { get; set; }
 
         /// <summary>
-        /// Callback for file selection
+        /// The service for getting the image
+        /// </summary>
+        [Parameter]
+        public IGetByKeyService<TImage, TKey> GetService { get; set; }
+        #endregion
+
+        #region AddMedia
+
+        protected UploadFileData? selectedFile = null;
+        protected bool uploadLoading = false;
+
+        /// <summary>
+        /// Add service for the image
+        /// </summary>
+        [Parameter]
+        public IAddMediaService<TKey> AddService { get; set; }
+
+        /// <summary>
+        /// Callback for file selection. Uploads the file.
         /// </summary>
         /// <param name="e"></param>
         /// <returns></returns>
-        protected async Task UploadFiles(InputFileChangeEventArgs e)
+        protected async Task UploadMediaAsync(InputFileChangeEventArgs e)
         {
-            var file = e.GetMultipleFiles().FirstOrDefault();
-            if (file is null)
-                return;
-
-            //Create he upload file data
-            var fileData = new UploadFileData();
-            var buffers = new byte[file.Size];
-            await file.OpenReadStream().ReadAsync(buffers);
-            fileData.FileName = file.Name;
-            fileData.FileSize = file.Size;
-            fileData.FileType = file.ContentType;
-            fileData.Bytes = buffers;
-            selectedFile = fileData;
-        }
-
-        /*IList<IBrowserFile> files = new List<IBrowserFile>();
-        private void UploadFiles(InputFileChangeEventArgs e)
-        {
-            foreach (var file in e.GetMultipleFiles())
+            try
             {
-                files.Add(file);
-            }
-            //TODO upload the files to the server
-        }*/
+                var file = e.GetMultipleFiles().FirstOrDefault();
+                if (file is null)
+                    return;
 
+                uploadLoading = true;
+                StateHasChanged();
+
+                //Create he upload file data
+                var fileData = new UploadFileData();
+                var buffers = new byte[file.Size];
+                await file
+                    .OpenReadStream(maxAllowedSize: 40960000) // max 40 MB
+                    .ReadAsync(buffers); 
+                fileData.FileName = file.Name;
+                fileData.FileSize = file.Size;
+                fileData.FileType = file.ContentType;
+                fileData.Bytes = buffers;
+                selectedFile = fileData;
+
+                //First, save the current model
+                await UpdateService.UpdateAsync(Id, Image);
+
+                //Do the upload
+                await AddService.AddMediaAsync(Id, selectedFile);
+
+                //Reload the image
+                Image = await GetService.GetAsync(Id);
+                await ImageChanged.InvokeAsync(Image);
+
+                uploadLoading = false;
+
+                StateHasChanged();
+
+                Snackbar.Add("Image uploaded successfuly", Severity.Success);
+
+                lastException = null;
+            }
+            catch (Exception ex)
+            {
+                lastException = ex;
+                Snackbar.Add("Something went wrong when uploading :(", Severity.Error);
+            }
+            finally
+            {
+                uploadLoading = false;
+            }
+        }
+        #endregion
+
+        #region DeleteMedia
+        protected bool deleteLoading = false;
+
+        /// <summary>
+        /// Deletes the media
+        /// </summary>
+        /// <returns></returns>
+        protected async Task DeleteMediaAsync()
+        {
+            try
+            {
+                deleteLoading = true;
+                
+                //First, save the current model
+                await UpdateService.UpdateAsync(Id, Image);
+
+                //Do the deletion
+                await DeleteService.DeleteMediaAsync(Id);
+
+                //Reload the image
+                Image = await GetService.GetAsync(Id);
+                await ImageChanged.InvokeAsync(Image);
+
+                deleteLoading = false;
+
+                StateHasChanged();
+
+                Snackbar.Add("Image deleted successfuly", Severity.Success);
+
+                lastException = null;
+            }
+            catch (Exception ex)
+            {
+                lastException = ex;
+                Snackbar.Add("Something went wrong when deleting :(", Severity.Error);
+            }
+            finally
+            {
+                deleteLoading = false;
+            }
+        }
+        #endregion
 
     }
 }

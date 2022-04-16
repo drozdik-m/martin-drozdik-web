@@ -18,11 +18,22 @@ namespace MartinDrozdik.Web.Facades.Models.People
         readonly IOrderableFacadeTrait<Person, int> orderableTrait;
 
         private readonly PersonRepository repository;
+        private readonly PersonProfileImageFacade profileImageFacade;
 
-        public PersonFacade(PersonRepository repository) : base(repository)
+        public PersonFacade(PersonRepository repository,
+            PersonProfileImageFacade profileImageFacade) : base(repository)
         {
             orderableTrait = this;
             this.repository = repository;
+            this.profileImageFacade = profileImageFacade;
+        }
+
+
+        public override async Task DeleteAsync(int id)
+        {
+            var item = await repository.GetAsync(id);
+            await profileImageFacade.DeleteMediaAsync(item.ProfileImage);
+            await base.DeleteAsync(id);
         }
 
         #region Orderable trait

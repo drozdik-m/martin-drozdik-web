@@ -21,6 +21,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services
             //Add model services
             serviceCollection = serviceCollection.AddScoped<ProjectTagService>();
             serviceCollection = serviceCollection.AddScoped<PersonService>();
+            serviceCollection = serviceCollection.AddScoped<PersonProfileImageService>();
 
             return serviceCollection;
         }

@@ -18,7 +18,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Media.Images
 {
-    public abstract class ImageController<TMedia> : BaseApiController<TMedia, int>
+    public class ImageController<TMedia> : MediaBaseController<TMedia>
         where TMedia : Image
     {
         readonly ImageFacade<TMedia> facade;

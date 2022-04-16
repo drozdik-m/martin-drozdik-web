@@ -79,6 +79,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
 
                 if (verbose)
                     Snackbar.Add("Items successfuly reloaded", Severity.Success);
+
+                lastException = null;
             }
             catch (Exception ex)
             {
@@ -153,6 +155,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
                 Snackbar.Add("Item successfuly added", Severity.Success);
                 addNewDialogOpen = false;
 
+                lastException = null;
+
                 await ReloadAsync();
             }
             catch (Exception ex)
@@ -207,6 +211,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
 
                 Snackbar.Add("Item deleted", Severity.Success);
                 deleteDialogOpen = false;
+
+                lastException = null;
 
                 await ReloadAsync();
             }
@@ -310,6 +316,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
 
                 Snackbar.Add("Items successfuly reordered", Severity.Success);
                 reordering = false;
+
+                lastException = null;
 
                 await ReloadAsync();
             }

@@ -23,7 +23,7 @@ using MartinDrozdik.Web.Facades.Traits;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace MartinDrozdik.Web.Facades.Models.Projects
+namespace MartinDrozdik.Web.Facades.Models.People
 {
     public class PersonProfileImageFacade : PersonImageFacade<PersonProfileImage>
     {
