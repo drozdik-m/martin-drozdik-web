@@ -99,7 +99,7 @@ builder.Services.AddScoped<UserSeed>();
 builder.Services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
 
 //Provide user language
-builder.Services.AddSingleton<IUserLanguageDictionary, CzechUserLanguageDictionary>();
+builder.Services.AddSingleton<IUserLanguageDictionary, EnglishUserLanguageDictionary>();
 
 //Add image saver
 builder.Services.AddImageSaver();

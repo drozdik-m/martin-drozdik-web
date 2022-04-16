@@ -13,6 +13,10 @@ body {
     h1, a, label, p, span, input {
         color: $black;
     }
+
+    p{
+        padding: 0 $pxInRem-8;
+    }
 }
 
 .windowFormWrapper {
