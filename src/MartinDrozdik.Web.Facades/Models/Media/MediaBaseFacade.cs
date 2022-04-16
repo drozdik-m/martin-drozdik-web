@@ -35,7 +35,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// <summary>
         /// Path to the folder with content
         /// </summary>
-        protected string ContentFolderPath => Path.Combine(hostEnvironment.ContentRootPath, "wwwroot");
+        protected string ContentFolderPath => Path.Combine(hostEnvironment.ContentRootPath, "wwwroot/");
 
         /// <summary>
         /// Adds media with the media data

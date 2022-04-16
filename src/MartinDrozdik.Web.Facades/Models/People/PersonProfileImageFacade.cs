@@ -37,7 +37,6 @@ namespace MartinDrozdik.Web.Facades.Models.People
             : base(hostEnvironment, repository, imageSaver, new ImageConfiguration()
             {
                 Width = 256,
-                Height = 256,
                 Quality = 70
             })
         {

@@ -40,7 +40,6 @@ namespace MartinDrozdik.Web.Facades.Models.Technologies
             : base(hostEnvironment, repository, imageSaver, new ImageConfiguration()
             {
                 Width = 256,
-                Height = 256,
                 Quality = 80
             })
         {

@@ -29,7 +29,7 @@ namespace MartinDrozdik.Data.Models.Media
         /// <summary>
         /// The full path of where the media is stored (Folder + Name)
         /// </summary>
-        public string FullPath => Path.Combine(FolderPath + FileName);
+        public string FullPath => Path.Combine(FolderPath, FileName);
 
         /// <summary>
         /// The URI of this media
