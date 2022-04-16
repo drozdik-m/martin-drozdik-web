@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MartinDrozdik.Data.Models.Technologies;
 using MartinDrozdik.Web.Admin.Client.Services.Authentication;
 using MartinDrozdik.Web.Admin.Client.Services.Models.People;
 using MartinDrozdik.Web.Admin.Client.Services.Models.Projects;
@@ -22,6 +23,8 @@ namespace MartinDrozdik.Web.Admin.Client.Services
             serviceCollection = serviceCollection.AddScoped<ProjectTagService>();
             serviceCollection = serviceCollection.AddScoped<PersonService>();
             serviceCollection = serviceCollection.AddScoped<PersonProfileImageService>();
+            serviceCollection = serviceCollection.AddScoped<Technology>();
+            serviceCollection = serviceCollection.AddScoped<TechnologyLogo>();
 
             return serviceCollection;
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MartinDrozdik.Web.Facades.Models.People;
 using MartinDrozdik.Web.Facades.Models.Projects;
+using MartinDrozdik.Web.Facades.Models.Technologies;
 using MartinDrozdik.Web.Facades.User;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +19,8 @@ namespace MartinDrozdik.Web.Facades
             serviceCollection = serviceCollection.AddScoped<UserFacade>();
             serviceCollection = serviceCollection.AddScoped<PersonProfileImageFacade>();
             serviceCollection = serviceCollection.AddScoped<PersonFacade>();
+            serviceCollection = serviceCollection.AddScoped<TechnologyFacade>();
+            serviceCollection = serviceCollection.AddScoped<TechnologyLogoFacade>();
 
             return serviceCollection;
         }

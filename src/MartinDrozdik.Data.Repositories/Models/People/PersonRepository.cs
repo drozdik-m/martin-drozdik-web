@@ -52,7 +52,6 @@ namespace MartinDrozdik.Data.Repositories.Models.People
         protected override async Task<IQueryable<Person>> ProcessReturnedEntitiesAsync(IQueryable<Person> entities)
         {
             entities = await base.ProcessReturnedEntitiesAsync(entities);
-            entities = entities.Include(e => e.ProfileImage);
             return orderableTrait.Order(entities);
         }
 

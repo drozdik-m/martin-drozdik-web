@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using Bonsai.Models.Abstraction.Entities;
 using MartinDrozdik.Models;
 
-namespace MartinDrozdik.Data.Models.People
+namespace MartinDrozdik.Data.Models.Technologies
 {
-    public class Person : EntityBase, IIdentifiable<int>, IOrderable
+    public class Technology : EntityBase, IIdentifiable<int>, IOrderable
     {
         /// <inheritdoc/>
         public int Id { get; set; }
@@ -18,9 +18,9 @@ namespace MartinDrozdik.Data.Models.People
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// Is this person me? Is this Martin Drozdík?
+        /// Very short description of the technology (fe. "Front-end SPA framework")
         /// </summary>
-        public bool IsMe { get; set; } = false;
+        public string Description { get; set; } = string.Empty;
 
         /// <inheritdoc/>
         public int OrderIndex { get; set; } = 0;
@@ -28,12 +28,12 @@ namespace MartinDrozdik.Data.Models.People
         /// <summary>
         /// Profile picture of the person
         /// </summary>
-        public PersonProfileImage ProfileImage { get; set; } = new PersonProfileImage();
+        public TechnologyLogo Logo { get; set; } = new TechnologyLogo();
 
         /// <summary>
         /// Id of the profile picture object
         /// </summary>
-        [ForeignKey("ProfileImage")]
-        public int ProfileImageId { get; set; }
+        [ForeignKey("Logo")]
+        public int LogoId { get; set; }
     }
 }

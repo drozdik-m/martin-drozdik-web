@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Data.Models.Technologies;
 using MartinDrozdik.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +20,10 @@ namespace Bonsai.DataPersistence.DbContexts
         // -------- PEOPLE --------
         public DbSet<Person> People { get; set; }
         public DbSet<PersonProfileImage> PeopleProfileImages { get; set; }
+
+        // -------- TECHNOLOGIES --------
+        public DbSet<Technology> Technologies { get; set; }
+        public DbSet<TechnologyLogo> TechnologyLogos { get; set; }
 
         public AppDb(DbContextOptions<AppDb> options) : base(options)
         {
