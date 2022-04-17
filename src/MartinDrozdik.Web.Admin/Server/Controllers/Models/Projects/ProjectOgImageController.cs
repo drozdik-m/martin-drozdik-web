@@ -5,28 +5,26 @@ using System.Resources;
 using System.Threading.Tasks;
 using Bonsai.Server.Controllers.BaseControllers;
 using Bonsai.Server.Controllers.BaseControllers.Traits;
-using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
-using MartinDrozdik.Web.Admin.Server.Controllers.Models.Media.Images;
 using MartinDrozdik.Web.Facades.Abstraction;
-using MartinDrozdik.Web.Facades.Models.Media;
-using MartinDrozdik.Web.Facades.Models.Media.Images;
 using MartinDrozdik.Web.Facades.Models.People;
+using MartinDrozdik.Web.Facades.Models.Projects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.People
+namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
 {
-    public class PersonProfileImageController : ImageController<PersonProfileImage>
+    public class ProjectOgImageController : BaseApiController<ProjectOgImage, int>
     {
-        readonly PersonProfileImageFacade facade;
+        readonly ProjectOgImageFacade facade;
 
-        public PersonProfileImageController(PersonProfileImageFacade facade)
+        public ProjectOgImageController(ProjectOgImageFacade facade)
             : base(facade)
         {
             this.facade = facade;
         }
+
     }
 }
