@@ -13,7 +13,7 @@ using MartinDrozdik.Web.Facades.Abstraction;
 using MartinDrozdik.Web.Facades.Traits.Abstraction;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bonsai.AppLogic.Facades.Traits
+namespace MartinDrozdik.Web.Facades.Traits
 {
     interface IHideableFacadeTrait<TEntity, TKey>
         : IHideableFacade<TEntity, TKey>

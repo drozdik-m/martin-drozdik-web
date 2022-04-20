@@ -17,11 +17,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
 {
     public class ProjectController : BaseApiController<Project, int>,
-        IOrderableControllerTrait<Project, int>
+        IOrderableControllerTrait<Project, int>,
+        IHideableControllerTrait<Project, int>
     {
         readonly ProjectFacade facade;
 
         readonly IOrderableControllerTrait<Project, int> orderableTrait;
+        readonly IHideableControllerTrait<Project, int> hideableTrait;
 
         public ProjectController(ProjectFacade facade)
             : base(facade)
@@ -29,17 +31,28 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
             this.facade = facade;
 
             orderableTrait = this;
+            hideableTrait = this;
         }
 
         #region Orderable trait
-
         IOrderableFacade<Project, int> IOrderableControllerTrait<Project, int>.OrderableFacade => facade;
 
         [HttpPut("reorder")]
         public virtual Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
-
         #endregion
 
+        #region Hideable trait
+        IHideableFacade<Project, int> IHideableControllerTrait<Project, int>.HideableFacade => facade;
 
+        [HttpPut("/{id}/hide")]
+        public virtual Task HideAsync(int itemToHide) => hideableTrait.THideAsync(itemToHide);
+
+        [HttpPut("/{id}/show")]
+        public virtual Task ShowAsync(int itemToHide) => hideableTrait.TShowAsync(itemToHide);
+
+        [HttpPut("/{id}/toggle-visibility")]
+        public virtual Task ToggleVisibilityAsync(int itemToToggle) => hideableTrait.TToggleVisibilityAsync(itemToToggle);
+
+        #endregion
     }
 }

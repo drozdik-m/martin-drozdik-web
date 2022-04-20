@@ -15,9 +15,11 @@ using MartinDrozdik.Web.Facades.Traits;
 namespace MartinDrozdik.Web.Facades.Models.Projects
 {
     public class ProjectFacade : CRUDFacade<Project, int>,
-        IOrderableFacadeTrait<Project, int>
+        IOrderableFacadeTrait<Project, int>,
+        IHideableFacadeTrait<Project, int>
     {
         readonly IOrderableFacadeTrait<Project, int> orderableTrait;
+        readonly IHideableFacadeTrait<Project, int> hideableTrait;
 
         readonly ProjectRepository repository;
         readonly ProjectLogoFacade logoFacade;
@@ -28,6 +30,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
             ProjectOgImageFacade ogImageFacade) : base(repository)
         {
             orderableTrait = this;
+            hideableTrait = this;
             this.repository = repository;
             this.logoFacade = logoFacade;
             this.ogImageFacade = ogImageFacade;
@@ -43,11 +46,17 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         }
 
         #region Orderable trait
-
         IOrderableRepository<Project, int> IOrderableFacadeTrait<Project, int>.OrderableRepository => repository;
 
         public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
+        #endregion
 
+        #region Hideable trait
+        IHideableRepository<Project, int> IHideableFacadeTrait<Project, int>.HideableRepository => repository;
+        public Task<IEnumerable<Project>> GetVisibleAsync() => hideableTrait.TGetVisibleAsync();
+        public Task HideAsync(int itemToHide) => hideableTrait.THideAsync(itemToHide);
+        public Task ShowAsync(int itemToShow) => hideableTrait.TShowAsync(itemToShow);
+        public Task ToggleVisibilityAsync(int itemToToggle) => hideableTrait.TToggleVisibilityAsync(itemToToggle);
         #endregion
     }
 }

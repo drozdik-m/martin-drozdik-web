@@ -14,13 +14,16 @@ using Microsoft.EntityFrameworkCore;
 namespace MartinDrozdik.Data.Repositories.Models.Projects
 {
     public class ProjectRepository : CRUDRepository<Project, int, AppDb>,
-        IOrderableRepositoryTrait<Project, int, AppDb>
+        IOrderableRepositoryTrait<Project, int, AppDb>,
+        IHideableRepositoryTrait<Project, int, AppDb>
     {
         readonly IOrderableRepositoryTrait<Project, int, AppDb> orderableTrait;
+        readonly IHideableRepositoryTrait<Project, int, AppDb> hideableTrait;
 
         public ProjectRepository(AppDb context) : base(context)
         {
             orderableTrait = this;
+            hideableTrait = this;
         }
 
         protected override DbSet<Project> EntitySet => Context.Projects;
@@ -68,9 +71,14 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         }
 
         #region Orderable trait
-
         public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
+        #endregion
 
+        #region Hideable trait
+        public Task<IEnumerable<Project>> GetVisibleAsync() => hideableTrait.TGetVisibleAsync();
+        public Task HideAsync(int itemToHide) => hideableTrait.THideAsync(itemToHide);
+        public Task ShowAsync(int itemToShow) => hideableTrait.TShowAsync(itemToShow);
+        public Task ToggleVisibilityAsync(int itemToToggle) => hideableTrait.TToggleVisibilityAsync(itemToToggle);
         #endregion
     }
 }
