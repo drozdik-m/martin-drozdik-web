@@ -26,7 +26,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
         /// <summary>
         /// Tells if any loading is in progress
         /// </summary>
-        protected bool AnyLoading => addLoading || deleteLoading || reloadLoading || reorderLoading;
+        protected bool AnyLoading => addLoading || deleteLoading || reloadLoading || reorderLoading || visibilityLoading;
 
 
         /// <summary>
@@ -373,6 +373,48 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
         protected void ReorderUpdated(MudItemDropInfo<TModel> dropItem)
         {
             Entities.UpdateOrder(dropItem, OrderExpression);
+        }
+        #endregion
+
+        #region Visibility
+        bool visibilityLoading = false;
+
+        /// <summary>
+        /// The service for updating visibility of existing entities
+        /// </summary>
+        [Parameter]
+        public IHideableService<TModel> HideableService { get; set; }
+
+
+        /// <summary>
+        /// Toggles visibility of an item
+        /// </summary>
+        /// <returns></returns>
+        public async Task ToggleVisibilityAsync(TModel model)
+        {
+            try
+            {
+                visibilityLoading = true;
+                await HideableService.ToggleVisibilityAsync(model);
+                visibilityLoading = false;
+
+                Snackbar.Add("Items' visibility updated", Severity.Success);
+
+                lastException = null;
+
+                StateHasChanged();
+
+                //await ReloadAsync();
+            }
+            catch (Exception ex)
+            {
+                lastException = ex;
+                Snackbar.Add("Something went wrong :(", Severity.Error);
+            }
+            finally
+            {
+                visibilityLoading = false;
+            }
         }
         #endregion
     }

@@ -18,7 +18,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
     {
         public async Task THideAsync(TEntity itemToHide)
         {
-            var response = await Http.PutAsync($"{ApiUri}/{itemToHide.Id}/hide", true.ToJsonContent());
+            var response = await Http.PutAsync($"{ApiUri}/{itemToHide.Id}/visibility", true.ToJsonContent());
             response.EnsureSuccessStatusCode();
 
             itemToHide.IsHidden = true;
@@ -26,7 +26,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
 
         public async Task TShowAsync(TEntity itemToShow)
         {
-            var response = await Http.PutAsync($"{ApiUri}/{itemToShow.Id}/show", false.ToJsonContent());
+            var response = await Http.PutAsync($"{ApiUri}/{itemToShow.Id}/visibility", false.ToJsonContent());
             response.EnsureSuccessStatusCode();
 
             itemToShow.IsHidden = false;
@@ -34,7 +34,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Traits
 
         public async Task TToggleVisibilityAsync(TEntity itemToToggle)
         {
-            var response = await Http.PutAsync($"{ApiUri}/{itemToToggle.Id}/toggle-visibility", (!itemToToggle.IsHidden).ToJsonContent());
+            var response = await Http.PutAsync($"{ApiUri}/{itemToToggle.Id}/visibility", (!itemToToggle.IsHidden).ToJsonContent());
             response.EnsureSuccessStatusCode();
 
             itemToToggle.IsHidden = !itemToToggle.IsHidden;

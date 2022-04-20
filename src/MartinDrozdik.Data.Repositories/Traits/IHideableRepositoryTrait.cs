@@ -54,13 +54,11 @@ namespace MartinDrozdik.Data.Repositories.Traits
                 throw new NotFoundException();
 
             //Hide
-            searchedEntity.IsHidden = newValueGetter.Invoke(searchedEntity.IsHidden);
+            var newValue = newValueGetter.Invoke(searchedEntity.IsHidden);
+            searchedEntity.IsHidden = newValue;
 
             //Set modified state
             Context.Entry(searchedEntity).State = EntityState.Modified;
-
-            //Process before update
-            await ProcessUpdatedEntityAsync(searchedEntity);
 
             //Save changes
             await Context.SaveChangesAsync();

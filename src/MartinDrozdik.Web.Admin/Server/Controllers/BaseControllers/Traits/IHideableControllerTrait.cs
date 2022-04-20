@@ -32,7 +32,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            catch(Exception)
+            catch(Exception e)
             {
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
@@ -49,7 +49,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }
@@ -65,10 +65,17 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
             {
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             } 
+        }
+
+        public Task TUpdateVisibilityAsync(TKey itemToUpdate, bool newVisibility)
+        {
+            if (newVisibility)
+                return THideAsync(itemToUpdate);
+            return TShowAsync(itemToUpdate);
         }
     }
 }

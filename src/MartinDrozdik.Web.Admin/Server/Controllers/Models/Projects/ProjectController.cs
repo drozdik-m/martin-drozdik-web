@@ -44,15 +44,8 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
         #region Hideable trait
         IHideableFacade<Project, int> IHideableControllerTrait<Project, int>.HideableFacade => facade;
 
-        [HttpPut("/{id}/hide")]
-        public virtual Task HideAsync(int itemToHide) => hideableTrait.THideAsync(itemToHide);
-
-        [HttpPut("/{id}/show")]
-        public virtual Task ShowAsync(int itemToHide) => hideableTrait.TShowAsync(itemToHide);
-
-        [HttpPut("/{id}/toggle-visibility")]
-        public virtual Task ToggleVisibilityAsync(int itemToToggle) => hideableTrait.TToggleVisibilityAsync(itemToToggle);
-
+        [HttpPut("{id}/visibility")]
+        public virtual Task HideAsync(int id, [FromBody] bool newVisibility) => hideableTrait.TUpdateVisibilityAsync(id, newVisibility);
         #endregion
     }
 }

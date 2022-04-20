@@ -25,7 +25,8 @@
     GetService="Service"
     AddService="Service" EntityCreator="() => new Project()"
     DeleteService="Service" 
-    ReorderService="Service" OrderExpression="e => e.OrderIndex">
+    ReorderService="Service" OrderExpression="e => e.OrderIndex"
+    HideableService="Service">
 
     <DisplayItems>
         <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
@@ -62,7 +63,9 @@
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
-                                HrefEdit="@($"/project/{item.Id}")"/>
+                                HrefEdit="@($"/project/{item.Id}")"
+                                OnVisibilityToggle="async _ => await listPage.ToggleVisibilityAsync(item)"
+                                Visible="!item.IsHidden"/>
                         </td>
                     </tr>
                 }
@@ -71,10 +74,10 @@
     </DisplayItems>
     
     <AddInputs>
+
         <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
                         Immediate="true" HelperText="The name of this project" 
                         Required="true" RequiredError="A name is required" />
-
 
         <MudGrid>
             <MudItem xs="9">
