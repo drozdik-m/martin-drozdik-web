@@ -60,11 +60,10 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         }
 
         protected override async Task<Project> ProcessDeletedEntityAsync(Project entity)
-        {
+       {
             entity = await base.ProcessDeletedEntityAsync(entity);
             Context.Entry(entity.Logo).State = EntityState.Deleted;
             Context.Entry(entity.OgImage).State = EntityState.Deleted;
-
             return entity;
         }
 

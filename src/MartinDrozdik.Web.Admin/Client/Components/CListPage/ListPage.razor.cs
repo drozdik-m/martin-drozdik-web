@@ -163,7 +163,10 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
             {
                 await addForm.Validate();
                 if (!addForm.IsValid)
+                {
                     Snackbar.Add("There are errors in the form", Severity.Warning);
+                    return;
+                }
 
                 addLoading = true;
                 await AddService.AddAsync(addItem);

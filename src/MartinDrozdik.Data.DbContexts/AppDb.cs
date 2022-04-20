@@ -32,6 +32,12 @@ namespace Bonsai.DataPersistence.DbContexts
         {
         }
 
+        /// <inheritdoc/>
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
         /// <summary>
         /// Update "last edit" date on changed entities
         /// </summary>

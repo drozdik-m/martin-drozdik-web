@@ -106,7 +106,6 @@ namespace MartinDrozdik.Data.Repositories
                 throw new DefaultKeyException();
 
             var entities = EntitySet
-                .AsNoTracking()
                 .Where(IdPredicate(id));
             var includedEntities = await IncludeRelationsAsync(entities);
             var processedEntities = await ProcessReturnedEntitiesAsync(includedEntities);
@@ -191,7 +190,9 @@ namespace MartinDrozdik.Data.Repositories
         /// <returns></returns>
         public async Task<bool> ExistsAsync(TKey id)
         {
-            var entities = EntitySet.AsNoTracking().Where(IdPredicate(id));
+            var entities = EntitySet
+                .AsNoTracking()
+                .Where(IdPredicate(id));
             var searchedEntity = await entities.FirstOrDefaultAsync();
 
             //Not found
