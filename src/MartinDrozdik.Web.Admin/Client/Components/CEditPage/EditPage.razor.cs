@@ -85,6 +85,12 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CEditPage
         protected TModel Entity { get; set; }
 
         /// <summary>
+        /// Event on entity list reload
+        /// </summary>
+        [Parameter]
+        public EventCallback OnReload { get; set; }
+
+        /// <summary>
         /// Reloads the current entity
         /// </summary>
         /// <param name="verbose">If true, messages about success will be used</param>
@@ -97,6 +103,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CEditPage
                 Entity = await GetService.GetAsync(Id);
                 OnEntityLoad?.Invoke(Entity);
                 reloadLoading = false;
+
+                await OnReload.InvokeAsync();
 
                 StateHasChanged();
 

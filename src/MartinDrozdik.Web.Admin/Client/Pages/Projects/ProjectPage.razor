@@ -21,7 +21,13 @@
 <MudText Typo="Typo.h3" Class="mb-1">Projects</MudText>
 <MudText Class="mb-4">Projects to display on the website.</MudText>
 
+@if(listPage is not null)
+{
+    <UrlComparator Urls="listPage.DisplayEntities.Select(e => e.UrlName)" />
+}
+
 <ListPage @ref="listPage" TModel="Project" TKey="int" KeyGetter="e => e.Id"
+    OnReload="() => StateHasChanged()"
     GetService="Service"
     AddService="Service" EntityCreator="() => new Project()"
     DeleteService="Service" 
@@ -34,6 +40,7 @@
                 <tr>
                     <th>Logo</th>
                     <th>Name</th>
+                    <th>URI key</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -60,6 +67,7 @@
                             }
                         </td>
                         <td>@item.Name</td>
+                        <td>@item.UrlName</td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"

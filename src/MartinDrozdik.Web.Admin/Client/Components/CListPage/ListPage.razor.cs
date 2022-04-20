@@ -41,7 +41,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
         /// <summary>
         /// Property for displaying entities
         /// </summary>
-        protected IEnumerable<TModel> DisplayEntities
+        public IEnumerable<TModel> DisplayEntities
         {
             get
             {
@@ -81,6 +81,12 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
         protected List<TModel> Entities { get; set; } = new List<TModel>();
 
         /// <summary>
+        /// Event on entity list reload
+        /// </summary>
+        [Parameter]
+        public EventCallback OnReload { get; set; }
+
+        /// <summary>
         /// Reloads all entities using the getter service
         /// </summary>
         /// <param name="verbose">If true, success notification messages will be used</param>
@@ -94,6 +100,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CListPage
                 reloadLoading = false;
 
                 StateHasChanged();
+
+                await OnReload.InvokeAsync();
 
                 if (verbose)
                     Snackbar.Add("Items successfuly reloaded", Severity.Success);
