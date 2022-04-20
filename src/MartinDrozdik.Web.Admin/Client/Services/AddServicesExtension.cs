@@ -26,6 +26,9 @@ namespace MartinDrozdik.Web.Admin.Client.Services
             serviceCollection = serviceCollection.AddScoped<PersonProfileImageService>();
             serviceCollection = serviceCollection.AddScoped<TechnologyService>();
             serviceCollection = serviceCollection.AddScoped<TechnologyLogoService>();
+            serviceCollection = serviceCollection.AddScoped<ProjectService>();
+            serviceCollection = serviceCollection.AddScoped<ProjectLogoService>();
+            serviceCollection = serviceCollection.AddScoped<ProjectOgImageService>();
 
             return serviceCollection;
         }
