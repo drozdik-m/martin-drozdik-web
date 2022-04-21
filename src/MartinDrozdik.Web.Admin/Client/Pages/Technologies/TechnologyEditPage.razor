@@ -51,12 +51,12 @@ else
             @* General info *@
             <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
                 
-                <MudTextField @bind-Value="context.Entity.Name" Disabled="context.Disabled" Label="Name" 
+                <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
                     Variant="Variant.Text"
                     Immediate="true" HelperText="The name of this technology" 
                     Required="true" RequiredError="A name is required" />
 
-                <MudTextField @bind-Value="context.Entity.Description" Disabled="context.Disabled" Label="Description" 
+                <MudTextField @bind-Value="context.Model.Description" Disabled="context.Disabled" Label="Description" 
                     Variant="Variant.Text"
                     Immediate="true" HelperText="Very short description of the technology" />
 
@@ -64,7 +64,7 @@ else
 
             @* Picture image *@
             <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
-                <ImageEditor Id="context.Entity.LogoId" @bind-Image="context.Entity.Logo"
+                <ImageEditor Id="context.Model.LogoId" @bind-Image="context.Model.Logo"
                     ReadOnly="context.Disabled"
                     AddService="LogoService" 
                     DeleteService="LogoService"

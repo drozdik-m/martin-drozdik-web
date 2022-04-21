@@ -55,10 +55,10 @@ else
             @* General info *@
             <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
                 
-                <MudSwitch @bind-Checked="context.Entity.IsMe" Disabled="context.Disabled" Label="Is this me?"
+                <MudSwitch @bind-Checked="context.Model.IsMe" Disabled="context.Disabled" Label="Is this me?"
                     Color="Color.Primary" />
 
-                <MudTextField @bind-Value="context.Entity.Name" Disabled="context.Disabled" Label="Name" 
+                <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
                     Variant="Variant.Text"
                     Immediate="true" HelperText="The full name of this person" 
                     Required="true" RequiredError="A name is required" />
@@ -67,7 +67,7 @@ else
 
             @* Picture image *@
             <MudTabPanel Text="Profile picture" Icon="@Icons.Material.Filled.Image">
-                <ImageEditor Id="context.Entity.ProfileImageId" @bind-Image="context.Entity.ProfileImage"
+                <ImageEditor Id="context.Model.ProfileImageId" @bind-Image="context.Model.ProfileImage"
                     ReadOnly="context.Disabled"
                     AddService="ProfileImageService" 
                     DeleteService="ProfileImageService"

@@ -5,7 +5,7 @@
         /// <summary>
         /// The entity that is edited
         /// </summary>
-        public TModel Entity { get; set; }
+        public TModel Model { get; set; }
 
         /// <summary>
         /// Are the input supposed to be read only?

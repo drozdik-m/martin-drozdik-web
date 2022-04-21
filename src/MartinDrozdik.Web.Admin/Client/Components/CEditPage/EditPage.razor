@@ -34,7 +34,7 @@
     <MudForm @ref="editForm" @bind-IsValid="@editFormValid" Class="my-4 py-1">
 
         @Editor(new EditPageEditContext<TModel>(){
-            Entity = Entity,
+            Model = Entity,
             Disabled = Disabled
         })
 

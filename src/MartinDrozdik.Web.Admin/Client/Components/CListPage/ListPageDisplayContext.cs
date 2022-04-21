@@ -5,7 +5,7 @@
         /// <summary>
         /// List of models to display
         /// </summary>
-        public IEnumerable<TModel> Entities { get; set; } = new List<TModel>();
+        public IEnumerable<TModel> Models { get; set; } = new List<TModel>();
 
 
         /// <summary>
@@ -17,7 +17,7 @@
         /// <summary>
         /// Tells if a skeleton should be displayed
         /// </summary>
-        public bool DisplaySkeleton => Loading && !Entities.Any();
+        public bool DisplaySkeleton => Loading && !Models.Any();
 
     }
 }

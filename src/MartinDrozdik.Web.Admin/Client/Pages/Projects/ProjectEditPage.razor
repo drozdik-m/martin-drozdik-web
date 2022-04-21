@@ -1,25 +1,27 @@
 ﻿@page "/project/{id:int}"
 @inherits RootPage
 @attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
-@inject ProjectTagService Service
+@inject ProjectService Service
+@inject ProjectLogoService LogoService
+@inject ProjectOgImageService OgImageService
 
 @code{
     [Parameter]
     public int Id { get; set; }
 
     public static BreadcrumbItem BreadcrumbItem(int id, string name)
-        => new(name, href: $"/project-tag/{id}", icon: Icons.Material.Filled.Edit);
+        => new(name, href: $"/project/{id}", icon: Icons.Material.Filled.Edit);
 
     protected List<BreadcrumbItem> breadcrumbItems = new()
     {
         MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
-        ProjectTagPage.BreadcrumbItem,
+        ProjectPage.BreadcrumbItem,
         PredefinedBreadcrumbs.Loading
     };
 
-    ProjectTag entity;
+    Project entity;
 
-    protected void OnEntityLoad(ProjectTag entity)
+    protected void OnEntityLoad(Project entity)
     {
         this.entity = entity;
         breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
@@ -33,7 +35,7 @@
 {
     <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
 }
-else 
+else
 {
     <MudText Typo="Typo.h3" Class="mb-4">Editing: @entity.Name</MudText>
 }
@@ -42,9 +44,74 @@ else
     GetService="Service"
     UpdateService="Service">
     <Editor>
-        <MudTextField @bind-Value="context.Entity.Name" Disabled="context.Disabled" Label="Name" 
-            Variant="Variant.Text" 
-            Immediate="true" HelperText="The name of this tag" 
-            Required="true" RequiredError="A name is required" />
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="false" PanelClass="pa-6" Color="@Color.Primary">
+
+            @* General info *@
+            <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
+                <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
+                    Variant="Variant.Text" Class="my-3"
+                    Immediate="true" HelperText="The name of this project" 
+                    Required="true" RequiredError="A name is required" />
+
+                <MudSwitch @bind-Checked="context.Model.IsHidden" Disabled="context.Disabled" 
+                    Class="my-4"
+                    ThumbIconColor=@(context.Model.IsHidden ? Color.Dark : Color.Secondary)
+                    Label="@(context.Model.IsHidden ? "Hidden" : "Visible")"
+                    ThumbIcon="@(context.Model.IsHidden ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"/>
+
+                <MudGrid>
+                    <MudItem xs="9">
+                        <MudTextField @bind-Value="context.Model.UrlName" Disabled="context.Disabled" Label="Url key" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The url key of this project" 
+                                Required="true" RequiredError="A url key is required" />
+                    </MudItem>
+                    <MudItem xs="3">
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Info" Class="mt-5"
+                                OnClick="_ => { context.Model.UrlName = context.Model.Name.ToUrlFriendly(); }">Generate</MudButton>
+                    </MudItem>
+                </MudGrid> 
+
+                <MudTextField @bind-Value="context.Model.Abstract" Disabled="context.Disabled" 
+                    Label="Abstract" Class="my-4"
+                    Variant="Variant.Outlined" Lines="8"
+                    Immediate="true" HelperText="Abstract of the article (= the first paragraph)" />
+
+                <MudDatePicker @bind-Date="context.Model.FinishedTime" Disabled="context.Disabled"
+                    Label="Project finished date" DateFormat="dd. MM. yyyy" />
+            </MudTabPanel>
+
+            @* Logo *@
+            <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
+                <ImageEditor Id="context.Model.LogoId" @bind-Image="context.Model.Logo"
+                    ReadOnly="context.Disabled"
+                    AddService="LogoService" 
+                    DeleteService="LogoService"
+                    GetService="LogoService"
+                    UpdateService="LogoService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="512" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+
+            @* Og image *@
+            <MudTabPanel Text="OG image" Icon="@Icons.Material.Filled.ImageAspectRatio">
+                <ImageEditor Id="context.Model.OgImageId" @bind-Image="context.Model.OgImage"
+                    ReadOnly="context.Disabled"
+                    AddService="OgImageService" 
+                    DeleteService="OgImageService"
+                    GetService="OgImageService"
+                    UpdateService="OgImageService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="512" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+        </MudTabs>
+
     </Editor>
 </EditPage>

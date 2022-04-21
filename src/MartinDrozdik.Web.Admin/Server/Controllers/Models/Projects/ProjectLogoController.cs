@@ -7,6 +7,7 @@ using Bonsai.Server.Controllers.BaseControllers;
 using Bonsai.Server.Controllers.BaseControllers.Traits;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Web.Admin.Server.Controllers.Models.Media.Images;
 using MartinDrozdik.Web.Facades.Abstraction;
 using MartinDrozdik.Web.Facades.Models.People;
 using MartinDrozdik.Web.Facades.Models.Projects;
@@ -16,7 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
 {
-    public class ProjectLogoController : BaseApiController<ProjectLogo, int>
+    public class ProjectLogoController : ImageController<ProjectLogo>
     {
         readonly ProjectLogoFacade facade;
 

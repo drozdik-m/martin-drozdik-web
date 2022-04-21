@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,17 @@ namespace MartinDrozdik.Data.Models.Projects
 
         public string Abstract { get; set; } = string.Empty;
 
-        public DateTime FinishedTime { get; set; } = DateTime.Now;
+        public DateTime? FinishedTime { get; set; } = DateTime.Now;
 
         public ProjectLogo Logo { get; set; } = new();
 
+        [ForeignKey("Logo")]
+        public int LogoId { get; set; } 
+
         public ProjectOgImage OgImage { get; set; } = new();
+
+        [ForeignKey("OgImage")]
+        public int OgImageId { get; set; }
 
         public ICollection<ProjectTag> Tags { get; set; } = new List<ProjectTag>();
     }
