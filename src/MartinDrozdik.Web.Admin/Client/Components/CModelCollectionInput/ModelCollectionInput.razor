@@ -1,0 +1,135 @@
+﻿@inherits RootComponent
+@typeparam TModel
+@typeparam TKey
+
+@* Error space *@
+@if(!(lastException is null))
+{
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+}
+
+<div>
+    @* Reorder *@
+    @if(ReorderService is not null && DisplayItems.Count() >= 2 && !ReadOnly)
+    {
+        <MudButtonGroup OverrideStyles="false" Class="me-3 mb-3">
+            <MudButton Variant="Variant.Filled" 
+                Color="@(reordering ? Color.Success : Color.Primary)" 
+                Disabled="AnyLoading"
+                StartIcon="@(reordering ? Icons.Material.Filled.Check : Icons.Material.Filled.Height)" 
+                OnClick="async _ => await OrderControlButton()">
+                @if (reorderLoading)
+                {
+                    <MudText Class="me-3">Saving order</MudText>
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                }
+                else if(reordering)
+                {
+                    <MudText>Confirm order</MudText>
+                }
+                else
+                {
+                    <MudText>Reorder</MudText>
+                }
+            </MudButton>
+            @if (reordering)
+            {
+                <MudButton Disabled="reorderLoading" Variant="Variant.Filled" Color="Color.Error" 
+                    StartIcon="@Icons.Material.Filled.Clear" 
+                    OnClick="async _ => await RevertReorderAsync()">
+                    Cancel
+                </MudButton>
+            }                     
+        </MudButtonGroup>
+    }
+
+    <div>
+        @if(reordering && ReorderService is not null)
+        {
+            <MudDropContainer T="TModel" @ref="reorderContainer" ItemIsDisabled="@(_ => reorderLoading)" Items="@DisplayItems" ItemsSelector="@((item, dropzone) => true)" ItemDropped="ReorderUpdated" >
+		        <ChildContent>
+			        <MudList Clickable="false">
+			            <MudListSubheader>Drop Zone</MudListSubheader>
+					    <MudDropZone T="TModel" Identifier="reorder" AllowReorder="true" />
+				    </MudList>
+		        </ChildContent>
+		        <ItemRenderer>
+                    @ReorderItem(context)
+		        </ItemRenderer>
+            </MudDropContainer>
+        }
+        else
+        {
+            @foreach(var item in DisplayItems)
+            {
+                <MudPaper Class="d-flex align-center pa-4 my-3" Elevation="25">
+                    <div>
+                        @DisplayItem(item)
+                    </div>
+                    <MudSpacer />
+                    <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" 
+                        OnClick="async _ => { await RemoveItemFromCollection(IdGetter(item)); }" Disabled="AnyLoading">Delete</MudButton> 
+                </MudPaper>
+            }
+        }
+        
+    </div>
+    
+
+    @if (!ReadOnly)
+    {
+        @* Select an item to add *@
+        @if(optionsLoaded)
+        {
+            <MudSelect T="TModel" Label="Item to add" Variant="Variant.Outlined" 
+                AnchorOrigin="Origin.BottomCenter" Class="my-4" @bind-Value="SelectedOption">
+                @foreach(var item in ItemsToAdd)
+                {
+                    <MudSelectItem T="TModel" Value="item"/>
+                }
+            </MudSelect>
+        }
+
+        @if (optionsLoaded && Options.Count == 0)
+        {
+            <MudAlert Severity="Severity.Info" Variant="Variant.Filled" Dense="true">No items to add</MudAlert>
+        }
+
+        <MudButtonGroup OverrideStyles="false" Class="mt-5">
+
+            @* Add selected button*@
+            @if (optionsLoaded && Options.Count != 0)
+            {
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary" 
+                        OnClick="async _ => await AddSelectedToCollection()" Disabled="@(AnyLoading || SelectedOption is null)">Add Selected</MudButton>
+            }
+
+            @* Reload options button *@
+            <MudButton Variant="Variant.Outlined" StartIcon="@(optionsLoaded ? Icons.Material.Filled.Refresh : Icons.Material.Filled.Add)" Color="Color.Primary" 
+                    OnClick="async _ => await ReloadOptionsAsync()" Disabled="AnyLoading">
+            @if (optionsLoading)
+            {
+                <MudText Class="me-3">Loading options</MudText>
+                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+            }
+            else
+            {
+                @if (optionsLoaded)
+                {
+                    <MudText>Reload options</MudText>
+                }
+                else
+                {
+                    <MudText>Start adding</MudText>
+                }
+            }
+            </MudButton>
+        </MudButtonGroup>
+    }
+
+    
+</div>
+
+
+
+

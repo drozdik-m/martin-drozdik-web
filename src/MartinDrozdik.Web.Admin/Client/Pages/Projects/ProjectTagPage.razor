@@ -24,8 +24,8 @@
 <ListPage @ref="listPage" TModel="ProjectTag" TKey="int" KeyGetter="e => e.Id"
     GetService="Service"
     AddService="Service" EntityCreator="() => new ProjectTag()"
-    DeleteService="Service" 
-    ReorderService="Service" OrderExpression="e => e.OrderIndex">
+    DeleteService="Service"
+    CustomOrder="e => e.OrderBy(e => e.Projects.Count())">
 
     <DisplayItems>
         <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">

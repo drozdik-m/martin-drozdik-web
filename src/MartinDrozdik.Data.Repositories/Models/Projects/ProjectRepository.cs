@@ -35,7 +35,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         {
             entities = entities
                 .Include(e => e.Logo)
-                .Include(e => e.OgImage);
+                .Include(e => e.OgImage)
+                .Include(e => e.Tags.OrderBy(e => e.OrderIndex));
             return base.IncludeRelationsAsync(entities);
         }
 
@@ -53,13 +54,17 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entity = await base.ProcessUpdatedEntityAsync(entity);
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
+
+            await HandleManyToManyUpdate(entity, e => e.Tags, e => e.Tags);
+
             return entity;
         }
 
         protected override async Task<IQueryable<Project>> ProcessReturnedEntitiesAsync(IQueryable<Project> entities)
         {
             entities = await base.ProcessReturnedEntitiesAsync(entities);
-            return orderableTrait.Order(entities);
+            entities = orderableTrait.Order(entities);
+            return entities;
         }
 
         protected override async Task<Project> ProcessDeletedEntityAsync(Project entity)

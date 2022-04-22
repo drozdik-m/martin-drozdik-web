@@ -4,6 +4,7 @@
 @inject ProjectService Service
 @inject ProjectLogoService LogoService
 @inject ProjectOgImageService OgImageService
+@inject ProjectTagService TagService
 
 @code{
     [Parameter]
@@ -110,6 +111,20 @@ else
                     </ImageDisplay>
 
                 </ImageEditor>
+            </MudTabPanel>
+
+            @* Tags*@
+            <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
+                <ModelCollectionInput TModel="ProjectTag" TKey="int" @bind-Items="context.Model.Tags"
+                    GetService="TagService" Unique="true" IdGetter="e => e.Id"
+                    ReorderService="TagService" OrderExpression="e => e.OrderIndex">
+                    <DisplayItem Context="tag">
+                        @tag.ToString()
+                    </DisplayItem>
+                    <ReorderItem Context="tag">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{tag.Name}")" />
+                    </ReorderItem>
+                </ModelCollectionInput>
             </MudTabPanel>
         </MudTabs>
 

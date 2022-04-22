@@ -15,5 +15,7 @@ namespace MartinDrozdik.Data.Models.Tags
         public string Name { get; set; } = string.Empty;
 
         public int OrderIndex { get; set; } = 0;
+
+        public override string ToString() => $"{Name}";
     }
 }

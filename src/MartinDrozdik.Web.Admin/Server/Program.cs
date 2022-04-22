@@ -28,7 +28,12 @@ var configuration = new ConfigurationBuilder()
                 .Build();
 
 //MVC service
-builder.Services.AddMvc().AddNewtonsoftJson();
+builder.Services
+    .AddMvc()
+    .AddNewtonsoftJson(e =>
+    {
+        e.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    });
 
 //Controllers view builder
 var controllersViewBuilder = builder.Services.AddControllersWithViews();

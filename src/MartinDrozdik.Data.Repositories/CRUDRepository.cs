@@ -84,6 +84,40 @@ namespace MartinDrozdik.Data.Repositories
         protected virtual Task<TEntity> ProcessDeletedEntityAsync(TEntity entity)
             => Task.FromResult(entity);
 
+        protected async Task<TEntity> HandleManyToManyUpdate<TTarget>(
+            TEntity entity,
+            Expression<Func<TEntity, IEnumerable<TTarget>>> enumerableGetterExpression,
+            Expression<Func<TEntity, ICollection<TTarget>>> collectionGetterExpression)
+            where TTarget : class, IIdentifiable<TKey>
+        {
+            var collectionGetter = collectionGetterExpression.Compile();
+
+            //Get desired tags
+            var desiredItems = collectionGetter(entity).ToList();
+
+            //Get original tags
+            var entry = Context.Entry(entity);
+            collectionGetter(entity).Clear();
+            await entry.Collection(enumerableGetterExpression).LoadAsync();
+
+            //Figure out new and deleted tags
+            var newTags = desiredItems.Where(e => !collectionGetter(entity).Any(f => e.Id.Equals(f.Id))).ToList();
+            var deletedTags = collectionGetter(entity).Where(e => !desiredItems.Any(f => e.Id.Equals(f.Id))).ToList();
+
+            //Add new tags
+            foreach (var newTag in newTags)
+            {
+                collectionGetter(entity).Add(newTag);
+                Context.Entry(newTag).State = EntityState.Modified;
+            }
+
+            //Delete old tags
+            foreach (var deletedTag in deletedTags)
+                collectionGetter(entity).Remove(deletedTag);
+
+            return entity;
+        }
+
         /// <summary>
         /// Predicate for searching using an id
         /// </summary>
