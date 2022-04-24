@@ -1,4 +1,5 @@
 ﻿@inherits RootComponent
+@typeparam TConnector
 @typeparam TModel
 @typeparam TKey
 
@@ -46,11 +47,11 @@
     <div>
         @if(reordering && ReorderService is not null)
         {
-            <MudDropContainer T="TModel" @ref="reorderContainer" ItemIsDisabled="@(_ => reorderLoading)" Items="@DisplayItems" ItemsSelector="@((item, dropzone) => true)" ItemDropped="ReorderUpdated" >
+            <MudDropContainer T="TConnector" @ref="reorderContainer" ItemIsDisabled="@(_ => reorderLoading)" Items="@DisplayItems" ItemsSelector="@((item, dropzone) => true)" ItemDropped="ReorderUpdated" >
 		        <ChildContent>
 			        <MudList Clickable="false">
 			            <MudListSubheader>Drop Zone</MudListSubheader>
-					    <MudDropZone T="TModel" Identifier="reorder" AllowReorder="true" />
+					    <MudDropZone T="TConnector" Identifier="reorder" AllowReorder="true" />
 				    </MudList>
 		        </ChildContent>
 		        <ItemRenderer>
@@ -68,7 +69,7 @@
                     </div>
                     <MudSpacer />
                     <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" 
-                        OnClick="async _ => { await RemoveItemFromCollection(IdGetter(item)); }" Disabled="AnyLoading">Delete</MudButton> 
+                        OnClick="async _ => { await RemoveItemFromCollection(item); }" Disabled="AnyLoading">Delete</MudButton> 
                 </MudPaper>
             }
         }

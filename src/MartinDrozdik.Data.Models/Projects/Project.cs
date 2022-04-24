@@ -38,5 +38,7 @@ namespace MartinDrozdik.Data.Models.Projects
         public int OgImageId { get; set; }
 
         public ICollection<ProjectTag> Tags { get; set; } = new List<ProjectTag>();
+
+        public ICollection<ProjectDeveloper> Developers { get; set; } = new List<ProjectDeveloper>();  
     }
 }

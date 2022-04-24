@@ -5,6 +5,7 @@
 @inject ProjectLogoService LogoService
 @inject ProjectOgImageService OgImageService
 @inject ProjectTagService TagService
+@inject PersonService PersonService
 
 @code{
     [Parameter]
@@ -113,16 +114,33 @@ else
                 </ImageEditor>
             </MudTabPanel>
 
-            @* Tags*@
+            @* Tags *@
             <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
-                <ModelCollectionInput TModel="ProjectTag" TKey="int" @bind-Items="context.Model.Tags"
+                <ModelCollectionInput TConnector="ProjectTag" TKey="int" TModel="ProjectTag" @bind-Items="context.Model.Tags"
                     GetService="TagService" Unique="true" IdGetter="e => e.Id"
-                    ReorderService="TagService" OrderExpression="e => e.OrderIndex">
+                    ReorderService="TagService" OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => e" IsAlreadySelected="(e, c) => c.Any(f => f.Id == e.Id)">
                     <DisplayItem Context="tag">
                         @tag.ToString()
                     </DisplayItem>
                     <ReorderItem Context="tag">
                         <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{tag.Name}")" />
+                    </ReorderItem>
+                </ModelCollectionInput>
+            </MudTabPanel>
+
+            @* Developers *@
+            <MudTabPanel Text="Developers" Icon="@Icons.Material.Filled.Person">
+                <ModelCollectionInput TConnector="ProjectDeveloper" TKey="int" TModel="Person" @bind-Items="context.Model.Developers"
+                    GetService="PersonService" Unique="true" IdGetter="e => e.Id"
+                    ReorderService="PersonService" OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => new ProjectDeveloper(){ ProjectsId = entity.Id, Person = e, PersonsId = e.Id }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.PersonsId == e.Id)">
+                    <DisplayItem Context="connection">
+                        @connection.Person.Name
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Person.Name}")" />
                     </ReorderItem>
                 </ModelCollectionInput>
             </MudTabPanel>

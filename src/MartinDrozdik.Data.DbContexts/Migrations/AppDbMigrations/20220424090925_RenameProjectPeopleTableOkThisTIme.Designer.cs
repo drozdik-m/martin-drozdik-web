@@ -4,6 +4,7 @@ using Bonsai.DataPersistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20220424090925_RenameProjectPeopleTableOkThisTIme")]
+    partial class RenameProjectPeopleTableOkThisTIme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +55,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasIndex("ProfileImageId");
 
-                    b.ToTable("People", (string)null);
+                    b.ToTable("People");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.People.PersonProfileImage", b =>
@@ -88,7 +90,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PeopleProfileImages", (string)null);
+                    b.ToTable("PeopleProfileImages");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.Project", b =>
@@ -138,7 +140,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasIndex("OgImageId");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectDeveloper", b =>
@@ -161,10 +163,6 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.Property<int>("PersonsId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProjectsId")
                         .HasColumnType("int");
 
@@ -174,7 +172,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasIndex("ProjectsId");
 
-                    b.ToTable("ProjectDevelopers", (string)null);
+                    b.ToTable("ProjectDevelopers");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectLogo", b =>
@@ -209,7 +207,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectLogos", (string)null);
+                    b.ToTable("ProjectLogos");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectOgImage", b =>
@@ -244,7 +242,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectOgImages", (string)null);
+                    b.ToTable("ProjectOgImages");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectTag", b =>
@@ -270,7 +268,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProjectTags", (string)null);
+                    b.ToTable("ProjectTags");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Technologies.Technology", b =>
@@ -305,7 +303,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasIndex("LogoId");
 
-                    b.ToTable("Technologies", (string)null);
+                    b.ToTable("Technologies");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Technologies.TechnologyLogo", b =>
@@ -340,7 +338,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TechnologyLogos", (string)null);
+                    b.ToTable("TechnologyLogos");
                 });
 
             modelBuilder.Entity("ProjectProjectTag", b =>
@@ -355,7 +353,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 
                     b.HasIndex("TagsId");
 
-                    b.ToTable("ProjectProjectTag", (string)null);
+                    b.ToTable("ProjectProjectTag");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.People.Person", b =>

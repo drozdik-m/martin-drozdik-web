@@ -13,7 +13,7 @@ using MudBlazor.Utilities;
 
 namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
 {
-    public partial class ModelCollectionInput<TModel, TKey> : RootComponent
+    public partial class ModelCollectionInput<TConnector, TModel, TKey> : RootComponent
     {
         [Inject]
         ISnackbar Snackbar { get; set; }
@@ -22,19 +22,19 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         /// Items to edit
         /// </summary>
         [Parameter]
-        public ICollection<TModel> Items { get; set; }
+        public ICollection<TConnector> Items { get; set; }
 
         /// <summary>
         /// Items changed callback
         /// </summary>
         [Parameter]
-        public EventCallback<ICollection<TModel>> ItemsChanged { get; set; }
+        public EventCallback<ICollection<TConnector>> ItemsChanged { get; set; }
 
         /// <summary>
         /// Fragment for rendering individual items
         /// </summary>
         [Parameter]
-        public RenderFragment<TModel> DisplayItem { get; set; }
+        public RenderFragment<TConnector> DisplayItem { get; set; }
 
         /// <summary>
         /// Tells if any loading is in progress
@@ -57,15 +57,18 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         /// Provides an ID for every model
         /// </summary>
         [Parameter, EditorRequired]
-        public Func<TModel, TKey> IdGetter { get; set; }
+        public Func<TConnector, TKey> IdGetter { get; set; }
 
         [Parameter]
-        public Func<ICollection<TModel>, IEnumerable<TModel>> CustomOrder { get; set; }
+        public Func<TModel, IEnumerable<TConnector>, bool> IsAlreadySelected { get; set; }
+
+        [Parameter]
+        public Func<ICollection<TConnector>, IEnumerable<TConnector>> CustomOrder { get; set; }
 
         /// <summary>
         /// Property for displaying items
         /// </summary>
-        public IEnumerable<TModel> DisplayItems
+        public IEnumerable<TConnector> DisplayItems
         {
             get
             {
@@ -132,14 +135,16 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
 
         #region Add
 
+        [Parameter, EditorRequired]
+        public Func<TModel, TConnector> ConnectorFactory { get; set; }
+             
         protected IEnumerable<TModel> ItemsToAdd
         {
             get
             {
                 if (!Unique)
                     return Options;
-                var itemIds = Items.Select(IdGetter);
-                return Options.Where(e => !itemIds.Contains(IdGetter.Invoke(e)));
+                return Options.Where(e => !IsAlreadySelected(e, Items));
             }
         }
 
@@ -157,7 +162,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
                     return;
                 }
 
-                Items.Add(SelectedOption);
+                Items.Add(ConnectorFactory(SelectedOption));
                 await ItemsChanged.InvokeAsync(Items);
 
                 if (Unique)
@@ -166,20 +171,25 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
             catch (Exception e)
             {
                 Snackbar.Add("Something went wrong :(", Severity.Error);
+                lastException = e;
             }
         }
 
         #endregion
 
         #region Remove
-        protected async Task RemoveItemFromCollection(TKey id)
+        protected async Task RemoveItemFromCollection(TConnector toRemove)
         {
             try
             {
-                var toRemove = Items
-                    .Where(e => IdGetter.Invoke(e).Equals(id))
-                    .SingleOrDefault();
+                if (IdGetter is null)
+                    throw new ArgumentNullException(nameof(IdGetter));
 
+                /*var toRemove = Items
+                    .Where(e => IdGetter.Invoke(e).Equals(id))
+                    .Where(e => IdGetter.Invoke(e).Equals(id))
+                    .SingleOrDefault();*/
+                
                 if (toRemove is null)
                     return;
 
@@ -189,6 +199,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
             catch (Exception e)
             {
                 Snackbar.Add("Something went wrong :(", Severity.Error);
+                lastException = e;
             }
         }
         #endregion
@@ -196,20 +207,20 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         #region Reorder
         bool reordering = false;
         bool reorderLoading = false;
-        MudDropContainer<TModel> reorderContainer;
+        MudDropContainer<TConnector> reorderContainer;
         int[] originalOrder = Array.Empty<int>();
 
         /// <summary>
         /// Section for display of reordered item
         /// </summary>
         [Parameter]
-        public RenderFragment<TModel> ReorderItem { get; set; }
+        public RenderFragment<TConnector> ReorderItem { get; set; }
 
         /// <summary>
         /// Expression that identifies the order property (e => e.OrderIndex)
         /// </summary>
         [Parameter]
-        public Expression<Func<TModel, int>> OrderExpression { get; set; }
+        public Expression<Func<TConnector, int>> OrderExpression { get; set; }
 
         /// <summary>
         /// Service for reordering
@@ -311,7 +322,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         /// Callback for the ordering component
         /// </summary>
         /// <param name="dropItem"></param>
-        protected void ReorderUpdated(MudItemDropInfo<TModel> dropItem)
+        protected void ReorderUpdated(MudItemDropInfo<TConnector> dropItem)
         {
             Items.UpdateOrder(dropItem, OrderExpression);
         }

@@ -36,7 +36,10 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entities = entities
                 .Include(e => e.Logo)
                 .Include(e => e.OgImage)
-                .Include(e => e.Tags.OrderBy(e => e.OrderIndex));
+                .Include(e => e.Tags.OrderBy(e => e.OrderIndex))
+                .Include(e => e.Developers)
+                    .ThenInclude(e => e.Person)
+                        .ThenInclude(e => e.ProfileImage);
             return base.IncludeRelationsAsync(entities);
         }
 
@@ -55,7 +58,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
 
-            await HandleManyToManyUpdate(entity, e => e.Tags, e => e.Tags);
+            await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
+            await HandleManyToManyConnectorUpdate<ProjectDeveloper, int>(entity, e => e.Developers, e => e.Developers);
 
             return entity;
         }

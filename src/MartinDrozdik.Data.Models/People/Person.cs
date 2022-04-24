@@ -35,5 +35,7 @@ namespace MartinDrozdik.Data.Models.People
         /// </summary>
         [ForeignKey("ProfileImage")]
         public int ProfileImageId { get; set; }
+
+        public override string ToString() => Name;
     }
 }

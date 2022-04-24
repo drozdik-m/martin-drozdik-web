@@ -84,36 +84,108 @@ namespace MartinDrozdik.Data.Repositories
         protected virtual Task<TEntity> ProcessDeletedEntityAsync(TEntity entity)
             => Task.FromResult(entity);
 
-        protected async Task<TEntity> HandleManyToManyUpdate<TTarget>(
+        /// <summary>
+        /// Figures out what items were removed and added to an entity collection 
+        /// and resets the collection to the original image.
+        /// </summary>
+        /// <typeparam name="TTarget"></typeparam>
+        /// <typeparam name="TTargetKey"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="enumerableGetterExpression"></param>
+        /// <param name="collectionGetterExpression"></param>
+        /// <returns></returns>
+        protected async Task<(List<TTarget> Removed, List<TTarget> Added)> FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(
             TEntity entity,
             Expression<Func<TEntity, IEnumerable<TTarget>>> enumerableGetterExpression,
             Expression<Func<TEntity, ICollection<TTarget>>> collectionGetterExpression)
-            where TTarget : class, IIdentifiable<TKey>
+            where TTarget : class, IIdentifiable<TTargetKey>
         {
             var collectionGetter = collectionGetterExpression.Compile();
 
-            //Get desired tags
+            //Get desired items
             var desiredItems = collectionGetter(entity).ToList();
 
-            //Get original tags
+            //Get original items
             var entry = Context.Entry(entity);
             collectionGetter(entity).Clear();
             await entry.Collection(enumerableGetterExpression).LoadAsync();
 
-            //Figure out new and deleted tags
-            var newTags = desiredItems.Where(e => !collectionGetter(entity).Any(f => e.Id.Equals(f.Id))).ToList();
-            var deletedTags = collectionGetter(entity).Where(e => !desiredItems.Any(f => e.Id.Equals(f.Id))).ToList();
+            //Figure out new and deleted items
+            var newItems = desiredItems.Where(e => !collectionGetter(entity).Any(f => e.Id.Equals(f.Id))).ToList();
+            var deletedItems = collectionGetter(entity).Where(e => !desiredItems.Any(f => e.Id.Equals(f.Id))).ToList();
+
+            return (newItems, deletedItems);
+        }
+
+        /// <summary>
+        /// Handles direct many-to-many connection
+        /// </summary>
+        /// <typeparam name="TTarget"></typeparam>
+        /// <typeparam name="TTargetKey"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="enumerableGetterExpression"></param>
+        /// <param name="collectionGetterExpression"></param>
+        /// <returns></returns>
+        protected async Task<TEntity> HandleManyToManyUpdate<TTarget, TTargetKey>(
+            TEntity entity,
+            Expression<Func<TEntity, IEnumerable<TTarget>>> enumerableGetterExpression,
+            Expression<Func<TEntity, ICollection<TTarget>>> collectionGetterExpression)
+            where TTarget : class, IIdentifiable<TTargetKey>
+        {
+            var collectionGetter = collectionGetterExpression.Compile();
+            var (newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(entity, enumerableGetterExpression, collectionGetterExpression);
 
             //Add new tags
-            foreach (var newTag in newTags)
+            foreach (var newItem in newItems)
             {
-                collectionGetter(entity).Add(newTag);
-                Context.Entry(newTag).State = EntityState.Modified;
+                collectionGetter(entity).Add(newItem);
+                Context.Entry(newItem).State = EntityState.Modified;
             }
 
             //Delete old tags
-            foreach (var deletedTag in deletedTags)
-                collectionGetter(entity).Remove(deletedTag);
+            foreach (var deletedItem in deletedItems)
+                collectionGetter(entity).Remove(deletedItem);
+
+            return entity;
+        }
+
+        /// <summary>
+        /// Handles many-to-many connection with explicit connector
+        /// </summary>
+        /// <typeparam name="TConnector"></typeparam>
+        /// <typeparam name="TConnectorKey"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="enumerableGetterExpression"></param>
+        /// <param name="collectionGetterExpression"></param>
+        /// <returns></returns>
+        protected async Task<TEntity> HandleManyToManyConnectorUpdate<TConnector, TConnectorKey>(
+            TEntity entity,
+            Expression<Func<TEntity, IEnumerable<TConnector>>> enumerableGetterExpression,
+            Expression<Func<TEntity, ICollection<TConnector>>> collectionGetterExpression)
+            where TConnector : class, IIdentifiable<TConnectorKey>
+        {
+            var collectionGetter = collectionGetterExpression.Compile();
+            var (newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TConnector, TConnectorKey>(entity, enumerableGetterExpression, collectionGetterExpression);
+
+            //Mark all connectors as modified
+            foreach(var connector in collectionGetter.Invoke(entity))
+            {
+                Context.Entry(connector).State = EntityState.Modified;
+            }
+
+            //Add new connectors
+            foreach (var newConnector in newItems)
+            {
+                collectionGetter(entity).Add(newConnector);
+                Context.Entry(newConnector).State = EntityState.Added;
+            }
+
+            //Delete old tags
+            foreach (var deletedConnector in deletedItems)
+            {
+                collectionGetter(entity).Remove(deletedConnector);
+                Context.Entry(deletedConnector).State = EntityState.Deleted;
+            }    
 
             return entity;
         }
@@ -159,7 +231,7 @@ namespace MartinDrozdik.Data.Repositories
             if (item == default)
                 throw new ArgumentNullException(nameof(item));
 
-            if (id == null)
+            if (id is null)
                 throw new ArgumentNullException(nameof(id));
 
             //The entity is not in the database
