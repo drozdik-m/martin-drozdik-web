@@ -24,8 +24,8 @@ namespace MartinDrozdik.Web.Facades
             serviceCollection = serviceCollection.AddScoped<ProjectFacade>();
             serviceCollection = serviceCollection.AddScoped<ProjectLogoFacade>();
             serviceCollection = serviceCollection.AddScoped<ProjectOgImageFacade>();
-
-
+            serviceCollection = serviceCollection.AddScoped<ProjectDeveloperFacade>();
+            
             return serviceCollection;
         }
     }

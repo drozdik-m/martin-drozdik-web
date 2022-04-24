@@ -27,7 +27,7 @@ namespace Bonsai.Server.Controllers.BaseControllers.Traits
             {
                 await OrderableFacade.ReorderAsync(newOrder);
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 throw new HttpResponseException(HttpStatusCode.InternalServerError);
             }

@@ -113,6 +113,12 @@ namespace MartinDrozdik.Data.Repositories
             //Figure out new and deleted items
             var newItems = desiredItems.Where(e => !collectionGetter(entity).Any(f => e.Id.Equals(f.Id))).ToList();
             var deletedItems = collectionGetter(entity).Where(e => !desiredItems.Any(f => e.Id.Equals(f.Id))).ToList();
+            var updatedItems = desiredItems
+                .Where(e => !newItems.Any(f => e.Id.Equals(f.Id)))
+                .Where(e => !deletedItems.Any(f => e.Id.Equals(f.Id)))
+                .ToList();
+
+            entry.Collection(enumerableGetterExpression).CurrentValue = updatedItems;
 
             return (newItems, deletedItems);
         }
@@ -135,14 +141,14 @@ namespace MartinDrozdik.Data.Repositories
             var collectionGetter = collectionGetterExpression.Compile();
             var (newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(entity, enumerableGetterExpression, collectionGetterExpression);
 
-            //Add new tags
+            //Add new items
             foreach (var newItem in newItems)
             {
                 collectionGetter(entity).Add(newItem);
                 Context.Entry(newItem).State = EntityState.Modified;
             }
 
-            //Delete old tags
+            //Delete old items
             foreach (var deletedItem in deletedItems)
                 collectionGetter(entity).Remove(deletedItem);
 
@@ -165,10 +171,11 @@ namespace MartinDrozdik.Data.Repositories
             where TConnector : class, IIdentifiable<TConnectorKey>
         {
             var collectionGetter = collectionGetterExpression.Compile();
+            
             var (newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TConnector, TConnectorKey>(entity, enumerableGetterExpression, collectionGetterExpression);
 
             //Mark all connectors as modified
-            foreach(var connector in collectionGetter.Invoke(entity))
+            foreach (var connector in collectionGetter.Invoke(entity))
             {
                 Context.Entry(connector).State = EntityState.Modified;
             }

@@ -95,7 +95,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         /// A service for getting all the options
         /// </summary>
         [Parameter]
-        public IGetAllService<TModel> GetService { get; set; }
+        public IGetAllService<TModel> GetOptionsService { get; set; }
 
         /// <summary>
         /// List of loaded entities to add to the collection
@@ -113,7 +113,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
             try
             {
                 optionsLoading = true;
-                Options = (await GetService.GetAsync()).ToList();
+                Options = (await GetOptionsService.GetAsync()).ToList();
                 optionsLoading = false;
                 optionsLoaded = true;
 
@@ -328,5 +328,30 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         }
         #endregion
 
+        #region Edit
+        protected Dictionary<TConnector, bool> EditingStatuses { get; set; } = new Dictionary<TConnector, bool>();
+
+        [Parameter]
+        public RenderFragment<ModelCollectionInputEditContext<TConnector>> EditItem { get; set; }
+
+        public Task ToggleEdit(TConnector model)
+        {
+            if(!EditingStatuses.ContainsKey(model))
+                EditingStatuses.Add(model, true);
+            else
+                EditingStatuses[model] = !EditingStatuses[model];
+
+            StateHasChanged();
+            return Task.CompletedTask;
+        }
+
+        public bool IsEditing(TConnector model)
+        {
+            if (!EditingStatuses.ContainsKey(model))
+                return false;
+            return EditingStatuses[model];
+        }
+
+        #endregion
     }
 }
