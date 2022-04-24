@@ -25,7 +25,7 @@
     GetService="Service"
     AddService="Service" EntityCreator="() => new ProjectTag()"
     DeleteService="Service"
-    CustomOrder="e => e.OrderBy(e => e.Projects.Count())">
+    ReorderService="Service" OrderExpression="e => e.OrderIndex">
 
     <DisplayItems>
         <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">

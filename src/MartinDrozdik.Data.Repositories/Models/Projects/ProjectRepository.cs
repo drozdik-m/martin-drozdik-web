@@ -36,7 +36,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entities = entities
                 .Include(e => e.Logo)
                 .Include(e => e.OgImage)
-                .Include(e => e.Tags.OrderBy(e => e.OrderIndex))
+                .Include(e => e.Tags.OrderBy(e => e.Tag.OrderIndex))
+                    .ThenInclude(e => e.Tag)
                 .Include(e => e.Developers)
                     .ThenInclude(e => e.Person)
                         .ThenInclude(e => e.ProfileImage);
@@ -58,7 +59,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
 
-            await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
+            //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
+            await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectDeveloper, int>(entity, e => e.Developers, e => e.Developers);
 
             return entity;

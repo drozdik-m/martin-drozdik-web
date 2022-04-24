@@ -11,7 +11,7 @@
 
 <div>
     @* Reorder *@
-    @if(DisplayItems.Count() >= 2 && !ReadOnly)
+    @if(OrderExpression is not null && DisplayItems.Count() >= 2 && !ReadOnly)
     {
         <MudButtonGroup OverrideStyles="false" Class="me-3 mb-3">
             <MudButton Variant="Variant.Filled" 
@@ -45,7 +45,7 @@
     }
 
     <div>
-        @if(reordering)
+        @if(OrderExpression is not null && reordering)
         {
             <MudDropContainer T="TConnector" @ref="reorderContainer" ItemIsDisabled="@(_ => reorderLoading)" Items="@DisplayItems" ItemsSelector="@((item, dropzone) => true)" ItemDropped="ReorderUpdated" >
 		        <ChildContent>

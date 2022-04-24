@@ -37,7 +37,7 @@ namespace MartinDrozdik.Data.Models.Projects
         [ForeignKey("OgImage")]
         public int OgImageId { get; set; }
 
-        public ICollection<ProjectTag> Tags { get; set; } = new List<ProjectTag>();
+        public ICollection<ProjectHasTag> Tags { get; set; } = new List<ProjectHasTag>();
 
         public ICollection<ProjectDeveloper> Developers { get; set; } = new List<ProjectDeveloper>();  
     }

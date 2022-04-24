@@ -117,16 +117,17 @@ else
 
             @* Tags *@
             <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
-                <ModelCollectionInput TConnector="ProjectTag" TKey="int" TModel="ProjectTag" @bind-Items="context.Model.Tags"
+                <ModelCollectionInput TConnector="ProjectHasTag" TKey="int" TModel="ProjectTag" @bind-Items="context.Model.Tags"
                     GetOptionsService="TagService" Unique="true" IdGetter="e => e.Id"
-                    OrderExpression="e => e.OrderIndex"
-                    ConnectorFactory="e => e" IsAlreadySelected="(e, c) => c.Any(f => f.Id == e.Id)"
+                    CustomOrder="e => e.OrderBy(f => f.Tag.OrderIndex)"
+                    ConnectorFactory="e => new ProjectHasTag(){ ProjectsId = entity.Id, Tag = e, TagsId = e.Id }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.TagsId == e.Id)"
                     ReadOnly="context.Disabled">
-                    <DisplayItem Context="tag">
-                        <MudText>@tag.Name</MudText>
+                    <DisplayItem Context="connection">
+                        <MudText>@connection.Tag.Name</MudText>
                     </DisplayItem>
-                    <ReorderItem Context="tag">
-                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{tag.Name}")" />
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Tag.Name}")" />
                     </ReorderItem>
                 </ModelCollectionInput>
             </MudTabPanel>
