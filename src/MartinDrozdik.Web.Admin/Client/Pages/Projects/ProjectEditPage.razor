@@ -119,11 +119,11 @@ else
             <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
                 <ModelCollectionInput TConnector="ProjectTag" TKey="int" TModel="ProjectTag" @bind-Items="context.Model.Tags"
                     GetOptionsService="TagService" Unique="true" IdGetter="e => e.Id"
-                    ReorderService="TagService" OrderExpression="e => e.OrderIndex"
+                    OrderExpression="e => e.OrderIndex"
                     ConnectorFactory="e => e" IsAlreadySelected="(e, c) => c.Any(f => f.Id == e.Id)"
                     ReadOnly="context.Disabled">
                     <DisplayItem Context="tag">
-                        @tag.ToString()
+                        <MudText>@tag.Name</MudText>
                     </DisplayItem>
                     <ReorderItem Context="tag">
                         <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{tag.Name}")" />
@@ -135,18 +135,18 @@ else
             <MudTabPanel Text="Developers" Icon="@Icons.Material.Filled.Person">
                 <ModelCollectionInput TConnector="ProjectDeveloper" TKey="int" TModel="Person" @bind-Items="context.Model.Developers"
                     GetOptionsService="PersonService" Unique="true" IdGetter="e => e.Id"
-                    ReorderService="ProjectDeveloperService" OrderExpression="e => e.OrderIndex"
+                    OrderExpression="e => e.OrderIndex"
                     ConnectorFactory="e => new ProjectDeveloper(){ ProjectsId = entity.Id, Person = e, PersonsId = e.Id }" 
                     IsAlreadySelected="(e, c) => c.Any(f => f.PersonsId == e.Id)" 
                     ReadOnly="context.Disabled">
                     <DisplayItem Context="connection">
-                        @connection.Person.Name
+                        <MudText><b>@connection.Person.Name</b> – @connection.Role</MudText>
                     </DisplayItem>
                     <ReorderItem Context="connection">
                         <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Person.Name}")" />
                     </ReorderItem>
                     <EditItem Context="connection">
-                        <MudTextField @bind-Value="connection.Model.Position" Disabled="context.Disabled" Label="Role" 
+                        <MudTextField @bind-Value="connection.Model.Role" Disabled="context.Disabled" Label="Role" 
                             Variant="Variant.Text" Class="my-3"
                             Immediate="true" HelperText="The role/position of this person in the project" />
                     </EditItem>

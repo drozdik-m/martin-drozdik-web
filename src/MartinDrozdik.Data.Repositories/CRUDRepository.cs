@@ -94,7 +94,7 @@ namespace MartinDrozdik.Data.Repositories
         /// <param name="enumerableGetterExpression"></param>
         /// <param name="collectionGetterExpression"></param>
         /// <returns></returns>
-        protected async Task<(List<TTarget> Removed, List<TTarget> Added)> FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(
+        protected async Task<(List<TTarget> Updated, List<TTarget> Removed, List<TTarget> Added)> FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(
             TEntity entity,
             Expression<Func<TEntity, IEnumerable<TTarget>>> enumerableGetterExpression,
             Expression<Func<TEntity, ICollection<TTarget>>> collectionGetterExpression)
@@ -118,9 +118,7 @@ namespace MartinDrozdik.Data.Repositories
                 .Where(e => !deletedItems.Any(f => e.Id.Equals(f.Id)))
                 .ToList();
 
-            entry.Collection(enumerableGetterExpression).CurrentValue = updatedItems;
-
-            return (newItems, deletedItems);
+            return (updatedItems, newItems, deletedItems);
         }
 
         /// <summary>
@@ -139,7 +137,7 @@ namespace MartinDrozdik.Data.Repositories
             where TTarget : class, IIdentifiable<TTargetKey>
         {
             var collectionGetter = collectionGetterExpression.Compile();
-            var (newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(entity, enumerableGetterExpression, collectionGetterExpression);
+            var (updatedItems, newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TTarget, TTargetKey>(entity, enumerableGetterExpression, collectionGetterExpression);
 
             //Add new items
             foreach (var newItem in newItems)
@@ -172,7 +170,8 @@ namespace MartinDrozdik.Data.Repositories
         {
             var collectionGetter = collectionGetterExpression.Compile();
             
-            var (newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TConnector, TConnectorKey>(entity, enumerableGetterExpression, collectionGetterExpression);
+            var (updatedItems, newItems, deletedItems) = await FigureOutRemovedAndAddedConnections<TConnector, TConnectorKey>(entity, enumerableGetterExpression, collectionGetterExpression);
+            Context.Entry(entity).Collection(enumerableGetterExpression).CurrentValue = updatedItems;
 
             //Mark all connectors as modified
             foreach (var connector in collectionGetter.Invoke(entity))

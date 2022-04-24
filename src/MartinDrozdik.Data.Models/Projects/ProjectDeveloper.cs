@@ -27,6 +27,6 @@ namespace MartinDrozdik.Data.Models.Projects
         [ForeignKey("PersonsId")]
         public Person? Person { get; set; }
 
-        public string Position { get; set; } = string.Empty;
+        public string Role { get; set; } = string.Empty;
     }
 }

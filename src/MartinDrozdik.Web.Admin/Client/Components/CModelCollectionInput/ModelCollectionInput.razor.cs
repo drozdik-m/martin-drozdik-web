@@ -223,12 +223,6 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         public Expression<Func<TConnector, int>> OrderExpression { get; set; }
 
         /// <summary>
-        /// Service for reordering
-        /// </summary>
-        [Parameter]
-        public IOrderableService<TKey> ReorderService { get; set; }
-
-        /// <summary>
         /// Method for the order control button
         /// </summary>
         /// <returns></returns>
@@ -272,7 +266,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
                 return;
             }
 
-            try
+            /*try
             {
                 reorderLoading = true;
                 var orderIds = Items
@@ -295,7 +289,9 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
             finally
             {
                 reorderLoading = false;
-            }
+            }*/
+
+            reordering = false;
         }
 
         /// <summary>
