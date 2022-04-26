@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Bonsai.Models.Abstraction.Entities;
 using MartinDrozdik.Data.Models.People;
+using MartinDrozdik.Data.Models.Technologies;
 using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Projects
@@ -39,6 +40,10 @@ namespace MartinDrozdik.Data.Models.Projects
 
         public ICollection<ProjectHasTag> Tags { get; set; } = new List<ProjectHasTag>();
 
-        public ICollection<ProjectDeveloper> Developers { get; set; } = new List<ProjectDeveloper>();  
+        public ICollection<ProjectDeveloper> Developers { get; set; } = new List<ProjectDeveloper>();
+
+        public ICollection<ProjectTechnology> Technologies { get; set; } = new List<ProjectTechnology>();
+
+        
     }
 }

@@ -4,6 +4,7 @@ using Bonsai.DataPersistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20220426191656_AddProjectTechnologyRelation")]
+    partial class AddProjectTechnologyRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -211,6 +213,35 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.ToTable("ProjectHasTags");
                 });
 
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectHasTechnology", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProjectsId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TechnologiesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectsId");
+
+                    b.HasIndex("TechnologiesId");
+
+                    b.ToTable("ProjectHasTechnologies");
+                });
+
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectLogo", b =>
                 {
                     b.Property<int>("Id")
@@ -305,42 +336,6 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectTags");
-                });
-
-            modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectTechnology", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("LastEditAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("OrderIndex")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TechnologiesId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Usage")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProjectsId");
-
-                    b.HasIndex("TechnologiesId");
-
-                    b.ToTable("ProjectTechnology");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Technologies.Technology", b =>
@@ -485,10 +480,10 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.Navigation("Tag");
                 });
 
-            modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectTechnology", b =>
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectHasTechnology", b =>
                 {
                     b.HasOne("MartinDrozdik.Data.Models.Projects.Project", "Project")
-                        .WithMany("Technologies")
+                        .WithMany()
                         .HasForeignKey("ProjectsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -520,8 +515,6 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.Navigation("Developers");
 
                     b.Navigation("Tags");
-
-                    b.Navigation("Technologies");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectTag", b =>

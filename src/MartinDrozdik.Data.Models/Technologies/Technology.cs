@@ -35,5 +35,8 @@ namespace MartinDrozdik.Data.Models.Technologies
         /// </summary>
         [ForeignKey("Logo")]
         public int LogoId { get; set; }
+
+        /// <inheritdoc/>
+        public override string ToString() => Name;
     }
 }

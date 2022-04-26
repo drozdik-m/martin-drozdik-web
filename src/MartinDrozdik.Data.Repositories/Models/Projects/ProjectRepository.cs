@@ -40,7 +40,10 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                     .ThenInclude(e => e.Tag)
                 .Include(e => e.Developers)
                     .ThenInclude(e => e.Person)
-                        .ThenInclude(e => e.ProfileImage);
+                        .ThenInclude(e => e.ProfileImage)
+                .Include(e => e.Technologies)
+                    .ThenInclude(e => e.Technology)
+                        .ThenInclude(e => e.Logo);
             return base.IncludeRelationsAsync(entities);
         }
 
@@ -61,7 +64,9 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
 
             //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
+            await HandleManyToManyConnectorUpdate<ProjectTechnology, int>(entity, e => e.Technologies, e => e.Technologies);
             await HandleManyToManyConnectorUpdate<ProjectDeveloper, int>(entity, e => e.Developers, e => e.Developers);
+            
 
             return entity;
         }

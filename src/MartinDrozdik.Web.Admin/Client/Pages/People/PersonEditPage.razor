@@ -54,7 +54,8 @@ else
 
             @* General info *@
             <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
-                
+                <MudText Typo="Typo.h5" Class="mb-5">General information</MudText>
+
                 <MudSwitch @bind-Checked="context.Model.IsMe" Disabled="context.Disabled" Label="Is this me?"
                     Color="Color.Primary" />
 
@@ -65,8 +66,10 @@ else
 
             </MudTabPanel>
 
-            @* Picture image *@
+            @* Person image *@
             <MudTabPanel Text="Profile picture" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Persons' image</MudText>
+
                 <ImageEditor Id="context.Model.ProfileImageId" @bind-Image="context.Model.ProfileImage"
                     ReadOnly="context.Disabled"
                     AddService="ProfileImageService" 

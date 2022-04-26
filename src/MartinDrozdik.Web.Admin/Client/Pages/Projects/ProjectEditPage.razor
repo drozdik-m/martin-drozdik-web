@@ -7,6 +7,7 @@
 @inject ProjectTagService TagService
 @inject ProjectDeveloperService ProjectDeveloperService
 @inject PersonService PersonService
+@inject TechnologyService TechnologyService
 
 @code{
     [Parameter]
@@ -51,6 +52,7 @@ else
 
             @* General info *@
             <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
+                <MudText Typo="Typo.h5" Class="mb-5">General information</MudText>
                 <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
                     Variant="Variant.Text" Class="my-3"
                     Immediate="true" HelperText="The name of this project" 
@@ -85,6 +87,7 @@ else
 
             @* Logo *@
             <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Project logo</MudText>
                 <ImageEditor Id="context.Model.LogoId" @bind-Image="context.Model.Logo"
                     ReadOnly="context.Disabled"
                     AddService="LogoService" 
@@ -101,6 +104,7 @@ else
 
             @* Og image *@
             <MudTabPanel Text="OG image" Icon="@Icons.Material.Filled.ImageAspectRatio">
+                <MudText Typo="Typo.h5" Class="mb-5">Project OG image</MudText>
                 <ImageEditor Id="context.Model.OgImageId" @bind-Image="context.Model.OgImage"
                     ReadOnly="context.Disabled"
                     AddService="OgImageService" 
@@ -117,6 +121,7 @@ else
 
             @* Tags *@
             <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
+                <MudText Typo="Typo.h5" Class="mb-5">Project tags</MudText>
                 <ModelCollectionInput TConnector="ProjectHasTag" TKey="int" TModel="ProjectTag" @bind-Items="context.Model.Tags"
                     GetOptionsService="TagService" Unique="true" IdGetter="e => e.Id"
                     CustomOrder="e => e.OrderBy(f => f.Tag.OrderIndex)"
@@ -134,6 +139,7 @@ else
 
             @* Developers *@
             <MudTabPanel Text="Developers" Icon="@Icons.Material.Filled.Person">
+                <MudText Typo="Typo.h5" Class="mb-5">Project developers</MudText>
                 <ModelCollectionInput TConnector="ProjectDeveloper" TKey="int" TModel="Person" @bind-Items="context.Model.Developers"
                     GetOptionsService="PersonService" Unique="true" IdGetter="e => e.Id"
                     OrderExpression="e => e.OrderIndex"
@@ -141,7 +147,13 @@ else
                     IsAlreadySelected="(e, c) => c.Any(f => f.PersonsId == e.Id)" 
                     ReadOnly="context.Disabled">
                     <DisplayItem Context="connection">
-                        <MudText><b>@connection.Person.Name</b> – @connection.Role</MudText>
+                        <MudText>
+                            <b>@connection.Person.Name</b>
+                            @if (!string.IsNullOrWhiteSpace(connection.Role))
+                            {
+                                @($"– {connection.Role}")
+                            }
+                         </MudText>
                     </DisplayItem>
                     <ReorderItem Context="connection">
                         <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Person.Name}")" />
@@ -150,6 +162,35 @@ else
                         <MudTextField @bind-Value="connection.Model.Role" Disabled="context.Disabled" Label="Role" 
                             Variant="Variant.Text" Class="my-3"
                             Immediate="true" HelperText="The role/position of this person in the project" />
+                    </EditItem>
+                </ModelCollectionInput>
+            </MudTabPanel>
+
+            @* Technologies *@
+            <MudTabPanel Text="Technologies" Icon="@Icons.Material.Filled.Analytics">
+                <MudText Typo="Typo.h5" Class="mb-5">Used technologies</MudText>
+                <ModelCollectionInput TConnector="ProjectTechnology" TKey="int" TModel="Technology" @bind-Items="context.Model.Technologies"
+                    GetOptionsService="TechnologyService" Unique="true" IdGetter="e => e.Id"
+                    OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => new ProjectTechnology(){ ProjectsId = entity.Id, Technology = e, TechnologiesId = e.Id }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.TechnologiesId == e.Id)" 
+                    ReadOnly="context.Disabled">
+                    <DisplayItem Context="connection">
+                        <MudText>
+                            <b>@connection.Technology.Name</b> 
+                            @if (!string.IsNullOrWhiteSpace(connection.Usage))
+                            {
+                                @($"– {connection.Usage}")
+                            }
+                         </MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Technology.Name}")" />
+                    </ReorderItem>
+                    <EditItem Context="connection">
+                        <MudTextField @bind-Value="connection.Model.Usage" Disabled="context.Disabled" Label="Usage" 
+                            Variant="Variant.Text" Class="my-3"
+                            Immediate="true" HelperText="The usage of this technology (front-end, back-end, ...)" />
                     </EditItem>
                 </ModelCollectionInput>
             </MudTabPanel>

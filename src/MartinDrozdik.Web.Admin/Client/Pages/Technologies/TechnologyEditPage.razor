@@ -50,7 +50,8 @@ else
 
             @* General info *@
             <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
-                
+                <MudText Typo="Typo.h5" Class="mb-5">General information</MudText>
+
                 <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
                     Variant="Variant.Text"
                     Immediate="true" HelperText="The name of this technology" 
@@ -62,8 +63,9 @@ else
 
             </MudTabPanel>
 
-            @* Picture image *@
+            @* Technology image *@
             <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Logo of the technology</MudText>
                 <ImageEditor Id="context.Model.LogoId" @bind-Image="context.Model.Logo"
                     ReadOnly="context.Disabled"
                     AddService="LogoService" 
