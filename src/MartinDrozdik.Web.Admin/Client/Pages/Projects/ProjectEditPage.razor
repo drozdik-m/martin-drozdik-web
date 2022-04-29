@@ -8,6 +8,7 @@
 @inject ProjectDeveloperService ProjectDeveloperService
 @inject PersonService PersonService
 @inject TechnologyService TechnologyService
+@inject ProjectPreviewImageService PreviewImageService
 
 @code{
     [Parameter]
@@ -97,6 +98,23 @@ else
 
                     <ImageDisplay Context="image">
                         <MudImage Height="512" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+
+            @* Preview image *@
+            <MudTabPanel Text="Preview image" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Project preview image</MudText>
+                <ImageEditor Id="context.Model.PreviewImageId" @bind-Image="context.Model.PreviewImage"
+                    ReadOnly="context.Disabled"
+                    AddService="PreviewImageService" 
+                    DeleteService="PreviewImageService"
+                    GetService="PreviewImageService"
+                    UpdateService="PreviewImageService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
                     </ImageDisplay>
 
                 </ImageEditor>

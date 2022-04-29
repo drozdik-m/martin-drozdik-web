@@ -26,7 +26,8 @@ namespace MartinDrozdik.Data.Repositories
             serviceCollection = serviceCollection.AddScoped<ProjectOgImageRepository>();
             serviceCollection = serviceCollection.AddScoped<ProjectDeveloperRepository>();
             serviceCollection = serviceCollection.AddScoped<ProjectPreviewImageRepository>();
-            
+            serviceCollection = serviceCollection.AddScoped<ProjectGalleryImageRepository>();
+
 
 
             return serviceCollection;

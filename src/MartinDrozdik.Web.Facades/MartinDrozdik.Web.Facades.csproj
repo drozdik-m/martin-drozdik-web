@@ -7,14 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MartinDrozdik.Services.ImageProcessing" Version="1.0.2" />
+    <PackageReference Include="MartinDrozdik.Services.ImageSaving" Version="1.1.0" />
     <PackageReference Include="MartinDrozdik.Utils.String" Version="1.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="6.0.0" />
     <PackageReference Include="SixLabors.ImageSharp" Version="2.1.1" />
     <PackageReference Include="SixLabors.ImageSharp.Drawing" Version="1.0.0-beta14" />
-    <PackageReference Include="SixLabors.ImageSharp.Web" Version="1.0.5" />
-    <PackageReference Include="System.Drawing.Common" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

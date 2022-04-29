@@ -4,9 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Services.ImageProcessing.Abstraction;
-using Bonsai.Services.ImageProcessing.Abstraction.Configuration;
-using Bonsai.Services.ImageProcessing.Configuration;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Data.Repositories.Models.Projects;
 using Microsoft.Extensions.Hosting;
@@ -17,8 +14,8 @@ using SixLabors.ImageSharp.Drawing.Processing;
 using SixLabors.ImageSharp.Drawing.Processing.Processors.Drawing;
 using SixLabors.ImageSharp.Processing;
 using SixLabors.ImageSharp.Processing.Processors;
-using Bonsai.Services.ImageProcessing;
-
+using MartinDrozdik.Services.ImageSaving;
+using MartinDrozdik.Services.ImageSaving.Configuration;
 
 namespace MartinDrozdik.Web.Facades.Models.Projects
 {
@@ -48,7 +45,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
 
             //Setup the uploaded image
             using var image = Image.Load(data);
-            var newImageSize = ImageSaver.GetImageSize(new System.Drawing.Size(image.Width, image.Height), new ImageConfiguration()
+            var newImageSize = ImageSaver.GetImageSize(image.Width, image.Height, new ImageConfiguration()
             {
                 MaxHeight = InnerLogoMaxHeight,
             });

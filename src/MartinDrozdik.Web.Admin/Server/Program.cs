@@ -1,13 +1,13 @@
 ﻿using Bonsai.DataPersistence.DbContexts;
 using Bonsai.RazorPages.Error.Services.LanguageDictionary.Languages;
 using Bonsai.RazorPages.User.Services.LanguageDictionary;
-using Bonsai.Services.ImageProcessing.Extensions;
 using MartinDrozdik.Data.DbContexts.Seeds;
 using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 using MartinDrozdik.Data.Models.UserIdentity;
 using MartinDrozdik.Data.Repositories;
 using MartinDrozdik.Services.FilePathProvider;
 using MartinDrozdik.Services.FilePathProvider.Specific;
+using MartinDrozdik.Services.ImageSaving.Extensions;
 using MartinDrozdik.Web.Admin.Server.Configuration;
 using MartinDrozdik.Web.Facades;
 using MartinDrozdik.Web.Facades.User;
