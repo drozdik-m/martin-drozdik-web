@@ -82,8 +82,54 @@ else
                     Variant="Variant.Outlined" Lines="8"
                     Immediate="true" HelperText="Abstract of the article (= the first paragraph)" />
 
-                <MudDatePicker @bind-Date="context.Model.FinishedTime" Disabled="context.Disabled"
-                    Label="Project finished date" DateFormat="dd. MM. yyyy" />
+                <MudGrid>
+                    <MudItem xs="3">
+                        <MudSwitch @bind-Checked="context.Model.IsFinished" Disabled="context.Disabled" 
+                            Class="my-4"
+                            Label="Is finished"
+                            Color="@(context.Model.IsFinished ? Color.Primary : Color.Success)"/>
+                    </MudItem>
+                    @if (context.Model.IsFinished)
+                    {
+                        <MudItem xs="9">
+                            <MudDatePicker @bind-Date="context.Model.FinishedTime" Disabled="context.Disabled"
+                                Label="Project finished date" DateFormat="dd. MM. yyyy" />
+                        </MudItem>
+                    }
+                </MudGrid> 
+
+                <MudGrid>
+                    <MudItem xs="3">
+                        <MudSwitch @bind-Checked="context.Model.HasLiveLink" Disabled="context.Disabled" 
+                            Class="my-4"
+                            Label="Is live"
+                            Color="@(context.Model.HasLiveLink ? Color.Primary : Color.Success)"/>
+                    </MudItem>
+                    @if (context.Model.HasLiveLink)
+                    {
+                        <MudItem xs="9">
+                            <MudTextField @bind-Value="context.Model.LiveLink" Disabled="context.Disabled" Label="Live URL" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The link to the live version of the project" />
+                        </MudItem>
+                    }
+                </MudGrid> 
+
+                <MudGrid>
+                    <MudItem xs="3">
+                        <MudSwitch @bind-Checked="context.Model.HasGitHubLink" Disabled="context.Disabled" 
+                            Class="my-4"
+                            Label="Has public GitHub"
+                            Color="@(context.Model.HasGitHubLink ? Color.Primary : Color.Success)"/>
+                    </MudItem>
+                    @if (context.Model.HasGitHubLink)
+                    {
+                        <MudItem xs="9">
+                            <MudTextField @bind-Value="context.Model.GitHubLink" Disabled="context.Disabled" Label="GitHub link" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The link to the public repository of the project" />
+                        </MudItem>
+                    }
+                </MudGrid>
+                
             </MudTabPanel>
 
             @* Logo *@
