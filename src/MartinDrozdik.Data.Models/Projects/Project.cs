@@ -26,6 +26,8 @@ namespace MartinDrozdik.Data.Models.Projects
 
         public string Abstract { get; set; } = string.Empty;
 
+        public bool IsFinished { get; set; } = false;    
+
         public DateTime? FinishedTime { get; set; } = DateTime.Now;
 
         public bool HasLiveLink { get; set; } = false;
@@ -57,6 +59,6 @@ namespace MartinDrozdik.Data.Models.Projects
 
         public ICollection<ProjectTechnology> Technologies { get; set; } = new List<ProjectTechnology>();
 
-        
+        public ICollection<ProjectGalleryImage> GalleryImages { get; set; } = new List<ProjectGalleryImage>();
     }
 }

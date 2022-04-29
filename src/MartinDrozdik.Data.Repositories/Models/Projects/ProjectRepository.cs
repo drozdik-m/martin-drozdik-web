@@ -45,6 +45,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                 .Include(e => e.Technologies)
                     .ThenInclude(e => e.Technology)
                         .ThenInclude(e => e.Logo)
+                .Include(e => e.GalleryImages)
                 ;
             return base.IncludeRelationsAsync(entities);
         }
@@ -65,6 +66,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
             Context.Entry(entity.PreviewImage).State = EntityState.Modified;
+            foreach(var galleryImage in entity.GalleryImages)
+                Context.Entry(galleryImage).State = EntityState.Modified;
 
             //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
@@ -87,6 +90,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             Context.Entry(entity.Logo).State = EntityState.Deleted;
             Context.Entry(entity.OgImage).State = EntityState.Deleted;
             Context.Entry(entity.PreviewImage).State = EntityState.Deleted;
+            foreach (var galleryImage in entity.GalleryImages)
+                Context.Entry(galleryImage).State = EntityState.Deleted;
             return entity;
         }
 
