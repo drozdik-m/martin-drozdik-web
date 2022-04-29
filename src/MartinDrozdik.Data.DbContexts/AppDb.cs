@@ -22,6 +22,7 @@ namespace Bonsai.DataPersistence.DbContexts
         public DbSet<ProjectDeveloper> ProjectDevelopers { get; set; }
         public DbSet<ProjectHasTag> ProjectHasTags { get; set; }
         public DbSet<ProjectTechnology> ProjectTechnology { get; set; }
+        public DbSet<ProjectPreviewImage> ProjectPreviewImages { get; set; }
 
         // -------- PEOPLE --------
         public DbSet<Person> People { get; set; }
@@ -30,6 +31,7 @@ namespace Bonsai.DataPersistence.DbContexts
         // -------- TECHNOLOGIES --------
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<TechnologyLogo> TechnologyLogos { get; set; }
+        
 
         public AppDb(DbContextOptions<AppDb> options) : base(options)
         {

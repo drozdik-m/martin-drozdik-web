@@ -28,6 +28,14 @@ namespace MartinDrozdik.Data.Models.Projects
 
         public DateTime? FinishedTime { get; set; } = DateTime.Now;
 
+        public bool HasLiveLink { get; set; } = false;
+
+        public string LiveLink { get ; set; } = string.Empty;
+
+        public bool HasGitHubLink { get; set; } = false;
+
+        public string GitHubLink { get; set; } = string.Empty;
+
         public ProjectLogo Logo { get; set; } = new();
 
         [ForeignKey("Logo")]
@@ -37,6 +45,11 @@ namespace MartinDrozdik.Data.Models.Projects
 
         [ForeignKey("OgImage")]
         public int OgImageId { get; set; }
+
+        public ProjectPreviewImage PreviewImage { get; set; } = new();
+
+        [ForeignKey("PreviewImage")]
+        public int PreviewImageId { get; set; }
 
         public ICollection<ProjectHasTag> Tags { get; set; } = new List<ProjectHasTag>();
 

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ganss.XSS;
 
-namespace MartinDrozdik.Data.Models.Text
+namespace MartinDrozdik.Data.Models.RichTexts.V1
 {
     //TODO Paragraph
     //TODO Text with side line
@@ -44,7 +44,5 @@ namespace MartinDrozdik.Data.Models.Text
         /// </summary>
         /// <returns></returns>
         public abstract string ToHTML();
-
-
     }
 }

@@ -36,6 +36,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entities = entities
                 .Include(e => e.Logo)
                 .Include(e => e.OgImage)
+                .Include(e => e.PreviewImage)
                 .Include(e => e.Tags.OrderBy(e => e.Tag.OrderIndex))
                     .ThenInclude(e => e.Tag)
                 .Include(e => e.Developers)
@@ -43,7 +44,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                         .ThenInclude(e => e.ProfileImage)
                 .Include(e => e.Technologies)
                     .ThenInclude(e => e.Technology)
-                        .ThenInclude(e => e.Logo);
+                        .ThenInclude(e => e.Logo)
+                ;
             return base.IncludeRelationsAsync(entities);
         }
 
@@ -52,6 +54,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entity = await base.ProcessNewEntityAsync(entity);
             Context.Entry(entity.Logo).State = EntityState.Added;
             Context.Entry(entity.OgImage).State = EntityState.Added;
+            Context.Entry(entity.PreviewImage).State = EntityState.Added;
             entity = await orderableTrait.SetInitialOrderAsync(entity);
             return entity;
         }
@@ -61,13 +64,13 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entity = await base.ProcessUpdatedEntityAsync(entity);
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
+            Context.Entry(entity.PreviewImage).State = EntityState.Modified;
 
             //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectTechnology, int>(entity, e => e.Technologies, e => e.Technologies);
             await HandleManyToManyConnectorUpdate<ProjectDeveloper, int>(entity, e => e.Developers, e => e.Developers);
             
-
             return entity;
         }
 
@@ -83,6 +86,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             entity = await base.ProcessDeletedEntityAsync(entity);
             Context.Entry(entity.Logo).State = EntityState.Deleted;
             Context.Entry(entity.OgImage).State = EntityState.Deleted;
+            Context.Entry(entity.PreviewImage).State = EntityState.Deleted;
             return entity;
         }
 

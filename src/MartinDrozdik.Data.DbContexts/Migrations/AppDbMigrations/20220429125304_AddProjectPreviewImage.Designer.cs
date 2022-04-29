@@ -4,6 +4,7 @@ using Bonsai.DataPersistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20220429125304_AddProjectPreviewImage")]
+    partial class AddProjectPreviewImage
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,25 +111,11 @@ namespace MartinDrozdik.Data.DbContexts.Migrations.AppDbMigrations
                     b.Property<DateTime?>("FinishedTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("GitHubLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("HasGitHubLink")
-                        .HasColumnType("bit");
-
-                    b.Property<bool>("HasLiveLink")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsHidden")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("LastEditAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("LiveLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LogoId")
                         .HasColumnType("int");
