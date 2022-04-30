@@ -17,16 +17,25 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Projects
 {
-    public class ProjectGalleryImageController : ImageController<ProjectGalleryImage>
+    public class ProjectGalleryImageController : ImageController<ProjectGalleryImage>,
+        IOrderableControllerTrait<ProjectGalleryImage, int>
     {
         readonly ProjectGalleryImageFacade facade;
+
+        readonly IOrderableControllerTrait<ProjectGalleryImage, int> orderableTrait;
 
         public ProjectGalleryImageController(ProjectGalleryImageFacade facade)
             : base(facade)
         {
             this.facade = facade;
+            orderableTrait = this;
         }
 
+        #region Orderable trait
+        IOrderableFacade<ProjectGalleryImage, int> IOrderableControllerTrait<ProjectGalleryImage, int>.OrderableFacade => facade;
 
+        [HttpPut("reorder")]
+        public virtual Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
+        #endregion
     }
 }

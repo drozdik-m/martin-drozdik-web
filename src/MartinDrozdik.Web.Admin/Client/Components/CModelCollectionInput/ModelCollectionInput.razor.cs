@@ -175,6 +175,20 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
             }
         }
 
+        public async Task AddNewToCollection()
+        {
+            try
+            {
+                Items.Add(ConnectorFactory(default));
+                await ItemsChanged.InvokeAsync(Items);
+            }
+            catch (Exception e)
+            {
+                Snackbar.Add("Something went wrong :(", Severity.Error);
+                lastException = e;
+            }
+        }
+
         #endregion
 
         #region Remove

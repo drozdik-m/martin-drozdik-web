@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,8 +13,11 @@ using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Projects
 {
-    public class ProjectGalleryImage : ProjectImage
+    public class ProjectGalleryImage : ProjectImage, IOrderable
     {
+        /// <inheritdoc />
+        public int OrderIndex { get; set; }
+
         /// <summary>
         /// The filename of the media thumbnail
         /// </summary>
@@ -34,5 +38,7 @@ namespace MartinDrozdik.Data.Models.Projects
         /// The project this image is assigned to
         /// </summary>
         public Project? Project { get; set; }
+        [ForeignKey("Project")]
+        public int ProjectId { get; set; }
     }
 }

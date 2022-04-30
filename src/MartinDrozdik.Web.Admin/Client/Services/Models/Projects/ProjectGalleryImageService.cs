@@ -18,14 +18,21 @@ using Newtonsoft.Json;
 
 namespace MartinDrozdik.Web.Admin.Client.Services.Models.Projects
 {
-    public class ProjectGalleryImageService : MediaBaseService<ProjectGalleryImage>
+    public class ProjectGalleryImageService : MediaBaseService<ProjectGalleryImage>,
+        IOrderableServiceTrait<ProjectGalleryImage, int>
     {
+        readonly IOrderableServiceTrait<ProjectGalleryImage, int> orderableTrait;
+
         public ProjectGalleryImageService(HttpClient http)
             : base(http)
         {
-
+            orderableTrait = this;
         }
 
         protected override string ApiUri { get; set; } = "/api/ProjectGalleryImage";
+
+        #region Orderable trait
+        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
+        #endregion
     }
 }

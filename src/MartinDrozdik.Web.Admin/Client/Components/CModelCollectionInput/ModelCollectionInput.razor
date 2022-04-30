@@ -126,32 +126,41 @@
         <MudButtonGroup OverrideStyles="false" Class="mt-5">
 
             @* Add selected button*@
-            @if (optionsLoaded && Options.Count != 0)
+            @if (GetOptionsService is not null && optionsLoaded && Options.Count != 0)
             {
                 <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary" 
                         OnClick="async _ => await AddSelectedToCollection()" Disabled="@(AnyLoading || SelectedOption is null)">Add Selected</MudButton>
             }
 
-            @* Reload options button *@
-            <MudButton Variant="Variant.Outlined" StartIcon="@(optionsLoaded ? Icons.Material.Filled.Refresh : Icons.Material.Filled.Add)" Color="Color.Primary" 
-                    OnClick="async _ => await ReloadOptionsAsync()" Disabled="AnyLoading">
-            @if (optionsLoading)
+            else if(GetOptionsService is null && ConnectorFactory is not null)
             {
-                <MudText Class="me-3">Loading options</MudText>
-                <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary" 
+                        OnClick="async _ => await AddNewToCollection()" Disabled="@(AnyLoading)">Add new</MudButton>
             }
-            else
+
+            @* Reload options button *@
+            @if(GetOptionsService is not null)
             {
-                @if (optionsLoaded)
+                <MudButton Variant="Variant.Outlined" StartIcon="@(optionsLoaded ? Icons.Material.Filled.Refresh : Icons.Material.Filled.Add)" Color="Color.Primary" 
+                    OnClick="async _ => await ReloadOptionsAsync()" Disabled="AnyLoading">
+                @if (optionsLoading)
                 {
-                    <MudText>Reload options</MudText>
+                    <MudText Class="me-3">Loading options</MudText>
+                    <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
                 }
                 else
                 {
-                    <MudText>Start adding</MudText>
+                    @if (optionsLoaded)
+                    {
+                        <MudText>Reload options</MudText>
+                    }
+                    else
+                    {
+                        <MudText>Start adding</MudText>
+                    }
                 }
+                </MudButton>
             }
-            </MudButton>
         </MudButtonGroup>
     }
 

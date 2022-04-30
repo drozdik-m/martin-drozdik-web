@@ -9,6 +9,7 @@
 @inject PersonService PersonService
 @inject TechnologyService TechnologyService
 @inject ProjectPreviewImageService PreviewImageService
+@inject ProjectGalleryImageService GalleryImageService
 
 @code{
     [Parameter]
@@ -181,6 +182,81 @@ else
                     </ImageDisplay>
 
                 </ImageEditor>
+            </MudTabPanel>
+
+            @* Gallery images *@
+            <MudTabPanel Text="Gallery images" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Project intro gallery</MudText>
+                <ModelCollectionInput TConnector="ProjectGalleryImage" TKey="int" TModel="ProjectGalleryImage" @bind-Items="context.Model.GalleryImages"
+                    IdGetter="e => e.Id"
+                    OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => new ProjectGalleryImage(){ ProjectId = entity.Id }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => e.Id == e.Id)" 
+                    ReadOnly="context.Disabled">
+
+                    <DisplayItem Context="connection">
+                        <MudText>
+                            @if (string.IsNullOrWhiteSpace(connection.Name))
+                            {
+                                @if(connection.Id == default)
+                                {
+                                    <i>New image</i>
+                                }
+                                else
+                                {
+                                    <b>Image @connection.Id</b>
+                                }
+                            }
+                            else
+                            {
+                                <b>@connection.Name</b>
+                            }
+                        </MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        @{
+                            var name = string.Empty;
+                            @if (string.IsNullOrWhiteSpace(connection.Name))
+                            {
+                                @if(connection.Id == default)
+                                {
+                                    name = "New image";
+                                }
+                                else
+                                {
+                                    name = $"Image {connection.Id}";
+                                }
+                            }
+                            else
+                            {
+                                name = connection.Name;
+                            }
+                        }
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{name}")" />
+                    </ReorderItem>
+                    <EditItem Context="connection">
+                        @if(connection.Model.Id == default)
+                        {
+                            <MudAlert Severity="Severity.Info">The image needs to be saved first </MudAlert>
+                        }
+                        else
+                        {
+                            <ImageEditor Id="connection.Model.Id" @bind-Image="connection.Model"
+                                ReadOnly="connection.ReadOnly"
+                                AddService="GalleryImageService" 
+                                DeleteService="GalleryImageService"
+                                GetService="GalleryImageService"
+                                UpdateService="GalleryImageService"> 
+
+                                <ImageDisplay Context="image">
+                                    <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                                    <MudImage Height="150" Src="@image.ThumbnailUri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                                </ImageDisplay>
+
+                            </ImageEditor>
+                        }
+                    </EditItem>
+                </ModelCollectionInput>
             </MudTabPanel>
 
             @* Tags *@

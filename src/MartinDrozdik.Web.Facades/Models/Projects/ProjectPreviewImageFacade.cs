@@ -31,7 +31,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
             : base(hostEnvironment, repository, imageSaver, new ImageConfiguration()
             {
                 MaxWidth = 540,
-                Quality = 70
+                Quality = 75
             })
         {
             this.hostEnvironment = hostEnvironment;

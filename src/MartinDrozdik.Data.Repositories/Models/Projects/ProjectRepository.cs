@@ -45,7 +45,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                 .Include(e => e.Technologies)
                     .ThenInclude(e => e.Technology)
                         .ThenInclude(e => e.Logo)
-                .Include(e => e.GalleryImages)
+                .Include(e => e.GalleryImages.OrderBy(e => e.OrderIndex))
                 ;
             return base.IncludeRelationsAsync(entities);
         }
@@ -66,14 +66,24 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
             Context.Entry(entity.PreviewImage).State = EntityState.Modified;
-            foreach(var galleryImage in entity.GalleryImages)
-                Context.Entry(galleryImage).State = EntityState.Modified;
+
+            /*foreach(var galleryImage in entity.GalleryImages)
+            {
+                galleryImage.ProjectId = entity.Id;
+
+                if (galleryImage.Id == default)
+                    Context.Entry(galleryImage).State = EntityState.Modified;
+                else
+                    Context.Entry(galleryImage).State = EntityState.Modified;
+                
+            }*/
 
             //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectTechnology, int>(entity, e => e.Technologies, e => e.Technologies);
             await HandleManyToManyConnectorUpdate<ProjectDeveloper, int>(entity, e => e.Developers, e => e.Developers);
-            
+            await HandleManyToOneUpdate<ProjectGalleryImage, int>(entity, e => e.GalleryImages, e => e.GalleryImages);
+
             return entity;
         }
 

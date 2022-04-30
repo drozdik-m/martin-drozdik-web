@@ -197,6 +197,24 @@ namespace MartinDrozdik.Data.Repositories
         }
 
         /// <summary>
+        /// Handles many-to-one connection
+        /// </summary>
+        /// <typeparam name="TTarget"></typeparam>
+        /// <typeparam name="TTargetKey"></typeparam>
+        /// <param name="entity"></param>
+        /// <param name="enumerableGetterExpression"></param>
+        /// <param name="collectionGetterExpression"></param>
+        /// <returns></returns>
+        protected async Task HandleManyToOneUpdate<TTarget, TTargetKey>(
+            TEntity entity,
+            Expression<Func<TEntity, IEnumerable<TTarget>>> enumerableGetterExpression,
+            Expression<Func<TEntity, ICollection<TTarget>>> collectionGetterExpression)
+            where TTarget : class, IIdentifiable<TTargetKey>
+        {
+            await HandleManyToManyConnectorUpdate<TTarget, TTargetKey>(entity, enumerableGetterExpression, collectionGetterExpression);
+        }
+
+        /// <summary>
         /// Predicate for searching using an id
         /// </summary>
         /// <param name="targetId">Target id</param>

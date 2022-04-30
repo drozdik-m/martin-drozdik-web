@@ -18,14 +18,21 @@ using MartinDrozdik.Data.Models.Projects;
 
 namespace MartinDrozdik.Data.Repositories.Models.Projects
 {
-    public class ProjectGalleryImageRepository : ProjectImageRepository<ProjectGalleryImage>
+    public class ProjectGalleryImageRepository : ProjectImageRepository<ProjectGalleryImage>,
+        IOrderableRepositoryTrait<ProjectGalleryImage, int, AppDb>
     {
+        readonly IOrderableRepositoryTrait<ProjectGalleryImage, int, AppDb> orderableTrait;
+
         public ProjectGalleryImageRepository(AppDb context)
             : base(context)
         {
-
+            orderableTrait = this;
         }
 
         protected override DbSet<ProjectGalleryImage> EntitySet => Context.ProjectGalleryImages;
+
+        #region Orderable trait
+        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
+        #endregion
     }
 }
