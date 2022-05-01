@@ -12,6 +12,6 @@ namespace MartinDrozdik.Data.Models.Projects
 {
     public class ProjectLogo : ProjectImage
     {
-
+        public override string FolderPath => $"AppData/ProjectLogos/{Id}";
     }
 }

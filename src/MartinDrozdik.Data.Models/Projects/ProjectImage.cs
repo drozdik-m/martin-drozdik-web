@@ -9,8 +9,8 @@ using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Projects
 {
-    public class ProjectImage : Image
+    public abstract class ProjectImage : Image
     {
-        public override string FolderPath => $"AppData/Projects/{Id}";
+        
     }
 }

@@ -12,6 +12,6 @@ namespace MartinDrozdik.Data.Models.Projects
 {
     public class ProjectPreviewImage : ProjectImage
     {
-
+        public override string FolderPath => $"AppData/ProjectPreviewImages/{Id}";
     }
 }

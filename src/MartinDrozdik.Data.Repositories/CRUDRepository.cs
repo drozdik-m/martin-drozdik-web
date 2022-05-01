@@ -249,6 +249,33 @@ namespace MartinDrozdik.Data.Repositories
             return searchedEntity;
         }
 
+        /// <summary>
+        /// Returns an entity for read purposes only
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="DefaultKeyException"></exception>
+        /// <exception cref="NotFoundException"></exception>
+        public async Task<TEntity> ReadAsync(TKey id)
+        {
+            if (Equals(id, default(TKey)))
+                throw new DefaultKeyException();
+
+            var entities = EntitySet
+                .AsNoTracking()
+                .Where(IdPredicate(id));
+            var includedEntities = await IncludeRelationsAsync(entities);
+            var processedEntities = await ProcessReturnedEntitiesAsync(includedEntities);
+            var searchedEntity = await processedEntities.FirstOrDefaultAsync();
+
+            //Not found
+            if (searchedEntity == default)
+                throw new NotFoundException();
+
+            //Return result entity
+            return searchedEntity;
+        }
+
         /// <inheritdoc/>
         public async Task UpdateAsync(TKey id, TEntity item)
         {

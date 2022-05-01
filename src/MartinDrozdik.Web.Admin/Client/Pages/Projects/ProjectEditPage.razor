@@ -192,7 +192,8 @@ else
                     OrderExpression="e => e.OrderIndex"
                     ConnectorFactory="e => new ProjectGalleryImage(){ ProjectId = entity.Id }" 
                     IsAlreadySelected="(e, c) => c.Any(f => e.Id == e.Id)" 
-                    ReadOnly="context.Disabled">
+                    ReadOnly="context.Disabled"                    
+                    >
 
                     <DisplayItem Context="connection">
                         <MudText>
@@ -237,23 +238,24 @@ else
                     <EditItem Context="connection">
                         @if(connection.Model.Id == default)
                         {
-                            <MudAlert Severity="Severity.Info">The image needs to be saved first </MudAlert>
+                        <MudAlert Severity="Severity.Info">The image needs to be saved first </MudAlert>
                         }
                         else
                         {
                             <ImageEditor Id="connection.Model.Id" @bind-Image="connection.Model"
-                                ReadOnly="connection.ReadOnly"
-                                AddService="GalleryImageService" 
-                                DeleteService="GalleryImageService"
-                                GetService="GalleryImageService"
-                                UpdateService="GalleryImageService"> 
+                                    ReadOnly="connection.ReadOnly"
+                                    AddService="GalleryImageService" 
+                                    DeleteService="GalleryImageService"
+                                    GetService="GalleryImageService"
+                                    UpdateService="GalleryImageService"
+                                    OnMediaChange="_ => { StateHasChanged(); }"> 
 
-                                <ImageDisplay Context="image">
-                                    <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
-                                    <MudImage Height="150" Src="@image.ThumbnailUri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
-                                </ImageDisplay>
+                                    <ImageDisplay Context="image">
+                                        <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                                        <MudImage Height="150" Src="@image.ThumbnailUri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                                    </ImageDisplay>
 
-                            </ImageEditor>
+                                </ImageEditor>
                         }
                     </EditItem>
                 </ModelCollectionInput>

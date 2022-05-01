@@ -51,7 +51,7 @@
     @if(AddService is not null || DeleteService is not null)
     {
         <MudItem xs="12">
-            <InputFile id="fileInput" OnChange="UploadMediaAsync" hidden accept="image/*" />
+            <InputFile id="@($"fileInput{Id}")" OnChange="UploadMediaAsync" hidden accept="image/*" />
             
             <MudButtonGroup OverrideStyles="false">
 
@@ -63,7 +63,7 @@
                         Color="Color.Primary"
                         Disabled="AnyLoading"
                         StartIcon="@Icons.Filled.CloudUpload"
-                        for="fileInput">
+                        for="@($"fileInput{Id}")">
                             @if (uploadLoading)
                             {
                                 <MudText Class="me-3">Uploading</MudText>

@@ -85,6 +85,12 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
             }
         }
 
+        /// <summary>
+        /// Invoked when media is changed
+        /// </summary>
+        [Parameter]
+        public Action<TImage> OnMediaChange { get; set; }
+
         #region Error
         /// <summary>
         /// The last error the occurred
@@ -158,6 +164,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
                 uploadLoading = false;
 
                 StateHasChanged();
+                OnMediaChange?.Invoke(Image);
 
                 Snackbar.Add("Image uploaded successfuly", Severity.Success);
 
@@ -201,6 +208,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
                 deleteLoading = false;
 
                 StateHasChanged();
+                OnMediaChange?.Invoke(Image);
 
                 Snackbar.Add("Image deleted successfuly", Severity.Success);
 

@@ -11,6 +11,6 @@ namespace MartinDrozdik.Data.Models.Technologies
 {
     public class TechnologyLogo : Image
     {
-        public override string FolderPath => $"AppData/Technologies/{Id}";
+        public override string FolderPath => $"AppData/TechnologyLogos/{Id}";
     }
 }

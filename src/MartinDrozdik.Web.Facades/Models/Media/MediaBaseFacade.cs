@@ -34,7 +34,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// <summary>
         /// Path to the folder with content
         /// </summary>
-        protected string ContentFolderPath => Path.Combine(hostEnvironment.ContentRootPath, "wwwroot/");
+        public string ContentFolderPath => Path.Combine(hostEnvironment.ContentRootPath, "wwwroot/");
 
         /// <summary>
         /// Adds media with the media data
@@ -75,7 +75,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// </summary>
         /// <param name="mediaData"></param>
         /// <returns></returns>
-        public async Task DeleteMediaAsync(TMedia mediaData)
+        public virtual async Task DeleteMediaAsync(TMedia mediaData)
         {
             //Delete the physical media
             DeletePhysicalMediaFile(mediaData);
@@ -86,12 +86,32 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         }
 
         /// <summary>
+        /// Disposes of the media folder 
+        /// </summary>
+        /// <param name="mediaData"></param>
+        public virtual void DisposeMediaFolder(TMedia mediaData)
+        {
+            var path = Path.Combine(ContentFolderPath, mediaData.FolderPath);
+            if (Directory.Exists(path) && File.GetAttributes(path) == FileAttributes.Directory)
+                Directory.Delete(path);
+        }
+
+        /// <summary>
         /// Deletes the media saved to the file system
         /// </summary>
         /// <param name="media"></param>
         protected void DeletePhysicalMediaFile(TMedia media)
         {
             var path = Path.Combine(ContentFolderPath, media.FullPath);
+            DeletePhysicalMediaFile(path);
+        }
+
+        // <summary>
+        /// Deletes the media saved to the file system
+        /// </summary>
+        /// <param name="path"></param>
+        protected void DeletePhysicalMediaFile(string path)
+        {
             if (File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory)
                 File.Delete(path);
         }

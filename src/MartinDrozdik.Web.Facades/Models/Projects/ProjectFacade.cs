@@ -24,25 +24,62 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         readonly ProjectRepository repository;
         readonly ProjectLogoFacade logoFacade;
         readonly ProjectOgImageFacade ogImageFacade;
+        readonly ProjectPreviewImageFacade previewImageFacade;
+        readonly ProjectGalleryImageFacade galleryImageFacade;
 
         public ProjectFacade(ProjectRepository repository,
             ProjectLogoFacade logoFacade,
-            ProjectOgImageFacade ogImageFacade) : base(repository)
+            ProjectOgImageFacade ogImageFacade,
+            ProjectPreviewImageFacade previewImageFacade,
+            ProjectGalleryImageFacade galleryImageFacade) : base(repository)
         {
             orderableTrait = this;
             hideableTrait = this;
             this.repository = repository;
             this.logoFacade = logoFacade;
             this.ogImageFacade = ogImageFacade;
+            this.previewImageFacade = previewImageFacade;
+            this.galleryImageFacade = galleryImageFacade;
         }
 
 
         public override async Task DeleteAsync(int id)
         {
             var item = await repository.GetAsync(id);
+
             await logoFacade.DeleteMediaAsync(item.Logo);
+            logoFacade.DisposeMediaFolder(item.Logo);
+
             await ogImageFacade.DeleteMediaAsync(item.OgImage);
+            ogImageFacade.DisposeMediaFolder(item.OgImage);
+
+            await previewImageFacade.DeleteMediaAsync(item.PreviewImage);
+            previewImageFacade.DisposeMediaFolder(item.PreviewImage);
+
+            foreach(var galleryImage in item.GalleryImages)
+            {
+                await galleryImageFacade.DeleteMediaAsync(galleryImage);
+                galleryImageFacade.DisposeMediaFolder(galleryImage);
+            }
+
             await base.DeleteAsync(id);
+        }
+
+        public override async Task UpdateAsync(int id, Project item)
+        {
+            var oldItem = await repository.ReadAsync(id);
+
+            var deletedGalleryImages = oldItem.GalleryImages
+                .Where(e => e.Id != default)
+                .Where(e => item.GalleryImages.All(f => e.Id != f.Id));
+
+            foreach (var galleryImage in deletedGalleryImages)
+            {
+                await galleryImageFacade.DeleteMediaAsync(galleryImage);
+                galleryImageFacade.DisposeMediaFolder(galleryImage);
+            }
+
+            await base.UpdateAsync(id, item);
         }
 
         #region Orderable trait

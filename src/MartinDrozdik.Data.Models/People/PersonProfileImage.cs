@@ -11,6 +11,6 @@ namespace MartinDrozdik.Data.Models.People
 {
     public class PersonProfileImage : PersonImage
     {
-        
+        public override string FolderPath => $"AppData/PeopleProfileImages/{Id}";
     }
 }

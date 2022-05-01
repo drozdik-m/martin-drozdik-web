@@ -18,6 +18,9 @@ namespace MartinDrozdik.Data.Models.Projects
         /// <inheritdoc />
         public int OrderIndex { get; set; }
 
+        /// <inheritdoc />
+        public override string FolderPath => $"AppData/ProjectGalleryImages/{Id}";
+
         /// <summary>
         /// The filename of the media thumbnail
         /// </summary>
