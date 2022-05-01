@@ -34,7 +34,7 @@ namespace MartinDrozdik.Data.Models.Media
         /// <summary>
         /// The URI of this media
         /// </summary>
-        public string Uri => Path.Combine("/", FullPath);
+        public string Uri => Path.Combine("/", FullPath).Replace("\\", "/");
 
         /// <summary>
         /// Tells if any file has been uploaded or not

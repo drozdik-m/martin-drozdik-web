@@ -35,7 +35,7 @@ namespace MartinDrozdik.Data.Models.Projects
         /// <summary>
         /// The URI of this medias' thumbnail
         /// </summary>
-        public string ThumbnailUri => Path.Combine("/", ThumbnailFullPath);
+        public string ThumbnailUri => Path.Combine("/", ThumbnailFullPath).Replace("\\", "/");
 
         /// <summary>
         /// The project this image is assigned to
