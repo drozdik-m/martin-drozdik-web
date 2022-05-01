@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20220429165930_Init")]
+    [Migration("20220501195219_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -105,6 +105,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -158,6 +161,8 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ArticleId");
 
                     b.HasIndex("LogoId");
 
@@ -233,7 +238,10 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjectId")
+                    b.Property<int>("OrderIndex")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Uploaded")
@@ -308,6 +316,33 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectLogos");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectMarkdownArticle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HTML")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Markdown")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectMarkdownArticles");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.ProjectOgImage", b =>
@@ -525,6 +560,12 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.Project", b =>
                 {
+                    b.HasOne("MartinDrozdik.Data.Models.Projects.ProjectMarkdownArticle", "Article")
+                        .WithMany()
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MartinDrozdik.Data.Models.Projects.ProjectLogo", "Logo")
                         .WithMany()
                         .HasForeignKey("LogoId")
@@ -546,6 +587,8 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     b.HasOne("MartinDrozdik.Data.Models.Projects.ProjectTag", null)
                         .WithMany("Projects")
                         .HasForeignKey("ProjectTagId");
+
+                    b.Navigation("Article");
 
                     b.Navigation("Logo");
 
@@ -577,7 +620,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 {
                     b.HasOne("MartinDrozdik.Data.Models.Projects.Project", "Project")
                         .WithMany("GalleryImages")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Project");
                 });

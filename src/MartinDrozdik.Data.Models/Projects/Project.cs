@@ -53,6 +53,11 @@ namespace MartinDrozdik.Data.Models.Projects
         [ForeignKey("PreviewImage")]
         public int PreviewImageId { get; set; }
 
+        public ProjectMarkdownArticle Article { get; set; } = new();
+
+        [ForeignKey("Article")]
+        public int ArticleId { get; set; }
+
         public ICollection<ProjectHasTag> Tags { get; set; } = new List<ProjectHasTag>();
 
         public ICollection<ProjectDeveloper> Developers { get; set; } = new List<ProjectDeveloper>();

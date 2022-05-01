@@ -24,6 +24,7 @@ namespace Bonsai.DataPersistence.DbContexts
         public DbSet<ProjectTechnology> ProjectTechnology { get; set; }
         public DbSet<ProjectPreviewImage> ProjectPreviewImages { get; set; }
         public DbSet<ProjectGalleryImage> ProjectGalleryImages { get; set; }
+        public DbSet<ProjectMarkdownArticle> ProjectMarkdownArticles { get; set; }
 
         // -------- PEOPLE --------
         public DbSet<Person> People { get; set; }

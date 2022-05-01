@@ -46,6 +46,22 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ProjectMarkdownArticles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Markdown = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HTML = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProjectMarkdownArticles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ProjectOgImages",
                 columns: table => new
                 {
@@ -159,6 +175,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     LogoId = table.Column<int>(type: "int", nullable: false),
                     OgImageId = table.Column<int>(type: "int", nullable: false),
                     PreviewImageId = table.Column<int>(type: "int", nullable: false),
+                    ArticleId = table.Column<int>(type: "int", nullable: false),
                     ProjectTagId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -170,6 +187,12 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         name: "FK_Projects_ProjectLogos_LogoId",
                         column: x => x.LogoId,
                         principalTable: "ProjectLogos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Projects_ProjectMarkdownArticles_ArticleId",
+                        column: x => x.ArticleId,
+                        principalTable: "ProjectMarkdownArticles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -251,7 +274,8 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProjectId = table.Column<int>(type: "int", nullable: true),
+                    OrderIndex = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     FileName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
@@ -266,7 +290,8 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         name: "FK_ProjectGalleryImages_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -358,6 +383,11 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 column: "TagsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Projects_ArticleId",
+                table: "Projects",
+                column: "ArticleId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Projects_LogoId",
                 table: "Projects",
                 column: "LogoId");
@@ -421,6 +451,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
 
             migrationBuilder.DropTable(
                 name: "ProjectLogos");
+
+            migrationBuilder.DropTable(
+                name: "ProjectMarkdownArticles");
 
             migrationBuilder.DropTable(
                 name: "ProjectOgImages");

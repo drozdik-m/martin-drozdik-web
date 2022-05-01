@@ -37,12 +37,14 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                 .Include(e => e.Logo)
                 .Include(e => e.OgImage)
                 .Include(e => e.PreviewImage)
+                .Include(e => e.PreviewImage)
+                .Include(e => e.Article)
                 .Include(e => e.Tags.OrderBy(e => e.Tag.OrderIndex))
                     .ThenInclude(e => e.Tag)
-                .Include(e => e.Developers)
+                .Include(e => e.Developers.OrderBy(e => e.Person.OrderIndex))
                     .ThenInclude(e => e.Person)
                         .ThenInclude(e => e.ProfileImage)
-                .Include(e => e.Technologies)
+                .Include(e => e.Technologies.OrderBy(e => e.Technology.OrderIndex))
                     .ThenInclude(e => e.Technology)
                         .ThenInclude(e => e.Logo)
                 .Include(e => e.GalleryImages.OrderBy(e => e.OrderIndex))
@@ -53,6 +55,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         protected override async Task<Project> ProcessNewEntityAsync(Project entity)
         {
             entity = await base.ProcessNewEntityAsync(entity);
+            Context.Entry(entity.Article).State = EntityState.Added;
             Context.Entry(entity.Logo).State = EntityState.Added;
             Context.Entry(entity.OgImage).State = EntityState.Added;
             Context.Entry(entity.PreviewImage).State = EntityState.Added;
@@ -63,20 +66,10 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         protected override async Task<Project> ProcessUpdatedEntityAsync(Project entity)
         {
             entity = await base.ProcessUpdatedEntityAsync(entity);
+            Context.Entry(entity.Article).State = EntityState.Modified;
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
             Context.Entry(entity.PreviewImage).State = EntityState.Modified;
-
-            /*foreach(var galleryImage in entity.GalleryImages)
-            {
-                galleryImage.ProjectId = entity.Id;
-
-                if (galleryImage.Id == default)
-                    Context.Entry(galleryImage).State = EntityState.Modified;
-                else
-                    Context.Entry(galleryImage).State = EntityState.Modified;
-                
-            }*/
 
             //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
@@ -97,6 +90,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         protected override async Task<Project> ProcessDeletedEntityAsync(Project entity)
        {
             entity = await base.ProcessDeletedEntityAsync(entity);
+            Context.Entry(entity.Article).State = EntityState.Deleted;
             Context.Entry(entity.Logo).State = EntityState.Deleted;
             Context.Entry(entity.OgImage).State = EntityState.Deleted;
             Context.Entry(entity.PreviewImage).State = EntityState.Deleted;
