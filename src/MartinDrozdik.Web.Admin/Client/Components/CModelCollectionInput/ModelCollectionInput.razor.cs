@@ -339,17 +339,29 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         #endregion
 
         #region Edit
-        protected Dictionary<TConnector, bool> EditingStatuses { get; set; } = new Dictionary<TConnector, bool>();
+        protected Dictionary<TConnector, bool> EditingStatusesDefaults { get; set; } = new Dictionary<TConnector, bool>();
+        protected Dictionary<TKey, bool> EditingStatusesIds { get; set; } = new Dictionary<TKey, bool>();
 
         [Parameter]
         public RenderFragment<ModelCollectionInputEditContext<TConnector>> EditItem { get; set; }
 
         public Task ToggleEdit(TConnector model)
         {
-            if(!EditingStatuses.ContainsKey(model))
-                EditingStatuses.Add(model, true);
+            var id = IdGetter(model);
+            if (id.Equals(default))
+            {
+                if (!EditingStatusesDefaults.ContainsKey(model))
+                    EditingStatusesDefaults.Add(model, true);
+                else
+                    EditingStatusesDefaults[model] = !EditingStatusesDefaults[model];
+            }
             else
-                EditingStatuses[model] = !EditingStatuses[model];
+            {
+                if (!EditingStatusesIds.ContainsKey(id))
+                    EditingStatusesIds.Add(id, true);
+                else
+                    EditingStatusesIds[id] = !EditingStatusesIds[id];
+            }
 
             StateHasChanged();
             return Task.CompletedTask;
@@ -357,9 +369,19 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
 
         public bool IsEditing(TConnector model)
         {
-            if (!EditingStatuses.ContainsKey(model))
-                return false;
-            return EditingStatuses[model];
+            var id = IdGetter(model);
+            if (id.Equals(default))
+            {
+                if (!EditingStatusesDefaults.ContainsKey(model))
+                    return false;
+                return EditingStatusesDefaults[model];
+            }
+            else
+            {
+                if (!EditingStatusesIds.ContainsKey(id))
+                    return false;
+                return EditingStatusesIds[id];
+            }    
         }
 
         #endregion
