@@ -46,7 +46,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         public virtual async Task AddMediaAsync(TMedia mediaData, Stream data, string dataName)
         {
             //Delete the old media if exists
-            DeletePhysicalMediaFile(mediaData);
+            DisposeMediaFile(mediaData);
 
             //Ensure the target exists
             mediaData.FileName = dataName.ToUrlFriendlyFileName();
@@ -78,7 +78,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         public virtual async Task DeleteMediaAsync(TMedia mediaData)
         {
             //Delete the physical media
-            DeletePhysicalMediaFile(mediaData);
+            DisposeMediaFile(mediaData);
 
             //Update the data model
             mediaData.Uploaded = false;
@@ -92,6 +92,15 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         public virtual void DisposeMediaFolder(TMedia mediaData)
         {
             var path = Path.Combine(ContentFolderPath, mediaData.FolderPath);
+            DisposeMediaFolder(path);
+        }
+
+        /// <summary>
+        /// Disposes a target folder
+        /// </summary>
+        /// <param name="path"></param>
+        public virtual void DisposeMediaFolder(string path)
+        {
             if (Directory.Exists(path) && File.GetAttributes(path) == FileAttributes.Directory)
                 Directory.Delete(path);
         }
@@ -100,17 +109,17 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// Deletes the media saved to the file system
         /// </summary>
         /// <param name="media"></param>
-        protected void DeletePhysicalMediaFile(TMedia media)
+        public virtual void DisposeMediaFile(TMedia media)
         {
             var path = Path.Combine(ContentFolderPath, media.FullPath);
-            DeletePhysicalMediaFile(path);
+            DisposeMediaFile(path);
         }
 
         // <summary>
         /// Deletes the media saved to the file system
         /// </summary>
         /// <param name="path"></param>
-        protected void DeletePhysicalMediaFile(string path)
+        protected virtual void DisposeMediaFile(string path)
         {
             if (File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory)
                 File.Delete(path);

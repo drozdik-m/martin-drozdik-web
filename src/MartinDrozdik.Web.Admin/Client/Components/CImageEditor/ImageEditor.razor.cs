@@ -158,14 +158,16 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
                 await AddService.AddMediaAsync(Id, selectedFile);
 
                 //Reload the image
-                Image = await GetService.GetAsync(Id);
-                await ImageChanged.InvokeAsync(Image);
+                var newImage = await GetService.GetAsync(Id);
+                Image = newImage;
+                await ImageChanged.InvokeAsync(newImage);
+                
 
                 uploadLoading = false;
 
+                OnMediaChange?.Invoke(newImage);
                 StateHasChanged();
-                OnMediaChange?.Invoke(Image);
-
+                
                 Snackbar.Add("Image uploaded successfuly", Severity.Success);
 
                 lastException = null;
@@ -202,13 +204,14 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CImageEditor
                 await DeleteService.DeleteMediaAsync(Id);
 
                 //Reload the image
-                Image = await GetService.GetAsync(Id);
-                await ImageChanged.InvokeAsync(Image);
+                var newImage = await GetService.GetAsync(Id);
+                Image = newImage;
+                await ImageChanged.InvokeAsync(newImage);
 
                 deleteLoading = false;
 
+                OnMediaChange?.Invoke(newImage);
                 StateHasChanged();
-                OnMediaChange?.Invoke(Image);
 
                 Snackbar.Add("Image deleted successfuly", Severity.Success);
 

@@ -10,6 +10,7 @@
 @inject TechnologyService TechnologyService
 @inject ProjectPreviewImageService PreviewImageService
 @inject ProjectGalleryImageService GalleryImageService
+@inject IJSRuntime JSRuntime
 
 @code{
     [Parameter]
@@ -190,10 +191,9 @@ else
                 <ModelCollectionInput TConnector="ProjectGalleryImage" TKey="int" TModel="ProjectGalleryImage" @bind-Items="context.Model.GalleryImages"
                     IdGetter="e => e.Id"
                     OrderExpression="e => e.OrderIndex"
-                    ConnectorFactory="e => new ProjectGalleryImage(){ ProjectId = entity.Id }" 
+                    ConnectorFactory="e => new ProjectGalleryImage(){ ProjectId = entity.Id, OrderIndex = entity.GalleryImages.Count }" 
                     IsAlreadySelected="(e, c) => c.Any(f => e.Id == e.Id)" 
-                    ReadOnly="context.Disabled"                    
-                    >
+                    ReadOnly="context.Disabled">
 
                     <DisplayItem Context="connection">
                         <MudText>
@@ -242,18 +242,25 @@ else
                         }
                         else
                         {
-                            <ImageEditor Id="connection.Model.Id" @bind-Image="connection.Model"
+
+                        <ImageEditor Id="connection.Model.Id" @bind-Image="connection.Model"
                                     ReadOnly="connection.ReadOnly"
                                     AddService="GalleryImageService" 
                                     DeleteService="GalleryImageService"
                                     GetService="GalleryImageService"
                                     UpdateService="GalleryImageService"
-                                    OnMediaChange="_ => { StateHasChanged(); }"> 
+                                    OnMediaChange=@(async e => {
+                                        entity.GalleryImages.Remove(entity.GalleryImages.Where(f => f.Id == e.Id).Single());
+                                        entity.GalleryImages.Add(e);
+                                        StateHasChanged();
+                                    })> 
 
+                                    
                                     <ImageDisplay Context="image">
                                         <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
                                         <MudImage Height="150" Src="@image.ThumbnailUri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
                                     </ImageDisplay>
+                                    
 
                                 </ImageEditor>
                         }
@@ -285,7 +292,7 @@ else
                 <ModelCollectionInput TConnector="ProjectDeveloper" TKey="int" TModel="Person" @bind-Items="context.Model.Developers"
                     GetOptionsService="PersonService" Unique="true" IdGetter="e => e.Id"
                     OrderExpression="e => e.OrderIndex"
-                    ConnectorFactory="e => new ProjectDeveloper(){ ProjectsId = entity.Id, Person = e, PersonsId = e.Id }" 
+                    ConnectorFactory="e => new ProjectDeveloper(){ ProjectsId = entity.Id, Person = e, PersonsId = e.Id, OrderIndex = entity.Developers.Count }" 
                     IsAlreadySelected="(e, c) => c.Any(f => f.PersonsId == e.Id)" 
                     ReadOnly="context.Disabled">
                     <DisplayItem Context="connection">
@@ -314,7 +321,7 @@ else
                 <ModelCollectionInput TConnector="ProjectTechnology" TKey="int" TModel="Technology" @bind-Items="context.Model.Technologies"
                     GetOptionsService="TechnologyService" Unique="true" IdGetter="e => e.Id"
                     OrderExpression="e => e.OrderIndex"
-                    ConnectorFactory="e => new ProjectTechnology(){ ProjectsId = entity.Id, Technology = e, TechnologiesId = e.Id }" 
+                    ConnectorFactory="e => new ProjectTechnology(){ ProjectsId = entity.Id, Technology = e, TechnologiesId = e.Id, OrderIndex = entity.Technologies.Count }" 
                     IsAlreadySelected="(e, c) => c.Any(f => f.TechnologiesId == e.Id)" 
                     ReadOnly="context.Disabled">
                     <DisplayItem Context="connection">

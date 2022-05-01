@@ -61,6 +61,7 @@
         }
         else
         {
+            int i = 0;
             @foreach(var item in DisplayItems)
             {
                 var isEditing = IsEditing(item);
@@ -94,11 +95,13 @@
                     <div class="px-4">
                         @EditItem(new ModelCollectionInputEditContext<TConnector>(){
                             Model = item,
-                            ReadOnly = AnyLoading || ReadOnly
+                            ReadOnly = AnyLoading || ReadOnly,
+                            ModelIndex = i
                         })
                     </div>
                 }
             }
+            i += 1;
         }
         
     </div>

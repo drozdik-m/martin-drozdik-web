@@ -75,7 +75,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
 
             foreach (var galleryImage in deletedGalleryImages)
             {
-                await galleryImageFacade.DeleteMediaAsync(galleryImage);
+                galleryImageFacade.DisposeMediaFile(galleryImage);
                 galleryImageFacade.DisposeMediaFolder(galleryImage);
             }
 

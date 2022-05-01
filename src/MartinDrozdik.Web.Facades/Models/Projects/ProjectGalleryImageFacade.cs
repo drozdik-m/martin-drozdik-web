@@ -54,16 +54,14 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
             await imageSaver.SaveAsync(path, data, thumbnailImageConfig);
         }
 
-        public override async Task DeleteMediaAsync(ProjectGalleryImage mediaData)
+
+        public override void DisposeMediaFile(ProjectGalleryImage media)
         {
-            //Delete the thumbnail
-            var path = Path.Combine(ContentFolderPath, mediaData.ThumbnailFullPath);
-            DeletePhysicalMediaFile(path);
+            base.DisposeMediaFile(media);
 
-            //Do the rest
-            await base.DeleteMediaAsync(mediaData);
+            var tmbPath = Path.Combine(ContentFolderPath, media.ThumbnailFullPath);
+            DisposeMediaFile(tmbPath);
         }
-
 
         #region Orderable trait
         IOrderableRepository<ProjectGalleryImage, int> IOrderableFacadeTrait<ProjectGalleryImage, int>.OrderableRepository => repository;
