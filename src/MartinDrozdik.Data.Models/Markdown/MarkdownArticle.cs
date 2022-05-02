@@ -27,5 +27,11 @@ namespace MartinDrozdik.Data.Models.Markdown
         /// The path to the folder with images
         /// </summary>
         public abstract string ImagesFolderPath { get; }
+
+        /// The path to the folder with files
+        /// </summary>
+        public abstract string FilesFolderPath { get; }
+
+        
     }
 }

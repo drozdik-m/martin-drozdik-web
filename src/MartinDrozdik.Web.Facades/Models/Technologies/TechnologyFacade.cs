@@ -36,7 +36,7 @@ namespace MartinDrozdik.Web.Facades.Models.Technologies
         {
             var item = await repository.GetAsync(id);
             await profileImageFacade.DeleteMediaAsync(item.Logo);
-            profileImageFacade.DisposeMediaFolder(item.Logo);
+            profileImageFacade.DisposeContentFolder(item.Logo);
             await base.DeleteAsync(id);
         }
 

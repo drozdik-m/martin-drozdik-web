@@ -10,5 +10,7 @@ namespace MartinDrozdik.Data.Models.Projects
     public class ProjectMarkdownArticle : MarkdownArticle
     {
         public override string ImagesFolderPath => $"AppData/ProjectMarkdownArticleImages/{Id}";
+
+        public override string FilesFolderPath => $"AppData/ProjectMarkdownArticleFiles/{Id}";
     }
 }

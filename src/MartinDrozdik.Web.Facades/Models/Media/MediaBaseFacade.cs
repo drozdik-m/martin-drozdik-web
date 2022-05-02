@@ -17,7 +17,7 @@ using Microsoft.Extensions.Hosting;
 
 namespace MartinDrozdik.Web.Facades.Models.Media
 {
-    public class MediaBaseFacade<TMedia> : CRUDFacade<TMedia, int>
+    public class MediaBaseFacade<TMedia> : ContentFacade<TMedia, int>
         where TMedia : MediaBase
     {
         readonly IHostEnvironment hostEnvironment;
@@ -25,16 +25,11 @@ namespace MartinDrozdik.Web.Facades.Models.Media
 
         public MediaBaseFacade(IHostEnvironment hostEnvironment,
             MediaBaseRepository<TMedia> repository)
-            : base(repository)
+            : base(hostEnvironment, repository)
         {
             this.hostEnvironment = hostEnvironment;
             this.repository = repository;
         }
-
-        /// <summary>
-        /// Path to the folder with content
-        /// </summary>
-        public string ContentFolderPath => Path.Combine(hostEnvironment.ContentRootPath, "wwwroot/");
 
         /// <summary>
         /// Adds media with the media data
@@ -46,7 +41,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         public virtual async Task AddMediaAsync(TMedia mediaData, Stream data, string dataName)
         {
             //Delete the old media if exists
-            DisposeMediaFile(mediaData);
+            DisposeContentFile(mediaData);
 
             //Ensure the target exists
             mediaData.FileName = dataName.ToUrlFriendlyFileName();
@@ -78,7 +73,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         public virtual async Task DeleteMediaAsync(TMedia mediaData)
         {
             //Delete the physical media
-            DisposeMediaFile(mediaData);
+            DisposeContentFile(mediaData);
 
             //Update the data model
             mediaData.Uploaded = false;
@@ -89,40 +84,20 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// Disposes of the media folder 
         /// </summary>
         /// <param name="mediaData"></param>
-        public virtual void DisposeMediaFolder(TMedia mediaData)
+        public virtual void DisposeContentFolder(TMedia mediaData)
         {
             var path = Path.Combine(ContentFolderPath, mediaData.FolderPath);
-            DisposeMediaFolder(path);
-        }
-
-        /// <summary>
-        /// Disposes a target folder
-        /// </summary>
-        /// <param name="path"></param>
-        public virtual void DisposeMediaFolder(string path)
-        {
-            if (Directory.Exists(path) && File.GetAttributes(path) == FileAttributes.Directory)
-                Directory.Delete(path);
+            DisposeContentFolder(path);
         }
 
         /// <summary>
         /// Deletes the media saved to the file system
         /// </summary>
         /// <param name="media"></param>
-        public virtual void DisposeMediaFile(TMedia media)
+        public virtual void DisposeContentFile(TMedia media)
         {
             var path = Path.Combine(ContentFolderPath, media.FullPath);
-            DisposeMediaFile(path);
-        }
-
-        // <summary>
-        /// Deletes the media saved to the file system
-        /// </summary>
-        /// <param name="path"></param>
-        protected virtual void DisposeMediaFile(string path)
-        {
-            if (File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory)
-                File.Delete(path);
+            DisposeContentFile(path);
         }
 
         /// <summary>

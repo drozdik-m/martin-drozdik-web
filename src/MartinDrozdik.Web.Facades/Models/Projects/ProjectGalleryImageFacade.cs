@@ -55,12 +55,12 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         }
 
 
-        public override void DisposeMediaFile(ProjectGalleryImage media)
+        public override void DisposeContentFile(ProjectGalleryImage media)
         {
-            base.DisposeMediaFile(media);
+            base.DisposeContentFile(media);
 
             var tmbPath = Path.Combine(ContentFolderPath, media.ThumbnailFullPath);
-            DisposeMediaFile(tmbPath);
+            DisposeContentFile(tmbPath);
         }
 
         #region Orderable trait

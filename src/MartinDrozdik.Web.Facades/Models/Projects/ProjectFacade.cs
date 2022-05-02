@@ -48,18 +48,18 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
             var item = await repository.GetAsync(id);
 
             await logoFacade.DeleteMediaAsync(item.Logo);
-            logoFacade.DisposeMediaFolder(item.Logo);
+            logoFacade.DisposeContentFolder(item.Logo);
 
             await ogImageFacade.DeleteMediaAsync(item.OgImage);
-            ogImageFacade.DisposeMediaFolder(item.OgImage);
+            ogImageFacade.DisposeContentFolder(item.OgImage);
 
             await previewImageFacade.DeleteMediaAsync(item.PreviewImage);
-            previewImageFacade.DisposeMediaFolder(item.PreviewImage);
+            previewImageFacade.DisposeContentFolder(item.PreviewImage);
 
             foreach(var galleryImage in item.GalleryImages)
             {
                 await galleryImageFacade.DeleteMediaAsync(galleryImage);
-                galleryImageFacade.DisposeMediaFolder(galleryImage);
+                galleryImageFacade.DisposeContentFolder(galleryImage);
             }
 
             await base.DeleteAsync(id);
@@ -75,8 +75,8 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
 
             foreach (var galleryImage in deletedGalleryImages)
             {
-                galleryImageFacade.DisposeMediaFile(galleryImage);
-                galleryImageFacade.DisposeMediaFolder(galleryImage);
+                galleryImageFacade.DisposeContentFile(galleryImage);
+                galleryImageFacade.DisposeContentFolder(galleryImage);
             }
 
             await base.UpdateAsync(id, item);
