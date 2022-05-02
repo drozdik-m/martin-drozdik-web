@@ -1,0 +1,27 @@
+﻿@inherits RootComponent
+@typeparam TArticle
+@typeparam TKey
+
+@* Error space *@
+@if(!(lastException is null))
+{
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+}
+
+
+
+<MudTextField @bind-Value="ArticleCast.Markdown" Disabled="ReadOnly || AnyLoading" Label="Article content" 
+              Variant="Variant.Outlined" Lines="@LineCount"
+              HelperText="The article content in Markdown syntax"
+              Class="mb-5" />
+
+
+<MudGrid>
+    <MudItem xs="2">
+        <MudNumericField @bind-Value="LineCount" Label="Editor line count" Variant="Variant.Filled" Min="5"
+                 Class="mb-4" />
+    </MudItem>
+    <MudItem xs="3">
+        
+    </MudItem>
+</MudGrid> 

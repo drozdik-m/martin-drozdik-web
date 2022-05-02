@@ -69,12 +69,32 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             return Markdig.Markdown.ToHtml(markdown, markdownPipeline);
         }
 
+        /// <summary>
+        /// Updates the HTML inside an article
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        public virtual TArticle UpdateHTML(TArticle article)
+        {
+            article.HTML = MarkdownToHTML(article.Markdown);
+            return article;
+        }
+
+        /// <inheritdoc />
+        public override async Task AddAsync(TArticle item)
+        {
+            item = UpdateHTML(item);
+            await base.AddAsync(item);
+        }
+
         /// <inheritdoc />
         public override async Task UpdateAsync(int id, TArticle item)
         {
-            item.HTML = MarkdownToHTML(item.Markdown);
+            item = UpdateHTML(item);
             await base.UpdateAsync(id, item);
         }
+
+        
 
     }
 }

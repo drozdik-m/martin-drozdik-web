@@ -10,6 +10,7 @@
 @inject TechnologyService TechnologyService
 @inject ProjectPreviewImageService PreviewImageService
 @inject ProjectGalleryImageService GalleryImageService
+@inject ProjectMarkdownArticleService MarkdownArticleService
 @inject IJSRuntime JSRuntime
 
 @code{
@@ -132,6 +133,14 @@ else
                     }
                 </MudGrid>
                 
+            </MudTabPanel>
+
+            @* Content *@
+            <MudTabPanel Text="Content" Icon="@Icons.Material.Filled.ContentPaste">
+                <MudText Typo="Typo.h5" Class="mb-5">Project description content</MudText>
+                <MarkdownArticleEditor @bind-Article="context.Model.Article" Id="context.Model.ArticleId"
+                                        ReadOnly="context.Disabled"
+                                        ArticleService="MarkdownArticleService" />
             </MudTabPanel>
 
             @* Logo *@

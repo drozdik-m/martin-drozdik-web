@@ -26,12 +26,14 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         readonly ProjectOgImageFacade ogImageFacade;
         readonly ProjectPreviewImageFacade previewImageFacade;
         readonly ProjectGalleryImageFacade galleryImageFacade;
+        readonly ProjectMarkdownArticleFacade articleFacade;
 
         public ProjectFacade(ProjectRepository repository,
             ProjectLogoFacade logoFacade,
             ProjectOgImageFacade ogImageFacade,
             ProjectPreviewImageFacade previewImageFacade,
-            ProjectGalleryImageFacade galleryImageFacade) : base(repository)
+            ProjectGalleryImageFacade galleryImageFacade,
+            ProjectMarkdownArticleFacade articleFacade) : base(repository)
         {
             orderableTrait = this;
             hideableTrait = this;
@@ -40,6 +42,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
             this.ogImageFacade = ogImageFacade;
             this.previewImageFacade = previewImageFacade;
             this.galleryImageFacade = galleryImageFacade;
+            this.articleFacade = articleFacade;
         }
 
 
@@ -67,6 +70,10 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
 
         public override async Task UpdateAsync(int id, Project item)
         {
+            //Content update
+            articleFacade.UpdateHTML(item.Article);
+
+            //Gallery update
             var oldItem = await repository.ReadAsync(id);
 
             var deletedGalleryImages = oldItem.GalleryImages

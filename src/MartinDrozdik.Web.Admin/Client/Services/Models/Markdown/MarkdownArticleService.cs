@@ -19,6 +19,7 @@ using Newtonsoft.Json;
 namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
 {
     public abstract class MarkdownArticleService<TArticle> : BaseApiService<TArticle, int>,
+        IMarkdownArticleService<TArticle, int>,
         ICRUDServiceTrait<TArticle, int>
         where TArticle : MarkdownArticle
     {

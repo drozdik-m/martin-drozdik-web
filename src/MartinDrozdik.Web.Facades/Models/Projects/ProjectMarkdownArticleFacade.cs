@@ -27,9 +27,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
             Quality = 75
         };*/
 
-        
-        
-
+       
         public ProjectMarkdownArticleFacade(IHostEnvironment hostEnvironment,
             ProjectMarkdownArticleRepository repository,
             IImageSaver imageSaver)
