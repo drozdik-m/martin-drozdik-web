@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,10 +29,25 @@ namespace MartinDrozdik.Data.Models.Markdown
         /// </summary>
         public abstract string ImagesFolderPath { get; }
 
+        /// <summary>
+        /// Returns Uri for an image
+        /// </summary>
+        /// <param name="imageName"></param>
+        /// <returns></returns>
+        public string GetImageUri(string imageName)
+            => Path.Combine(ImagesFolderPath, imageName).Replace("\\", "/");
+
+        /// <summary>
         /// The path to the folder with files
         /// </summary>
         public abstract string FilesFolderPath { get; }
 
-        
+        /// <summary>
+        /// Returns Uri for a file
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public string GetFileUri(string fileName)
+            => Path.Combine(ImagesFolderPath, fileName).Replace("\\", "/");
     }
 }

@@ -8,6 +8,7 @@ using Bonsai.Server.Controllers.BaseControllers;
 using Bonsai.Server.Controllers.BaseControllers.Traits;
 using MartinDrozdik.Data.Models.Files;
 using MartinDrozdik.Data.Models.Markdown;
+using MartinDrozdik.Data.Models.Markdown.Media;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Web.Facades.Abstraction;
@@ -31,17 +32,17 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Markdown
             this.facade = facade;
         }
 
-        /*[HttpPost("{id}/media")]
-        public async Task<ActionResult> UploadMediaAsync(int id, [FromBody] UploadFileData file)
+        [HttpPost("{id}/file")]
+        public async Task<ActionResult<AddFileResponse>> UploadMediaAsync(int id, [FromBody] UploadFileData file)
         {
             if (file is null)
                 return BadRequest("File not delivered");
 
             try
             {
-                var media = await facade.GetAsync(id);
-                await facade.AddMediaAsync(media, file.Bytes, file.FileName);
-                return Ok();
+                var article = await facade.GetAsync(id);
+                var result = await facade.AddFileAsync(article, file.Bytes, file.FileName);
+                return Ok(result);
             }
             catch (NotFoundException)
             {
@@ -51,6 +52,39 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Markdown
             {
                 return StatusCode(500, e.Message);
             }
-        }*/
+        }
+
+        [HttpPost("{id}/image")]
+        public Task<ActionResult<AddImageResponse>> UploadRegularImageAsync(int id, [FromBody] UploadFileData file)
+            => UploadImageAsync(id, file, ImageSize.Regular);
+
+        [HttpPost("{id}/textwidth-image")]
+        public Task<ActionResult<AddImageResponse>> UploadTextWidthImageAsync(int id, [FromBody] UploadFileData file)
+            => UploadImageAsync(id, file, ImageSize.TextWidth);
+
+        [HttpPost("{id}/wide-image")]
+        public Task<ActionResult<AddImageResponse>> UploadWideImageAsync(int id, [FromBody] UploadFileData file)
+            => UploadImageAsync(id, file, ImageSize.Wide);
+
+        protected virtual async Task<ActionResult<AddImageResponse>> UploadImageAsync(int id, UploadFileData file, ImageSize imageSize)
+        {
+            if (file is null)
+                return BadRequest("File not delivered");
+
+            try
+            {
+                var article = await facade.GetAsync(id);
+                var result = await facade.AddImageAsync(article, imageSize, file.Bytes, file.FileName);
+                return Ok(result);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

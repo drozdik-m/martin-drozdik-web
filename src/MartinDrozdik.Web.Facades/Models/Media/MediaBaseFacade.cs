@@ -106,7 +106,7 @@ namespace MartinDrozdik.Web.Facades.Models.Media
         /// <param name="media"></param>
         protected void EnsureTargetFolderExists(TMedia media)
         {
-            Directory.CreateDirectory(Path.Combine(ContentFolderPath, media.FolderPath));
+            EnsureTargetFolderExists(Path.Combine(ContentFolderPath, media.FolderPath))
         }
     }
 }

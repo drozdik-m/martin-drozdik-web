@@ -31,10 +31,10 @@ namespace MartinDrozdik.Web.Facades
         /// Disposes a target folder
         /// </summary>
         /// <param name="path"></param>
-        public virtual void DisposeContentFolder(string path)
+        public virtual void DisposeContentFolder(string path, bool disposeContents = false)
         {
             if (Directory.Exists(path) && File.GetAttributes(path) == FileAttributes.Directory)
-                Directory.Delete(path);
+                Directory.Delete(path, disposeContents);
         }
 
         // <summary>
@@ -45,6 +45,40 @@ namespace MartinDrozdik.Web.Facades
         {
             if (File.Exists(path) && File.GetAttributes(path) != FileAttributes.Directory)
                 File.Delete(path);
+        }
+
+        /// <summary>
+        /// Ensures the target path is ok to use and free of any existing files
+        /// </summary>
+        /// <param name="path"></param>
+        /// <exception cref="Exception"></exception>
+        protected void EnsureSafePath(string path)
+        {
+            if (File.Exists(path))
+                throw new Exception("File with this name already exists");
+
+            EnsureTargetFolderExists(path);
+        }
+
+        /// <summary>
+        /// Ensures that the folder exists
+        /// </summary>
+        /// <param name="path"></param>
+        protected void EnsureTargetFolderExists(string path)
+        {
+            Directory.CreateDirectory(path);
+        }
+
+        /// <summary>
+        /// Saves a stream to a file
+        /// </summary>
+        /// <param name="path"></param>
+        /// <param name="stream"></param>
+        protected void SaveStreamAsFile(string path, Stream stream)
+        {
+            EnsureSafePath(path);
+            using FileStream outputFileStream = new FileStream(path, FileMode.Create);
+            stream.CopyTo(outputFileStream);
         }
     }
 }
