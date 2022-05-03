@@ -9,6 +9,7 @@ using Bonsai.Models.Abstraction.Services.CRUD;
 using Bonsai.Utils.JSON;
 using MartinDrozdik.Data.Models.Files;
 using MartinDrozdik.Data.Models.Markdown;
+using MartinDrozdik.Data.Models.Markdown.Media;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
@@ -31,28 +32,44 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
             crudTrait = this;
         }
 
-        public async Task UploadFileAsync(int id, UploadFileData file)
+        /// <inheritdoc />
+        public async Task<AddFileResponse> UploadFileAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/file", file.ToJsonContent());
             response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return content.DeserializeJson<AddFileResponse>();
         }
 
-        public async Task UploadRegularImageAsync(int id, UploadFileData file)
+        /// <inheritdoc />
+        public async Task<AddMediaResponse> UploadRegularImageAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/image", file.ToJsonContent());
             response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return content.DeserializeJson<AddMediaResponse>();
         }
 
-        public async Task UploadTextWidthImageAsync(int id, UploadFileData file)
+        /// <inheritdoc />
+        public async Task<AddMediaResponse> UploadTextWidthImageAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/textwidth-image", file.ToJsonContent());
             response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return content.DeserializeJson<AddMediaResponse>();
         }
 
-        public async Task UploadWideImageAsync(int id, UploadFileData file)
+        /// <inheritdoc />
+        public async Task<AddMediaResponse> UploadWideImageAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/wide-image", file.ToJsonContent());
             response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            return content.DeserializeJson<AddMediaResponse>();
         }
 
         #region CRUD trait

@@ -14,14 +14,70 @@
               Variant="Variant.Outlined" Lines="@LineCount"
               HelperText="The article content in Markdown syntax"
               Class="mb-5" />
+<InputFile id="@($"markdownImageInputRegular{Id}")" OnChange="UploadRegularImageAsync" hidden accept="image/*" />
+<InputFile id="@($"markdownImageInputTextWidth{Id}")" OnChange="UploadTextWidthImageAsync" hidden accept="image/*" />
+<InputFile id="@($"markdownImageInputWide{Id}")" OnChange="UploadWideImageAsync" hidden accept="image/*" />
+<InputFile id="@($"markdownFileInput{Id}")" OnChange="UploadFileAsync" hidden />
 
 
 <MudGrid>
+    
+    <MudItem xs="10">
+
+        <MudButtonGroup OverrideStyles="false">
+            @* Add regular image *@
+            <MudButton HtmlTag="label"
+                    Variant="Variant.Filled"
+                    Color="Color.Primary"
+                    Disabled="AnyLoading || ReadOnly"
+                    StartIcon="@Icons.Filled.CloudUpload"
+                    for="@($"markdownImageInputRegular{Id}")">
+                        <MudText>Add regular image</MudText>
+            </MudButton>
+
+            @* Add text width image *@
+            <MudButton HtmlTag="label"
+                    Variant="Variant.Filled"
+                    Color="Color.Primary"
+                    Disabled="AnyLoading || ReadOnly"
+                    StartIcon="@Icons.Filled.CloudUpload"
+                    for="@($"markdownImageInputTextWidth{Id}")">
+                        <MudText>Add text-width image</MudText>
+            </MudButton>
+
+            @* Add wide image *@
+            <MudButton HtmlTag="label"
+                    Variant="Variant.Filled"
+                    Color="Color.Primary"
+                    Disabled="AnyLoading || ReadOnly"
+                    StartIcon="@Icons.Filled.CloudUpload"
+                    for="@($"markdownImageInputWide{Id}")">
+                        <MudText>Add wide image</MudText>
+            </MudButton>
+        </MudButtonGroup>
+
+       @* Add File *@
+       <MudButton HtmlTag="label"
+               Variant="Variant.Filled"
+               Color="Color.Primary"
+               Disabled="AnyLoading || ReadOnly"
+               StartIcon="@Icons.Filled.CloudUpload"
+               for="@($"markdownFileInput{Id}")">
+                   <MudText>Add file</MudText>
+       </MudButton>
+
+        @* Add File *@
+       <MudButton HtmlTag="label"
+               Variant="Variant.Outlined"
+               Color="Color.Info"
+               StartIcon="@Icons.Filled.Info">
+                   Guide
+       </MudButton>
+
+    </MudItem>
+
     <MudItem xs="2">
         <MudNumericField @bind-Value="LineCount" Label="Editor line count" Variant="Variant.Filled" Min="5"
                  Class="mb-4" />
-    </MudItem>
-    <MudItem xs="3">
-        
     </MudItem>
 </MudGrid> 

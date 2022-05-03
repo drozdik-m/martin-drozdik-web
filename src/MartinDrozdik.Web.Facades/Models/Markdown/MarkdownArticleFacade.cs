@@ -51,6 +51,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         static readonly MarkdownPipeline markdownPipeline =
             new MarkdownPipelineBuilder()
             .UseEmphasisExtras()
+            .UseCustomContainers()
             .UseGenericAttributes()
             .UseFootnotes()
             .UseAutoIdentifiers()

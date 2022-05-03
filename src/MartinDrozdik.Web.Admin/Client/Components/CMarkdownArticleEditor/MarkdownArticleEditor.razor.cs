@@ -89,17 +89,57 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CMarkdownArticleEditor
         Exception? lastException = default;
         #endregion
 
-        #region AddMedia
+        #region UploadMedia
 
         //protected UploadFileData? selectedFile = null;
         protected bool uploadLoading = false;
 
+
+        protected Task UploadFileAsync(InputFileChangeEventArgs e)
+            => UploadMediaAsync(e, async f =>
+            {
+                var res = await ArticleService.UploadFileAsync(Id, f);
+                ArticleCast.Markdown += "\n";
+                ArticleCast.Markdown += $"[{f.FileName}]({res.MediaURI})" + "{.file}\n";
+            });
+
+        protected Task UploadRegularImageAsync(InputFileChangeEventArgs e)
+            => UploadMediaAsync(e, async f =>
+            {
+                var res = await ArticleService.UploadRegularImageAsync(Id, f);
+                ArticleCast.Markdown += "\n";
+                ArticleCast.Markdown += "^^^\n";
+                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})\n";
+                ArticleCast.Markdown += $"^^^ Image: {f.FileName}\n";
+            });
+
+        protected Task UploadTextWidthImageAsync(InputFileChangeEventArgs e)
+            => UploadMediaAsync(e, async f =>
+            {
+                var res = await ArticleService.UploadRegularImageAsync(Id, f);
+                ArticleCast.Markdown += "\n";
+                ArticleCast.Markdown += "^^^\n";
+                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})\n";
+                ArticleCast.Markdown += $"^^^ Image: {f.FileName}" + "{.textWidth}\n";
+            });
+
+        protected Task UploadWideImageAsync(InputFileChangeEventArgs e)
+            => UploadMediaAsync(e, async f =>
+            {
+                var res = await ArticleService.UploadRegularImageAsync(Id, f);
+                ArticleCast.Markdown += "\n";
+                ArticleCast.Markdown += "^^^\n";
+                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})\n";
+                ArticleCast.Markdown += $"^^^ Image: {f.FileName}" + "{.wide}\n";
+            });
+
         /// <summary>
-        /// Callback for file selection. Uploads the file.
+        /// Uploads the file
         /// </summary>
         /// <param name="e"></param>
+        /// <param name="upload"></param>
         /// <returns></returns>
-        /*protected async Task UploadMediaAsync(InputFileChangeEventArgs e)
+        protected async Task UploadMediaAsync(InputFileChangeEventArgs e, Func<UploadFileData, Task> upload)
         {
             try
             {
@@ -120,26 +160,17 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CMarkdownArticleEditor
                 fileData.FileSize = file.Size;
                 fileData.FileType = file.ContentType;
                 fileData.Bytes = buffers;
-                selectedFile = fileData;
-
-                //First, save the current model
-                await UpdateService.UpdateAsync(Id, Image);
 
                 //Do the upload
-                await AddService.AddMediaAsync(Id, selectedFile);
+                await upload.Invoke(fileData);
 
-                //Reload the image
-                var newImage = await GetService.GetAsync(Id);
-                Image = newImage;
-                await ImageChanged.InvokeAsync(newImage);
-
+                //Notify change
+                await ArticleChanged.InvokeAsync(Article);
 
                 uploadLoading = false;
-
-                OnMediaChange?.Invoke(newImage);
                 StateHasChanged();
 
-                Snackbar.Add("Image uploaded successfuly", Severity.Success);
+                Snackbar.Add("File uploaded successfuly", Severity.Success);
 
                 lastException = null;
             }
@@ -152,7 +183,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CMarkdownArticleEditor
             {
                 uploadLoading = false;
             }
-        }*/
+        }
         #endregion
     }
 }
