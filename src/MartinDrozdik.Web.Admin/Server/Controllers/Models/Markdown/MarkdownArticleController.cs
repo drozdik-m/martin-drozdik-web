@@ -21,7 +21,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Markdown
 {
-    public class MarkdownArticleController<TArticle> : BaseApiController<TArticle, int>
+    public abstract class MarkdownArticleController<TArticle> : BaseApiController<TArticle, int>
         where TArticle : MarkdownArticle
     {
         readonly MarkdownArticleFacade<TArticle> facade;
@@ -33,7 +33,7 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Markdown
         }
 
         [HttpPost("{id}/file")]
-        public async Task<ActionResult<AddFileResponse>> UploadMediaAsync(int id, [FromBody] UploadFileData file)
+        public async Task<ActionResult<AddFileResponse>> UploadFileAsync(int id, [FromBody] UploadFileData file)
         {
             if (file is null)
                 return BadRequest("File not delivered");

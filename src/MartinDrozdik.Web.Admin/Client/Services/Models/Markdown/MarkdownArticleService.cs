@@ -31,17 +31,29 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
             crudTrait = this;
         }
 
-        /*public async Task AddMediaAsync(int id, UploadFileData image)
+        public async Task UploadFileAsync(int id, UploadFileData file)
         {
-            var response = await Http.PostAsync($"{ApiUri}/{id}/media", image.ToJsonContent());
+            var response = await Http.PostAsync($"{ApiUri}/{id}/file", file.ToJsonContent());
             response.EnsureSuccessStatusCode();
         }
 
-        public async Task DeleteMediaAsync(int id)
+        public async Task UploadRegularImageAsync(int id, UploadFileData file)
         {
-            var response = await Http.DeleteAsync($"{ApiUri}/{id}/media");
+            var response = await Http.PostAsync($"{ApiUri}/{id}/image", file.ToJsonContent());
             response.EnsureSuccessStatusCode();
-        }*/
+        }
+
+        public async Task UploadTextWidthImageAsync(int id, UploadFileData file)
+        {
+            var response = await Http.PostAsync($"{ApiUri}/{id}/textwidth-image", file.ToJsonContent());
+            response.EnsureSuccessStatusCode();
+        }
+
+        public async Task UploadWideImageAsync(int id, UploadFileData file)
+        {
+            var response = await Http.PostAsync($"{ApiUri}/{id}/wide-image", file.ToJsonContent());
+            response.EnsureSuccessStatusCode();
+        }
 
         #region CRUD trait
 
