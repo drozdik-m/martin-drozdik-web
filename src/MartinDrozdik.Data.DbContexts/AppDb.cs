@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Data.Models.Technologies;
@@ -33,7 +34,11 @@ namespace Bonsai.DataPersistence.DbContexts
         // -------- TECHNOLOGIES --------
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<TechnologyLogo> TechnologyLogos { get; set; }
-        
+
+        // -------- CV --------
+        public DbSet<Education> Educations { get; set; }
+        public DbSet<LanguageSkill> LanguageSkills { get; set; }
+        public DbSet<WorkExperience> WorkExperiences { get; set; }
 
         public AppDb(DbContextOptions<AppDb> options) : base(options)
         {
