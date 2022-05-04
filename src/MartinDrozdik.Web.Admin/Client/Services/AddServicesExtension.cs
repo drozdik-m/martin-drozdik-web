@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MartinDrozdik.Data.Models.Technologies;
 using MartinDrozdik.Web.Admin.Client.Services.Authentication;
+using MartinDrozdik.Web.Admin.Client.Services.Models.CV;
 using MartinDrozdik.Web.Admin.Client.Services.Models.People;
 using MartinDrozdik.Web.Admin.Client.Services.Models.Projects;
 using MartinDrozdik.Web.Admin.Client.Services.Models.Technologies;
@@ -33,6 +34,9 @@ namespace MartinDrozdik.Web.Admin.Client.Services
             serviceCollection = serviceCollection.AddScoped<ProjectPreviewImageService>();
             serviceCollection = serviceCollection.AddScoped<ProjectGalleryImageService>();
             serviceCollection = serviceCollection.AddScoped<ProjectMarkdownArticleService>();
+            serviceCollection = serviceCollection.AddScoped<EducationService>();
+            serviceCollection = serviceCollection.AddScoped<LanguageSkillService>();
+            serviceCollection = serviceCollection.AddScoped<WorkExperienceService>();
 
             return serviceCollection;
         }

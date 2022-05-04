@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MartinDrozdik.Data.Models.Technologies;
+using MartinDrozdik.Data.Repositories.Models.CV;
 using MartinDrozdik.Data.Repositories.Models.People;
 using MartinDrozdik.Data.Repositories.Models.Projects;
 using MartinDrozdik.Data.Repositories.Models.Technologies;
@@ -28,6 +29,9 @@ namespace MartinDrozdik.Data.Repositories
             serviceCollection = serviceCollection.AddScoped<ProjectPreviewImageRepository>();
             serviceCollection = serviceCollection.AddScoped<ProjectGalleryImageRepository>();
             serviceCollection = serviceCollection.AddScoped<ProjectMarkdownArticleRepository>();
+            serviceCollection = serviceCollection.AddScoped<EducationRepository>();
+            serviceCollection = serviceCollection.AddScoped<LanguageSkillRepository>();
+            serviceCollection = serviceCollection.AddScoped<WorkExperienceRepository>();
 
             return serviceCollection;
         }
