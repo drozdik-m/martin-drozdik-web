@@ -31,7 +31,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         public ProjectMarkdownArticleFacade(IHostEnvironment hostEnvironment,
             ProjectMarkdownArticleRepository repository,
             IImageSaver imageSaver)
-            : base(hostEnvironment, repository)
+            : base(hostEnvironment, imageSaver, repository)
         {
             this.hostEnvironment = hostEnvironment;
             this.repository = repository;

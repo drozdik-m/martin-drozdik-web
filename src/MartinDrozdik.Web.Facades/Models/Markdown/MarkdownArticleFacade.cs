@@ -82,8 +82,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         /// <inheritdoc />
         public override async Task UpdateAsync(int id, TArticle item)
         {
-            item = UpdateHTML(item);
-            RemoveUnusedMedia(item);
+            UpdateArticlesContent(item);
             await base.UpdateAsync(id, item);
         }
 
@@ -91,9 +90,28 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         public override async Task DeleteAsync(int id)
         {
             var item = await repository.ReadAsync(id);
-            DisposeContentFolder(item.ImagesFolderPath, disposeContents: true);
-            DisposeContentFolder(item.FilesFolderPath, disposeContents: true);
+            DisposeContents(item);
             await base.DeleteAsync(id);
+        }
+
+        /// <summary>
+        /// Updates all contents of the article (HTML, file contents, ...)
+        /// </summary>
+        /// <param name="article"></param>
+        public virtual void UpdateArticlesContent(TArticle article)
+        {
+            article = UpdateHTML(article);
+            RemoveUnusedMedia(article);
+        }
+
+        /// <summary>
+        /// Disposes all resources of an article
+        /// </summary>
+        /// <param name="article"></param>
+        public virtual void DisposeContents(TArticle article)
+        {
+            DisposeContentFolder(Path.Combine(ContentFolderPath, article.ImagesFolderPath), disposeContents: true);
+            DisposeContentFolder(Path.Combine(ContentFolderPath, article.FilesFolderPath), disposeContents: true);
         }
 
         /// <summary>
@@ -130,7 +148,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             var mediaToDelete = savedMedia.Where(e => !usedMedia.Contains(e));
 
             foreach(var media in mediaToDelete)
-                DisposeContentFile(media);
+                DisposeContentFile(Path.Combine(ContentFolderPath, media));
         }
 
         /// <summary>
@@ -142,7 +160,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         {
             var result = new List<string>();
 
-            var xml = XElement.Parse(article.HTML);
+            var xml = XElement.Parse($"<root>{article.HTML}</root>");
 
             //Images
             var imgSrcs = xml
@@ -204,6 +222,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         /// <returns></returns>
         public Task<AddFileResponse> AddFileAsync(TArticle article, Stream data, string dataName)
         {
+            dataName = dataName.ToUrlFriendlyFileName();
             var path = Path.Combine(ContentFolderPath, article.FilesFolderPath, dataName);
             SaveStreamAsFile(path, data);
 
@@ -235,6 +254,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         /// <returns></returns>
         public async Task<AddImageResponse> AddImageAsync(TArticle article, ImageSize size, Stream data, string dataName)
         {
+            dataName = dataName.ToUrlFriendlyFileName();
             var path = Path.Combine(ContentFolderPath, article.ImagesFolderPath, dataName);
             EnsureSafePath(path);
             

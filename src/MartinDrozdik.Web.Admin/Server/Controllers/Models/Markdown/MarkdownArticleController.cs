@@ -10,6 +10,7 @@ using MartinDrozdik.Data.Models.Files;
 using MartinDrozdik.Data.Models.Markdown;
 using MartinDrozdik.Data.Models.Markdown.Media;
 using MartinDrozdik.Data.Models.Media;
+using MartinDrozdik.Data.Models.Media.Exceptions;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Web.Facades.Abstraction;
 using MartinDrozdik.Web.Facades.Models.Markdown;
@@ -48,6 +49,10 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Markdown
             {
                 return NotFound();
             }
+            catch (FileAlreadyExistsException)
+            {
+                return BadRequest("A file with than name already exists");
+            }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
@@ -80,6 +85,10 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.Markdown
             catch (NotFoundException)
             {
                 return NotFound();
+            }
+            catch (FileAlreadyExistsException)
+            {
+                return BadRequest("A file with than name already exists");
             }
             catch (Exception e)
             {

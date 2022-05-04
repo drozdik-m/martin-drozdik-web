@@ -5,7 +5,7 @@
 @* Error space *@
 @if(!(lastException is null))
 {
-    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled" Class="mb-4">@lastException.Message</MudAlert>
 }
 
 
@@ -19,6 +19,10 @@
 <InputFile id="@($"markdownImageInputWide{Id}")" OnChange="UploadWideImageAsync" hidden accept="image/*" />
 <InputFile id="@($"markdownFileInput{Id}")" OnChange="UploadFileAsync" hidden />
 
+@if (uploadLoading)
+{
+    <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+}
 
 <MudGrid>
     
@@ -27,7 +31,7 @@
         <MudButtonGroup OverrideStyles="false">
             @* Add regular image *@
             <MudButton HtmlTag="label"
-                    Variant="Variant.Filled"
+                    Variant="Variant.Outlined"
                     Color="Color.Primary"
                     Disabled="AnyLoading || ReadOnly"
                     StartIcon="@Icons.Filled.CloudUpload"
@@ -37,7 +41,7 @@
 
             @* Add text width image *@
             <MudButton HtmlTag="label"
-                    Variant="Variant.Filled"
+                    Variant="Variant.Outlined"
                     Color="Color.Primary"
                     Disabled="AnyLoading || ReadOnly"
                     StartIcon="@Icons.Filled.CloudUpload"
@@ -47,7 +51,7 @@
 
             @* Add wide image *@
             <MudButton HtmlTag="label"
-                    Variant="Variant.Filled"
+                    Variant="Variant.Outlined"
                     Color="Color.Primary"
                     Disabled="AnyLoading || ReadOnly"
                     StartIcon="@Icons.Filled.CloudUpload"
@@ -57,22 +61,28 @@
         </MudButtonGroup>
 
        @* Add File *@
-       <MudButton HtmlTag="label"
-               Variant="Variant.Filled"
+       <MudButtonGroup OverrideStyles="false">
+           <MudButton HtmlTag="label"
+               Variant="Variant.Outlined"
                Color="Color.Primary"
                Disabled="AnyLoading || ReadOnly"
                StartIcon="@Icons.Filled.CloudUpload"
                for="@($"markdownFileInput{Id}")">
                    <MudText>Add file</MudText>
-       </MudButton>
+            </MudButton>
+       </MudButtonGroup>
 
         @* Add File *@
-       <MudButton HtmlTag="label"
+       <MudButtonGroup OverrideStyles="false">
+           <MudButton HtmlTag="label"
                Variant="Variant.Outlined"
                Color="Color.Info"
-               StartIcon="@Icons.Filled.Info">
+               StartIcon="@Icons.Filled.Info"
+               OnClick="_ => { guideDialogOpen = !guideDialogOpen; }">
                    Guide
-       </MudButton>
+            </MudButton>
+       </MudButtonGroup>
+       
 
     </MudItem>
 
@@ -81,3 +91,47 @@
                  Class="mb-4" />
     </MudItem>
 </MudGrid> 
+
+
+@* Guide dialog *@
+<MudDialog @bind-IsVisible="guideDialogOpen" Options=@(new() { FullWidth = true }) >
+    <TitleContent>
+        <MudText Typo="Typo.h6"><MudIcon Icon="@Icons.Material.Filled.Info" Class="mr-3"/>Exotic block guide</MudText>
+    </TitleContent>
+    <DialogContent>
+        
+        <MudText>The editor uses <MudLink Href="https://www.markdownguide.org/cheat-sheet/" Target="_blank">Markdown syntax</MudLink> with extra custom blocks.</MudText>
+
+        <div class="my-4">
+            <MudText Typo="Typo.h5">Sidelined text</MudText>
+            <MudText>Text with a line on a side, marking some important side information.</MudText>
+             <MudButton HtmlTag="label" Variant="Variant.Outlined" Color="Color.Success" StartIcon="@Icons.Filled.Add" Class="mt-2"
+               OnClick=@(async _ => { await AddText("\nSidelined paragraph {.sidelined}\n"); guideDialogOpen = false; })>Add</MudButton>
+        </div>
+
+        <div class="my-4">
+            <MudText Typo="Typo.h5">Important text</MudText>
+            <MudText>A big and short important piece of information.</MudText>
+             <MudButton HtmlTag="label" Variant="Variant.Outlined" Color="Color.Success" StartIcon="@Icons.Filled.Add" Class="mt-2"
+               OnClick=@(async _ => { await AddText("\nImportant text {.important}\n"); guideDialogOpen = false; })>Add</MudButton>
+        </div>
+
+        <div class="my-4">
+            <MudText Typo="Typo.h5">Highlighted text</MudText>
+            <MudText>A highlighted paragraph with important but longer information.</MudText>
+             <MudButton HtmlTag="label" Variant="Variant.Outlined" Color="Color.Success" StartIcon="@Icons.Filled.Add" Class="mt-2"
+               OnClick=@(async _ => { await AddText("\nHighlighted text {.highlighted}\n"); guideDialogOpen = false; })>Add</MudButton>
+        </div>
+
+        <div class="my-4">
+            <MudText Typo="Typo.h5">Blockquite</MudText>
+            <MudText>A block combination of a statement and its author</MudText>
+             <MudButton HtmlTag="label" Variant="Variant.Outlined" Color="Color.Success" StartIcon="@Icons.Filled.Add" Class="mt-2"
+               OnClick=@(async _ => { await AddText("\n> Quote\n> \"\"Author\"\"\n"); guideDialogOpen = false; })>Add</MudButton>
+        </div>
+        
+        <div class="d-flex justify-end my-4">
+            <MudButton Variant="Variant.Text" Color="Color.Dark" OnClick="_ => guideDialogOpen = false" Class="mr-2 px-3">Close</MudButton>
+        </div>
+    </DialogContent>
+</MudDialog>

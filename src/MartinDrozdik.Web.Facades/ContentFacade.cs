@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Data.Models.Media.Exceptions;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using Microsoft.Extensions.Hosting;
 
@@ -52,12 +53,20 @@ namespace MartinDrozdik.Web.Facades
         /// </summary>
         /// <param name="path"></param>
         /// <exception cref="Exception"></exception>
-        protected void EnsureSafePath(string path)
+        protected void EnsureSafePath(string path, bool overwrite = false)
         {
-            if (File.Exists(path))
-                throw new Exception("File with this name already exists");
+            if (overwrite)
+                DisposeContentFile(path);
+            else
+            {
+                if (File.Exists(path))
+                    throw new FileAlreadyExistsException("File with this name already exists");
+            }
+            
 
-            EnsureTargetFolderExists(path);
+            var dirPath = Path.GetDirectoryName(path);
+            if (dirPath is not null)
+                EnsureTargetFolderExists(dirPath);
         }
 
         /// <summary>
@@ -74,9 +83,10 @@ namespace MartinDrozdik.Web.Facades
         /// </summary>
         /// <param name="path"></param>
         /// <param name="stream"></param>
-        protected void SaveStreamAsFile(string path, Stream stream)
+        /// <param name="overwrite"></param>
+        protected void SaveStreamAsFile(string path, Stream stream, bool overwrite = false)
         {
-            EnsureSafePath(path);
+            EnsureSafePath(path, overwrite);
             using FileStream outputFileStream = new FileStream(path, FileMode.Create);
             stream.CopyTo(outputFileStream);
         }

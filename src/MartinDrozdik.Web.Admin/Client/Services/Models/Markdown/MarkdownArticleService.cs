@@ -32,10 +32,20 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
             crudTrait = this;
         }
 
+        public async Task EnsureNotBadRequest(HttpResponseMessage response)
+        {
+            if (response.StatusCode == System.Net.HttpStatusCode.BadRequest)
+            {
+                var exceptionContent = await response.Content.ReadAsStringAsync();
+                throw new Exception(exceptionContent);
+            }
+        }
+
         /// <inheritdoc />
         public async Task<AddFileResponse> UploadFileAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/file", file.ToJsonContent());
+            await EnsureNotBadRequest(response);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -46,6 +56,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
         public async Task<AddMediaResponse> UploadRegularImageAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/image", file.ToJsonContent());
+            await EnsureNotBadRequest(response);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -56,6 +67,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
         public async Task<AddMediaResponse> UploadTextWidthImageAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/textwidth-image", file.ToJsonContent());
+            await EnsureNotBadRequest(response);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();
@@ -66,6 +78,7 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.Media
         public async Task<AddMediaResponse> UploadWideImageAsync(int id, UploadFileData file)
         {
             var response = await Http.PostAsync($"{ApiUri}/{id}/wide-image", file.ToJsonContent());
+            await EnsureNotBadRequest(response);
             response.EnsureSuccessStatusCode();
 
             var content = await response.Content.ReadAsStringAsync();

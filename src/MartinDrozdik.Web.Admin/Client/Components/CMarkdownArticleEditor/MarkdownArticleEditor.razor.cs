@@ -185,5 +185,15 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CMarkdownArticleEditor
             }
         }
         #endregion
+
+        #region Guide
+        bool guideDialogOpen = false;
+
+        public async Task AddText(string text)
+        {
+            ArticleCast.Markdown += text;
+            await ArticleChanged.InvokeAsync(Article);
+        }
+        #endregion
     }
 }

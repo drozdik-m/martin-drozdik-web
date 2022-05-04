@@ -48,6 +48,6 @@ namespace MartinDrozdik.Data.Models.Markdown
         /// <param name="fileName"></param>
         /// <returns></returns>
         public string GetFileUri(string fileName)
-            => Path.Combine(ImagesFolderPath, fileName).Replace("\\", "/");
+            => Path.Combine(FilesFolderPath, fileName).Replace("\\", "/");
     }
 }
