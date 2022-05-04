@@ -14,8 +14,32 @@ namespace MartinDrozdik.Data.Models.CV
         public int Id { get; set; }
 
         /// <inheritdoc />
-        public int OrderIndex { get; set; }
+        public int OrderIndex { get; set; } = 0;
 
-        //public string 
+        /// <summary>
+        /// Name of the education - name of the school, title, ...
+        /// </summary>
+        public string Name { get; set; } = string.Empty;
+
+        /// <summary>
+        /// What field of study?
+        /// </summary>
+        public string Specialization { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Start time of the education
+        /// </summary>
+        public DateTime StartedDate { get; set; } = DateTime.Now;
+
+        /// <summary>
+        /// Tells if the education is concluded
+        /// </summary>
+        public bool Finished { get; set; } = false;
+
+        /// <summary>
+        /// End time of the education
+        /// </summary>
+        public DateTime EndedDate { get; set; } = DateTime.Now;
+
     }
 }
