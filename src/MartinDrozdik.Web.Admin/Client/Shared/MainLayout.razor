@@ -14,6 +14,20 @@
     {
         isDarkMode = !isDarkMode;
     }
+
+    bool cvExpanded = true;
+    bool projectExpanded = true;
+
+    public static string ProjectsIcon = Icons.Filled.Code;
+    public static string PeopleIcon = Icons.Filled.Person;
+
+    public static string ProjectTagsIcon = Icons.Filled.Tag;
+
+    public static string TechnologiesIcon = Icons.Filled.Analytics;
+
+    public static string WorkExperiencesIcon = Icons.Filled.Work;
+    public static string LanguageSkillsIcon = Icons.Filled.Language;
+    public static string EducationsIcon = Icons.Filled.School;
 }
 
 @* MudBlazor *@
@@ -68,12 +82,23 @@
 
     @* Left drawer *@
     <MudDrawer @bind-Open="drawerOpen" Elevation="2" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
-        <MudNavMenu>
+        <MudNavMenu Bordered="true">
             <MudNavLink Match="NavLinkMatch.All" Href="/" Icon="@Icons.Filled.Home">Admin</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/project" Icon="@Icons.Filled.Code">Projects</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/people" Icon="@Icons.Filled.Person">People</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/project-tag" Icon="@Icons.Filled.Tag">Project tags</MudNavLink>
-            <MudNavLink Match="NavLinkMatch.All" Href="/technology" Icon="@Icons.Filled.Analytics">Technologies</MudNavLink>
+            
+            <MudNavLink Match="NavLinkMatch.All" Href="/people" Icon="@MainLayout.PeopleIcon">People</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/technology" Icon="@MainLayout.TechnologiesIcon">Technologies</MudNavLink>
+            
+            <MudNavGroup Title="@(drawerOpen ? "Work" : "")" @bind-Expanded="projectExpanded">
+                <MudNavLink Match="NavLinkMatch.All" Href="/project" Icon="@MainLayout.ProjectsIcon">Projects</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/project-tag" Icon="@MainLayout.ProjectTagsIcon">Project tags</MudNavLink>
+            </MudNavGroup>
+
+            <MudNavGroup Title="@(drawerOpen ? "CV" : "")" @bind-Expanded="cvExpanded">
+                <MudNavLink Match="NavLinkMatch.All" Href="/work-experience" Icon="@MainLayout.WorkExperiencesIcon">Work experiences</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/education" Icon="@MainLayout.EducationsIcon">Educations</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/language-skill" Icon="@MainLayout.LanguageSkillsIcon">Language skills</MudNavLink>
+            </MudNavGroup>
+
         </MudNavMenu>
     </MudDrawer>
     <MudMainContent Class="pt-16 px-16">
