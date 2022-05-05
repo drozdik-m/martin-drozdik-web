@@ -1,11 +1,11 @@
 ﻿@page "/language-skill"
 @inherits RootPage
 @attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
-@inject PersonService Service 
+@inject LanguageSkillService Service 
 
 @code {
     public static BreadcrumbItem BreadcrumbItem { get; }
-        = new BreadcrumbItem("People", href: "/people", icon: MainLayout.LanguageSkillsIcon);
+        = new BreadcrumbItem("Language skill", href: "/language-skill", icon: MainLayout.LanguageSkillsIcon);
 
     protected List<BreadcrumbItem> breadcrumbItems = new()
     {
@@ -13,25 +13,25 @@
         BreadcrumbItem,
     };
 
-    ListPage<Person, int> listPage;
+    ListPage<LanguageSkill, int> listPage;
 }
 
 <MudBreadcrumbs Items="breadcrumbItems" />
 
-<MudText Typo="Typo.h3" Class="mb-1">People</MudText>
-<MudText Class="mb-4">People relevant in projects as developers and so on...</MudText>
+<MudText Typo="Typo.h3" Class="mb-1">Language skills</MudText>
+<MudText Class="mb-4">What languages I know and how well?</MudText>
 
-<ListPage @ref="listPage" TModel="Person" TKey="int" KeyGetter="e => e.Id"
+<ListPage @ref="listPage" TModel="LanguageSkill" TKey="int" KeyGetter="e => e.Id"
     GetService="Service"
-    AddService="Service" EntityCreator="() => new Person()"
+    AddService="Service" EntityCreator="() => new LanguageSkill()"
     DeleteService="Service"
-    CustomOrder="e => e.Where(e => e.IsMe).OrderBy(e => e.Name).Concat(e.Where(e => !e.IsMe).OrderBy(e => e.Name))">
+    ReorderService="Service" OrderExpression="e => e.OrderIndex">
 
     <DisplayItems>
         <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Language Name</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -43,7 +43,6 @@
                         <tr>
                             <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
-                            <td><MudSkeleton /></td>
                         </tr>
                     }
                 }
@@ -51,16 +50,12 @@
                 {
                     <tr>
                         <td>
-                            @item.Name
-                            @if(item.IsMe)
-                            {
-                                <MudChip Color="Color.Secondary" Class="ml-3">Me</MudChip>
-                            }
+                            @item.LanguageName
                         </td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
-                                HrefEdit="@($"/people/{item.Id}")"/>
+                                HrefEdit="@($"/language-skill/{item.Id}")"/>
                         </td>
                     </tr>
                 }
@@ -69,12 +64,12 @@
     </DisplayItems>
     
     <AddInputs>
-        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
-                        Immediate="true" HelperText="The full name of this person" 
+        <MudTextField @bind-Value="context.Model.LanguageName" Disabled="context.Loading" Label="Language name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The full name of this language" 
                         Required="true" RequiredError="A name is required" />
     </AddInputs>
 
     <ReorderItem>
-        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.LanguageName}")" />
     </ReorderItem>
 </ListPage>
