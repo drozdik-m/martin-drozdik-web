@@ -1,0 +1,81 @@
+﻿@page "/education"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject EducationService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("Education", href: "/education", icon: MainLayout.EducationsIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<Education, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">Education</MudText>
+<MudText Class="mb-4">Where did I study? What titles did I get?</MudText>
+
+<ListPage @ref="listPage" TModel="Education" TKey="int" KeyGetter="e => e.Id"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new Education()"
+    DeleteService="Service"
+    ReorderService="Service" OrderExpression="e => e.OrderIndex">
+
+    <DisplayItems>
+
+        @if (!context.Models.Any())
+        {
+            <MudAlert Severity="Severity.Info">No education added. I am dumb.</MudAlert>
+        }
+        else
+        {
+            <MudTimeline TimelinePosition="TimelinePosition.Start">
+
+                @foreach (var item in context.Models)
+                {
+                    <MudTimelineItem Size="Size.Medium" Color="@(item.Ended ? Color.Primary : Color.Info)" Elevation="25">
+                        <MudCard Elevation="25">
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6">@item.Name</MudText>
+                                <MudText Typo="Typo.body2">@item.Specialization</MudText>
+                                <MudText Typo="Typo.body2" Class="my-2">
+                                    <b>
+                                        @if (item.StartedDate.HasValue)
+                                        {
+                                            @($"from {item.StartedDate.Value.ToString("dd. MM. yyyy")}")
+                                        }
+                                        @if(item.EndedDate.HasValue && item.Ended)
+                                        {
+                                            @($" to {item.EndedDate.Value.ToString("dd. MM. yyyy")}")
+                                        }
+                                    </b>
+                                </MudText>
+                                <ListControlButton Disabled="context.Loading" 
+                                    OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                    HrefEdit="@($"/education/{item.Id}")"/>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudTimelineItem>
+                }            
+
+            </MudTimeline>
+        }
+
+    </DisplayItems>
+    
+    <AddInputs>
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The name of the education. May contain a title." 
+                        Required="true" RequiredError="A name is required" />
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+    </ReorderItem>
+</ListPage>

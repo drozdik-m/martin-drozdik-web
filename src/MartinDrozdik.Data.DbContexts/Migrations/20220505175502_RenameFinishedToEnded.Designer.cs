@@ -4,6 +4,7 @@ using Bonsai.DataPersistence.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20220505175502_RenameFinishedToEnded")]
+    partial class RenameFinishedToEnded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,7 +38,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     b.Property<bool>("Ended")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("EndedDate")
+                    b.Property<DateTime>("EndedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("LastEditAt")
@@ -53,7 +55,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("StartedDate")
+                    b.Property<DateTime>("StartedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");

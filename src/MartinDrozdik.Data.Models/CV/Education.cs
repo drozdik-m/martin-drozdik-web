@@ -29,17 +29,17 @@ namespace MartinDrozdik.Data.Models.CV
         /// <summary>
         /// Start time of the education
         /// </summary>
-        public DateTime StartedDate { get; set; } = DateTime.Now;
+        public DateTime? StartedDate { get; set; } = DateTime.Now;
 
         /// <summary>
         /// Tells if the education is concluded
         /// </summary>
-        public bool Finished { get; set; } = false;
+        public bool Ended { get; set; } = false;
 
         /// <summary>
         /// End time of the education
         /// </summary>
-        public DateTime EndedDate { get; set; } = DateTime.Now;
+        public DateTime? EndedDate { get; set; } = DateTime.Now;
 
     }
 }
