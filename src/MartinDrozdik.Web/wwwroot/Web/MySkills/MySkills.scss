@@ -22,6 +22,7 @@
             @include box-shadow($pxInRem-7 $pxInRem-7 $pxInRem-39 $pxInRem-6 rgba(0, 0, 0, 0.35));
             text-align: center;
             background-repeat: no-repeat;
+            @include border-radius($radiusSmall);
             $bgTopPadding: 2rem;
             $bgHeight: 4.5rem;
             $bgSpace: 1.5rem;
@@ -61,6 +62,7 @@
                 background-color: $black;
                 @include dashedBorderBlack($pxInRem-20);
                 z-index: 2;
+                @include border-radius(0);
 
                 p, h3 {
                     color: white;

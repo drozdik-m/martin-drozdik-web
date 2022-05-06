@@ -28,16 +28,30 @@
             <h3 class="headingUnderlined">Pracovní zkušenosti</h3>
             <ul class="importantDottedList importantDottedListRed importantDottedDashedList">
 
-                <li class="dottedListImportantItem">
-                    <span class="biographyListHeading">Spoluzakladatel a programátor</span>
-                    <dl class="biographyListItemInfos">
-                        <dt>Místo pracovní zkušenosti</dt>
-                        <dd class="placeOfWork">Bonsai Development</dd>
-                        <dt>Doba pracovní zkušenosti</dt>
-                        <dd class="timeOfWork">březen 2016 – současnost</dd>
-                    </dl>
-                    <p>Popisem mé práce je tvorba a optimalizace webových stránek, organizace týmu a komunikace s klienty.</p>
-                </li>
+                @foreach(var workExperience in Model.WorkExperiences)
+                {
+                    <li class="dottedListImportantItem">
+                        <span class="biographyListHeading">@workExperience.WorkPosition</span>
+                        <dl class="biographyListItemInfos">
+                            <dt>Místo pracovní zkušenosti</dt>
+                            <dd class="placeOfWork">
+                                @if (workExperience.PlaceOfWorkHasWebsite)
+                                {
+                                    <a href="@workExperience.PlaceOfWorkUri" target="_blank" title="@workExperience.PlaceOfWork Web" rel="nofollow">
+                                        @workExperience.PlaceOfWork
+                                    </a>
+                                }
+                                else
+                                {
+                                    @workExperience.PlaceOfWork
+                                }
+                            </dd>
+                            <dt>Doba pracovní zkušenosti</dt>
+                            <dd class="timeOfWork">září 2020 – současnost</dd>
+                        </dl>
+                        <p>@workExperience.Description</p>
+                    </li>
+                }
 
                 <li class="dottedListImportantItem">
                     <span class="biographyListHeading">Vyučující předmětu OOP na&nbsp;ČVUT</span>

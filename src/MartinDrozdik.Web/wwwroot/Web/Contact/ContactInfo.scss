@@ -19,6 +19,7 @@ $mobileTreshold: 56.25rem !default;
         overflow: hidden;
         margin-right: 3rem;
         @include box-shadow($pxInRem-4 $pxInRem-4 $pxInRem-18 $pxInRem-2 rgba(0, 0, 0, 0.2));
+        @include border-radius($radiusSmall);
 
         > h3, > p {
             color: white;
@@ -49,21 +50,19 @@ $mobileTreshold: 56.25rem !default;
             bottom: 0;
             right: 0;
             z-index: 1;
+            pointer-events: none;
         }
 
         #contactInfoLinks {
             position: absolute;
             bottom: $pxInRem-30;
             left: $pxInRem-24;
+            z-index: 2;
 
             .icon {
                 display: inline-block;
                 vertical-align: middle;
-
-                
-
                 @include ResponsiveBorder.responsiveBorder(50%, white);
-
                 $iconDimensions: 2.25rem;
 
                 &.iconGitHubWhite {
@@ -78,7 +77,6 @@ $mobileTreshold: 56.25rem !default;
                     background-size: 1.5rem 1.5rem;
                     height: $iconDimensions;
                     width: $iconDimensions;
-                    
                 }
             }
         }
