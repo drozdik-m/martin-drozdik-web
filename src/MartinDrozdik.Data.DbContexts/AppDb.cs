@@ -11,7 +11,7 @@ using MartinDrozdik.Data.Models.Technologies;
 using MartinDrozdik.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bonsai.DataPersistence.DbContexts
+namespace MartinDrozdik.Data.DbContexts
 {
     public class AppDb : DbContext
     {

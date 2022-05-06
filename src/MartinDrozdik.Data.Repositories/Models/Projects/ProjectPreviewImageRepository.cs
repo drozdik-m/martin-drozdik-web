@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.DataPersistence.DbContexts;
 using Bonsai.Models.Abstraction.Services;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -15,6 +14,7 @@ using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Media.Images;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Data.DbContexts;
 
 namespace MartinDrozdik.Data.Repositories.Models.Projects
 {

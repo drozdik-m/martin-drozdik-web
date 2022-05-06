@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Options;
 
-namespace Bonsai.DataPersistence.DbContexts
+namespace MartinDrozdik.Data.DbContexts
 {
     public class IdentityDb : IdentityDbContext<AppUser>
     {

@@ -1,5 +1,4 @@
-﻿using Bonsai.DataPersistence.DbContexts;
-using Bonsai.Server.Middlewares.Localization;
+﻿using Bonsai.Server.Middlewares.Localization;
 using Bonsai.Services.Email.Extensions;
 using Bonsai.Services.RecaptchaV2.Configuration;
 using Bonsai.Services.RecaptchaV2.Extensions;
@@ -21,6 +20,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using MartinDrozdik.Data.Models.UserIdentity;
 using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
+using MartinDrozdik.Data.DbContexts;
 
 namespace MartinDrozdik.Web
 {
