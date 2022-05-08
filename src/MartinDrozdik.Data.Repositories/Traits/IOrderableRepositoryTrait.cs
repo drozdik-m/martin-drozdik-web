@@ -4,11 +4,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Exceptions.Services.CRUD;
-using Bonsai.Models.Abstraction.Services;
-using Bonsai.Models.Exceptions.CRUD;
 using MartinDrozdik.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Exceptions.Services.CRUD;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using Microsoft.EntityFrameworkCore;
 

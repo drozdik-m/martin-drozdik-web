@@ -1,5 +1,4 @@
 ﻿using System.Linq.Expressions;
-using Bonsai.Models.Abstraction.Entities;
 using Bonsai.Models.Abstraction.Services;
 using MartinDrozdik.Abstraction.Services.CRUD;
 using MartinDrozdik.Data.Models.Authentication;

@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MartinDrozdik.Abstraction.Services;
 
 namespace MartinDrozdik.Data.DbContexts.Seeds
 {
-    public interface ISeed
+    public interface ISeed : ISeedableService
     {
-        /// <summary>
-        /// Does the seeding operation
-        /// </summary>
-        /// <returns>True if seeding was required, else false</returns>
-        Task SeedAsync();
     }
 }

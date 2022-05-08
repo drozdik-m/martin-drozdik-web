@@ -17,11 +17,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.CV
 {
     public class EducationController : BaseApiController<Education, int>,
-        IOrderableControllerTrait<Education, int>
+        IOrderableControllerTrait<Education, int>,
+        ISeedableControllerTrait
     {
         readonly EducationFacade facade;
 
         readonly IOrderableControllerTrait<Education, int> orderableTrait;
+        readonly ISeedableControllerTrait seedableTrait;
 
         public EducationController(EducationFacade facade)
             : base(facade)
@@ -29,6 +31,7 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.CV
             this.facade = facade;
 
             orderableTrait = this;
+            seedableTrait = this;
         }
 
         #region Orderable trait
@@ -40,6 +43,14 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.CV
 
         #endregion
 
+        #region Seedable trait
+
+        ISeedableFacade ISeedableControllerTrait.SeedableFacade => facade;
+
+        [HttpPost("seed")]
+        public virtual Task SeedAsync() => seedableTrait.TSeedAsync();
+
+        #endregion
 
     }
 }

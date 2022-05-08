@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction.Exceptions.Services.CRUD;
 
 namespace MartinDrozdik.Abstraction.Services
 {

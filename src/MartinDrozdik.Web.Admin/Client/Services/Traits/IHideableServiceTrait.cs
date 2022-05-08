@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Exceptions.CRUD;
 using Bonsai.Utils.JSON;
 using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Abstraction.Services;

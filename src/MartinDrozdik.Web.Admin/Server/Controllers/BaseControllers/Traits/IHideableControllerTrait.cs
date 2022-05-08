@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Bonsai.Models.Abstraction;
 using Bonsai.Models.Abstraction.Services;
-using Bonsai.Models.Exceptions.CRUD;
 using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Abstraction.Exceptions.Services.CRUD;
 using MartinDrozdik.Web.Facades.Abstraction;

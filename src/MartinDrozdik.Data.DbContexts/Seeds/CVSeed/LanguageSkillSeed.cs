@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using MartinDrozdik.Abstraction.Services;
 using MartinDrozdik.Data.DbContexts.Configuration;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.UserIdentity;
@@ -11,16 +12,13 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
 {
-    public class LanguageSkillSeed : ISeed
+    public class LanguageSkillSeed : DbSeed
     {
-        private readonly AppDb context;
-
-        public LanguageSkillSeed(AppDb context)
+        public LanguageSkillSeed(AppDb context) : base(context)
         {
-            this.context = context;
         }
 
-        public async Task SeedAsync()
+        public override async Task SeedAsync()
         {
             //Create items
             var items = new List<LanguageSkill>()
@@ -47,8 +45,8 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
 
             //Add and save items
             foreach(var item in items)
-                context.Add(item);
-            await context.SaveChangesAsync();
+                Context.Add(item);
+            await Context.SaveChangesAsync();
         }
 
 

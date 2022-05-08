@@ -17,11 +17,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.CV
 {
     public class LanguageSkillController : BaseApiController<LanguageSkill, int>,
-        IOrderableControllerTrait<LanguageSkill, int>
+        IOrderableControllerTrait<LanguageSkill, int>,
+        ISeedableControllerTrait
     {
         readonly LanguageSkillFacade facade;
 
         readonly IOrderableControllerTrait<LanguageSkill, int> orderableTrait;
+        readonly ISeedableControllerTrait seedableTrait;
 
         public LanguageSkillController(LanguageSkillFacade facade)
             : base(facade)
@@ -29,6 +31,7 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.CV
             this.facade = facade;
 
             orderableTrait = this;
+            seedableTrait = this;
         }
 
         #region Orderable trait
@@ -40,6 +43,13 @@ namespace MartinDrozdik.Web.Admin.Server.Controllers.Models.CV
 
         #endregion
 
+        #region Seedable trait
 
+        ISeedableFacade ISeedableControllerTrait.SeedableFacade => facade;
+
+        [HttpPost("seed")]
+        public virtual Task SeedAsync() => seedableTrait.TSeedAsync();
+
+        #endregion 
     }
 }

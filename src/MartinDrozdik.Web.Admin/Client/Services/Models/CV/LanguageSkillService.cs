@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction.Localization;
-using Bonsai.Models.Abstraction.Services;
-using Bonsai.Models.Abstraction.Services.CRUD;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
@@ -16,16 +13,19 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.CV
 {
     public class LanguageSkillService : BaseApiService<LanguageSkill, int>,
         ICRUDServiceTrait<LanguageSkill, int>,
-        IOrderableServiceTrait<LanguageSkill, int>
+        IOrderableServiceTrait<LanguageSkill, int>,
+        ISeedableServiceTrait
     {
         readonly ICRUDServiceTrait<LanguageSkill, int> crudTrait;
         readonly IOrderableServiceTrait<LanguageSkill, int> orderableTrait;
+        readonly ISeedableServiceTrait seedableTrait;
 
         public LanguageSkillService(HttpClient http)
             : base(http)
         {
             crudTrait = this;
             orderableTrait = this;
+            seedableTrait = this;
         }
 
         protected override string ApiUri { get; set; } = "/api/LanguageSkill";
@@ -45,5 +45,8 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.CV
 
         #endregion
 
+        #region Seedable trait
+        public Task SeedAsync() => seedableTrait.TSeedAsync();
+        #endregion
     }
 }

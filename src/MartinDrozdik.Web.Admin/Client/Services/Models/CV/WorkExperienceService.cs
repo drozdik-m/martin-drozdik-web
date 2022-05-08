@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction.Localization;
 using Bonsai.Models.Abstraction.Services;
 using Bonsai.Models.Abstraction.Services.CRUD;
 using MartinDrozdik.Data.Models.CV;
@@ -16,16 +15,19 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.CV
 {
     public class WorkExperienceService : BaseApiService<WorkExperience, int>,
         ICRUDServiceTrait<WorkExperience, int>,
-        IOrderableServiceTrait<WorkExperience, int>
+        IOrderableServiceTrait<WorkExperience, int>,
+        ISeedableServiceTrait
     {
         readonly ICRUDServiceTrait<WorkExperience, int> crudTrait;
         readonly IOrderableServiceTrait<WorkExperience, int> orderableTrait;
+        readonly ISeedableServiceTrait seedableTrait;
 
         public WorkExperienceService(HttpClient http)
             : base(http)
         {
             crudTrait = this;
             orderableTrait = this;
+            seedableTrait = this;
         }
 
         protected override string ApiUri { get; set; } = "/api/WorkExperience";
@@ -42,8 +44,10 @@ namespace MartinDrozdik.Web.Admin.Client.Services.Models.CV
 
         #region Orderable trait
         public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
-
         #endregion
 
+        #region Seedable trait
+        public Task SeedAsync() => seedableTrait.TSeedAsync();
+        #endregion
     }
 }

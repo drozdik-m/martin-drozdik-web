@@ -13,12 +13,12 @@ using MartinDrozdik.Abstraction.Services;
 
 namespace MartinDrozdik.Web.Admin.Client.Services.Traits
 {
-    interface IOrderableServiceTrait<TEntity, TKey> : IServiceTrait, IOrderableService<TKey>
-        where TEntity : class, IIdentifiable<TKey>, IOrderable
+    interface ISeedableServiceTrait : IServiceTrait, ISeedableService
     {
-        public async Task TReorderAsync(IEnumerable<TKey> newOrder)
+        /// <inheritdoc/>
+        public async Task TSeedAsync()
         {
-            var response = await Http.PutAsync(ApiUri + "/reorder", newOrder.ToJsonContent());
+            var response = await Http.PostAsync(ApiUri + "/seed", "".ToJsonContent());
             response.EnsureSuccessStatusCode();
         }
     }

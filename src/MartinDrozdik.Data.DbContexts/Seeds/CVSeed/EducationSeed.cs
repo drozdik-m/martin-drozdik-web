@@ -11,16 +11,13 @@ using Microsoft.AspNetCore.Identity;
 
 namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
 {
-    public class EducationSeed : ISeed
+    public class EducationSeed : DbSeed
     {
-        private readonly AppDb context;
-
-        public EducationSeed(AppDb context)
+        public EducationSeed(AppDb context) : base(context)
         {
-            this.context = context;
         }
 
-        public async Task SeedAsync()
+        public override async Task SeedAsync()
         {
             //Create items
             var items = new List<Education>()
@@ -65,8 +62,8 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
 
             //Add and save items
             foreach(var item in items)
-                context.Add(item);
-            await context.SaveChangesAsync();
+                Context.Add(item);
+            await Context.SaveChangesAsync();
         }
 
 

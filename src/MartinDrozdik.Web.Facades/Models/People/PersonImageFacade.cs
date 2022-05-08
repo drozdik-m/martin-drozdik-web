@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction.Localization;
 using Bonsai.Utils.String;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Media.Images;

@@ -6,11 +6,6 @@ using System.Net.Http;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
-using Bonsai.Models.Abstraction.Services;
-using Bonsai.Models.Abstraction.Services.CRUD;
-using Bonsai.Models.Exceptions.CRUD;
 using Bonsai.Utils.JSON;
 using Newtonsoft.Json;
 

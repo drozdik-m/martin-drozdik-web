@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using MartinDrozdik.Abstraction.Services;
 using MartinDrozdik.Data.DbContexts.Configuration;
 using MartinDrozdik.Data.Models.UserIdentity;
 using Microsoft.AspNetCore.Identity;
