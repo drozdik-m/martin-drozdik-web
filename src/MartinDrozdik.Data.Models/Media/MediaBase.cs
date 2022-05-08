@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Text;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Media

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Data.Repositories.Abstraction;
 using Microsoft.EntityFrameworkCore;
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Data.Models.Media;
 using MartinDrozdik.Data.Models.Media.Images;
 

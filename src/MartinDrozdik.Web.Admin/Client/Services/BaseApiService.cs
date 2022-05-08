@@ -4,8 +4,8 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
 using Bonsai.Models.Abstraction.Services.CRUD;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Web.Admin.Client.Services.Traits;
 using Newtonsoft.Json;
 

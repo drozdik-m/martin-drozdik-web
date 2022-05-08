@@ -8,9 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
 using Bonsai.Models.Abstraction.Services;
 using Bonsai.Models.Exceptions.CRUD;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Web.Facades.Abstraction;
 using Microsoft.EntityFrameworkCore;
 

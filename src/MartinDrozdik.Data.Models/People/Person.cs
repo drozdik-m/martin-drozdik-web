@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.People

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Bonsai.Models.Abstraction;
-using Bonsai.Models.Abstraction.Entities;
-using Bonsai.Models.Abstraction.Services.CRUD;
+using MartinDrozdik.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Services.CRUD;
 
 namespace MartinDrozdik.Web.Facades.Abstraction
 {

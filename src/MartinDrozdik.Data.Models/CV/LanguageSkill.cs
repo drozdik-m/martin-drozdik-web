@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Bonsai.Models.Abstraction.Entities;
+using MartinDrozdik.Abstraction.Entities;
 using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.CV
