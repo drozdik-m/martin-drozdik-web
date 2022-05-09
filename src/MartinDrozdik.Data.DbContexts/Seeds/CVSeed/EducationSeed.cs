@@ -26,7 +26,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
                 {
                     Name = "ČVUT FIT v Praze (Ing.)",
                     Specialization = "Softwarové inženýrstvý",
-                    StartedDate = new DateTime(2020, 9, 0),
+                    StartedDate = new DateTime(2020, 9, 1),
                     Ended = false,
                     EndedDate = new DateTime(2022, 6, 1),
                     OrderIndex = 0,
@@ -35,7 +35,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
                 {
                     Name = "ČVUT FIT v Praze (Bc.)",
                     Specialization = "Softwarové inženýrstvý",
-                    StartedDate = new DateTime(2017, 9, 0),
+                    StartedDate = new DateTime(2017, 9, 1),
                     Ended = true,
                     EndedDate = new DateTime(2020, 6, 1),
                     OrderIndex = 1,
@@ -44,7 +44,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
                 {
                     Name = "SPŠSE a VOŠ Liberec",
                     Specialization = "Technické lyceum",
-                    StartedDate = new DateTime(2013, 9, 0),
+                    StartedDate = new DateTime(2013, 9, 1),
                     Ended = true,
                     EndedDate = new DateTime(2017, 6, 1),
                     OrderIndex = 2,
@@ -52,7 +52,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
                 new Education()
                 {
                     Name = "ZŠ Doctrina",
-                    StartedDate = new DateTime(2004, 9, 0),
+                    StartedDate = new DateTime(2004, 9, 1),
                     Ended = true,
                     EndedDate = new DateTime(2013, 6, 1),
                     OrderIndex = 3,

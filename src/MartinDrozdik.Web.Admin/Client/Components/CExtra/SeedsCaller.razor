@@ -17,8 +17,8 @@
         
         @foreach(var (name, seed) in Seeds)
         {
-            <MudListItem Icon="@Icons.Material.Filled.Drafts">
-                @name
+            <MudListItem>
+                <MudText Class="mr-5" Style="display: inline;">@name</MudText>
                 <MudButton Color="Color.Primary" Variant="Variant.Outlined" OnClick="@(async _ => await SeedAsync(seed, verbose: true))" >Seed</MudButton>
             </MudListItem>
         }

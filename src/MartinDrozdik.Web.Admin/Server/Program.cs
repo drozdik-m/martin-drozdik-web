@@ -112,6 +112,9 @@ builder.Services.AddImageSaver();
 //Repositories
 builder.Services.AddRepositories();
 
+//Seeds
+builder.Services.AddSeeds();
+
 //Facades
 builder.Services.AddFacades();
 
