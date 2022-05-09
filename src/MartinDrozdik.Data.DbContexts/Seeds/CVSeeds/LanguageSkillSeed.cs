@@ -10,7 +10,7 @@ using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.UserIdentity;
 using Microsoft.AspNetCore.Identity;
 
-namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
+namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeeds
 {
     public class LanguageSkillSeed : DbSeed
     {
@@ -44,7 +44,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
             };
 
             //Add and save items
-            foreach(var item in items)
+            foreach (var item in items)
                 Context.Add(item);
             await Context.SaveChangesAsync();
         }

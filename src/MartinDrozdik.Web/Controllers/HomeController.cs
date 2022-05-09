@@ -19,6 +19,8 @@ using Bonsai.Utils.String;
 using Bonsai.Services.Email.Messages;
 using Bonsai.Services.RecaptchaV2.Abstraction;
 using Bonsai.Services.Email.Abstraction;
+using MartinDrozdik.Data.Models.CV;
+using MartinDrozdik.Web.Facades.Models.People;
 
 namespace Bonsai.Server.Controllers
 {
@@ -30,12 +32,18 @@ namespace Bonsai.Server.Controllers
         readonly ServerConfiguration serverConfig;
         readonly IRecaptchaV2Validator recaptchaValidator;
         readonly IEmailSender emailSender;
+        private readonly WorkExperienceFacade workExperienceFacade;
+        private readonly EducationFacade educationFacade;
+        private readonly LanguageSkillFacade languageSkillFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
             ServerConfiguration serverConfig,
             IRecaptchaV2Validator recaptchaValidator,
-            IEmailSender emailSender
+            IEmailSender emailSender,
+            WorkExperienceFacade workExperienceFacade,
+            EducationFacade educationFacade,
+            LanguageSkillFacade languageSkillFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -43,11 +51,19 @@ namespace Bonsai.Server.Controllers
             this.serverConfig = serverConfig;
             this.recaptchaValidator = recaptchaValidator;
             this.emailSender = emailSender;
+            this.workExperienceFacade = workExperienceFacade;
+            this.educationFacade = educationFacade;
+            this.languageSkillFacade = languageSkillFacade;
         }
 
         public async Task<IActionResult> Index()
         {
-            var indexModel = new IndexPageModel(cultureProvider, languageDictionary)
+            var workExperiences = await workExperienceFacade.GetAsync();
+            var educations = await educationFacade.GetAsync();
+            var languageSkill = await languageSkillFacade.GetAsync();
+
+            var indexModel = new IndexPageModel(cultureProvider, languageDictionary,
+                workExperiences, educations, languageSkill)
             {
 
             };

@@ -70,7 +70,9 @@
     </div>
 </div-->
 
-@*<partial name="_Biography" for="@BiographyModel.Default" />*@
+
+@{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }
+<partial name="_Biography" for="@biographyModel" />
 
 <partial name="_Contact" for="@ContactModel.Default" />
 

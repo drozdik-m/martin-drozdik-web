@@ -19,8 +19,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using MartinDrozdik.Data.Models.UserIdentity;
-using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 using MartinDrozdik.Data.DbContexts;
+using MartinDrozdik.Services.ImageSaving.Extensions;
+using MartinDrozdik.Data.Repositories;
+using MartinDrozdik.Web.Facades;
+using MartinDrozdik.Data.DbContexts.Seeds;
 
 namespace MartinDrozdik.Web
 {
@@ -97,6 +100,19 @@ namespace MartinDrozdik.Web
 
             //Add languages
             services.AddLanguages();
+
+            //Add image saver
+            services.AddImageSaver();
+
+            //Repositories
+            services.AddRepositories();
+
+            //Seeds
+            services.AddSeeds();
+
+            //Facades
+            services.AddFacades();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

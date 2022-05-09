@@ -9,7 +9,7 @@ using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.UserIdentity;
 using Microsoft.AspNetCore.Identity;
 
-namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
+namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeeds
 {
     public class WorkExperienceSeed : DbSeed
     {
@@ -70,11 +70,11 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeed
                     EndedDate = new DateTime(2016, 7, 1),
                     OrderIndex = 3,
                 },
-                
+
             };
 
             //Add and save items
-            foreach(var item in items)
+            foreach (var item in items)
                 Context.Add(item);
             await Context.SaveChangesAsync();
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MartinDrozdik.Abstraction.Services;
-using MartinDrozdik.Data.DbContexts.Seeds.CVSeed;
+using MartinDrozdik.Data.DbContexts.Seeds.CVSeeds;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;

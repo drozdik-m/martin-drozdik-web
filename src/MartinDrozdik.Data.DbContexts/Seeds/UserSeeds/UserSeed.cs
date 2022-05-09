@@ -9,7 +9,7 @@ using MartinDrozdik.Data.DbContexts.Configuration;
 using MartinDrozdik.Data.Models.UserIdentity;
 using Microsoft.AspNetCore.Identity;
 
-namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeed
+namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeeds
 {
     public class UserSeed : ISeed
     {
@@ -25,7 +25,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeed
 
         public async Task SeedAsync()
         {
-            foreach(var userConfig in seedUsers)
+            foreach (var userConfig in seedUsers)
             {
                 var user = new AppUser
                 {
@@ -45,7 +45,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeed
                     throw new Exception("The seeded user could not be retrieved for some reason");
 
                 //Add the roles
-                foreach(var role in userConfig.Roles)
+                foreach (var role in userConfig.Roles)
                     await AddRole(user, role);
             }
         }
@@ -57,7 +57,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.UserSeed
             //The user already exists
             if (searchResult != null)
                 return;
-                
+
             //Create the user
             var result = await userManager.CreateAsync(user, password);
 

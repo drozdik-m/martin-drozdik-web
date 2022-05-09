@@ -13,10 +13,16 @@ namespace MartinDrozdik.Web.Facades
 {
     public static class AddFacadesExtension
     {
+        public static IServiceCollection AddIdentityFacades(this IServiceCollection serviceCollection)
+        {
+            serviceCollection = serviceCollection.AddScoped<UserFacade>();
+
+            return serviceCollection;
+        }
+
         public static IServiceCollection AddFacades(this IServiceCollection serviceCollection)
         {
             serviceCollection = serviceCollection.AddScoped<ProjectTagFacade>();
-            serviceCollection = serviceCollection.AddScoped<UserFacade>();
             serviceCollection = serviceCollection.AddScoped<PersonProfileImageFacade>();
             serviceCollection = serviceCollection.AddScoped<PersonFacade>();
             serviceCollection = serviceCollection.AddScoped<TechnologyFacade>();

@@ -1,5 +1,4 @@
 ﻿using MartinDrozdik.Data.DbContexts.Seeds;
-using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;

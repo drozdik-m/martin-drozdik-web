@@ -1,6 +1,7 @@
 ﻿@use "sass:math";
+@use "../Global/CommonText.scss";
 
-@import "../_Variables.scss";
+@import "../_Variables";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 @import "../ImportantDottedList/ImportantDottedList";
@@ -120,6 +121,17 @@
     }
     //Work experience list
     #biographyWorkExperience {
+        ul {
+            li {
+                .biographyListItemInfos {
+                    .commonA {
+                        //@include CommonText.commonABackgroundSize($pxInRem-12, $pxInRem-5);
+                        background-image: none;
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
     }
     //School experience list
     #biographySchoolExperience {

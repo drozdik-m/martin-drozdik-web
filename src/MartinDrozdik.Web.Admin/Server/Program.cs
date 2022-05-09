@@ -2,7 +2,7 @@
 using Bonsai.RazorPages.User.Services.LanguageDictionary;
 using MartinDrozdik.Data.DbContexts;
 using MartinDrozdik.Data.DbContexts.Seeds;
-using MartinDrozdik.Data.DbContexts.Seeds.UserSeed;
+using MartinDrozdik.Data.DbContexts.Seeds.UserSeeds;
 using MartinDrozdik.Data.Models.UserIdentity;
 using MartinDrozdik.Data.Repositories;
 using MartinDrozdik.Services.FilePathProvider;
@@ -117,6 +117,7 @@ builder.Services.AddSeeds();
 
 //Facades
 builder.Services.AddFacades();
+builder.Services.AddIdentityFacades();
 
 //Create the app
 var app = builder.Build();
