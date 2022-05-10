@@ -21,7 +21,7 @@
     font-weight: $fontWeightBlack;
     color: $black;
     position: relative;
-    padding-block: $pxInRem-4;
+    padding-bottom: $pxInRem-6;
     margin-bottom: $pxInRem-28;
 
     &:after {
@@ -72,9 +72,9 @@
 
 @media only screen and (max-width: 46rem) {
     .commonH {
-        font-size: $pxInRem-50;
-        padding-block: $pxInRem-4;
-        margin-bottom: $pxInRem-28;
+        font-size: $pxInRem-46;
+        padding-bottom: $pxInRem-6;
+        margin-bottom: $pxInRem-22;
 
         &:after {
             height: $pxInRem-4;

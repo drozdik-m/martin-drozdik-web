@@ -1,35 +1,153 @@
-﻿@import "../_Variables";
+﻿@use "sass:math";
+
+@import "../_Variables";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 @import "../Global/Tags";
 
-.projectList{
-    max-width: 50rem;
+.projectList {
+    max-width: 60rem;
     margin: 0 auto;
-    padding: 0.75rem;
-
+    list-style: none;
     //COLOR SCHEMES
-    &.darkMode{
-
+    &.darkMode {
     }
 
-    &.lightMode{
-        span, a, p, h3{
+    &.lightMode {
+        span, a, p, h3 {
             color: white;
         }
     }
-
     //TAGS HEADING
-    .tagsHeading{
+    .tagsHeading {
         font-weight: $fontWeightExtraBold;
         display: block;
         font-size: $pxInRem-26;
         margin-bottom: $pxInRem-6;
     }
-
     //TAGS
-    .tags{
-
+    .tags {
     }
 
+    .projects > li {
+        display: flex;
+        align-items: center;
+        margin: 1.75rem 0;
+
+        .projectPreviewImage, .projectDescription {
+        }
+        //IMAGE
+        .projectPreviewImage {
+            @include box-shadow(0 0 $pxInRem-6 $pxInRem-2 rgba(0, 0, 0, 0.35));
+            @include border-radius($radiusSmall);
+            max-width: 100%;
+            $width: 22rem;
+            width: $width;
+            min-width: $width;
+            height: math.div($width, 16) * 9;
+            font-size: 0;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            margin-right: 1rem;
+        }
+        //DESCRIPTION
+        .projectDescription {
+            h3 {
+                font-weight: $fontWeightBold;
+                font-size: $pxInRem-24;
+                margin: $pxInRem-1 0 $pxInRem-8 0;
+            }
+
+            p {
+                font-size: $pxInRem-16;
+                margin-bottom: $pxInRem-8;
+            }
+
+            .tags {
+                margin-bottom: $pxInRem-10;
+            }
+
+            .projectActions {
+                .commonButton {
+                    vertical-align: bottom;
+                    margin: $pxInRem-6 $pxInRem-8;
+                    
+                }
+
+                .commonButtonLive, .commonButtonGithub {
+                    padding-top: $pxInRem-9;
+                    padding-bottom: $pxInRem-9;
+                }
+
+                .commonButtonLive {
+                    &:before {
+                        top: 52%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 56.875rem){
+    .projectList {
+        .projects > li {
+            padding-left: $pxInRem-12;
+            //padding-right: $pxInRem-8;
+            position: relative;
+
+            &:before {
+                position: absolute;
+                content: " ";
+                font-size: 0;
+                left: 0;
+                top: 0;
+                bottom: 0;
+                background-color: white;
+                width: $pxInRem-1;
+            }
+
+            .projectPreviewImage {
+                display: none;
+                background-image: none !important;
+            }
+
+            .projectDescription {
+                .projectActions {
+                    .commonButton {
+                        margin: $pxInRem-4 $pxInRem-4;
+                    }
+
+                    .commonButtonLive, .commonButtonGithub {
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 30rem){
+    .projectList {
+        .projects > li {
+
+            
+
+            .projectPreviewImage {
+                
+            }
+
+            .projectDescription {
+                .projectActions {
+                    .commonButton {
+                        
+                    }
+
+                    .commonButtonLive, .commonButtonGithub {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
 }

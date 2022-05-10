@@ -20,10 +20,10 @@
 
 <partial name="_MySkills" for="@MySkillsModel.Default" />
 
-<!--div id="projects" class="backgroundBlock">
+<div id="projects" class="backgroundBlock">
     <div id="projectsContent" class="block">
         <h2 class="commonH commonHWhite">Dokončené projekty</h2>
-        <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z nichž část zajisté stojí za zmínku.</p>
+        <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z&nbsp;nichž část zajisté stojí za zmínku.</p>
 
         <div class="projectList lightMode">
             <span class="tagsHeading">Filtr tagů</span>
@@ -37,38 +37,62 @@
 
             @* Project list *@
             <ul class="projects">
-                <li>
-                    <img src="https://via.placeholder.com/150" title="Projekt GIT Elekto" alt="Project GIT Elektro" />
-                    <h3>GIT Elektro</h3>
-                    <p></p>
-                    <ul class="tags tagsWhiteBlack">
-                        <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
-                    </ul>
-                    <div class="projectActions">
-                        <a href="https://git-elektro.cz/" title="Detail projektu GIT Elektro" class="commonButton commonButtonRed">Detail projektu</a>
-                        <a href="https://git-elektro.cz/" title="GIT Elektro codebase" class="commonButton commonButtonDarkRed commonButtonGithub">GitHub</a>
-                        <a href="https://git-elektro.cz/" title="GIT Elektro živý web" class="commonButton commonButtonDarkRed commonButtonLive">Odkaz</a>
-                    </div>
-                </li>
 
                 <li>
-                    <img src="https://via.placeholder.com/150" title="Projekt GIT Elekto" alt="Project GIT Elektro" />
-                    <h3>GIT Elektro</h3>
-                    <p></p>
-                    <ul class="tags tagsWhiteBlack">
-                        <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
-                    </ul>
+                    <div class="projectPreviewImage" style="background-image: url(https://via.placeholder.com/1920x1080)">&nbsp;</div>
+                    <div class="projectDescription">
+                        <h3>GIT Elektro</h3>
+                        <p>Web na míru pro energetickou společnost</p>
+                        <ul class="tags tagsSlim tagsWhiteBlack">
+                            <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
+                            <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
+                            <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
+                        </ul>
+                        <div class="projectActions">
+                            <a href="https://git-elektro.cz/" title="Detail projektu GIT Elektro" class="commonButton commonButtonRed">Detail projektu</a>
+                            <a href="https://git-elektro.cz/" title="GIT Elektro codebase" class="commonButton commonButtonDarkRed commonButtonSlim commonButtonGithub iconGitHubWhite">GitHub</a>
+                            <a href="https://git-elektro.cz/" title="GIT Elektro živý web" class="commonButton commonButtonDarkRed commonButtonSlim commonButtonLive">Odkaz</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="projectPreviewImage" style="background-image: url(https://via.placeholder.com/1920x1080)">&nbsp;</div>
+                    <div class="projectDescription">
+                        <h3>GIT Elektro</h3>
+                        <p>Web na míru pro energetickou společnost. Toto je delší odstavec, protože jsme byl asi moc ukecaný.</p>
+                        <ul class="tags tagsSlim tagsWhiteBlack">
+                            <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
+                            <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
+                            <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
+                        </ul>
+                        <div class="projectActions">
+                            <a href="https://git-elektro.cz/" title="Detail projektu GIT Elektro" class="commonButton commonButtonRed">Detail projektu</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="projectPreviewImage" style="background-image: url(https://via.placeholder.com/1920x1080)">&nbsp;</div>
+                    <div class="projectDescription">
+                        <h3>GIT Elektro</h3>
+                        <p>Web na míru pro energetickou společnost. Toto je delší odstavec, protože jsme byl asi moc ukecaný a protáhlo se to omg stop it, měl jsem radší vložit lorem ipsum lol.</p>
+                        <ul class="tags tagsSlim tagsWhiteBlack">
+                            <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
+                            <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
+                            <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
+                        </ul>
+                        <div class="projectActions">
+                            <a href="https://git-elektro.cz/" title="Detail projektu GIT Elektro" class="commonButton commonButtonRed">Detail projektu</a>
+                        </div>
+                    </div>
                 </li>
 
             </ul>
 
+            @*<a href="">Zobrazit stránku s projekty</a>*@
+
         </div>
     </div>
-</div-->
+</div>
 
 
 @{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }

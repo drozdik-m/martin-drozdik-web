@@ -17,7 +17,7 @@
             border-width: $pxInRem-1;
             padding: $pxInRem-6 $pxInRem-12;
             font-weight: $fontWeightBold;
-            font-size: $pxInRem-16;
+            font-size: $pxInRem-18;
             @include border-radius($pxInRem-3);
             cursor: pointer;
             @include transition(border-color $transition, background-color $transition, color $transition);
@@ -30,11 +30,17 @@
                 @include transition(color $transition);
             }
 
-            &:active{
+            &:active {
                 top: $pxInRem-1;
             }
         }
+    }
 
+    &.tagsSlim {
+        a {
+            padding: $pxInRem-4 $pxInRem-8;
+            font-size: $pxInRem-15;
+        }
     }
 
     @mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
@@ -75,5 +81,16 @@
     //SCHEMES
     &.tagsWhiteBlack {
         @include tagsScheme($black, #cfcfcf, #cfcfcf, $black, white, $black);
+    }
+}
+
+@media only screen and (max-width: 46rem) {
+    .tags {
+        li {
+            a {
+                padding: $pxInRem-5 $pxInRem-10;
+                font-size: $pxInRem-16;
+            }
+        }
     }
 }
