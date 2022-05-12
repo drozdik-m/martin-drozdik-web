@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
-namespace MartinDrozdik.Web.TagHelpers
+namespace MartinDrozdik.Web.ViewSupport.TagHelpers
 {
     [HtmlTargetElement("white-logo-icon", TagStructure = TagStructure.WithoutEndTag)]
     public class WhiteLogoIconTagHelper : TagHelper
