@@ -7,7 +7,7 @@
 
 .projectList {
     max-width: 60rem;
-    margin: 0 auto;
+    margin: 0rem auto;
     list-style: none;
     //COLOR SCHEMES
     &.darkMode {
@@ -72,7 +72,6 @@
                 .commonButton {
                     vertical-align: bottom;
                     margin: $pxInRem-6 $pxInRem-8;
-                    
                 }
 
                 .commonButtonLive, .commonButtonGithub {
@@ -86,6 +85,14 @@
                     }
                 }
             }
+        }
+    }
+    //EXTRA BUTTONS
+    .extraActionButton {
+        text-align: center;
+        margin-top: 2rem;
+        .loadMoreProjectsButton{
+            margin-top: 2rem;
         }
     }
 }
@@ -122,6 +129,15 @@
                     .commonButtonLive, .commonButtonGithub {
                     }
                 }
+            }
+        }
+        //EXTRA BUTTONS
+        .extraActionButton {
+            text-align: center;
+            margin-top: 1rem;
+
+            .loadMoreProjectsButton {
+                margin-top: 0.5rem;
             }
         }
     }
