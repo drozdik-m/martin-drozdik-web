@@ -6,7 +6,7 @@
 @import "../Global/Tags";
 
 .projectList {
-    max-width: 60rem;
+    max-width: 62rem;
     margin: 0rem auto;
     list-style: none;
     //COLOR SCHEMES
@@ -41,7 +41,7 @@
             @include box-shadow(0 0 $pxInRem-6 $pxInRem-2 rgba(0, 0, 0, 0.35));
             @include border-radius($radiusSmall);
             max-width: 100%;
-            $width: 22rem;
+            $width: 24rem;
             width: $width;
             min-width: $width;
             height: math.div($width, 16) * 9;
@@ -56,7 +56,7 @@
             h3 {
                 font-weight: $fontWeightBold;
                 font-size: $pxInRem-24;
-                margin: $pxInRem-1 0 $pxInRem-8 0;
+                margin: $pxInRem-1 0 $pxInRem-12 0;
             }
 
             p {
