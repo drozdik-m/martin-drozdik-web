@@ -1,15 +1,15 @@
 ﻿import { EntityListConfig } from "./EntityListConfig";
 import { IdIndexedEntity } from "./IdIndexedEntity";
-import { IIdentifiable } from "./IIdentifiable";
+import { ListEntity } from "./ListEntity";
 
 
-export abstract class EntityList<TEntity extends IIdentifiable<number>, TConfig extends EntityListConfig<number, TEntity>>
+export abstract class EntityList<TEntity extends ListEntity, TConfig extends EntityListConfig<TEntity>>
 {
 
     private listElement: HTMLElement;
     private entityListElement: HTMLElement;
 
-    private config: EntityListConfig<number, TEntity>;
+    private config: TConfig;
 
     private from: number = 0;
     private loaded: number;
@@ -18,7 +18,7 @@ export abstract class EntityList<TEntity extends IIdentifiable<number>, TConfig 
     private filteredEntities: TEntity[] = []
     private entityIndexes: IdIndexedEntity = {};
 
-    constructor(listElement: HTMLElement, config: EntityListConfig<number, TEntity>)
+    constructor(listElement: HTMLElement, config: TConfig)
     {
         this.listElement = listElement;
         this.config = config;
@@ -82,7 +82,7 @@ export abstract class EntityList<TEntity extends IIdentifiable<number>, TConfig 
         for (let i = 0; i < this.entities.length; i++)
         {
             let entity = this.entities[i];
-            this.entityIndexes[entity.Id] = i;
+            this.entityIndexes[entity.id] = i;
         }
     }
 
@@ -112,16 +112,10 @@ export abstract class EntityList<TEntity extends IIdentifiable<number>, TConfig 
     {
         var result = "";
         for (let i = 0; i < entities.length; i++)
-            result += this.GetHTMLFor(entities[i]);
+            result += entities[i].html;
 
         this.entityListElement.insertAdjacentHTML("beforeend", result);
     }
-
-    /**
-     * Returns HTML representation of an entity
-     * @param entity
-     */
-    protected abstract GetHTMLFor(entity: TEntity): string;
 
     /**
      * Load new items into the current list (one whole page)

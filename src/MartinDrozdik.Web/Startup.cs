@@ -24,6 +24,7 @@ using MartinDrozdik.Services.ImageSaving.Extensions;
 using MartinDrozdik.Data.Repositories;
 using MartinDrozdik.Web.Facades;
 using MartinDrozdik.Data.DbContexts.Seeds;
+using MartinDrozdik.Web.Services.ViewRenderer;
 
 namespace MartinDrozdik.Web
 {
@@ -112,6 +113,9 @@ namespace MartinDrozdik.Web
 
             //Facades
             services.AddFacades();
+
+            //Add view render service
+            services.AddScoped<IViewRenderService, ViewRenderService>();
 
         }
 

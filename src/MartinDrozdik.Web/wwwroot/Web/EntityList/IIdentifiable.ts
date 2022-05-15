@@ -1,5 +1,5 @@
 ﻿
 export interface IIdentifiable<TKey>
 {
-    Id: TKey
+    id: TKey
 }

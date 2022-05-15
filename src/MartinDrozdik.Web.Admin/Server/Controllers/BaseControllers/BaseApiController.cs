@@ -11,7 +11,7 @@ using MartinDrozdik.Web.Facades.Abstraction;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Bonsai.Server.Controllers.BaseControllers
+namespace MartinDrozdik.Web.Admin.Server.Controllers.BaseControllers
 {
     [Route("api/[controller]")]
     [ApiController]

@@ -1,9 +1,9 @@
-﻿import { IIdentifiable } from "./IIdentifiable";
+﻿import { ListEntity } from "./ListEntity";
 
 
-export interface EntityListConfig<TKey, TEntity extends IIdentifiable<TKey>>
+export interface EntityListConfig<TEntity extends ListEntity>
 {
-    entities: [TEntity],
+    entities: TEntity[],
     loadMoreButton: boolean,
     pageSize: number,
 }
