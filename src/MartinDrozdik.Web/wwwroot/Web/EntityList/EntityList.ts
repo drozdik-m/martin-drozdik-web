@@ -11,6 +11,9 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
 
     private config: TConfig;
 
+    private loadMoreButtonElement: HTMLElement;
+    private loadMoreButtonVisible: boolean = true;
+
     private from: number = 0;
     private loaded: number;
 
@@ -20,21 +23,12 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
 
     constructor(listElement: HTMLElement, config: TConfig)
     {
+        //Handle initial values
         this.listElement = listElement;
         this.config = config;
 
-        //Check entities
-        if (typeof config.entities == "undefined")
-            throw new Error("Entities are not defined");
-
-        //Do not use "load more button" by defalt
-        if (typeof config.loadMoreButton == "undefined")
-            config.loadMoreButton = false;
-
-        //Default page size is 3
-        if (typeof config.pageSize == "undefined")
-            config.pageSize = 3;
-        this.loaded = config.pageSize;
+        this.loaded = config.initialSize;
+        this.SetEntities(config.entities);
 
         //Initialize this object
         this.Initialize();
@@ -48,7 +42,8 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         var object = this;
 
         //Bind "load more" button
-        var loadMoreButton = this.listElement.querySelector(".loadMoreProjectsButton");
+        let loadMoreButton: HTMLElement = this.listElement.querySelector(".loadMoreProjectsButton");
+        this.loadMoreButtonElement = loadMoreButton;
         if (loadMoreButton == null)
         {
             console.error(`No button with class ".loadMoreProjectsButton" has been found`);
@@ -76,6 +71,9 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     {
         //Set new entities
         this.entities = entities;
+
+        //Reset the filter
+        this.filteredEntities = this.entities;
 
         //Sort items by their ID
         this.entities = this.config.entities;
@@ -112,9 +110,20 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     {
         var result = "";
         for (let i = 0; i < entities.length; i++)
-            result += entities[i].html;
+            result += `<li>${entities[i].html}</li>`;
 
         this.entityListElement.insertAdjacentHTML("beforeend", result);
+    }
+
+    /**
+     * Resets and corrects the state of the list
+     * */
+    public Reset(): void
+    {
+        this.from = 0;
+        this.loaded = 0;
+        this.filteredEntities = this.entities;
+        this.listElement.innerHTML = "";
     }
 
     /**
@@ -126,14 +135,46 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         var newEntitiesCount = this.config.pageSize;
         var start = this.from + this.loaded;
 
+        console.log(this.filteredEntities.length);
+
         //Load new entities
         for (let i = start; i < start + newEntitiesCount && i < this.filteredEntities.length; i++)
-            newEntities.push(this.filteredEntities[i]);
+        {
+            let toAdd = this.filteredEntities[i];
+            console.log("Add entity " + toAdd.id);
+            newEntities.push(toAdd);
+        }
 
         //Append new entities
         this.AppendEntities(newEntities);
 
         //Move the counter
         this.loaded += newEntitiesCount;
+
+        //Check the load more button visibility
+        this.CheckLoadMoreButtonVisibility();
+    }
+
+    /**
+     * Checks if the load more button should be visible or not and corrects if needed
+     * */
+    protected CheckLoadMoreButtonVisibility()
+    {
+        if (!this.config.loadMoreButton)
+            return;
+
+        if (this.loaded >= this.filteredEntities.length && this.loadMoreButtonVisible)
+        {
+            this.loadMoreButtonElement.style.display = "none";
+            this.loadMoreButtonVisible = false;
+        }
+        else if (this.loaded < this.filteredEntities.length && !this.loadMoreButtonVisible)
+        {
+            this.loadMoreButtonElement.style.display = "inline-block";
+            this.loadMoreButtonVisible = true;
+        }
+
+        //this.loadMoreButtonElement
+        //this.loadMoreButtonVisible
     }
 }

@@ -11,7 +11,7 @@
         margin: $pxInRem-4 0;
         margin-right: $pxInRem-3;
 
-        a {
+        button, a {
             display: block;
             border-style: solid;
             border-width: $pxInRem-1;
@@ -37,7 +37,7 @@
     }
 
     &.tagsSlim {
-        a {
+        a, button {
             padding: $pxInRem-4 $pxInRem-8;
             font-size: $pxInRem-15;
         }
@@ -46,7 +46,7 @@
     @mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
 
         li {
-            a {
+            a, button {
                 &, &:before {
                     color: $details;
                 }
@@ -56,7 +56,7 @@
             }
 
             &.selected {
-                a {
+                a, button {
                     &, &:before {
                         color: $activeDetails;
                     }
@@ -67,7 +67,7 @@
             }
 
             &:hover {
-                a {
+                a, button {
                     &, &:before {
                         color: $hoverDetails;
                     }
@@ -87,7 +87,7 @@
 @media only screen and (max-width: 46rem) {
     .tags {
         li {
-            a {
+            a, button {
                 padding: $pxInRem-5 $pxInRem-10;
                 font-size: $pxInRem-16;
             }

@@ -21,6 +21,7 @@ using Bonsai.Services.RecaptchaV2.Abstraction;
 using Bonsai.Services.Email.Abstraction;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Web.Facades.Models.People;
+using MartinDrozdik.Web.Facades.Models.Projects;
 
 namespace Bonsai.Server.Controllers
 {
@@ -35,6 +36,7 @@ namespace Bonsai.Server.Controllers
         private readonly WorkExperienceFacade workExperienceFacade;
         private readonly EducationFacade educationFacade;
         private readonly LanguageSkillFacade languageSkillFacade;
+        private readonly ProjectTagFacade projectTagFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
@@ -43,7 +45,8 @@ namespace Bonsai.Server.Controllers
             IEmailSender emailSender,
             WorkExperienceFacade workExperienceFacade,
             EducationFacade educationFacade,
-            LanguageSkillFacade languageSkillFacade
+            LanguageSkillFacade languageSkillFacade,
+            ProjectTagFacade projectTagFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -54,6 +57,7 @@ namespace Bonsai.Server.Controllers
             this.workExperienceFacade = workExperienceFacade;
             this.educationFacade = educationFacade;
             this.languageSkillFacade = languageSkillFacade;
+            this.projectTagFacade = projectTagFacade;
         }
 
         public async Task<IActionResult> Index()
@@ -61,9 +65,11 @@ namespace Bonsai.Server.Controllers
             var workExperiences = await workExperienceFacade.GetAsync();
             var educations = await educationFacade.GetAsync();
             var languageSkill = await languageSkillFacade.GetAsync();
+            var projectTags = await projectTagFacade.GetAsync();
 
             var indexModel = new IndexPageModel(cultureProvider, languageDictionary,
-                workExperiences, educations, languageSkill)
+                workExperiences, educations, languageSkill,
+                projectTags)
             {
 
             };

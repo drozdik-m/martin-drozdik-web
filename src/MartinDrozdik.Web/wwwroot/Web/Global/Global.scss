@@ -12,6 +12,9 @@
     padding: 0;
 }
 
+.loadingScreen{
+    @include border-radius($radiusSmall);
+}
 
 @import "Animations";
 @import "Block";
