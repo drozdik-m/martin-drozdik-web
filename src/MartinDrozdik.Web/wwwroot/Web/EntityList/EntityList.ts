@@ -17,9 +17,13 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     private from: number = 0;
     private loaded: number;
 
-    private entities: TEntity[] = []
+    
     private filteredEntities: TEntity[] = []
-    private entityIndexes: IdIndexedEntity = {};
+    private selectedTags: number[] = []
+    private entitiesByTags: IdIndexedEntity<TEntity[]> = {}
+
+    private entities: TEntity[] = []
+    private entityIndexes: IdIndexedEntity<number> = {};
 
     constructor(listElement: HTMLElement, config: TConfig)
     {
@@ -61,6 +65,39 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
             console.error(`No element with class ".entityList" has been found`);
             return;
         }
+
+        //Bind "tags"
+        let listTagsElement: HTMLElement = this.listElement.querySelector(".listTags");
+        if (listTagsElement == null)
+        {
+            console.error(`No element with class ".listTagsElement" has been found`);
+            return;
+        }
+        let tags = listTagsElement.querySelectorAll("button");
+        for (let i = 0; i < tags.length; i++)
+        {
+            tags[i].addEventListener("click", function ()
+            {
+                //Get basic info
+                let id = this.getAttribute("data-id");
+                let idInt = parseInt(id);
+                let parent = this.parentElement;
+                let isSelected = parent.classList.contains("selected");
+
+                //Toggle selection
+                parent.classList.toggle("selected");
+
+                //Handle filter
+                if (isSelected)
+                    object.RemoveTagFromFilter(idInt);
+                else
+                    object.AddTagToFilter(idInt);
+
+                //Reset and redraw
+                object.ResetPaging();
+            });
+        }
+        
     }
 
     /**
@@ -76,11 +113,28 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         this.filteredEntities = this.entities;
 
         //Sort items by their ID
-        this.entities = this.config.entities;
         for (let i = 0; i < this.entities.length; i++)
         {
             let entity = this.entities[i];
             this.entityIndexes[entity.id] = i;
+        }
+
+        //Sort items by tags
+        if (this.config.tagsFilter)
+        {
+            this.entitiesByTags = {};
+            for (let i = 0; i < this.entities.length; i++)
+            {
+                let entity = this.entities[i];
+                for (let t = 0; t < entity.tags.length; t++)
+                {
+                    let tagId = entity.tags[t];
+
+                    if (typeof this.entitiesByTags[tagId] == "undefined")
+                        this.entitiesByTags[tagId] = [];
+                    this.entitiesByTags[tagId].push(entity);
+                }
+            }
         }
     }
 
@@ -118,12 +172,65 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     /**
      * Resets and corrects the state of the list
      * */
-    public Reset(): void
+    public ResetPaging(): void
     {
         this.from = 0;
         this.loaded = 0;
-        this.filteredEntities = this.entities;
-        this.listElement.innerHTML = "";
+        this.entityListElement.innerHTML = "";
+        this.LoadMore();
+    }
+
+    /**
+     * Updates filtered entities based on the new tag
+     * @param tagId
+     */
+    protected AddTagToFilter(tagId: number)
+    {
+        //Add the id to selected tags
+        this.selectedTags.push(tagId);
+
+        //Update filtered entities
+        this.filteredEntities = this.filteredEntities.filter(function (e) { return e.tags.includes(tagId); });
+    }
+
+    /**
+     * Updates filtered entities based on the removed tag
+     * @param tagId
+     */
+    protected RemoveTagFromFilter(tagId: number)
+    {   
+        //Remove the id from selected tags
+        this.selectedTags = this.selectedTags.filter(function (e) { return e != tagId });
+        
+        //Update filtered entities
+        if (this.selectedTags.length == 0)
+            this.filteredEntities = this.entities;
+        else if (this.selectedTags.length == 1)
+            this.filteredEntities = this.entitiesByTags[this.selectedTags[0]];
+        else
+        {
+            for (let i = 0; i < this.entitiesByTags[tagId].length; i++)
+            {
+                let candidateEntity = this.entitiesByTags[tagId][i];
+
+                //Check if the candidate entity has all selected tags
+                var suitableCandidate = true;
+                for (let t = 0; this.selectedTags.length; t++)
+                {
+                    let selectedTag = this.selectedTags[t];
+                    if (!candidateEntity.tags.includes(selectedTag))
+                    {
+                        suitableCandidate = false;
+                        break;
+                    }
+                        
+                }
+
+                //Add the candidate entity if not already there
+                if (suitableCandidate && !this.filteredEntities.includes(candidateEntity))
+                    this.filteredEntities.push(candidateEntity);
+            }
+        }
     }
 
     /**
@@ -131,17 +238,25 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
      * */
     public LoadMore(): void
     {
+        this.LoadMoreCount(this.config.pageSize);
+    }
+
+    /**
+     * Load new items into the current list (defined count)
+     * @param count
+     */
+    public LoadMoreCount(count: number): void
+    {
         var newEntities: TEntity[] = [];
-        var newEntitiesCount = this.config.pageSize;
         var start = this.from + this.loaded;
 
-        console.log(this.filteredEntities.length);
+        //console.log(this.filteredEntities.length);
 
         //Load new entities
-        for (let i = start; i < start + newEntitiesCount && i < this.filteredEntities.length; i++)
+        for (let i = start; i < start + count && i < this.filteredEntities.length; i++)
         {
             let toAdd = this.filteredEntities[i];
-            console.log("Add entity " + toAdd.id);
+            //console.log("Add entity " + toAdd.id);
             newEntities.push(toAdd);
         }
 
@@ -149,7 +264,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         this.AppendEntities(newEntities);
 
         //Move the counter
-        this.loaded += newEntitiesCount;
+        this.loaded += count;
 
         //Check the load more button visibility
         this.CheckLoadMoreButtonVisibility();

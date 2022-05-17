@@ -1,6 +1,6 @@
 ﻿
 
-export interface IdIndexedEntity
+export interface IdIndexedEntity<T>
 {
-    [index: number]: number;
+    [index: number]: T;
 }

@@ -6,11 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Styles{
+@section Styles
+{
     <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/IndexPage.css")" />
 }
 
-@section Scripts{
+@section Scripts
+{
     <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/IndexPage.js")"></script>
 }
 
@@ -27,7 +29,7 @@
 
         <div class="projectList lightMode">
             <span class="tagsHeading">Filtr tagů</span>
-            <ul class="tags tagsWhiteBlack">
+            <ul class="tags listTags tagsWhiteBlack">
                 @foreach(var tag in Model.ProjectTags)
                 {
                     @*<li class="selected"><button type="button">web</button></li>*@
@@ -86,8 +88,8 @@
                 </li>*@
             </ul>
 
-            <div class="extraActionButton loadMoreProjectsButton">
-                <button type="button" href="@Url.Action("Projects", "Home")" class="commonButton commonButtonThick commonButtonRed loadMoreProjectsButton">Načíst další</button>
+            <div class="extraActionButton">
+                <button type="button" href="@Url.Action("Projects", "Home")" class="loadMoreProjectsButton commonButton commonButtonThick commonButtonRed loadMoreProjectsButton">Načíst další</button>
             </div>
 
             <div class="extraActionButton">

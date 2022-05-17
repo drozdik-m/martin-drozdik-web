@@ -35,6 +35,7 @@ WindowEvents.OnDOMReady.Add(function ()
     let projectList = new ProjectList(projectListElement, {
         entities: [],
         loadMoreButton: true,
+        tagsFilter: true,
         pageSize: 3,
         initialSize: 0
     });
@@ -57,6 +58,7 @@ WindowEvents.OnDOMReady.Add(function ()
             //projects = projects.slice(0, 8);
             //console.log(projects);
             projectList.SetEntities(projects);
+            projectList.LoadMoreCount(3);
         })
         .Catch(function (error: Error)
         {

@@ -2,6 +2,6 @@
 
 export interface ListEntity extends IIdentifiable<number>
 {
-    tags: string[],
+    tags: number[],
     html: string
 }
