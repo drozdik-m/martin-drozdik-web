@@ -10,6 +10,7 @@
         vertical-align: middle;
         margin: $pxInRem-4 0;
         margin-right: $pxInRem-3;
+        @include transition(opacity $transition);
 
         button, a {
             display: block;
@@ -64,6 +65,10 @@
                     background-color: $activeBackground;
                     border-color: $activeDetails;
                 }
+            }
+
+            &.unsuitable {
+                opacity: 0.6;
             }
 
             &:hover {

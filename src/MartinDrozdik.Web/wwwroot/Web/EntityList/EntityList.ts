@@ -1,4 +1,5 @@
 ﻿import { EntityListConfig } from "./EntityListConfig";
+import { EntityTag } from "./EntityTag";
 import { IdIndexedEntity } from "./IdIndexedEntity";
 import { ListEntity } from "./ListEntity";
 
@@ -18,9 +19,14 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     private loaded: number;
 
     
-    private filteredEntities: TEntity[] = []
-    private selectedTags: number[] = []
-    private entitiesByTags: IdIndexedEntity<TEntity[]> = {}
+    private filteredEntities: TEntity[] = [];
+    private tags: IdIndexedEntity<EntityTag> = {};
+    private entitiesByTags: IdIndexedEntity<TEntity[]> = {};
+    private selectedTags: number[] = [];
+    private listTagsElement: HTMLElement;
+    private tagElements: NodeListOf<HTMLElement>;
+    private unsuitableTagClass = "unsuitable";
+    private selectedTagClass = "selected";
 
     private entities: TEntity[] = []
     private entityIndexes: IdIndexedEntity<number> = {};
@@ -68,24 +74,33 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
 
         //Bind "tags"
         let listTagsElement: HTMLElement = this.listElement.querySelector(".listTags");
+        this.listTagsElement = listTagsElement;
         if (listTagsElement == null)
         {
-            console.error(`No element with class ".listTagsElement" has been found`);
+            console.error(`No element with class ".listTags" has been found`);
             return;
         }
-        let tags = listTagsElement.querySelectorAll("button");
-        for (let i = 0; i < tags.length; i++)
+        let tagButtons: NodeListOf<HTMLElement> = listTagsElement.querySelectorAll("button");
+        this.tagElements = tagButtons;
+        for (let i = 0; i < tagButtons.length; i++)
         {
-            tags[i].addEventListener("click", function ()
+            let tagButton = tagButtons[i];
+
+            //Save the tag
+            let buttonId = parseInt(tagButton.getAttribute("data-id"));
+            this.tags[buttonId] = new EntityTag(buttonId, tagButton);
+
+            //Bind the tag to a click
+            tagButton.addEventListener("click", function ()
             {
                 //Get basic info
                 let id = this.getAttribute("data-id");
                 let idInt = parseInt(id);
                 let parent = this.parentElement;
-                let isSelected = parent.classList.contains("selected");
+                let isSelected = parent.classList.contains(object.selectedTagClass);
 
                 //Toggle selection
-                parent.classList.toggle("selected");
+                parent.classList.toggle(object.selectedTagClass);
 
                 //Handle filter
                 if (isSelected)
@@ -182,25 +197,73 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
 
     /**
      * Updates filtered entities based on the new tag
-     * @param tagId
+     * @param newTagId
      */
-    protected AddTagToFilter(tagId: number)
+    protected AddTagToFilter(newTagId: number)
     {
+
         //Add the id to selected tags
-        this.selectedTags.push(tagId);
+        this.tags[newTagId].selected = true;
+        this.selectedTags.push(newTagId);
 
         //Update filtered entities
-        this.filteredEntities = this.filteredEntities.filter(function (e) { return e.tags.includes(tagId); });
+        this.filteredEntities = this.filteredEntities.filter(function (e) { return e.tags.includes(newTagId); });
+
+        //Check unsuitable tag class
+        if (!this.UpdateUnsuitableTagsCommon())
+        {
+            for (const tagId in this.tags)
+            {
+                let tag = this.tags[tagId];
+
+                //An insuitable tag has been selected
+                if (tag.selected && tag.unsuitable)
+                {
+                    tag.element.parentElement.classList.remove(this.unsuitableTagClass);
+                    tag.unsuitable = false;
+                    continue;
+                }
+
+                //Ignore selected and already unsuitable
+                else if (tag.selected || tag.unsuitable)
+                    continue;
+
+                //Figure out if suitable
+                let shouldBeUnsuitable = true;
+                for (let i = 0; i < this.filteredEntities.length; i++)
+                {
+                    let entity = this.filteredEntities[i];
+
+                    //The tag is suitable
+                    if (entity.tags.includes(tag.id))
+                    {
+                        shouldBeUnsuitable = false;
+                        break;
+                    }
+                }
+
+                tag.unsuitable = shouldBeUnsuitable;
+                
+                //Make the tag unsuitable is needed
+                if (tag.unsuitable)
+                    tag.element.parentElement.classList.add(this.unsuitableTagClass);
+
+            }
+        }
     }
 
     /**
      * Updates filtered entities based on the removed tag
-     * @param tagId
+     * @param removedTagId
      */
-    protected RemoveTagFromFilter(tagId: number)
+    protected RemoveTagFromFilter(removedTagId: number)
     {   
         //Remove the id from selected tags
-        this.selectedTags = this.selectedTags.filter(function (e) { return e != tagId });
+        let removedTag = this.tags[removedTagId];
+        removedTag.selected = false;
+        removedTag.unsuitable = true;
+        this.selectedTags = this.selectedTags.filter(function (e) { return e != removedTagId });
+
         
         //Update filtered entities
         if (this.selectedTags.length == 0)
@@ -209,9 +272,9 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
             this.filteredEntities = this.entitiesByTags[this.selectedTags[0]];
         else
         {
-            for (let i = 0; i < this.entitiesByTags[tagId].length; i++)
+            for (let i = 0; i < this.entitiesByTags[removedTagId].length; i++)
             {
-                let candidateEntity = this.entitiesByTags[tagId][i];
+                let candidateEntity = this.entitiesByTags[removedTagId][i];
 
                 //Check if the candidate entity has all selected tags
                 var suitableCandidate = true;
@@ -231,6 +294,89 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                     this.filteredEntities.push(candidateEntity);
             }
         }
+
+        //Check unsuitable tag class
+        if (!this.UpdateUnsuitableTagsCommon())
+        {
+            for (const tagId in this.tags)
+            {
+                let tag = this.tags[tagId];
+
+
+                console.log(`before ${tag.id} suitable:${tag.unsuitable} selected:${tag.selected}`);
+
+                //Skip suitable and selected
+                if (!tag.unsuitable || tag.selected)
+                    continue;
+
+                //Figure out if suitable
+                let shouldBeUnsuitable = true;
+                for (let i = 0; i < this.filteredEntities.length; i++)
+                {
+                    let entity = this.filteredEntities[i];
+
+                    //The tag is suitable
+                    if (entity.tags.includes(tag.id))
+                    {
+                        shouldBeUnsuitable = false;
+                        break;
+                    }
+                }
+
+                tag.unsuitable = shouldBeUnsuitable;
+                console.log(`${tag.id} ${tag.unsuitable}`);
+
+                //Make the tag unsuitable is needed
+                if (!tag.unsuitable)
+                    tag.element.parentElement.classList.remove(this.unsuitableTagClass);
+                else if (tag.unsuitable && removedTagId == tag.id)
+                    tag.element.parentElement.classList.add(this.unsuitableTagClass);
+            }
+        }
+    }
+
+    /**
+     * Check common usecases for marking tags with unsuitable class
+     * @return true if any common use case has been encountered, else false
+     * */
+    protected UpdateUnsuitableTagsCommon(): boolean
+    {
+        //No filters selected
+        if (this.selectedTags.length == 0)
+        {
+            for (const tagId in this.tags)
+            {
+                let tag = this.tags[tagId];
+                tag.selected = false;
+                tag.unsuitable = false;
+                tag.element.parentElement.classList.remove(this.unsuitableTagClass);
+            }
+
+            return true;
+        }
+
+        //Already no results
+        if (this.filteredEntities.length == 0)
+        {
+            for (const tagId in this.tags)
+            {
+                let tag = this.tags[tagId];
+
+                if (tag.selected)
+                {
+                    tag.element.parentElement.classList.remove(this.unsuitableTagClass);
+                    tag.unsuitable = false;
+                    continue;
+                }
+
+                tag.unsuitable = true;
+                tag.element.parentElement.classList.add(this.unsuitableTagClass);
+            }
+
+            return true;
+        }
+
+        return false;
     }
 
     /**
