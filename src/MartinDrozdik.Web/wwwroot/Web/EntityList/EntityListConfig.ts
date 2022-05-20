@@ -8,5 +8,5 @@ export interface EntityListConfig<TEntity extends ListEntity>
     tagsFilter: boolean,
     pageSize: number,
     initialSize: number,
-
+    noResultsMessage: string,
 }

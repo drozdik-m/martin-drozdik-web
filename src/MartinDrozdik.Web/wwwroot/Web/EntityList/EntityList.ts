@@ -1,7 +1,12 @@
-﻿import { EntityListConfig } from "./EntityListConfig";
+﻿import { Ajax, AjaxResponse } from "@drozdik.m/ajax";
+import { LoadingAnimation } from "@drozdik.m/loading-animation";
+import { ProjectList } from "../Projects/ProjectList";
+import { Pipeline } from "@drozdik.m/pipeline";
+import { EntityListConfig } from "./EntityListConfig";
 import { EntityTag } from "./EntityTag";
 import { IdIndexedEntity } from "./IdIndexedEntity";
 import { ListEntity } from "./ListEntity";
+import { StatusWindowError } from "../StatusWindow/StatusWindowError";
 
 
 export abstract class EntityList<TEntity extends ListEntity, TConfig extends EntityListConfig<TEntity>>
@@ -25,8 +30,10 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     private selectedTags: number[] = [];
     private listTagsElement: HTMLElement;
     private tagElements: NodeListOf<HTMLElement>;
+    private notFoundElement: HTMLElement = null;
     private unsuitableTagClass = "unsuitable";
     private selectedTagClass = "selected";
+    private notFoundClass = "notFound";
 
     private entities: TEntity[] = []
     private entityIndexes: IdIndexedEntity<number> = {};
@@ -410,22 +417,38 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         this.CheckLoadMoreButtonVisibility();
 
         //Add appropriate classes to new entity tag lists
-        let tagsToSelectSelector = "";
-        for (let i = 0; i < this.selectedTags.length; i++)
+        if (this.selectedTags.length > 0)
         {
-            let tagId = this.selectedTags[i];
-            let selector = `.tags [data-id="${tagId}"]`;
-            if (tagsToSelectSelector.length > 0)
-                tagsToSelectSelector += `, ${selector}`;
-            else
-                tagsToSelectSelector += selector;
+            let tagsToSelectSelector = "";
+            for (let i = 0; i < this.selectedTags.length; i++)
+            {
+                let tagId = this.selectedTags[i];
+                let selector = `.tags [data-id="${tagId}"]`;
+                if (tagsToSelectSelector.length > 0)
+                    tagsToSelectSelector += `, ${selector}`;
+                else
+                    tagsToSelectSelector += selector;
+            }
+
+            let tagElements = this.entityListElement.querySelectorAll(tagsToSelectSelector);
+            for (let i = 0; i < tagElements.length; i++)
+            {
+                let element = tagElements[i];
+                element.parentElement.classList.add(this.selectedTagClass);
+            }
         }
 
-        let tagElements = this.entityListElement.querySelectorAll(tagsToSelectSelector);
-        for (let i = 0; i < tagElements.length; i++)
+        //Check if no results at all
+        if (this.filteredEntities.length == 0 && this.notFoundElement == null)
         {
-            let element = tagElements[i];
-            element.parentElement.classList.add(this.selectedTagClass);
+            this.entityListElement.insertAdjacentHTML("beforebegin",
+                `<p class="${this.notFoundClass}">${this.config.noResultsMessage}</p>`);
+            this.notFoundElement = this.listElement.querySelector(`.${this.notFoundClass}`);
+        }
+        else if (this.filteredEntities.length != 0 && this.notFoundElement != null)
+        {
+            this.notFoundElement.parentElement.removeChild(this.notFoundElement);
+            this.notFoundElement = null;
         }
     }
 
@@ -449,5 +472,43 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         }
         //this.loadMoreButtonElement
         //this.loadMoreButtonVisible
+    }
+
+    public static InitiateViaAPI<TEntity extends ListEntity, TConfig extends EntityListConfig<TEntity>>
+        (entityList: EntityList<TEntity, TConfig>, apiURI: string): void
+    {
+        let projectAjax = new Ajax();
+        let loading = new LoadingAnimation(entityList.listElement);
+       
+        loading.Show();
+        projectAjax
+            .Get(apiURI)
+            .Then(function (response: AjaxResponse)
+            {
+                //Check for response error
+                if (response.IsError())
+                    return Pipeline.Reject(new Error(response.StatusText() + ": " + response.Response()))
+
+                return response.Response();
+            })
+            .Then(function (listEntities: string)
+            {
+                loading.Hide();
+                let projects: TEntity[] = JSON.parse(listEntities);
+                entityList.SetEntities(projects);
+                entityList.LoadMoreCount(3);
+            })
+            .Catch(function (error: Error)
+            {
+                console.error(error);
+                loading.Hide();
+                let errorDialog = new StatusWindowError("contactFormErrorDialog",
+                    {
+                        heading: "Načítání selhalo",
+                        message: "Něco se moc pokazilo :( <br /> " + error.message,
+                        closeButtonText: "Zavřít"
+                    });
+                errorDialog.Display();
+            });
     }
 }
