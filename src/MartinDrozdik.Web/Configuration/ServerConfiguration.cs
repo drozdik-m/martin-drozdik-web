@@ -20,6 +20,11 @@ namespace MartinDrozdik.Web.Configuration
         public string Domain { get; set; }
 
         /// <summary>
+        /// The domain where all admin/dynamic content is located
+        /// </summary>
+        public string ContentDomain { get; set; }
+
+        /// <summary>
         /// Email configuration for a sending email account
         /// </summary>
         public EmailSenderConfiguration EmailSender { get; set; }

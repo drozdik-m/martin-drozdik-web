@@ -43,7 +43,7 @@ namespace MartinDrozdik.Web.Controllers.Projects
                     result.Add(new ProjectListItem()
                     {
                         Id = item.Id,
-                        Tags = item.Tags.Select(e => e.Id).ToList(),
+                        Tags = item.Tags.Select(e => e.Tag.Id).ToList(),
                         HTML = await viewRenderService.RenderToStringAsync("Project/ProjectListItem", item),
                     });
                 }

@@ -1,3 +1,36 @@
 ﻿@model Project
+@inject ServerConfiguration ServerConfiguration
 
-<p>HTML for @Model.Id</p>
+<li>
+    <div class="projectPreviewImage" style="background-image: url(@(Model.PreviewImage.Uploaded ? ServerConfiguration.ContentDomain + Model.PreviewImage.Uri : "/Web/Projects/Default.png"))">&nbsp;</div>
+    <div class="projectDescription">
+        @if (!string.IsNullOrWhiteSpace(Model.Name))
+        {
+            <h3>@Model.Name</h3>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Abstract))
+        {
+            <p>@Model.Abstract</p>
+        }
+        <ul class="tags tagsSlim tagsWhiteBlack">
+            @foreach(var tag in Model.Tags)
+            {
+                <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
+            }
+        </ul>
+        <div class="projectActions">
+            @*@Url.Action("Home", "Project", new { Id = Model.UrlName })*@
+            <a href="#" title="Detail projektu @Model.Name" class="commonButton commonButtonRed">Detail projektu</a>
+            
+            @if (Model.HasGitHubLink)
+            {
+                <a href="https://git-elektro.cz/" title="@Model.Name GitHub codebase" class="commonButton commonButtonDarkRed commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
+            }
+            
+            @if (Model.HasLiveLink)
+            {
+                <a href="https://git-elektro.cz/" title="@Model.Name live" class="commonButton commonButtonDarkRed commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
+            }
+        </div>
+    </div>
+</li>

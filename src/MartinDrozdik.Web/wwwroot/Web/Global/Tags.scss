@@ -4,15 +4,26 @@
 
 
 .tags {
+    font-size: 0;
+
     li {
         display: inline-block;
         list-style-type: none;
         vertical-align: middle;
         margin: $pxInRem-4 0;
-        margin-right: $pxInRem-3;
+        margin-right: $pxInRem-7;
         @include transition(opacity $transition);
 
         button, a {
+            cursor: pointer;
+            @include transition(border-color $transition, background-color $transition, color $transition);
+
+            &:active {
+                top: $pxInRem-1;
+            }
+        }
+
+        button, a, > span {
             display: block;
             border-style: solid;
             border-width: $pxInRem-1;
@@ -20,8 +31,6 @@
             font-weight: $fontWeightBold;
             font-size: $pxInRem-18;
             @include border-radius($pxInRem-3);
-            cursor: pointer;
-            @include transition(border-color $transition, background-color $transition, color $transition);
             text-decoration: none;
             position: relative;
             top: 0;
@@ -30,24 +39,22 @@
                 content: "#";
                 @include transition(color $transition);
             }
-
-            &:active {
-                top: $pxInRem-1;
-            }
         }
     }
 
     &.tagsSlim {
-        a, button {
-            padding: $pxInRem-4 $pxInRem-8;
-            font-size: $pxInRem-15;
+        li {
+            a, button, > span {
+                padding: $pxInRem-4 $pxInRem-8;
+                font-size: $pxInRem-15;
+            }
         }
     }
 
     @mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
 
         li {
-            a, button {
+            a, button, > span {
                 &, &:before {
                     color: $details;
                 }
@@ -57,7 +64,7 @@
             }
 
             &.selected {
-                a, button {
+                a, button, > span {
                     &, &:before {
                         color: $activeDetails;
                     }
@@ -92,7 +99,7 @@
 @media only screen and (max-width: 46rem) {
     .tags {
         li {
-            a, button {
+            a, button, > span {
                 padding: $pxInRem-5 $pxInRem-10;
                 font-size: $pxInRem-16;
             }

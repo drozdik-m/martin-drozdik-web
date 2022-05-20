@@ -302,9 +302,6 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
             {
                 let tag = this.tags[tagId];
 
-
-                console.log(`before ${tag.id} suitable:${tag.unsuitable} selected:${tag.selected}`);
-
                 //Skip suitable and selected
                 if (!tag.unsuitable || tag.selected)
                     continue;
@@ -324,7 +321,6 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 }
 
                 tag.unsuitable = shouldBeUnsuitable;
-                console.log(`${tag.id} ${tag.unsuitable}`);
 
                 //Make the tag unsuitable is needed
                 if (!tag.unsuitable)
@@ -396,8 +392,6 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         var newEntities: TEntity[] = [];
         var start = this.from + this.loaded;
 
-        //console.log(this.filteredEntities.length);
-
         //Load new entities
         for (let i = start; i < start + count && i < this.filteredEntities.length; i++)
         {
@@ -414,6 +408,25 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
 
         //Check the load more button visibility
         this.CheckLoadMoreButtonVisibility();
+
+        //Add appropriate classes to new entity tag lists
+        let tagsToSelectSelector = "";
+        for (let i = 0; i < this.selectedTags.length; i++)
+        {
+            let tagId = this.selectedTags[i];
+            let selector = `.tags [data-id="${tagId}"]`;
+            if (tagsToSelectSelector.length > 0)
+                tagsToSelectSelector += `, ${selector}`;
+            else
+                tagsToSelectSelector += selector;
+        }
+
+        let tagElements = this.entityListElement.querySelectorAll(tagsToSelectSelector);
+        for (let i = 0; i < tagElements.length; i++)
+        {
+            let element = tagElements[i];
+            element.parentElement.classList.add(this.selectedTagClass);
+        }
     }
 
     /**
@@ -434,7 +447,6 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
             this.loadMoreButtonElement.style.display = "inline-block";
             this.loadMoreButtonVisible = true;
         }
-
         //this.loadMoreButtonElement
         //this.loadMoreButtonVisible
     }

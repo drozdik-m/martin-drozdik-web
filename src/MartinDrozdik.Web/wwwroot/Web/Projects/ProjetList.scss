@@ -32,7 +32,9 @@
     .projects > li {
         display: flex;
         align-items: center;
-        margin: 1.75rem 0;
+        margin: 1rem 0;
+        animation-name: FadeIn;
+        animation-duration: 0.3s;
 
         .projectPreviewImage, .projectDescription {
         }
