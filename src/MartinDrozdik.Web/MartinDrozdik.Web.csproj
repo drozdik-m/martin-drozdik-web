@@ -58,6 +58,7 @@
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
+    <Content Remove="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
     <Content Remove="wwwroot\Web\_Variables.scss" />
@@ -90,6 +91,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\StatusWindow\StatusWindow.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <TypeScriptCompile Include="tsconfig.json">

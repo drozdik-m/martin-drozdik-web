@@ -67,14 +67,29 @@ namespace Bonsai.Server.Controllers
             var languageSkill = await languageSkillFacade.GetAsync();
             var projectTags = await projectTagFacade.GetAsync();
 
-            var indexModel = new IndexPageModel(cultureProvider, languageDictionary,
+            var model = new IndexPageModel(cultureProvider, languageDictionary,
                 workExperiences, educations, languageSkill,
                 projectTags)
             {
 
             };
 
-            return View(indexModel);
+            return View(model);
+
+        }
+
+        [Route("projekty")]
+        public async Task<IActionResult> Projects()
+        {
+            var projectTags = await projectTagFacade.GetAsync();
+
+            var model = new ProjectsPageModel(cultureProvider, languageDictionary,
+                projectTags)
+            {
+
+            };
+
+            return View(model);
         }
 
         [HttpPost]

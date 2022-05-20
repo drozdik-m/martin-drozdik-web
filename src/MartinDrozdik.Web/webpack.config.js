@@ -14,6 +14,7 @@ module.exports = [
             //Scripts
             Global: "./wwwroot/_dist/Web/Global/Global.js",
             IndexPage: "./wwwroot/_dist/Web/_Pages/IndexPage/IndexPage.js",
+            ProjectsPage: "./wwwroot/_dist/Web/_Pages/ProjectsPage/ProjectsPage.js",
             SitemapPage: "./wwwroot/_dist/Web/_Pages/SitemapPage/SitemapPage.js",
         },
 
@@ -53,6 +54,7 @@ module.exports = [
         entry: {
             Global: "./wwwroot/Web/Global/Global.scss",
             IndexPage: "./wwwroot/Web/_Pages/IndexPage/IndexPage.scss",
+            ProjectsPage: "./wwwroot/Web/_Pages/ProjectsPage/ProjectsPage.scss",
             SitemapPage: "./wwwroot/Web/_Pages/SitemapPage/SitemapPage.scss",
         },
 
