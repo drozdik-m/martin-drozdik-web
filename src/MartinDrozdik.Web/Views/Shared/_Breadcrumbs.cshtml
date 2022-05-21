@@ -1,0 +1,25 @@
+﻿@model BreadcrumbsModel
+
+@{
+    var i = 0;
+    var count = Model.Breadcrumbs.Count();
+}
+<ul class="breadcrumbs blockMargin">
+    @foreach(var breadcrumb in Model.Breadcrumbs)
+    {
+        <li class="item@(i) @(BreadcrumbModel.SchemeToClass(breadcrumb.Scheme)) @(BreadcrumbModel.TypeToClass(breadcrumb.Type))@(i == count - 1 ? " lastItem" : "")">
+            @if (!string.IsNullOrWhiteSpace(breadcrumb.Uri))
+            {
+                <a href="@breadcrumb.Uri">@breadcrumb.Text</a>
+            }
+            else
+            {
+                <a>@breadcrumb.Text</a>
+            }
+        </li>
+
+        i += 1;
+    }
+</ul>
+
+

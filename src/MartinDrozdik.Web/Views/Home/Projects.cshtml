@@ -16,4 +16,44 @@
     <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/ProjectsPage.js")"></script>
 }
 
-<p>projekty yo!</p>
+<div class="block">
+    @{
+        var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
+        {
+           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Black),
+           new BreadcrumbModel("Projekty", string.Empty, BreadcrumbType.Projects, BreadcrumbScheme.White),
+        });
+    }
+    <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
+</div>
+
+@*
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 lastItem projects white"><a>Projekty</a></li>
+    </ul>
+</div>
+
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 projects dark"><a href="#">Projekty</a></li>
+        <li class="item2 lastItem article white"><a>Git Elektro</a></li>
+    </ul>
+</div>
+
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 lastItem articles white"><a>Projekty</a></li>
+    </ul>
+</div>
+
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 articles darkRed"><a href="#">Projekty</a></li>
+        <li class="item2 lastItem article white"><a >Git Elektro je super firma a tohle je velmi dlouhý nadpis</a></li>
+    </ul>
+</div>*@
