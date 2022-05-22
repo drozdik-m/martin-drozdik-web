@@ -1,35 +1,41 @@
-﻿@model Project
+﻿@model ProjectListItemModel
 @inject ServerConfiguration ServerConfiguration
 
 <li>
-    <div class="projectPreviewImage" style="background-image: url(@(Model.PreviewImage.Uploaded ? ServerConfiguration.ContentDomain + Model.PreviewImage.Uri : "/Web/Projects/Default.png"))">&nbsp;</div>
+    <div class="projectPreviewImage" style="background-image: url(@(Model.Project.PreviewImage.Uploaded ? ServerConfiguration.ContentDomain + Model.Project.PreviewImage.Uri : "/Web/Projects/Default.png"))">&nbsp;</div>
     <div class="projectDescription">
-        @if (!string.IsNullOrWhiteSpace(Model.Name))
+        @if (!string.IsNullOrWhiteSpace(Model.Project.Name))
         {
-            <h3>@Model.Name</h3>
+            <h3>
+                @Model.Project.Name
+                @if (Model.Project.IsFinished)
+                {
+                    <span class="finishedYear">@Model.Project.FinishedTime.Value.Year</span>
+                }
+            </h3>
         }
-        @if (!string.IsNullOrWhiteSpace(Model.Abstract))
+        @if (!string.IsNullOrWhiteSpace(Model.Project.Abstract))
         {
-            <p>@Model.Abstract</p>
+            <p>@Model.Project.Abstract</p>
         }
-        <ul class="tags tagsSlim tagsWhiteBlack">
-            @foreach(var tag in Model.Tags)
+        <ul class="tags tagsSlim @(Model.Scheme == ProjectListItemScheme.Dark ? "tagsWhiteBlack" : "tagsBlackWhite")">
+            @foreach(var tag in Model.Project.Tags)
             {
                 <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
             }
         </ul>
         <div class="projectActions">
             @*@Url.Action("Home", "Project", new { Id = Model.UrlName })*@
-            <a href="#" title="Detail projektu @Model.Name" class="commonButton commonButtonRed">Detail projektu</a>
+            <a href="#" title="Detail projektu @Model.Project.Name" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonRed" : "commonButtonDarkRed")">Detail projektu</a>
             
-            @if (Model.HasGitHubLink)
+            @if (Model.Project.HasGitHubLink)
             {
-                <a href="https://git-elektro.cz/" title="@Model.Name GitHub codebase" class="commonButton commonButtonDarkRed commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
+                <a href="@Model.Project.GitHubLink" title="@Model.Project.Name GitHub codebase" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonDarkRed" : "commonButtonBlack") commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
             }
             
-            @if (Model.HasLiveLink)
+            @if (Model.Project.HasLiveLink)
             {
-                <a href="https://git-elektro.cz/" title="@Model.Name live" class="commonButton commonButtonDarkRed commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
+                <a href="@Model.Project.LiveLink" title="@Model.Project.Name live" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonDarkRed" : "commonButtonBlack") commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
             }
         </div>
     </div>

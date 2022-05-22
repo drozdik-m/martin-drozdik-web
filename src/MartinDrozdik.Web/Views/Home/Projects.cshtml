@@ -27,6 +27,24 @@
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 </div>
 
+<div id="projects" class="block">
+    <h1 class="commonH">Dokončené projekty</h1>
+    <ul id="projectsStats" class="blockNarrower">
+        <li class="importantStat projectCountStat">
+            přes<span class="statNumber">@Model.CompletedProjectsCount</span>dokončených projektů
+        </li>
+    </ul>
+    <p class="commonP">Ať už se jedná o&nbsp;větší školní projekty nebo profesionální placené weby, vždy usiluji o&nbsp;maximální kvalitu kódu i&nbsp;výsledku. Přirozeně, postupem času a s&nbsp;nově nabitými zkušenostmi přispívám lepší a&nbsp;lepší prací se&nbsp;slibnějšími výsledky.</p>
+    <p class="commonP">Spoustu ze svých projektů jsem dokončil v&nbsp;týmu. Dle mého názoru je týmová práce v oblasti programování naprosto esenciální.</p>
+
+
+    @{
+        var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Light);
+    }
+    <partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
+
+</div>
+
 @*
 <div class="block">
     <ul class="breadcrumbs blockMargin">

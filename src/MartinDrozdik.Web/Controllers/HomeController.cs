@@ -84,7 +84,7 @@ namespace Bonsai.Server.Controllers
             var projectTags = await projectTagFacade.GetAsync();
 
             var model = new ProjectsPageModel(cultureProvider, languageDictionary,
-                projectTags)
+                projectTags, 30)
             {
 
             };

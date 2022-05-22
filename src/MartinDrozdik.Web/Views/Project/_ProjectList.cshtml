@@ -1,33 +1,27 @@
 ﻿@model ProjectListModel
 
-<div id="projects" class="backgroundBlock">
-    <div id="projectsContent" class="block">
-        <h2 class="commonH commonHWhite">Dokončené projekty</h2>
-        <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z&nbsp;nichž část zajisté stojí za zmínku.</p>
+<div class="projectList @(Model.Scheme == ProjectListScheme.Dark ? "darkMode" : "lightMode")">
+    <span class="tagsHeading">Filtr tagů</span>
+    <ul class="tags listTags @(Model.Scheme == ProjectListScheme.Dark ? "tagsWhiteBlack" : "tagsBlackWhite")">
+        @foreach(var tag in Model.Tags)
+        {
+            <li><button type="button" data-id="@tag.Id">@tag.Name</button></li>
+        }
+    </ul>
 
-        <div class="projectList @(Model.Scheme == ProjectListScheme.Dark ? "darkMode" : "lighMode")">
-            <span class="tagsHeading">Filtr tagů</span>
-            <ul class="tags listTags tagsWhiteBlack">
-                @foreach(var tag in Model.Tags)
-                {
-                    <li><button type="button" data-id="@tag.Id">@tag.Name</button></li>
-                }
-            </ul>
+    @* Project list *@
+    <ul class="projects entityList"></ul>
 
-            @* Project list *@
-            <ul class="projects entityList"></ul>
-
-            <div class="extraActionButton">
-                <button type="button" href="@Url.Action("Projects", "Home")" class="loadMoreProjectsButton commonButton commonButtonThick @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonRed" : "commonButtonBlack") loadMoreProjectsButton">Načíst další</button>
-            </div>
-
-            @if (Model.ShowMoreProjectsButton)
-            {
-                <div class="extraActionButton">
-                    <a href="@Url.Action("Projects", "Home")" class="commonButton @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonDarkRed" : "commonButtonBlack")">Zobrazit stránku s projekty</a>
-                </div>
-            }            
-
-        </div>
+    <div class="extraActionButton">
+        <button type="button" href="@Url.Action("Projects", "Home")" class="loadMoreProjectsButton commonButton commonButtonThick @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonRed" : "commonButtonBlack") loadMoreProjectsButton">Načíst další</button>
     </div>
+
+    @if (Model.ShowMoreProjectsButton)
+    {
+        <div class="extraActionButton">
+            <a href="@Url.Action("Projects", "Home")" class="commonButton @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonDarkRed" : "commonButtonBlack")">Zobrazit stránku s projekty</a>
+        </div>
+    }            
+
 </div>
+

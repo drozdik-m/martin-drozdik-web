@@ -11,14 +11,19 @@ namespace MartinDrozdik.Web.Views.Home
     public class ProjectsPageModel : ViewModelBase
     {
         public IEnumerable<ProjectTag> ProjectTags { get; }
+        public int CompletedProjectsCount { get; }
 
         public ProjectsPageModel(ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,
-            IEnumerable<ProjectTag> projectTags)
+            IEnumerable<ProjectTag> projectTags,
+            int completedProjectsCount)
             : base(cultureProvider, languageDictionary)
         {
             ProjectTags = projectTags;
+            CompletedProjectsCount = completedProjectsCount;
         }
+
+        
 
         public override string Description => "Za svou kariéru mám na kontě celou řadu zajímavých projektů, z nichž část zajisté stojí za zmínku. Projekty jsou různého druhu, od týmových snah přes osobní tvorbu až po odborné texty.";
 

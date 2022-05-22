@@ -1,7 +1,10 @@
-﻿@import "../../_Variables.scss";
+﻿@use "../../ImportantStats/ImportantStats";
+
+@import "../../_Variables.scss";
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
 
+@import "../../Projects/ProjetList";
 /*@import "../../HeroHeader/HeroHeader";
 @import "../../AboutMe/AboutMe";
 @import "../../MySkills/MySkills";
@@ -15,5 +18,44 @@
 //--------------------------------------------------
 //---------PROJECTS PAGE----------------------------
 //--------------------------------------------------
+body {
+    background-color: $projectsBackground;
+}
 
+#projects {
+    .commonP {
+        color: $black;
+    }
+    //---STATS---
+    #projectsStats {
+        float: right;
+        margin-right: 8%;
+        //background-color: red;
+    }
 
+    //---LIST---
+    .projectList{
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media only screen and (max-width: 69.5rem) {
+    #projects {
+        #projectsStats {
+            margin: 1rem;
+            margin-top: 0;
+
+            .importantStat {
+                @include ImportantStats.importantStatNoIcon();
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 45rem){
+    #projects {
+        #projectsStats {
+            display: none;
+        }
+    }
+}

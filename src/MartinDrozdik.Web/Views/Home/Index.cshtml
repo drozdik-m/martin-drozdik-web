@@ -22,11 +22,19 @@
 
 <partial name="_MySkills" for="@MySkillsModel.Default" />
 
-@{
-    var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Dark);
-    projectListModel.ShowMoreProjectsButton = true;
-}
-<partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
+<div id="projects" class="backgroundBlock">
+    <div id="projectsContent" class="block">
+        <h2 class="commonH commonHWhite">Dokončené projekty</h2>
+        <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z&nbsp;nichž část zajisté stojí za zmínku.</p>
+
+        @{
+            var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Dark);
+            projectListModel.ShowMoreProjectsButton = true;
+        }
+        <partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
+    </div>
+</div>
+
 
 @{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }
 <partial name="_Biography" for="@biographyModel" />

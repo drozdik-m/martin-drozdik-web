@@ -11,6 +11,7 @@ using MartinDrozdik.Data.Models.Projects.Display;
 using MartinDrozdik.Web.Facades.Abstraction;
 using MartinDrozdik.Web.Facades.Models.Projects;
 using MartinDrozdik.Web.Services.ViewRenderer;
+using MartinDrozdik.Web.Views.Project;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,20 +32,31 @@ namespace MartinDrozdik.Web.Controllers.Projects
             this.viewRenderService = viewRenderService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProjectListItem>>> GetAsync()
+        [HttpGet()]
+        public async Task<ActionResult<IEnumerable<ProjectListItem>>> GetAsync(string scheme)
         {
+           
+            //ProjectListItemModel
             try
             {
+                //Get scheme
+                var schemeType = ProjectListItemScheme.Dark;
+                if (scheme == "light")
+                    schemeType = ProjectListItemScheme.Light;
+                else if (scheme != "dark")
+                    throw new Exception("Unknown scheme");
+
+                //Get projects
                 var projects = await facade.GetVisibleAsync();
                 var result = new List<ProjectListItem>();
                 foreach(var item in projects)
                 {
+                    var model = new ProjectListItemModel(item, schemeType);
                     result.Add(new ProjectListItem()
                     {
                         Id = item.Id,
                         Tags = item.Tags.Select(e => e.Tag.Id).ToList(),
-                        HTML = await viewRenderService.RenderToStringAsync("Project/_ProjectListItem", item),
+                        HTML = await viewRenderService.RenderToStringAsync("Project/_ProjectListItem", model),
                     });
                 }
 

@@ -38,5 +38,5 @@ WindowEvents.OnDOMReady.Add(function ()
         noResultsMessage: "Žádné projekty nenalezeny"
     });
 
-    EntityList.InitiateViaAPI<ProjectListEntity, ProjectListConfig>(projectList, "/api/ProjectList");
+    EntityList.InitiateViaAPI(projectList, "/api/ProjectList?scheme=dark");
 });

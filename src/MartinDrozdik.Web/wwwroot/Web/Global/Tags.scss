@@ -90,9 +90,14 @@
             }
         }
     }
+
     //SCHEMES
     &.tagsWhiteBlack {
         @include tagsScheme($black, #cfcfcf, #cfcfcf, $black, white, $black);
+    }
+    //SCHEMES
+    &.tagsBlackWhite {
+        @include tagsScheme($projectsBackground, $black, $black, white, $blackHover, white);
     }
 }
 
