@@ -1,0 +1,85 @@
+﻿@model ProjectPageModel
+@inject IFilePathProvider PathProvider
+
+@{
+    //Layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/ProjectPage.css")" />
+}
+
+@section Scripts
+{
+    <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/ProjectPage.js")"></script>
+}
+
+@section Metas
+{
+    <meta property="article:author" content="@Model.Author">
+    <meta property="article:published" itemprop="datePublished" content="@Model.Project.CreatedAt.ToString("yyyy-MM-dd")">
+    <meta property="article:modified" itemprop="dateModified" content="@Model.Project.LastEditAt.ToString("yyyy-MM-dd")">
+    
+}
+
+<div class="block">
+    @{
+        var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
+        {
+           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Black),
+           new BreadcrumbModel("Projekty", string.Empty, BreadcrumbType.Projects, BreadcrumbScheme.White),
+        });
+    }
+    <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
+</div>
+
+<div id="projects" class="block">
+    <h1 class="commonH">Dokončené projekty</h1>
+    <ul id="projectsStats" class="blockNarrower">
+        <li class="importantStat projectCountStat">
+            přes<span class="statNumber">@Model.CompletedProjectsCount</span>dokončených projektů
+        </li>
+    </ul>
+    <p class="commonP">Ať už se jedná o&nbsp;větší školní projekty nebo profesionální placené weby, vždy usiluji o&nbsp;maximální kvalitu kódu i&nbsp;výsledku. Přirozeně, postupem času a s&nbsp;nově nabitými zkušenostmi přispívám lepší a&nbsp;lepší prací se&nbsp;slibnějšími výsledky.</p>
+    <p class="commonP">Spoustu ze svých projektů jsem dokončil v&nbsp;týmu. Dle mého názoru je týmová práce v oblasti programování naprosto esenciální.</p>
+
+
+    @{
+        var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Light);
+    }
+    <partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
+
+</div>
+
+@*
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 lastItem projects white"><a>Projekty</a></li>
+    </ul>
+</div>
+
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 projects dark"><a href="#">Projekty</a></li>
+        <li class="item2 lastItem article white"><a>Git Elektro</a></li>
+    </ul>
+</div>
+
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 lastItem articles white"><a>Projekty</a></li>
+    </ul>
+</div>
+
+<div class="block">
+    <ul class="breadcrumbs blockMargin">
+        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
+        <li class="item1 articles darkRed"><a href="#">Projekty</a></li>
+        <li class="item2 lastItem article white"><a >Git Elektro je super firma a tohle je velmi dlouhý nadpis</a></li>
+    </ul>
+</div>*@

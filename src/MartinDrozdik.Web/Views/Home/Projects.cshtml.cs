@@ -29,7 +29,7 @@ namespace MartinDrozdik.Web.Views.Home
 
         public override string PageTitle => "Projekty";
 
-        public override string[] KeywordsList => new string[] { 
+        public override IEnumerable<string> KeywordsList => new string[] { 
             "Martin Drozdík",
             "projekty",
             "teamové práce",
