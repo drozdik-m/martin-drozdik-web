@@ -35,7 +35,7 @@ namespace MartinDrozdik.Web.Views.Home
 
         public override string Title => PageTitle;
 
-        public override string[] KeywordsList => new string[] { 
+        public override IEnumerable<string> KeywordsList => new string[] { 
             "Martin Drozdík",
             "Software engineer",
             "OOP",

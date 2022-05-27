@@ -22,6 +22,8 @@ using Bonsai.Services.Email.Abstraction;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Web.Facades.Models.People;
 using MartinDrozdik.Web.Facades.Models.Projects;
+using MartinDrozdik.Abstraction.Exceptions.Services.CRUD;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace Bonsai.Server.Controllers
 {
@@ -37,6 +39,7 @@ namespace Bonsai.Server.Controllers
         private readonly EducationFacade educationFacade;
         private readonly LanguageSkillFacade languageSkillFacade;
         private readonly ProjectTagFacade projectTagFacade;
+        private readonly ProjectFacade projectFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
@@ -46,7 +49,8 @@ namespace Bonsai.Server.Controllers
             WorkExperienceFacade workExperienceFacade,
             EducationFacade educationFacade,
             LanguageSkillFacade languageSkillFacade,
-            ProjectTagFacade projectTagFacade
+            ProjectTagFacade projectTagFacade,
+            ProjectFacade projectFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -58,6 +62,7 @@ namespace Bonsai.Server.Controllers
             this.educationFacade = educationFacade;
             this.languageSkillFacade = languageSkillFacade;
             this.projectTagFacade = projectTagFacade;
+            this.projectFacade = projectFacade;
         }
 
         public async Task<IActionResult> Index()
@@ -91,6 +96,27 @@ namespace Bonsai.Server.Controllers
 
             return View(model);
         }
+
+        /*[Route("projekty/{id}")]
+        public async Task<IActionResult> Project(string id)
+        {
+            try
+            {
+                var project = await projectFacade.GetAsync(id);
+
+                var model = new ProjectPageModel(cultureProvider, languageDictionary,
+                    project)
+                {
+
+                };
+
+                return View(model);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+        }*/
 
         [HttpPost]
         public async Task<IActionResult> SendMail(ContactForm contactForm)
