@@ -54,7 +54,12 @@ namespace MartinDrozdik.Web
             services.AddMvc().AddNewtonsoftJson();
 
             //Controllers view builder
-            var controllersViewBuilder = services.AddControllersWithViews();
+            var controllersViewBuilder = services
+                .AddControllersWithViews()
+                .AddRazorOptions(options =>
+                {
+                    options.ViewLocationFormats.Add("/Views/Projects/{0}.cshtml");
+                });
             if (Environment.IsDevelopment())
                 controllersViewBuilder.AddRazorRuntimeCompilation();
             controllersViewBuilder.AddNewtonsoftJson();
