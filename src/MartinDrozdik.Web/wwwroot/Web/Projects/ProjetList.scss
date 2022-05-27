@@ -126,6 +126,23 @@
 
 @media only screen and (max-width: 56.875rem){
     .projectList {
+        //COLOR SCHEMES
+        &.darkMode {
+            .projects > li {
+                &:before {
+                    background-color: white;
+                }
+            }
+        }
+
+        &.lightMode {
+            .projects > li {
+                &:before {
+                    background-color: $black;
+                }
+            }
+        }
+
         .projects > li {
             padding-left: $pxInRem-12;
             //padding-right: $pxInRem-8;

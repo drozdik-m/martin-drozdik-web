@@ -132,6 +132,9 @@ else
                         </MudItem>
                     }
                 </MudGrid>
+
+                <MudTextField @bind-Value="context.Model.Keywords" Disabled="context.Disabled" Label="Keywords" Variant="Variant.Text" 
+                                Immediate="true" HelperText="Keywords separated by comma" />
                 
             </MudTabPanel>
 

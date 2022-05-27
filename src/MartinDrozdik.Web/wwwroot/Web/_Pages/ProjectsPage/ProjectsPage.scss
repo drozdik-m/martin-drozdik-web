@@ -23,6 +23,8 @@ body {
 }
 
 #projects {
+    margin-bottom: 3rem;
+
     .commonP {
         color: $black;
     }
@@ -32,15 +34,16 @@ body {
         margin-right: 8%;
         //background-color: red;
     }
-
     //---LIST---
-    .projectList{
+    .projectList {
         margin-bottom: 1.5rem;
     }
 }
 
 @media only screen and (max-width: 69.5rem) {
     #projects {
+        margin-bottom: 1rem;
+
         #projectsStats {
             margin: 1rem;
             margin-top: 0;
@@ -54,6 +57,8 @@ body {
 
 @media only screen and (max-width: 45rem){
     #projects {
+        
+
         #projectsStats {
             display: none;
         }

@@ -104,9 +104,21 @@
 @media only screen and (max-width: 46rem) {
     .tags {
         li {
+            margin: $pxInRem-3 0;
+            margin-right: $pxInRem-4;
+
             a, button, > span {
-                padding: $pxInRem-5 $pxInRem-10;
+                padding: $pxInRem-4 $pxInRem-8;
                 font-size: $pxInRem-16;
+            }
+        }
+
+        &.tagsSlim {
+            li {
+                a, button, > span {
+                    padding: $pxInRem-3 $pxInRem-6;
+                    font-size: $pxInRem-14;
+                }
             }
         }
     }

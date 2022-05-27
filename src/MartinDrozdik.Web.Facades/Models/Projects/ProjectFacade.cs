@@ -46,6 +46,8 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         }
 
 
+        public async Task<Project> GetAsync(string id) => await repository.GetAsync(id);
+
         public override async Task DeleteAsync(int id)
         {
             var item = await repository.GetAsync(id);

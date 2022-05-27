@@ -119,6 +119,8 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 object.ResetPaging();
             });
         }
+
+        
         
     }
 
@@ -144,7 +146,15 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         //Sort items by tags
         if (this.config.tagsFilter)
         {
+            //Ensure all entities by tags have freshly defined value
             this.entitiesByTags = {};
+            for (let tag in this.tags)
+            {
+                if (typeof this.entitiesByTags[tag] == "undefined")
+                    this.entitiesByTags[tag] = [];
+            }
+
+            //Sort the items
             for (let i = 0; i < this.entities.length; i++)
             {
                 let entity = this.entities[i];
@@ -158,6 +168,9 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 }
             }
         }
+
+        
+        
     }
 
     /**

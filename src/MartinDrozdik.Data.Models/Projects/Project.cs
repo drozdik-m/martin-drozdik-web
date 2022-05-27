@@ -26,6 +26,8 @@ namespace MartinDrozdik.Data.Models.Projects
 
         public string Abstract { get; set; } = string.Empty;
 
+        public string Keywords { get; set; } = string.Empty;
+
         public bool IsFinished { get; set; } = false;    
 
         public DateTime? FinishedTime { get; set; } = DateTime.Now;

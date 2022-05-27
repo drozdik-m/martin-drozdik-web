@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using MartinDrozdik.Abstraction.Exceptions.Services.CRUD;
 using MartinDrozdik.Data.DbContexts;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
@@ -30,6 +31,22 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
 
         protected override Expression<Func<Project, bool>> IdPredicate(int targetId)
             => e => e.Id == targetId;
+
+        public async Task<Project> GetAsync(string id)
+        {
+            var entities = EntitySet
+                .Where(e => e.UrlName == id);
+            var includedEntities = await IncludeRelationsAsync(entities);
+            var processedEntities = await ProcessReturnedEntitiesAsync(includedEntities);
+            var searchedEntity = await processedEntities.FirstOrDefaultAsync();
+
+            //Not found
+            if (searchedEntity == default)
+                throw new NotFoundException();
+
+            //Return result entity
+            return searchedEntity;
+        }
 
         protected override Task<IQueryable<Project>> IncludeRelationsAsync(IQueryable<Project> entities)
         {
