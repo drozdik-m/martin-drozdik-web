@@ -56,7 +56,7 @@ namespace MartinDrozdik.Web.Controllers.Projects
                     {
                         Id = item.Id,
                         Tags = item.Tags.Select(e => e.Tag.Id).ToList(),
-                        HTML = await viewRenderService.RenderToStringAsync("Project/_ProjectListItem", model),
+                        HTML = await viewRenderService.RenderToStringAsync("Projects/_ProjectListItem", model),
                     });
                 }
 
