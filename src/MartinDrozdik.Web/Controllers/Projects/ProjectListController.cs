@@ -11,7 +11,7 @@ using MartinDrozdik.Data.Models.Projects.Display;
 using MartinDrozdik.Web.Facades.Abstraction;
 using MartinDrozdik.Web.Facades.Models.Projects;
 using MartinDrozdik.Web.Services.ViewRenderer;
-using MartinDrozdik.Web.Views.Project;
+using MartinDrozdik.Web.Views.Projects;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

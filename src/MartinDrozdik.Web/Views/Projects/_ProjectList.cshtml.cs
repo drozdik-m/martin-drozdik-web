@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using MartinDrozdik.Data.Models.Projects;
 using MartinDrozdik.Web.Views.Home;
 
-namespace MartinDrozdik.Web.Views.Project
+namespace MartinDrozdik.Web.Views.Projects
 {
     public class ProjectListModel
     {
