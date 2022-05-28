@@ -19,9 +19,14 @@
 @section Metas
 {
     <meta property="article:author" content="@Model.Author">
-    <meta property="article:published" itemprop="datePublished" content="@Model.Project.CreatedAt.ToString("yyyy-MM-dd")">
-    <meta property="article:modified" itemprop="dateModified" content="@Model.Project.LastEditAt.ToString("yyyy-MM-dd")">
+    <meta property="article:published_time" content="@Model.Project.CreatedAt.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">
+    <meta property="article:modified_time" content="@Model.Project.LastEditAt.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture)">
     
+    @foreach(var tag in Model.Project.Tags)
+    {
+        <meta property="article:tag" content="@tag.Tag.Name">
+    }
+
 }
 
 <div class="block">
@@ -29,13 +34,14 @@
         var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
         {
            new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Black),
-           new BreadcrumbModel("Projekty", string.Empty, BreadcrumbType.Projects, BreadcrumbScheme.White),
+           new BreadcrumbModel("Projekty", @Url.Action("Home", "Projects"), BreadcrumbType.Projects, BreadcrumbScheme.Dark),
+           new BreadcrumbModel(Model.Project.Name, string.Empty, BreadcrumbType.Article, BreadcrumbScheme.White),
         });
     }
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 </div>
 
-<div id="projects" class="block">
+@*<div id="projects" class="block">
     <h1 class="commonH">Dokončené projekty</h1>
     <ul id="projectsStats" class="blockNarrower">
         <li class="importantStat projectCountStat">
@@ -52,34 +58,4 @@
     <partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
 
 </div>
-
-@*
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 lastItem projects white"><a>Projekty</a></li>
-    </ul>
-</div>
-
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 projects dark"><a href="#">Projekty</a></li>
-        <li class="item2 lastItem article white"><a>Git Elektro</a></li>
-    </ul>
-</div>
-
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 lastItem articles white"><a>Projekty</a></li>
-    </ul>
-</div>
-
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 articles darkRed"><a href="#">Projekty</a></li>
-        <li class="item2 lastItem article white"><a >Git Elektro je super firma a tohle je velmi dlouhý nadpis</a></li>
-    </ul>
-</div>*@
+*@

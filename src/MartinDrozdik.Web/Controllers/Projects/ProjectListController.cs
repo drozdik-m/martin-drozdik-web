@@ -32,7 +32,7 @@ namespace MartinDrozdik.Web.Controllers.Projects
             this.viewRenderService = viewRenderService;
         }
 
-        [HttpGet()]
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectListItem>>> GetAsync(string scheme)
         {
            

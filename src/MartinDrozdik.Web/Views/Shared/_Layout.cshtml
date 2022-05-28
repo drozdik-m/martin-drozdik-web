@@ -2,6 +2,10 @@
 @inject IFilePathProvider PathProvider
 @inject ServerConfiguration ServerConfiguration
 
+@{
+    var url = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}";
+}
+
 <!DOCTYPE html>
 <html lang="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
 <head>
@@ -17,6 +21,12 @@
     <meta name="language" content="@Model.CultureProvider.Culture.TwoLetterISOLanguageName" />
     <meta name="robots" content="index, follow" />
     <meta name="copyright" content="@Model.ClientName" />
+    @RenderSection("Metas", required: false)
+    @if (Model.RevisionDate.HasValue)
+    {
+        <meta name="revised" content="@Model.RevisionDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)" />
+    }
+
 
     <!--TITLE-->
     <title>@Model.Title</title>
@@ -28,18 +38,20 @@
     <!--WINDOWS META TAGS-->
     <meta name="application-name" content="@Model.SiteName" />
 
-    <!--SOCIAL-->
+    <!--OPEN GRAPH PROTOCOL-->
     <meta property="og:image" content="@ServerConfiguration.Domain@Model.OgImage" />
     <meta property="og:image:secure_url" content="@ServerConfiguration.Domain@Model.OgImage" />
     <meta property="og:type" content="@Model.PageType" />
     <meta property="og:description" content="@Model.Description" />
     <meta property="og:title" content="@Model.Title" />
     <meta property="og:site_name" content="@Model.SiteName" />
+    <meta property="og:locale" content="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
+    <meta property="og:url" content="@url">
 
     <!--TWITTER-->
     <meta name="twitter:title" content="@Model.Title" />
     <meta name="twitter:description" content="@Model.Description" />
-    <meta name="twitter:image" content="@ServerConfiguration.Web@Model.OgImage" />
+    <meta name="twitter:image" content="@ServerConfiguration.Domain@Model.OgImage" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image:alt" content="@Model.SiteName" />
 

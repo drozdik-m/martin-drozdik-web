@@ -97,7 +97,7 @@ namespace Bonsai.Server.Controllers
             return View(model);
         }
 
-        /*[Route("projekty/{id}")]
+        [Route("projekty/{id}")]
         public async Task<IActionResult> Project(string id)
         {
             try
@@ -116,7 +116,7 @@ namespace Bonsai.Server.Controllers
             {
                 return NotFound();
             }
-        }*/
+        }
 
         [HttpPost]
         public async Task<IActionResult> SendMail(ContactForm contactForm)

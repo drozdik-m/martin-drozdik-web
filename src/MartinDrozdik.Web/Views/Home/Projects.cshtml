@@ -41,37 +41,6 @@
     @{
         var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Light);
     }
-    <partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
+    <partial name="_ProjectList" for="@projectListModel" />
 
 </div>
-
-@*
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 lastItem projects white"><a>Projekty</a></li>
-    </ul>
-</div>
-
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home black"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 projects dark"><a href="#">Projekty</a></li>
-        <li class="item2 lastItem article white"><a>Git Elektro</a></li>
-    </ul>
-</div>
-
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 lastItem articles white"><a>Projekty</a></li>
-    </ul>
-</div>
-
-<div class="block">
-    <ul class="breadcrumbs blockMargin">
-        <li class="item0 home red"><a href="#">Martin Drozdík</a></li>
-        <li class="item1 articles darkRed"><a href="#">Projekty</a></li>
-        <li class="item2 lastItem article white"><a >Git Elektro je super firma a tohle je velmi dlouhý nadpis</a></li>
-    </ul>
-</div>*@
