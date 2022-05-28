@@ -11,12 +11,12 @@ namespace MartinDrozdik.Web.Views.Home
     public class ProjectPageModel : ViewModelBase
     {
         public IEnumerable<ProjectTag> ProjectTags { get; }
-        public Project Project { get; }
+        public Data.Models.Projects.Project Project { get; }
         public int CompletedProjectsCount { get; }
 
         public ProjectPageModel(ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,
-            Project project)
+            Data.Models.Projects.Project project)
             : base(cultureProvider, languageDictionary)
         {
             Project = project;
