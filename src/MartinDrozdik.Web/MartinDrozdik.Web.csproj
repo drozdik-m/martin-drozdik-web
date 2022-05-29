@@ -34,6 +34,7 @@
     <Content Remove="wwwroot\Web\Footer\FooterNav.scss" />
     <Content Remove="wwwroot\Web\Form\Form.scss" />
     <Content Remove="wwwroot\Web\Form\ResponsiveBorder.scss" />
+    <Content Remove="wwwroot\Web\Gallery\Gallery.scss" />
     <Content Remove="wwwroot\Web\Global\Animations.scss" />
     <Content Remove="wwwroot\Web\Global\Block.scss" />
     <Content Remove="wwwroot\Web\Global\CommonButton.scss" />
@@ -87,6 +88,7 @@
     <None Include="wwwroot\Web\Form\ResponsiveBorder.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\Gallery\Gallery.scss" />
     <None Include="wwwroot\Web\Global\MagnifyingGlass.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -240,7 +242,6 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="wwwroot\Web\Gallery\" />
     <Folder Include="wwwroot\_dist\" />
   </ItemGroup>
 

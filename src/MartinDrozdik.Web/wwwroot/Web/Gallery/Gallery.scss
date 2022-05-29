@@ -1,0 +1,36 @@
+﻿@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+//--------------------------------------------------
+//---------GALLERY----------------------------------
+//--------------------------------------------------
+
+.gallery {
+    display: flex;
+    align-content: space-between;
+    gap: $pxInRem-16;
+    flex-wrap: wrap;
+
+    li {
+        position: relative;
+        width: 30%;
+        height: 12.1875rem;
+        list-style: none;
+        list-style-type: none;
+        background-image: url("/Web/Projects/Default.png");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+
+        > span {
+            position: absolute;
+        }
+    }
+}
+
+@media only screen and (max-width: 50rem){
+    .gallery {
+    }
+
+}

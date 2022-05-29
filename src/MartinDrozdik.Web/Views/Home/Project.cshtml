@@ -29,7 +29,8 @@
 
 }
 
-<div class="block">
+
+<div id="project" class="block">
     @{
         var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
         {
@@ -39,9 +40,7 @@
         });
     }
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
-</div>
 
-<div id="project" class="block">
     <h1 class="commonH">@Model.Project.Name</h1>
     <div id="logo">
         @if (Model.Project.Logo.Uploaded)
@@ -71,5 +70,11 @@
         }
     </ul>
 
+    <ul class="gallery">
+        @for(int i = 0; i < 4; i++)
+        {
+            <li class="magnifyingGlass"><span>Velmi zajímavý a krásný obrázek</span></li>
+        }
+    </ul>
 
 </div>

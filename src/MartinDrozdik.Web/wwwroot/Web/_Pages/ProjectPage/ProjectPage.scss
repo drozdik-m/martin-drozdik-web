@@ -2,14 +2,19 @@
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
 
+@import "../../Gallery/Gallery";
+
 body {
     background-color: $projectsBackground;
 }
 
+
 //--------------------------------------------------
 //---------PROJECT PAGE-----------------------------
 //--------------------------------------------------
+
 #project {
+    max-width: 70rem;
 
     > .commonP {
         margin-bottom: $pxInRem-20;
