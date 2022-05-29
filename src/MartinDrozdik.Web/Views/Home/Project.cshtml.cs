@@ -39,6 +39,26 @@ namespace MartinDrozdik.Web.Views.Home
 
         public override PageId PageId => PageId.Project;
 
-        
+        public static string FinishedDateToString(DateTime finishedDate)
+        {
+            var monthWord = finishedDate.Month switch
+            {
+                1  => "lednu",
+                2  => "únoru",
+                3  => "březnu",
+                4  => "dubnu",
+                5  => "květnu",
+                6  => "červnu",
+                7  => "červenci",
+                8  => "srpnu",
+                9  => "září",
+                10 => "říjnu",
+                11 => "listopadu",
+                12 => "prosinci",
+                _ => throw new Exception("Unknown month"),
+            };
+
+            return $"{monthWord} {finishedDate.Year}";
+        }
     }
 }

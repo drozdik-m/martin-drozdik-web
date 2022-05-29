@@ -2,6 +2,96 @@
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
 
+body {
+    background-color: $projectsBackground;
+}
+
 //--------------------------------------------------
 //---------PROJECT PAGE-----------------------------
 //--------------------------------------------------
+#project {
+
+    > .commonP {
+        margin-bottom: $pxInRem-20;
+    }
+
+    #logo {
+        float: right;
+        text-align: center;
+        margin-right: 8.5%;
+        margin-left: $pxInRem-12;
+
+        img {
+            max-width: 17rem;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: $pxInRem-28;
+        }
+
+        .commonButton {
+            margin: 0 $pxInRem-10;
+        }
+    }
+
+    #finishedDate {
+        display: block;
+        font-size: $pxInRem-18;
+        color: #535353;
+        font-weight: $fontWeightBold;
+        margin-bottom: $pxInRem-24;
+    }
+
+    .tags {
+        margin-bottom: $pxInRem-22;
+    }
+}
+
+@media only screen and (max-width: 72rem){
+    #project {
+
+        #logo {
+            margin-right: 3%;
+        }
+
+    }
+}
+
+@media only screen and (max-width: 56.25rem) {
+    #project {
+
+        > .commonP {
+            margin-bottom: $pxInRem-10;
+        }
+
+        #logo {
+            margin-right: 0;
+            margin-left: 0;
+            float: none;
+            text-align: center;
+            margin-bottom: $pxInRem-12;
+
+            img {
+                max-width: 14rem;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                margin-bottom: $pxInRem-10;
+            }
+
+            .commonButton {
+                margin: 0 0;
+                margin-right: $pxInRem-6;
+            }
+        }
+
+        #finishedDate {
+            font-size: $pxInRem-16;
+            margin-bottom: $pxInRem-14;
+        }
+
+        .tags {
+            margin-bottom: $pxInRem-18;
+        }
+    }
+}

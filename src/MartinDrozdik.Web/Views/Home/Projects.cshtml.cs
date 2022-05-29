@@ -40,7 +40,5 @@ namespace MartinDrozdik.Web.Views.Home
         public override string OgImage => "/Web/_Pages/ProjectsPage/ProjectsPageOG.png";
 
         public override PageId PageId => PageId.Projects;
-
-        
     }
 }

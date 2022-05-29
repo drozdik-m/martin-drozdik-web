@@ -41,21 +41,35 @@
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 </div>
 
-@*<div id="projects" class="block">
-    <h1 class="commonH">Dokončené projekty</h1>
-    <ul id="projectsStats" class="blockNarrower">
-        <li class="importantStat projectCountStat">
-            přes<span class="statNumber">@Model.CompletedProjectsCount</span>dokončených projektů
-        </li>
-    </ul>
-    <p class="commonP">Ať už se jedná o&nbsp;větší školní projekty nebo profesionální placené weby, vždy usiluji o&nbsp;maximální kvalitu kódu i&nbsp;výsledku. Přirozeně, postupem času a s&nbsp;nově nabitými zkušenostmi přispívám lepší a&nbsp;lepší prací se&nbsp;slibnějšími výsledky.</p>
-    <p class="commonP">Spoustu ze svých projektů jsem dokončil v&nbsp;týmu. Dle mého názoru je týmová práce v oblasti programování naprosto esenciální.</p>
-
-
-    @{
-        var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Light);
+<div id="project" class="block">
+    <h1 class="commonH">@Model.Project.Name</h1>
+    <div id="logo">
+        @if (Model.Project.Logo.Uploaded)
+        {
+            @*@Model.Project.Logo.Uri*@
+            <img src="/Web/Projects/Default.png" title="@Model.Project.Logo.Name" alt="@Model.Project.Logo.AlternativeText" />   
+        }
+        @if (Model.Project.HasGitHubLink)
+        {
+            <a href="@Model.Project.GitHubLink" title="@Model.Project.Name GitHub codebase" class="commonButton commonButtonBlack commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
+        }
+        
+        @if (Model.Project.HasLiveLink)
+        {
+            <a href="@Model.Project.LiveLink" title="@Model.Project.Name live" class="commonButton commonButtonBlack commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
+        }
+    </div>
+    <p class="commonP">@Model.Project.Abstract</p>
+    @if(Model.Project.IsFinished && Model.Project.FinishedTime.HasValue)
+    {
+        <span id="finishedDate">Dokončeno v @ProjectPageModel.FinishedDateToString(Model.Project.FinishedTime.Value)</span>
     }
-    <partial name="../Project/_ProjectList.cshtml" for="@projectListModel" />
+    <ul class="tags tagsBlackWhite">
+        @foreach(var tag in Model.Project.Tags)
+        {
+            <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
+        }
+    </ul>
+
 
 </div>
-*@
