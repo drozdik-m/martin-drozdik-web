@@ -43,6 +43,7 @@
     <Content Remove="wwwroot\Web\Global\Global.scss" />
     <Content Remove="wwwroot\Web\Global\Icons.scss" />
     <Content Remove="wwwroot\Web\Global\LinkHover.scss" />
+    <Content Remove="wwwroot\Web\Global\MagnifyingGlass.scss" />
     <Content Remove="wwwroot\Web\Global\Tags.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\Circles.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
@@ -84,6 +85,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Form\ResponsiveBorder.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Global\MagnifyingGlass.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Icon\LinkedInIconWhite.scss">
@@ -236,6 +240,7 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
+    <Folder Include="wwwroot\Web\Gallery\" />
     <Folder Include="wwwroot\_dist\" />
   </ItemGroup>
 
