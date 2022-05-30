@@ -26,6 +26,7 @@
     "@drozdik.m/dimensions-helper": "^1.0.0",
     "@drozdik.m/form": "^1.1.11",
     "@drozdik.m/google-analytics": "^1.0.1",
+    "@drozdik.m/image-gallery": "^1.2.4",
     "@drozdik.m/lerp": "^1.0.1",
     "@drozdik.m/loading-animation": "^1.2.1",
     "@drozdik.m/menu": "^1.1.0",

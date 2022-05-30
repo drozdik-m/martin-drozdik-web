@@ -71,9 +71,13 @@
     </ul>
 
     <ul class="gallery">
-        @for(int i = 0; i < 4; i++)
+        @foreach(var image in Model.Project.GalleryImages)
         {
-            <li class="magnifyingGlass"><span>Velmi zajímavý a krásný obrázek</span></li>
+            <li>
+                <a class="galleryImage magnifyingGlass" href="/Web/Projects/Default.png" title="@image.AlternativeText">
+                    <span>@image.Name</span>
+                </a>
+            </li>
         }
     </ul>
 

@@ -2,35 +2,106 @@
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
+@import "../../../node_modules/@drozdik.m/image-gallery/module";
+
 //--------------------------------------------------
 //---------GALLERY----------------------------------
 //--------------------------------------------------
 
 .gallery {
     display: flex;
-    align-content: space-between;
+    justify-content: space-between;
     gap: $pxInRem-16;
     flex-wrap: wrap;
+    font-size: 0;
+    margin: $pxInRem-16 0;
+
+    $width: 32%;
 
     li {
-        position: relative;
-        width: 30%;
-        height: 12.1875rem;
+        width: $width;
+        height: 13rem;
         list-style: none;
         list-style-type: none;
+        position: relative;
+    }
+
+    &:after {
+        content: " ";
+        font-size: 0;
+        width: $width;
+    }
+
+    .galleryImage {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        display: block;
         background-image: url("/Web/Projects/Default.png");
         background-repeat: no-repeat;
         background-position: center center;
         background-size: cover;
+        overflow: hidden;
+        @include border-radius($radiusSmall);
 
         > span {
             position: absolute;
+            z-index: 6;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: $pxInRem-6;
+            background-color: $darkTransparentBackground;
+            color: white;
+            text-align: center;
+            font-size: $pxInRem-16;
+            @include transition(background-color $transition);
+        }
+
+        &:hover {
+            > span {
+                background-color: rgba(0, 0, 0, 0);
+            }
         }
     }
 }
 
-@media only screen and (max-width: 50rem){
+@media only screen and (max-width: 54.375rem){
     .gallery {
+        display: flex;
+        justify-content: space-around;
+        gap: $pxInRem-10;
+        //margin: $pxInRem-16 0;
+
+        $width: 48%;
+
+        li {
+            width: $width;
+            height: 12rem;
+        }
+
+        &:after {
+            display: none;
+        }
+
+        .galleryImage {
+
+            > span {
+                //font-size: $pxInRem-16;
+            }
+        }
     }
 
+}
+
+@media only screen and (max-width: 31.25rem) {
+    .gallery {
+
+        li {
+            height: 8rem;
+        }
+
+    }
 }

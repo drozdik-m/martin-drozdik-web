@@ -1,7 +1,6 @@
-﻿/*import { WindowEvents } from "@drozdik.m/window-events";
+﻿import { ImageGallery } from "@drozdik.m/image-gallery";
 
-
-WindowEvents.OnDOMReady.Add(function ()
+export function MakeGallery(gallerySelector: string)
 {
-
-});*/
+    ImageGallery.FromLinksSelector(`${gallerySelector} li a`);
+}
