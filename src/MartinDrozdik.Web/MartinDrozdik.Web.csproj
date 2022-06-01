@@ -24,6 +24,7 @@
     <Content Remove="wwwroot\Web\Article\ArticleBase.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
     <Content Remove="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss" />
+    <Content Remove="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss" />
     <Content Remove="wwwroot\Web\Contact\Contact.scss" />
     <Content Remove="wwwroot\Web\Contact\ContactForm.scss" />
     <Content Remove="wwwroot\Web\Contact\ContactInfo.scss" />
@@ -56,7 +57,7 @@
     <Content Remove="wwwroot\Web\Menu\Menu.scss" />
     <Content Remove="wwwroot\Web\Menu\Mobile.scss" />
     <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
-    <Content Remove="wwwroot\Web\Projects\ProjetList.scss" />
+    <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
@@ -74,6 +75,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Contact\ContactForm.scss">
@@ -102,6 +106,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\StatusWindow\StatusWindow.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Tags\Tags.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss">
@@ -160,9 +167,6 @@
     <None Include="wwwroot\Web\Global\LinkHover.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Global\Tags.scss">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Include="wwwroot\Web\HeroHeader\Circles.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -187,7 +191,7 @@
     <None Include="wwwroot\Web\MySkills\MySkills.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Projects\ProjetList.scss">
+    <None Include="wwwroot\Web\Projects\ProjectList.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss">

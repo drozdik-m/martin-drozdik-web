@@ -41,6 +41,7 @@
     }
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 
+    <!--HEADING-->
     <h1 class="commonH">@Model.Project.Name</h1>
     <div id="logo">
         @if (Model.Project.Logo.Uploaded)
@@ -70,15 +71,23 @@
         }
     </ul>
 
+    <!--GALLERY-->
     <ul class="gallery">
         @foreach(var image in Model.Project.GalleryImages)
         {
             <li>
-                <a class="galleryImage magnifyingGlass" href="/Web/Projects/Default.png" title="@image.AlternativeText">
+                <a class="galleryImage magnifyingGlass" href="/Web/Gallery/Default.png" title="@image.AlternativeText">
                     <span>@image.Name</span>
                 </a>
             </li>
         }
     </ul>
+
+    <!--CONTACT ME STRIPE-->
+    <div class="contactMeStripe">
+        Zalíbil se vám projekt? Chtěli byste podobný? <a class="contactMeStripeButton" href="/#contact" title="Kontaktní informace a formulář">Napište mi</a>
+    </div>
+
+    <!--CONTENT-->
 
 </div>
