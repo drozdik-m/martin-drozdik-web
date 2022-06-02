@@ -88,6 +88,34 @@
         Zalíbil se vám projekt? Chtěli byste podobný? <a class="contactMeStripeButton" href="/#contact" title="Kontaktní informace a formulář">Napište mi</a>
     </div>
 
+
+    <div id="projectTeam">
+        <h2 class="projectH2">Tým</h2>
+        @{
+            var developerCount = Model.Project.Developers.Count();
+        }
+        @if(developerCount > 0 && !(developerCount == 1 && Model.Project.Developers.First().Person.IsMe))
+        {
+            <ul class="team">
+                @foreach(var member in Model.Project.Developers)
+                {
+                    <li class="@(member.Person.IsMe ? "teamMe" : "")">
+                        <div class="teamFace">&nbsp;</div>
+                        <div class="teamDescription">
+                            <span class="teamName">@member.Person.Name</span>
+                            @if(!string.IsNullOrWhiteSpace(member.Role))
+                            {
+                                <span class="teamPosition">@member.Role</span>
+                            }
+                        </div>
+                    </li>
+                }
+            </ul>
+        }
+        
+    </div>
+
+
     <!--CONTENT-->
 
 </div>

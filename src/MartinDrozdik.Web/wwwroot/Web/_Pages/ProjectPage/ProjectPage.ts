@@ -1,6 +1,7 @@
 ﻿import { WindowEvents } from "@drozdik.m/window-events";
 import { MakeGallery } from "../../Gallery/Gallery";
 import "../../ContactMeStripe/ContactMeStripe";
+import "../../Team/Team";
 
 
 WindowEvents.OnDOMReady.Add(function ()

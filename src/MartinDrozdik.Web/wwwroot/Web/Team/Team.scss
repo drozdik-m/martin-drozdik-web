@@ -1,0 +1,132 @@
+﻿@use "sass:math";
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+//--------------------------------------------------
+//---------TEAM-------------------------------------
+//--------------------------------------------------
+.team {
+    font-size: 0;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    li {
+        $faceDimensions: $pxInRem-144;
+        flex: 0 0 14rem;
+        padding: 1rem;
+        margin: 0.5rem 0;
+        //background-color: red;
+
+
+        .teamFace {
+            width: $faceDimensions;
+            height: $faceDimensions;
+            background-image: url("/Web/Team/Default.png");
+            @include border-radius(50%);
+            @include box-shadow(0 0 $pxInRem-22 $pxInRem-5 rgba(0, 0, 0, 0.25));
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .teamDescription {
+            position: relative;
+            @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-26 $pxInRem-2 rgba(0, 0, 0, 0.2));
+            z-index: 3;
+            text-align: center;
+            background-color: #F8F4FB;
+            padding: $pxInRem-6;
+            padding-bottom: $pxInRem-8;
+            @include border-radius($radiusSmall);
+            margin-top: -$pxInRem-6;
+
+            .teamName, .teamPosition {
+                display: block;
+                color: $black;
+            }
+
+            .teamName {
+                font-size: $pxInRem-18;
+                font-weight: $fontWeightBold;
+                margin-top: $pxInRem-4;
+                margin-bottom: $pxInRem-3;
+            }
+
+            .teamPosition {
+                font-size: $pxInRem-14;
+                
+                &:before {
+                    content: " ";
+                    font-size: 0;
+                    display: block;
+                    margin-left: auto;
+                    margin-right: auto;
+                    background-color: #E2E2E2;
+                    width: $pxInRem-24;
+                    height: $pxInRem-1;
+                    margin-bottom: $pxInRem-6;
+                }
+            }
+        }
+
+        &.teamMe {
+            .teamFace {
+                &:after {
+                    $circleDimensions: 10.625rem;
+                    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMTcwIDE3MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iODUiIGN5PSI4NSIgcj0iODQuNSIgc3Ryb2tlPSIjMjQwQjM2IiBzdHJva2UtZGFzaGFycmF5PSIxNSAxNSIgc3Ryb2tlLW9wYWNpdHk9Ii4zNSIvPgo8L3N2Zz4K");
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    background-size: $circleDimensions;
+                    height: $circleDimensions;
+                    width: $circleDimensions;
+                    content: " ";
+                    position: absolute;
+                    left: math.div($faceDimensions - $circleDimensions, 2);
+                    top: math.div($faceDimensions - $circleDimensions, 2);
+                    z-index: 1;
+                    @include transform(rotate(90deg));
+                }
+            }
+
+            .teamDescription {
+
+                .teamName {
+                    &:after {
+                        content: " (já)";
+                        color: $red;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 37.5rem){
+    .team {
+        display: block;
+        text-align: center;
+
+        li {
+            display: block;
+            padding: 0.5rem;
+            margin: 0;
+
+            .teamFace {
+                background-image: none !important;
+                display: none;
+            }
+
+            .teamDescription {
+                padding-left: $pxInRem-18;
+                padding-right: $pxInRem-18;
+            }
+        }
+    }
+}
