@@ -21,7 +21,7 @@
     <Content Remove="package.json" />
     <Content Remove="tsconfig.json" />
     <Content Remove="wwwroot\Web\AboutMe\AboutMe.scss" />
-    <Content Remove="wwwroot\Web\Article\ArticleBase.scss" />
+    <Content Remove="wwwroot\Web\Article\Article.scss" />
     <Content Remove="wwwroot\Web\Article\Team.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
     <Content Remove="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss" />
@@ -127,7 +127,7 @@
     <None Include="wwwroot\Web\AboutMe\AboutMe.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Article\ArticleBase.scss" />
+    <None Include="wwwroot\Web\Article\Article.scss" />
     <None Include="wwwroot\Web\Biography\Biography.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

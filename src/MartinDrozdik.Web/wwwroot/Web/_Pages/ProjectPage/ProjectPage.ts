@@ -2,6 +2,7 @@
 import { MakeGallery } from "../../Gallery/Gallery";
 import "../../ContactMeStripe/ContactMeStripe";
 import "../../Team/Team";
+import "../../Article/Article";
 
 
 WindowEvents.OnDOMReady.Add(function ()
@@ -17,4 +18,6 @@ WindowEvents.OnDOMReady.Add(function ()
     MakeGallery("#project .gallery");
     console.log(document.querySelectorAll("#project .gallery li a"));
 });
+
+
 

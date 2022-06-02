@@ -1,5 +1,6 @@
 ﻿@model ProjectPageModel
 @inject IFilePathProvider PathProvider
+@inject ServerConfiguration ServerConfiguration
 
 @{
     //Layout
@@ -30,7 +31,7 @@
 }
 
 
-<div id="project" class="block">
+<article id="project" class="block">
     @{
         var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
         {
@@ -47,7 +48,7 @@
         @if (Model.Project.Logo.Uploaded)
         {
             @*@Model.Project.Logo.Uri*@
-            <img src="/Web/Projects/Default.png" title="@Model.Project.Logo.Name" alt="@Model.Project.Logo.AlternativeText" />   
+            <img src="@ServerConfiguration.ContentDomain@Model.Project.Logo.Uri" title="@Model.Project.Logo.Name" alt="@Model.Project.Logo.AlternativeText" />   
         }
         @if (Model.Project.HasGitHubLink)
         {
@@ -75,11 +76,14 @@
     <ul class="gallery">
         @foreach(var image in Model.Project.GalleryImages)
         {
-            <li>
-                <a class="galleryImage magnifyingGlass" href="/Web/Gallery/Default.png" title="@image.AlternativeText">
-                    <span>@image.Name</span>
-                </a>
-            </li>
+            if (image.Uploaded)
+            {
+                <li>
+                    <a class="galleryImage magnifyingGlass" href="@ServerConfiguration.ContentDomain@image.Uri" title="@image.AlternativeText">
+                        <span>@image.Name</span>
+                    </a>
+                </li>
+            }
         }
     </ul>
 
@@ -112,10 +116,12 @@
                 }
             </ul>
         }
-        
     </div>
 
-
     <!--CONTENT-->
+    <div class="article">
+        <h2></h2>
+        @Html.Raw(@Model.Project.Article.HTML)
+    </div>
 
-</div>
+</article>

@@ -5,6 +5,7 @@
 @import "../../Gallery/Gallery";
 @import "../../ContactMeStripe/ContactMeStripe";
 @import "../../Team/Team";
+@import "../../Article/Article";
 
 body {
     background-color: $projectsBackground;
@@ -16,7 +17,7 @@ body {
 //--------------------------------------------------
 
 #project {
-    max-width: 70rem;
+    max-width: 57.5rem;
 
     > .commonP {
         margin-bottom: $pxInRem-20;
@@ -25,15 +26,15 @@ body {
     #logo {
         float: right;
         text-align: center;
-        margin-right: 3.8%;
-        margin-left: $pxInRem-12;
+        //margin-right: 3.8%;
+        margin-left: $pxInRem-16;
 
         img {
             max-width: 17rem;
             display: block;
             margin-left: auto;
             margin-right: auto;
-            margin-bottom: $pxInRem-28;
+            margin-bottom: $pxInRem-18;
             @include border-radius($radiusSmall);
         }
 
@@ -52,9 +53,16 @@ body {
 
     .tags {
         margin-bottom: $pxInRem-22;
+        &:after{
+            clear: both;
+            display: block;
+            content: " ";
+            font-size: 0;
+        }
+
     }
 
-    .projectH2 {
+    .projectH2, .article h2 {
         font-size: $pxInRem-38;
         color: $black;
         font-weight: $fontWeightBold;

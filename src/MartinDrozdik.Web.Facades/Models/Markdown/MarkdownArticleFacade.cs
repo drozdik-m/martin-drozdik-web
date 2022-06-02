@@ -102,6 +102,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         {
             article = UpdateHTML(article);
             RemoveUnusedMedia(article);
+
         }
 
         /// <summary>
@@ -131,7 +132,38 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         /// <returns></returns>
         public virtual TArticle UpdateHTML(TArticle article)
         {
+            //Get HTML
             article.HTML = MarkdownToHTML(article.Markdown);
+
+            //Mark external links
+            var xml = XElement.Parse($"<root>{article.HTML}</root>");
+            var links = xml.Descendants("a");
+            foreach(var link in links)
+            {
+                var href = link.Attribute("href")?.Value;
+                if (href is not null && (href.StartsWith("http://") || href.StartsWith("https://")))
+                {
+                    link.SetAttributeValue("target", "_blank");
+                    link.SetAttributeValue("rel", "noopener");
+                    link.SetAttributeValue("class", "external");
+                }
+            }
+
+            //Add titles to links
+            foreach (var link in links)
+            {
+                var href = link.Attribute("href")?.Value;
+                if (href is not null)
+                {
+                    link.SetAttributeValue("title", $"Link: {href}");
+                }
+            }
+
+            //Save the XML
+            var reader = xml.CreateReader();
+            reader.MoveToContent();
+            article.HTML = reader.ReadInnerXml();
+
             return article;
         }
 
