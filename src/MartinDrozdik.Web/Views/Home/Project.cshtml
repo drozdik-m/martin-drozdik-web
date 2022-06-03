@@ -79,7 +79,10 @@
             if (image.Uploaded)
             {
                 <li>
-                    <a class="galleryImage magnifyingGlass" href="@ServerConfiguration.ContentDomain@image.Uri" title="@image.AlternativeText">
+                    <a class="galleryImage magnifyingGlass" 
+                        href="@ServerConfiguration.ContentDomain@image.Uri" 
+                        style="background-image: url(@ServerConfiguration.ContentDomain@image.ThumbnailUri)"
+                        title="@image.AlternativeText">
                         <span>@image.Name</span>
                     </a>
                 </li>
@@ -98,29 +101,26 @@
         @{
             var developerCount = Model.Project.Developers.Count();
         }
-        @if(developerCount > 0 && !(developerCount == 1 && Model.Project.Developers.First().Person.IsMe))
-        {
-            <ul class="team">
-                @foreach(var member in Model.Project.Developers)
-                {
-                    <li class="@(member.Person.IsMe ? "teamMe" : "")">
-                        <div class="teamFace">&nbsp;</div>
-                        <div class="teamDescription">
-                            <span class="teamName">@member.Person.Name</span>
-                            @if(!string.IsNullOrWhiteSpace(member.Role))
-                            {
-                                <span class="teamPosition">@member.Role</span>
-                            }
-                        </div>
-                    </li>
-                }
-            </ul>
-        }
+        <ul class="team">
+            @foreach(var member in Model.Project.Developers)
+            {
+                <li class="@(member.Person.IsMe ? "teamMe" : "")">
+                    <div class="teamFace" style="@(member.Person.ProfileImage.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain + member.Person.ProfileImage.Uri})" : "")">&nbsp;</div>
+                    <div class="teamDescription">
+                        <span class="teamName">@member.Person.Name</span>
+                        @if(!string.IsNullOrWhiteSpace(member.Role))
+                        {
+                            <span class="teamPosition">@member.Role</span>
+                        }
+                    </div>
+                </li>
+            }
+        </ul>
     </div>
 
     <!--CONTENT-->
     <div class="article">
-        <h2></h2>
+        <h2>Práce na projektu</h2>
         @Html.Raw(@Model.Project.Article.HTML)
     </div>
 

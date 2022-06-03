@@ -59,6 +59,8 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             .UseMathematics()
             .UseEmojiAndSmiley()
             .UseDiagrams()
+            .UseCitations()
+            .UseFigures()
             .Build();
 
 

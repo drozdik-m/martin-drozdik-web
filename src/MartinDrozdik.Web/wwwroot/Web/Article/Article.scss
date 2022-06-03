@@ -2,31 +2,31 @@
 
 @import "../_Variables.scss";
 
-@import "@drozdik.m/common-mixins/_module";
-
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
 //--------------------------------------------------
 //---------SIZES------------------------------------
 //--------------------------------------------------
 
 //Font-sizes
-$h1FS: $pxInRem-26;
-$h1mobileFS: $pxInRem-22;
-$h2FS: $pxInRem-22;
-$h2mobileFS: $pxInRem-20;
-$h3FS: $pxInRem-20;
-$h3mobileFS: $pxInRem-18;
-$h4FS: $pxInRem-18;
-$h4mobileFS: $pxInRem-16;
-$h5FS: $pxInRem-16;
-$h5mobileFS: $pxInRem-14;
-$h6FS: $pxInRem-14;
-$h6mobileFS: $pxInRem-12;
+$h1FS: $pxInRem-50;
+$h1mobileFS: $pxInRem-28;
+$h2FS: $pxInRem-38;
+$h2mobileFS: $pxInRem-24;
+$h3FS: $pxInRem-30;
+$h3mobileFS: $pxInRem-20;
+$h4FS: $pxInRem-22;
+$h4mobileFS: $pxInRem-18;
+$h5FS: $pxInRem-18;
+$h5mobileFS: $pxInRem-16;
+$h6FS: $pxInRem-16;
+$h6mobileFS: $pxInRem-14;
 
 //Line-heights
 $normalFS: $pxInRem-18;
 $mobileFS: $pxInRem-16;
-$normalLH: $pxInRem-28;
+$normalLH: $pxInRem-30;
 $mobileLH: $pxInRem-22;
 
 //Margins
@@ -84,15 +84,26 @@ $linkColorVisited: #8f0099;
     p {
         margin-bottom: $pMargin;
         line-height: $normalLH;
+
+        cite {
+            &:before {
+                content: "“";
+            }
+
+            &:after {
+                content: "”";
+            }
+        }
     }
 
     h1, h2, h3, h4, h5, h6 {
         margin-bottom: $hMargin;
+        color: $black;
+        font-weight: $fontWeightBold;
     }
 
     h1 {
         font-size: $h1FS;
-        font-weight: bolder;
     }
 
     h2 {
@@ -282,33 +293,77 @@ $linkColorVisited: #8f0099;
 //--------------------------------------------------
 .article {
     blockquote {
-        background: $lighterGray;
-        border-left: $pxInRem-10 solid $lightGray;
+        background: rgba(36, 11, 54, 0.07);
         margin-bottom: $itemMargin;
-        padding: $pxInRem-8 $pxInRem-10;
-        quotes: "\201C""\201D""\2018""\2019";
+        padding: $pxInRem-6 $pxInRem-14;
+        position: relative;
+        $quoteDimensions: 2rem;
+        padding-left: $quoteDimensions + 1rem;
 
         &:before {
-            $fontSize: $pxInRem-48;
-            color: $lightGray;
-            content: "\201C";
-            font-size: $fontSize;
-            line-height: $pxInRem-10;
-            margin-right: $pxInRem-4;
-            vertical-align: -(math.div($fontSize, 3));
+            display: block;
+            content: " ";
+            font-size: 0;
+            background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im03Ljg4IDAuNC0yLjA0IDEyLjcyaDIuODh2MTIuMzZoLTguMDR2LTEyLjM2bDMtMTIuNzJoNC4yem0xNC41MiAwLTIuMDQgMTIuNzJoMi44OHYxMi4zNmgtOC4wNHYtMTIuMzZsMy0xMi43Mmg0LjJ6IiBmaWxsPSIjMjQwQjM2Ii8+Cjwvc3ZnPgo=");
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: $pxInRem-24;
+            position: absolute;
+            left: $pxInRem-8;
+            top: $pxInRem-14;
+            height: $quoteDimensions;
+            width: $quoteDimensions;
         }
 
         p {
-            display: inline;
-            font-weight: bold;
+            font-weight: $fontWeightSemiBold;
+            font-size: $pxInRem-24;
+            line-height: $pxInRem-26;
+            margin-top: $pxInRem-12;
+            margin-bottom: 0;
         }
 
         cite {
             text-align: right;
             display: block;
+            margin-top: $pxInRem-6;
 
             &:before {
                 content: "— ";
+            }
+            &:after{
+                content: "";
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: $mobileBreakpoint){
+    .article {
+        blockquote {
+            padding: $pxInRem-4 $pxInRem-10;
+            $quoteDimensions: 2rem;
+            padding-left: $quoteDimensions + 0.5rem;
+
+            &:before {
+                background-size: $pxInRem-16;
+                position: absolute;
+                left: $pxInRem-4;
+                top: $pxInRem-10;
+                height: $quoteDimensions;
+                width: $quoteDimensions;
+            }
+
+            p {
+                font-weight: $fontWeightSemiBold;
+                font-size: $pxInRem-18;
+                line-height: $pxInRem-22;
+                margin-top: $pxInRem-12;
+                margin-bottom: 0;
+            }
+
+            cite {
+                margin-top: $pxInRem-6;
             }
         }
     }
@@ -318,20 +373,41 @@ $linkColorVisited: #8f0099;
 //---------IMPORTANT TEXT---------------------------
 //--------------------------------------------------
 .article {
-    .importantText {
+    .important {
         text-align: center;
-        font-size: $pxInRem-22;
+        font-size: $pxInRem-26;
         line-height: normal;
-        font-weight: bold;
+        font-weight: $fontWeightExtraBold;
         margin: $pxInRem-40 0;
+        color: $black;
     }
 }
 
 @media only screen and (max-width: $mobileBreakpoint) {
     .article {
-        .importantText {
+        .important {
             font-size: $pxInRem-18;
             margin: $pxInRem-20 0;
+        }
+    }
+}
+
+//--------------------------------------------------
+//---------HIGHLIGHTED TEXT-------------------------
+//--------------------------------------------------
+.article {
+    .highlighted {
+        background-color: $black;
+        padding: 1.25rem 1.75rem;
+        color: white;
+        @include border-radius($radiusSmall);
+
+    }
+}
+@media only screen and (max-width: $mobileBreakpoint) {
+    .article {
+        .highlighted {
+            padding: 0.75rem 1rem;
         }
     }
 }
@@ -346,13 +422,15 @@ $linkColorVisited: #8f0099;
 
         &:before {
             position: absolute;
+            display: block;
             top: 0;
             bottom: 0;
             left: 0;
+            $width: $pxInRem-4;
             width: $pxInRem-4;
             //background-color: $mainTheme;
             background: linear-gradient(to bottom, $red, $black);
-            @include border-radius($radiusSmall);
+            @include border-radius($width);
             content: " ";
             font-size: 0;
             box-shadow: $pxInRem-2 $pxInRem-2 $pxInRem-2 0 rgba(0, 0, 0, 0.35);
