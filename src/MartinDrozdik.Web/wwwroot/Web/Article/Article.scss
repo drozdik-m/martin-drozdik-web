@@ -248,7 +248,7 @@ $linkColorVisited: #8f0099;
             width: $imageWideMaxWidth;
             $side: math.div($imageWideMaxWidth - $articleBlockMaxWidth, 2);
             margin-left: -$side;
-            max-width: unset;
+            max-width: none;
         }
     }
 
@@ -319,7 +319,7 @@ $linkColorVisited: #8f0099;
             background-position: right center;
             background-repeat: no-repeat;
             background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMTEgMTEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im05Ljc3NzggMi4wODM5LTYuMjk0NCA2LjI5NDRjLTAuMDU1MjQgMC4wNjM1NS0wLjEyMzAzIDAuMTE1LTAuMTk5MSAwLjE1MTEycy0wLjE1ODc4IDAuMDU2MTItMC4yNDI5NCAwLjA1ODc2Yy0wLjA4NDE3IDAuMDAyNjQtMC4xNjc5Ny0wLjAxMjE0LTAuMjQ2MTYtMC4wNDM0Mi0wLjA3ODE4LTAuMDMxMjgtMC4xNDkwNi0wLjA3ODM4LTAuMjA4MTgtMC4xMzgzNC0wLjA1OTEyLTAuMDU5OTctMC4xMDUyLTAuMTMxNS0wLjEzNTM3LTAuMjEwMTJzLTAuMDQzNzYtMC4xNjI2My0wLjAzOTkzLTAuMjQ2NzUgMC4wMjUwMS0wLjE2NjU0IDAuMDYyMi0wLjI0MjA5YzAuMDM3Mi0wLjA3NTU1IDAuMDg5Ni0wLjE0MjU5IDAuMTUzOTMtMC4xOTY5M2w2LjI4MjItNi4yODgzaC0yLjE4NzhjLTAuMTYyMDcgMC0wLjMxNzUxLTAuMDY0MzgtMC40MzIxMi0wLjE3ODk5LTAuMTE0Ni0wLjExNDYtMC4xNzg5OS0wLjI3MDA0LTAuMTc4OTktMC40MzIxMnMwLjA2NDM5LTAuMzE3NTIgMC4xNzg5OS0wLjQzMjEyYzAuMTE0NjEtMC4xMTQ2MSAwLjI3MDA1LTAuMTc4OTkgMC40MzIxMi0wLjE3ODk5aDMuNjY2N2MwLjE2MjEgMCAwLjMxNzUgMC4wNjQzODUgMC40MzIxIDAuMTc4OTkgMC4xMTQ2IDAuMTE0NjEgMC4xNzkgMC4yNzAwNCAwLjE3OSAwLjQzMjEydjMuNjY2N2MwIDAuMTYyMDctMC4wNjQ0IDAuMzE3NTEtMC4xNzkgMC40MzIxMi0wLjExNDYgMC4xMTQ2LTAuMjcgMC4xNzg5OS0wLjQzMjEgMC4xNzg5OXMtMC4zMTc1LTAuMDY0MzktMC40MzIxMy0wLjE3ODk5Yy0wLjExNDYxLTAuMTE0NjEtMC4xNzg5OS0wLjI3MDA1LTAuMTc4OTktMC40MzIxMnYtMi4xOTM5em0tMS4yMjIyIDQuNjM4M2MwLTAuMTYyMDcgMC4wNjQzOC0wLjMxNzUxIDAuMTc4OTktMC40MzIxMiAwLjExNDYtMC4xMTQ2IDAuMjcwMDQtMC4xNzg5OSAwLjQzMjEyLTAuMTc4OTkgMC4xNjIwNyAwIDAuMzE3NTEgMC4wNjQzOSAwLjQzMjEyIDAuMTc4OTkgMC4xMTQ2IDAuMTE0NjEgMC4xNzg5OSAwLjI3MDA1IDAuMTc4OTkgMC40MzIxMnYzLjA1NTZjMCAwLjMyNDEyLTAuMTI4NzcgMC42MzUwMi0wLjM1Nzk4IDAuODY0MjJzLTAuNTQwMDkgMC4zNTgtMC44NjQyNCAwLjM1OGgtNy4zMzMzYy0wLjMyNDE1IDAtMC42MzUwMy0wLjEyODgtMC44NjQyNC0wLjM1OC0wLjIyOTIxLTAuMjI5Mi0wLjM1Nzk4LTAuNTQwMS0wLjM1Nzk4LTAuODY0MjJ2LTcuMzMzM2MwLTAuNjcyMjIgMC41NS0xLjIyMjIgMS4yMjIyLTEuMjIyMmgzLjA1NTZjMC4xNjIwNyAwIDAuMzE3NTEgMC4wNjQzOSAwLjQzMjEyIDAuMTc4OTkgMC4xMTQ2IDAuMTE0NjEgMC4xNzg5OSAwLjI3MDA1IDAuMTc4OTkgMC40MzIxMiAwIDAuMTYyMDgtMC4wNjQzOSAwLjMxNzUyLTAuMTc4OTkgMC40MzIxMi0wLjExNDYxIDAuMTE0NjEtMC4yNzAwNSAwLjE3ODk5LTAuNDMyMTIgMC4xNzg5OWgtMy4wNTU2djcuMzMzM2g3LjMzMzN2LTMuMDU1NnoiIGZpbGw9IiM4NDg0ODQiLz4KPC9zdmc+Cg==");
-            background-size: $pxInRem-11;
+            background-size: $pxInRem-11 $pxInRem-11;
             padding-right: $pxInRem-14;
         }
     }
@@ -344,7 +344,7 @@ $linkColorVisited: #8f0099;
             background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjQgMjYiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im03Ljg4IDAuNC0yLjA0IDEyLjcyaDIuODh2MTIuMzZoLTguMDR2LTEyLjM2bDMtMTIuNzJoNC4yem0xNC41MiAwLTIuMDQgMTIuNzJoMi44OHYxMi4zNmgtOC4wNHYtMTIuMzZsMy0xMi43Mmg0LjJ6IiBmaWxsPSIjMjQwQjM2Ii8+Cjwvc3ZnPgo=");
             background-position: center center;
             background-repeat: no-repeat;
-            background-size: $pxInRem-24;
+            background-size: $pxInRem-24 $pxInRem-24;
             position: absolute;
             left: $pxInRem-8;
             top: $pxInRem-14;
@@ -368,7 +368,8 @@ $linkColorVisited: #8f0099;
             &:before {
                 content: "— ";
             }
-            &:after{
+
+            &:after {
                 content: "";
             }
         }
@@ -383,7 +384,7 @@ $linkColorVisited: #8f0099;
             padding-left: $quoteDimensions + 0.5rem;
 
             &:before {
-                background-size: $pxInRem-16;
+                background-size: $pxInRem-16 $pxInRem-16;
                 position: absolute;
                 left: $pxInRem-4;
                 top: $pxInRem-10;
@@ -592,7 +593,7 @@ $linkColorVisited: #8f0099;
         background-repeat: no-repeat;
         background-position-x: right;
         background-position-y: $pxInRem-5;
-        background-size: $pxInRem-16;
+        background-size: $pxInRem-16 $pxInRem-16;
         padding-right: $pxInRem-24;
         position: relative;
         padding-left: $pxInRem-53;

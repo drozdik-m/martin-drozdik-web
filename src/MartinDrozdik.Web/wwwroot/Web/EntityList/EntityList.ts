@@ -227,7 +227,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         this.selectedTags.push(newTagId);
 
         //Update filtered entities
-        this.filteredEntities = this.filteredEntities.filter(function (e) { return e.tags.includes(newTagId); });
+        this.filteredEntities = this.filteredEntities.filter(function (e) { return e.tags.indexOf(newTagId) != -1; });
 
         //Check unsuitable tag class
         if (!this.UpdateUnsuitableTagsCommon())
@@ -255,7 +255,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                     let entity = this.filteredEntities[i];
 
                     //The tag is suitable
-                    if (entity.tags.includes(tag.id))
+                    if (entity.tags.indexOf(tag.id) != -1)
                     {
                         shouldBeUnsuitable = false;
                         break;
@@ -301,7 +301,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 for (let t = 0; this.selectedTags.length; t++)
                 {
                     let selectedTag = this.selectedTags[t];
-                    if (!candidateEntity.tags.includes(selectedTag))
+                    if (candidateEntity.tags.indexOf(selectedTag) == -1)
                     {
                         suitableCandidate = false;
                         break;
@@ -310,7 +310,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 }
 
                 //Add the candidate entity if not already there
-                if (suitableCandidate && !this.filteredEntities.includes(candidateEntity))
+                if (suitableCandidate && this.filteredEntities.indexOf(candidateEntity) == -1)
                     this.filteredEntities.push(candidateEntity);
             }
         }
@@ -333,7 +333,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                     let entity = this.filteredEntities[i];
 
                     //The tag is suitable
-                    if (entity.tags.includes(tag.id))
+                    if (entity.tags.indexOf(tag.id) != -1)
                     {
                         shouldBeUnsuitable = false;
                         break;

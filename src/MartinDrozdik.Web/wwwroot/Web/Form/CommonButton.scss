@@ -78,13 +78,14 @@ button {
 .commonButtonGithub {
     background-repeat: no-repeat;
     background-position: $pxInRem-16 center;
-    background-size: $pxInRem-24;
+    background-size: $pxInRem-24 $pxInRem-24;
     padding-left: $pxInRem-50;
     padding-right: $pxInRem-28;
     padding-top: $pxInRem-14;
 
+
     &.commonButtonSlim {
-        background-size: $pxInRem-20;
+        background-size: $pxInRem-20 $pxInRem-20;
         padding-left: $pxInRem-46;
         padding-right: $pxInRem-20;
         padding-top: $pxInRem-11;
