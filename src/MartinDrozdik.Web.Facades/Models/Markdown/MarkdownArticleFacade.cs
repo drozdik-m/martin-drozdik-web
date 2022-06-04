@@ -61,6 +61,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             .UseDiagrams()
             .UseCitations()
             .UseFigures()
+            .UseMediaLinks()
             .Build();
 
 
@@ -137,27 +138,57 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             //Get HTML
             article.HTML = MarkdownToHTML(article.Markdown);
 
-            //Mark external links
+            //Mark external links and file types
             var xml = XElement.Parse($"<root>{article.HTML}</root>");
             var links = xml.Descendants("a");
             foreach(var link in links)
             {
+                var classVal = link.Attribute("class")?.Value;
                 var href = link.Attribute("href")?.Value;
-                if (href is not null && (href.StartsWith("http://") || href.StartsWith("https://")))
+
+                var isFile = false;
+                if (classVal is not null && classVal.Contains("file"))
+                    isFile = true;
+
+                if (href is null)
+                    continue;
+
+                if (href.StartsWith("http://") || href.StartsWith("https://"))
                 {
                     link.SetAttributeValue("target", "_blank");
                     link.SetAttributeValue("rel", "noopener");
                     link.SetAttributeValue("class", "external");
                 }
+
+                if (isFile)
+                {
+                    link.SetAttributeValue("target", "_blank");
+
+                    var extension = Path.GetExtension(href);
+                    if (extension is not null)
+                    {
+                        extension = extension.ToLower().Replace(".", "");
+                        link.SetAttributeValue("data-file-type", extension);
+                    }
+                }
+                
+                
             }
 
             //Add titles to links
             foreach (var link in links)
             {
+                var classVal = link.Attribute("class")?.Value;
                 var href = link.Attribute("href")?.Value;
+
+                var isFile = false;
+                if (classVal is not null && classVal.Contains("file"))
+                    isFile = true;
+
                 if (href is not null)
                 {
-                    link.SetAttributeValue("title", $"Link: {href}");
+                    if (!isFile)
+                        link.SetAttributeValue("title", $"Link: {href}");
                 }
             }
 
@@ -182,7 +213,10 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             var mediaToDelete = savedMedia.Where(e => !usedMedia.Contains(e));
 
             foreach(var media in mediaToDelete)
-                DisposeContentFile(Path.Combine(ContentFolderPath, media));
+            {
+                var mediaRelativePath = article.GetImagePath(media);
+                DisposeContentFile(Path.Combine(ContentFolderPath, mediaRelativePath));
+            }
         }
 
         /// <summary>
@@ -202,15 +236,26 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
                        .Select(x => x.Attribute("src")?.Value)
                        .Where(e => e is not null)
                        .OfType<string>()
+                       .Select(Path.GetFileName)
                        .ToList();
             result.AddRange(imgSrcs);
 
             //Files
             var hrefLinks = xml
                        .Descendants("a")
+                       .Where(e =>
+                       {
+                           var classVal = e.Attribute("class")?.Value;
+                           if (classVal is not null && classVal.Contains("file"))
+                               return true;
+                           return false;
+                       })
                        .Select(x => x.Attribute("href")?.Value)
                        .Where(e => e is not null)
+                       .Select(Path.GetFileName)
+                       .Where(e => e is not null)
                        .OfType<string>()
+                       
                        .ToList();
             result.AddRange(hrefLinks);
 
@@ -231,7 +276,10 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             if (Directory.Exists(imagesPath))
             {
                 IEnumerable<string> files = Directory.GetFiles(imagesPath);
-                files = files.Select(e => article.GetImageUri(Path.GetFileName(e)));
+                files = files
+                    .Select(Path.GetFileName)
+                    .Where(e => e is not null)
+                    .OfType<string>();
                 result.AddRange(files);
             }
 
@@ -240,7 +288,10 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             if (Directory.Exists(filesPath))
             {
                 IEnumerable<string> files = Directory.GetFiles(filesPath);
-                files = files.Select(e => article.GetFileUri(Path.GetFileName(e)));
+                files = files
+                    .Select(Path.GetFileName)
+                    .Where(e => e is not null)
+                    .OfType<string>();
                 result.AddRange(files);
             }
 
@@ -328,5 +379,57 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             };
         }
 
+        /// <summary>
+        /// Updates paths of resources
+        /// </summary>
+        /// <param name="article"></param>
+        /// <param name="linkFactory"></param>
+        /// <returns></returns>
+        public TArticle WithUpdatedResourceLinks(TArticle article, Func<string, string> linkFactory)
+        {
+            //Update image paths
+            var xml = XElement.Parse($"<root>{article.HTML}</root>");
+            var images = xml.Descendants("img");
+            foreach (var link in images)
+            {
+                var src = link.Attribute("src")?.Value;
+                if (src is not null && !src.StartsWith("http://") && !src.StartsWith("https://"))
+                    link.SetAttributeValue("src", linkFactory(src));
+            }
+
+            //Update file paths
+            var links = xml.Descendants("a");
+            foreach (var link in links)
+            {
+                var classVal = link.Attribute("class")?.Value;
+
+                var isFile = false;
+                if (classVal is not null && classVal.Contains("file"))
+                    isFile = true;
+
+                if (!isFile)
+                    continue;
+
+                var src = link.Attribute("href")?.Value;
+                if (src is not null && !src.StartsWith("http://") && !src.StartsWith("https://"))
+                    link.SetAttributeValue("href", linkFactory(src));
+            }
+
+            //Save the XML
+            var reader = xml.CreateReader();
+            reader.MoveToContent();
+            article.HTML = reader.ReadInnerXml();
+
+            return article;
+        }
+
+        /// <summary>
+        /// Updates paths of resources
+        /// </summary>
+        /// <param name="article"></param>
+        /// <param name="linkFactory"></param>
+        /// <returns></returns>
+        public IEnumerable<TArticle> WithUpdatedResourceLinks(IEnumerable<TArticle> articles, Func<string, string> linkFactory)
+            => articles.Select(e => WithUpdatedResourceLinks(e, linkFactory));
     }
 }

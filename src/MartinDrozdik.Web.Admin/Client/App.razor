@@ -12,7 +12,7 @@
                     }
 
                     @if (true) { NavManager.NavigateTo(loginURI, forceLoad: true); }
-                    NavManager.NavigateTo("/");
+                    @*NavManager.NavigateTo("/");*@
                     <h1>Unauthorized access</h1>
                     <p class="mb-3">You need to <a href="@loginURI" title="Login page">log in</a> to gain access to this resource.</p>
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" Href="@loginURI">Log in</MudButton>

@@ -5,6 +5,8 @@
 @import "../../Gallery/Gallery";
 @import "../../ContactMeStripe/ContactMeStripe";
 @import "../../Team/Team";
+
+$articleBlockMaxWidth: 57.5rem;
 @import "../../Article/Article";
 
 body {
@@ -17,7 +19,7 @@ body {
 //--------------------------------------------------
 
 #project {
-    max-width: 57.5rem;
+    max-width: $articleBlockMaxWidth;
 
     > .commonP {
         margin-bottom: $pxInRem-20;
@@ -53,16 +55,16 @@ body {
 
     .tags {
         margin-bottom: $pxInRem-22;
-        &:after{
+
+        &:after {
             clear: both;
             display: block;
             content: " ";
             font-size: 0;
         }
-
     }
 
-    .projectH2{
+    .projectH2 {
         font-size: $pxInRem-38;
         color: $black;
         font-weight: $fontWeightBold;

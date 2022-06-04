@@ -30,12 +30,20 @@ namespace MartinDrozdik.Data.Models.Markdown
         public abstract string ImagesFolderPath { get; }
 
         /// <summary>
+        /// Return relative path for an image
+        /// </summary>
+        /// <param name="imageName"></param>
+        /// <returns></returns>
+        public string GetImagePath(string imageName)
+            => Path.Combine(ImagesFolderPath, imageName).Replace("\\", "/");
+
+        /// <summary>
         /// Returns Uri for an image
         /// </summary>
         /// <param name="imageName"></param>
         /// <returns></returns>
         public string GetImageUri(string imageName)
-            => Path.Combine(ImagesFolderPath, imageName).Replace("\\", "/");
+            => Path.Combine("/", ImagesFolderPath, imageName).Replace("\\", "/");
 
         /// <summary>
         /// The path to the folder with files

@@ -40,6 +40,7 @@ namespace Bonsai.Server.Controllers
         private readonly LanguageSkillFacade languageSkillFacade;
         private readonly ProjectTagFacade projectTagFacade;
         private readonly ProjectFacade projectFacade;
+        private readonly ProjectMarkdownArticleFacade projectMarkdownArticleFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
@@ -50,7 +51,8 @@ namespace Bonsai.Server.Controllers
             EducationFacade educationFacade,
             LanguageSkillFacade languageSkillFacade,
             ProjectTagFacade projectTagFacade,
-            ProjectFacade projectFacade
+            ProjectFacade projectFacade,
+            ProjectMarkdownArticleFacade projectMarkdownArticleFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -63,6 +65,7 @@ namespace Bonsai.Server.Controllers
             this.languageSkillFacade = languageSkillFacade;
             this.projectTagFacade = projectTagFacade;
             this.projectFacade = projectFacade;
+            this.projectMarkdownArticleFacade = projectMarkdownArticleFacade;
         }
 
         public async Task<IActionResult> Index()
@@ -103,6 +106,8 @@ namespace Bonsai.Server.Controllers
             try
             {
                 var project = await projectFacade.GetAsync(id);
+                project.Article = projectMarkdownArticleFacade.WithUpdatedResourceLinks(project.Article,
+                    e => $"{serverConfig.ContentDomain}{e}");
 
                 var model = new ProjectPageModel(cultureProvider, languageDictionary,
                     project)

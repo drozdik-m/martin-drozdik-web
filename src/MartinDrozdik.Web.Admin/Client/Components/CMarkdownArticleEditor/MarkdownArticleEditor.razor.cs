@@ -116,8 +116,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CMarkdownArticleEditor
                 var res = await ArticleService.UploadRegularImageAsync(Id, f);
                 ArticleCast.Markdown += "\n";
                 ArticleCast.Markdown += "^^^\n";
-                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})\n";
-                ArticleCast.Markdown += $"^^^ Image: {f.FileName}" + "{.textWidth}\n";
+                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})" + "{.textWidth}\n";
+                ArticleCast.Markdown += $"^^^ Image: {f.FileName}\n";
             });
 
         protected Task UploadWideImageAsync(InputFileChangeEventArgs e)
@@ -126,8 +126,8 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CMarkdownArticleEditor
                 var res = await ArticleService.UploadRegularImageAsync(Id, f);
                 ArticleCast.Markdown += "\n";
                 ArticleCast.Markdown += "^^^\n";
-                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})\n";
-                ArticleCast.Markdown += $"^^^ Image: {f.FileName}" + "{.wide}\n";
+                ArticleCast.Markdown += $"![{f.FileName}]({res.MediaURI})" + "{.wide}\n";
+                ArticleCast.Markdown += $"^^^ Image: {f.FileName}\n";
             });
 
         /// <summary>
