@@ -3,6 +3,7 @@ import { MakeGallery } from "../../Gallery/Gallery";
 import "../../ContactMeStripe/ContactMeStripe";
 import "../../Team/Team";
 import "../../Article/Article";
+import "../../Technologies/Technologies";
 
 
 WindowEvents.OnDOMReady.Add(function ()

@@ -5,6 +5,7 @@
 @import "../../Gallery/Gallery";
 @import "../../ContactMeStripe/ContactMeStripe";
 @import "../../Team/Team";
+@import "../../Technologies/Technologies";
 
 $articleBlockMaxWidth: 57.5rem;
 @import "../../Article/Article";
@@ -73,6 +74,10 @@ body {
 
     #projectTeam {
         margin: 2rem 0;
+    }
+
+    #projectTechnologies{
+        margin-bottom: 1rem;
     }
 }
 
