@@ -29,6 +29,10 @@ namespace MartinDrozdik.Data.Models.Blog
 
         public string Keywords { get; set; } = string.Empty;
 
+        public bool IsArticleReference { get; set; } = false;
+
+        public string ReferenceLink { get; set; } = string.Empty;
+
         public ArticleMainImage MainImage { get; set; } = new();
 
         [ForeignKey("MainImage")]
@@ -39,10 +43,10 @@ namespace MartinDrozdik.Data.Models.Blog
         [ForeignKey("Content")]
         public int ContentId { get; set; }
 
-        public Person Author { get; set; }
+        public Person? Author { get; set; } = null;
 
         [ForeignKey("Author")]
-        public int AuthorId { get; set; }
+        public int? AuthorId { get; set; }
 
         public ICollection<ProjectHasTag> Tags { get; set; } = new List<ProjectHasTag>();
 

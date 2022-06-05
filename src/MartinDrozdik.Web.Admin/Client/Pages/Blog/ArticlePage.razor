@@ -1,0 +1,98 @@
+﻿@page "/article"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject ArticleService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("Articles", href: "/article", icon: MainLayout.ArticleIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<Article, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">Articles</MudText>
+<MudText Class="mb-4">Articles to display on the website.</MudText>
+
+@if(listPage is not null)
+{
+    <UrlComparator Urls="listPage.DisplayEntities.Select(e => e.UrlName)" />
+}
+
+<ListPage @ref="listPage" TModel="Article" TKey="int" KeyGetter="e => e.Id"
+    OnReload="() => StateHasChanged()"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new Article()"
+    DeleteService="Service" 
+    ReorderService="Service" OrderExpression="e => e.OrderIndex"
+    HideableService="Service">
+
+    <DisplayItems>
+        <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>URI key</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(context.DisplaySkeleton)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                        </tr>
+                    }
+                }
+                @foreach (var item in context.Models)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.UrlName</td>
+                        <td>
+                            <ListControlButton Disabled="context.Loading" 
+                                OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                HrefEdit="@($"/article/{item.Id}")"
+                                OnVisibilityToggle="async _ => await listPage.ToggleVisibilityAsync(item)"
+                                Visible="!item.IsHidden"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </DisplayItems>
+    
+    <AddInputs>
+
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The name of this article" 
+                        Required="true" RequiredError="A name is required" />
+
+        <MudGrid>
+            <MudItem xs="9">
+                <MudTextField @bind-Value="context.Model.UrlName" Disabled="context.Loading" Label="Url key" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The url key of this article" 
+                        Required="true" RequiredError="A url key is required" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Info" Class="mt-5"
+                        OnClick="_ => { context.Model.UrlName = context.Model.Name.ToUrlFriendly(); }">Generate</MudButton>
+            </MudItem>
+        </MudGrid> 
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+    </ReorderItem>
+</ListPage>

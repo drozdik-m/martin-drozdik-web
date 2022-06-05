@@ -1,0 +1,133 @@
+﻿@page "/article/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject ArticleService Service
+@inject ArticleMainImageService MainImageService
+@inject ArticleTagService TagService
+@inject BlogMarkdownArticleService MarkdownArticleService
+@inject PersonService PersonService
+@inject IJSRuntime JSRuntime
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/article/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        ArticlePage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    Article entity;
+
+    protected void OnEntityLoad(Article entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Editing: @entity.Name</MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="false" PanelClass="pa-6" Color="@Color.Primary">
+
+            @* General info *@
+            <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
+                <MudText Typo="Typo.h5" Class="mb-5">General information</MudText>
+                <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
+                    Variant="Variant.Text" Class="my-3"
+                    Immediate="true" HelperText="The name of this article" 
+                    Required="true" RequiredError="A name is required" />
+
+                <MudSwitch @bind-Checked="context.Model.IsHidden" Disabled="context.Disabled" 
+                    Class="my-4"
+                    ThumbIconColor=@(context.Model.IsHidden ? Color.Dark : Color.Secondary)
+                    Label="@(context.Model.IsHidden ? "Hidden" : "Visible")"
+                    ThumbIcon="@(context.Model.IsHidden ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"/>
+
+                <MudGrid>
+                    <MudItem xs="9">
+                        <MudTextField @bind-Value="context.Model.UrlName" Disabled="context.Disabled" Label="Url key" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The url key of this article" 
+                                Required="true" RequiredError="A url key is required" />
+                    </MudItem>
+                    <MudItem xs="3">
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Info" Class="mt-5"
+                                OnClick="_ => { context.Model.UrlName = context.Model.Name.ToUrlFriendly(); }">Generate</MudButton>
+                    </MudItem>
+                </MudGrid> 
+
+                @* TODO author *@
+
+                <MudTextField @bind-Value="context.Model.Abstract" Disabled="context.Disabled" 
+                    Label="Abstract" Class="my-4"
+                    Variant="Variant.Outlined" Lines="8"
+                    Immediate="true" HelperText="Abstract of the article (= the first paragraph)" />
+
+
+
+                <MudTextField @bind-Value="context.Model.Keywords" Disabled="context.Disabled" Label="Keywords" Variant="Variant.Text" 
+                                Immediate="true" HelperText="Keywords separated by comma" />
+                
+            </MudTabPanel>
+
+            @* Content *@
+            <MudTabPanel Text="Content" Icon="@Icons.Material.Filled.ContentPaste">
+                <MudText Typo="Typo.h5">Article description content</MudText>
+
+                <MudSwitch @bind-Checked="context.Model.IsArticleReference" Disabled="context.Disabled" 
+                    Class="my-3"
+                    Label="@(context.Model.IsArticleReference ? "Linked article" : "Content článek")" />
+
+                @if (context.Model.IsArticleReference)
+                {
+                    <MudTextField @bind-Value="context.Model.ReferenceLink" Disabled="context.Disabled" 
+                        Label="Link" Class="my-4"
+                        Variant="Variant.Outlined" HelperText="Link to the article" />
+                }
+                else
+                {
+                    <MarkdownArticleEditor @bind-Article="context.Model.Content" Id="context.Model.ContentId"
+                                        ReadOnly="context.Disabled"
+                                        ArticleService="MarkdownArticleService" />
+                }
+            </MudTabPanel>
+
+            @* Main image *@
+            <MudTabPanel Text="Main image" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Article main image</MudText>
+                <ImageEditor Id="context.Model.MainImageId" @bind-Image="context.Model.MainImage"
+                    ReadOnly="context.Disabled"
+                    AddService="MainImageService" 
+                    DeleteService="MainImageService"
+                    GetService="MainImageService"
+                    UpdateService="MainImageService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="512" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+        </MudTabs>
+
+    </Editor>
+</EditPage>

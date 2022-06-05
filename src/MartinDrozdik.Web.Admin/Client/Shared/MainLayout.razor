@@ -1,7 +1,7 @@
 ﻿@inherits LayoutComponentBase
 
 @code {
-    bool drawerOpen = false;
+    bool drawerOpen = true;
     private MudTheme theme = new();
     private bool isDarkMode;
 
@@ -19,9 +19,12 @@
     bool projectExpanded = true;
 
     public static string ProjectsIcon = Icons.Filled.Code;
+    public static string ProjectTagsIcon = Icons.Filled.Tag;
+
     public static string PeopleIcon = Icons.Filled.Person;
 
-    public static string ProjectTagsIcon = Icons.Filled.Tag;
+    public static string ArticleIcon = Icons.Filled.Article;
+    public static string ArticleTagsIcon = Icons.Filled.Tag;
 
     public static string TechnologiesIcon = Icons.Filled.Analytics;
 
@@ -92,6 +95,11 @@
             <MudNavGroup Title="@(drawerOpen ? "Work" : "")" @bind-Expanded="projectExpanded">
                 <MudNavLink Match="NavLinkMatch.All" Href="/project" Icon="@MainLayout.ProjectsIcon">Projects</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/project-tag" Icon="@MainLayout.ProjectTagsIcon">Project tags</MudNavLink>
+            </MudNavGroup>
+
+            <MudNavGroup Title="@(drawerOpen ? "Blog" : "")" @bind-Expanded="projectExpanded">
+                <MudNavLink Match="NavLinkMatch.All" Href="/article" Icon="@MainLayout.ArticleIcon">Articles</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/article-tag" Icon="@MainLayout.ArticleTagsIcon">Article tags</MudNavLink>
             </MudNavGroup>
 
             <MudNavGroup Title="@(drawerOpen ? "CV" : "")" @bind-Expanded="cvExpanded">

@@ -4,6 +4,7 @@ using MartinDrozdik.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations
 {
     [DbContext(typeof(AppDb))]
-    partial class AppDbModelSnapshot : ModelSnapshot
+    [Migration("20220605172152_AuthorNotRequiredForReal")]
+    partial class AuthorNotRequiredForReal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,9 +48,6 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<bool>("IsArticleReference")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("IsHidden")
                         .HasColumnType("bit");
 
@@ -68,10 +67,6 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
 
                     b.Property<int>("OrderIndex")
                         .HasColumnType("int");
-
-                    b.Property<string>("ReferenceLink")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UrlName")
                         .IsRequired()
