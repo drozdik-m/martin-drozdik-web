@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MartinDrozdik.Web.Facades.Models.Blog;
 using MartinDrozdik.Web.Facades.Models.People;
 using MartinDrozdik.Web.Facades.Models.Projects;
 using MartinDrozdik.Web.Facades.Models.Technologies;
@@ -37,7 +38,12 @@ namespace MartinDrozdik.Web.Facades
             serviceCollection = serviceCollection.AddScoped<EducationFacade>();
             serviceCollection = serviceCollection.AddScoped<LanguageSkillFacade>();
             serviceCollection = serviceCollection.AddScoped<WorkExperienceFacade>();
-            
+            serviceCollection = serviceCollection.AddScoped<ArticleMainImageFacade>();
+            serviceCollection = serviceCollection.AddScoped<ArticleTagFacade>();
+            serviceCollection = serviceCollection.AddScoped<BlogMarkdownArticleFacade>();
+            serviceCollection = serviceCollection.AddScoped<ArticleFacade>();
+
+
             return serviceCollection;
         }
     }
