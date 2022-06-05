@@ -141,7 +141,7 @@ else
             @* Content *@
             <MudTabPanel Text="Content" Icon="@Icons.Material.Filled.ContentPaste">
                 <MudText Typo="Typo.h5" Class="mb-5">Project description content</MudText>
-                <MarkdownArticleEditor @bind-Article="context.Model.Article" Id="context.Model.ArticleId"
+                <MarkdownArticleEditor @bind-Article="context.Model.Content" Id="context.Model.ContentId"
                                         ReadOnly="context.Disabled"
                                         ArticleService="MarkdownArticleService" />
             </MudTabPanel>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MartinDrozdik.Data.Models.Blog;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.People;
 using MartinDrozdik.Data.Models.Projects;
@@ -26,6 +27,14 @@ namespace MartinDrozdik.Data.DbContexts
         public DbSet<ProjectPreviewImage> ProjectPreviewImages { get; set; }
         public DbSet<ProjectGalleryImage> ProjectGalleryImages { get; set; }
         public DbSet<ProjectMarkdownArticle> ProjectMarkdownArticles { get; set; }
+
+        // -------- ARTICLES --------
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<ArticleTag> ArticleTags { get; set; }
+        public DbSet<ArticleMainImage> ArticleMainImages { get; set; }
+        public DbSet<ArticleHasTag> ArticleHasTags { get; set; }
+        public DbSet<BlogMarkdownArticle> BlogMarkdownArticles { get; set; }
+
 
         // -------- PEOPLE --------
         public DbSet<Person> People { get; set; }

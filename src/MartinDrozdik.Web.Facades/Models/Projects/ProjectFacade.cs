@@ -52,7 +52,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         {
             var item = await repository.GetAsync(id);
 
-            articleFacade.DisposeContents(item.Article);
+            articleFacade.DisposeContents(item.Content);
 
             await logoFacade.DeleteMediaAsync(item.Logo);
             logoFacade.DisposeContentFolder(item.Logo);
@@ -75,7 +75,7 @@ namespace MartinDrozdik.Web.Facades.Models.Projects
         public override async Task UpdateAsync(int id, Project item)
         {
             //Content update
-            articleFacade.UpdateArticlesContent(item.Article);
+            articleFacade.UpdateArticlesContent(item.Content);
 
             //Gallery update
             var oldItem = await repository.ReadAsync(id);

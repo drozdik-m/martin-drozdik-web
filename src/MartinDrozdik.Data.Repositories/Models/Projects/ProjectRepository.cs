@@ -55,7 +55,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                 .Include(e => e.OgImage)
                 .Include(e => e.PreviewImage)
                 .Include(e => e.PreviewImage)
-                .Include(e => e.Article)
+                .Include(e => e.Content)
                 .Include(e => e.Tags.OrderBy(e => e.Tag.OrderIndex))
                     .ThenInclude(e => e.Tag)
                 .Include(e => e.Developers.OrderBy(e => e.Person.OrderIndex))
@@ -72,7 +72,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         protected override async Task<Project> ProcessNewEntityAsync(Project entity)
         {
             entity = await base.ProcessNewEntityAsync(entity);
-            Context.Entry(entity.Article).State = EntityState.Added;
+            Context.Entry(entity.Content).State = EntityState.Added;
             Context.Entry(entity.Logo).State = EntityState.Added;
             Context.Entry(entity.OgImage).State = EntityState.Added;
             Context.Entry(entity.PreviewImage).State = EntityState.Added;
@@ -83,7 +83,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         protected override async Task<Project> ProcessUpdatedEntityAsync(Project entity)
         {
             entity = await base.ProcessUpdatedEntityAsync(entity);
-            Context.Entry(entity.Article).State = EntityState.Modified;
+            Context.Entry(entity.Content).State = EntityState.Modified;
             Context.Entry(entity.Logo).State = EntityState.Modified;
             Context.Entry(entity.OgImage).State = EntityState.Modified;
             Context.Entry(entity.PreviewImage).State = EntityState.Modified;
@@ -107,7 +107,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
         protected override async Task<Project> ProcessDeletedEntityAsync(Project entity)
        {
             entity = await base.ProcessDeletedEntityAsync(entity);
-            Context.Entry(entity.Article).State = EntityState.Deleted;
+            Context.Entry(entity.Content).State = EntityState.Deleted;
             Context.Entry(entity.Logo).State = EntityState.Deleted;
             Context.Entry(entity.OgImage).State = EntityState.Deleted;
             Context.Entry(entity.PreviewImage).State = EntityState.Deleted;

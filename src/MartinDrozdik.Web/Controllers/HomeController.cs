@@ -106,7 +106,7 @@ namespace Bonsai.Server.Controllers
             try
             {
                 var project = await projectFacade.GetAsync(id);
-                project.Article = projectMarkdownArticleFacade.WithUpdatedResourceLinks(project.Article,
+                project.Content = projectMarkdownArticleFacade.WithUpdatedResourceLinks(project.Content,
                     e => $"{serverConfig.ContentDomain}{e}");
 
                 var model = new ProjectPageModel(cultureProvider, languageDictionary,
