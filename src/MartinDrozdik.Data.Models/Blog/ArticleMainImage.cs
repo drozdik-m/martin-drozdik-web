@@ -13,7 +13,7 @@ using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Blog
 {
-    public class ArticleMainImage : ArticleImage, IOrderable
+    public class ArticleMainImage : ArticleImage
     {
         /// <inheritdoc />
         public int OrderIndex { get; set; }

@@ -39,7 +39,7 @@ namespace MartinDrozdik.Data.Models.Blog
         [ForeignKey("Content")]
         public int ContentId { get; set; }
 
-        public Person Author { get; set; } = new();
+        public Person Author { get; set; }
 
         [ForeignKey("Author")]
         public int AuthorId { get; set; }
