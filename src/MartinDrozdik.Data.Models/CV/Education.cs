@@ -41,5 +41,10 @@ namespace MartinDrozdik.Data.Models.CV
         /// </summary>
         public DateTime? EndedDate { get; set; } = DateTime.Now;
 
+        /// <summary>
+        /// Additional note
+        /// </summary>
+        public string Note { get; set; } = string.Empty;
+
     }
 }

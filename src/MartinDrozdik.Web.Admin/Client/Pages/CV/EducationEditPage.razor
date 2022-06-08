@@ -71,7 +71,9 @@ else
             </MudItem>
         </MudGrid>
 
-       
+        <MudTextField @bind-Value="context.Model.Note" Disabled="context.Disabled" Label="Note" 
+           Variant="Variant.Text"
+           Immediate="true" HelperText="Something interesting?"  />
 
         
     </Editor>

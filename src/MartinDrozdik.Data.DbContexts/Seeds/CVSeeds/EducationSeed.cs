@@ -27,8 +27,9 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeeds
                     Name = "ČVUT FIT v Praze (Ing.)",
                     Specialization = "Softwarové inženýrstvý",
                     StartedDate = new DateTime(2020, 9, 1),
-                    Ended = false,
+                    Ended = true,
                     EndedDate = new DateTime(2022, 6, 1),
+                    Note = "S červeným diplomem",
                     OrderIndex = 0,
                 },
                 new Education()

@@ -79,6 +79,11 @@
                                 }
                                 <dt>Doba studia</dt>
                                 <dd class="timeOfStudy">@Model.EducationTimeRangeText(education)</dd>
+                                @if (!string.IsNullOrWhiteSpace(education.Note))
+                                {
+                                    <dt>Poznámka ke studiu</dt>
+                                    <dd class="note">@education.Note</dd>
+                                }
                             </dl>
                         </li>
                     }
