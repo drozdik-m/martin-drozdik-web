@@ -59,6 +59,7 @@ namespace MartinDrozdik.Web
                 .AddRazorOptions(options =>
                 {
                     options.ViewLocationFormats.Add("/Views/Projects/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Blog/{0}.cshtml");
                 });
             if (Environment.IsDevelopment())
                 controllersViewBuilder.AddRazorRuntimeCompilation();

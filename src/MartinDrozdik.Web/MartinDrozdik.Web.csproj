@@ -24,6 +24,7 @@
     <Content Remove="wwwroot\Web\Article\Article.scss" />
     <Content Remove="wwwroot\Web\Article\Team.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
+    <Content Remove="wwwroot\Web\Blog\BlogList.scss" />
     <Content Remove="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss" />
     <Content Remove="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss" />
     <Content Remove="wwwroot\Web\Contact\Contact.scss" />
@@ -62,6 +63,7 @@
     <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
     <Content Remove="wwwroot\Web\Technologies\Technologies.scss" />
+    <Content Remove="wwwroot\Web\_Pages\IndexPage\Blog.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
@@ -75,6 +77,9 @@
 
   <ItemGroup>
     <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Blog\BlogList.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Icon\StackOverflowIconWhite.scss">
@@ -121,6 +126,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Tags\Tags.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\IndexPage\Blog.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss">
