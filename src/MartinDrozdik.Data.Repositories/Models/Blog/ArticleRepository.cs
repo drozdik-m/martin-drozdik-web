@@ -54,6 +54,8 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
             entities = entities
                 .Include(e => e.MainImage)
                 .Include(e => e.Content)
+                .Include(e => e.Author)
+                    .ThenInclude(e => e.ProfileImage)
                 .Include(e => e.Tags.OrderBy(e => e.Tag.OrderIndex))
                     .ThenInclude(e => e.Tag)
                 ;
@@ -74,6 +76,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
             entity = await base.ProcessUpdatedEntityAsync(entity);
             Context.Entry(entity.Content).State = EntityState.Modified;
             Context.Entry(entity.MainImage).State = EntityState.Modified;
+            entity.AuthorId = entity.Author?.Id;
 
             //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
             await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);

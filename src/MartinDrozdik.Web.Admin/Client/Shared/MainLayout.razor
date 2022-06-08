@@ -16,6 +16,7 @@
     }
 
     bool cvExpanded = true;
+    bool blogExpanded = true;
     bool projectExpanded = true;
 
     public static string ProjectsIcon = Icons.Filled.Code;
@@ -97,7 +98,7 @@
                 <MudNavLink Match="NavLinkMatch.All" Href="/project-tag" Icon="@MainLayout.ProjectTagsIcon">Project tags</MudNavLink>
             </MudNavGroup>
 
-            <MudNavGroup Title="@(drawerOpen ? "Blog" : "")" @bind-Expanded="projectExpanded">
+            <MudNavGroup Title="@(drawerOpen ? "Blog" : "")" @bind-Expanded="blogExpanded">
                 <MudNavLink Match="NavLinkMatch.All" Href="/article" Icon="@MainLayout.ArticleIcon">Articles</MudNavLink>
                 <MudNavLink Match="NavLinkMatch.All" Href="/article-tag" Icon="@MainLayout.ArticleTagsIcon">Article tags</MudNavLink>
             </MudNavGroup>
