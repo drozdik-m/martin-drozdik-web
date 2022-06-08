@@ -65,18 +65,23 @@ $mobileTreshold: 56.25rem !default;
                 @include ResponsiveBorder.responsiveBorder(50%, white);
                 $iconDimensions: 2.25rem;
 
+                &.iconGitHubWhite, &.iconLinkedInWhite, &.iconStackOverflowWhite {
+                    height: $iconDimensions;
+                    width: $iconDimensions;
+                }
+
                 &.iconGitHubWhite {
                     background-size: $iconDimensions $iconDimensions;
-                    width: $iconDimensions;
-                    height: $iconDimensions;
                     margin-right: 1.5rem;
                 }
 
                 &.iconLinkedInWhite {
-                    $dimensions: 1.5rem;
                     background-size: 1.5rem 1.5rem;
-                    height: $iconDimensions;
-                    width: $iconDimensions;
+                    margin-right: 1.1rem;
+                }
+
+                &.iconStackOverflowWhite {
+                    background-size: 1.7rem 1.7rem;
                 }
             }
         }
@@ -87,10 +92,6 @@ $mobileTreshold: 56.25rem !default;
     #contact {
         #contactInfo {
             margin-right: 0.5rem;
-
-           
-
-            
         }
     }
 }

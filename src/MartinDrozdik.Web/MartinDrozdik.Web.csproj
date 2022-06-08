@@ -52,6 +52,7 @@
     <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
     <Content Remove="wwwroot\Web\Icon\GitHubIconWhite.scss" />
     <Content Remove="wwwroot\Web\Icon\LinkedInIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icon\StackOverflowIconWhite.scss" />
     <Content Remove="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss" />
     <Content Remove="wwwroot\Web\ImportantStats\ImportantStats.scss" />
     <Content Remove="wwwroot\Web\Menu\Desktop.scss" />
@@ -74,6 +75,9 @@
 
   <ItemGroup>
     <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Icon\StackOverflowIconWhite.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Technologies\Technologies.scss">

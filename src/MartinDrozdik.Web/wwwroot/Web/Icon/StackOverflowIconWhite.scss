@@ -1,0 +1,8 @@
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+.iconStackOverflowWhite {
+    background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgMjggMzQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0yMy42NDYgMzAuMjQzdi04Ljg3NGgyLjk1Nzh2MTEuODMyaC0yNi42MDR2LTExLjgzMmgyLjk1Nzh2OC44NzRoMjAuNjg4eiIgZmlsbD0iI2ZmZiIvPgo8cGF0aCBkPSJtNS45MTg5IDI3LjIzNWgxNC43ODl2LTIuOTU3OWgtMTQuNzg5djIuOTU3OXptMTMuMjU1LTI3LjIzNS0yLjM3MzQgMS43NjUyIDguODI2NCAxMS44NjcgMi4zNzMzLTEuNzY1Mi04LjgyNjMtMTEuODY3em0tNy4zMzYxIDYuOTk2IDExLjM2NCA5LjQ2NDUgMS44OTI5LTIuMjczLTExLjM2NC05LjQ2NDQtMS44OTI5IDIuMjcyOXptLTMuNzEgNi41NzcyIDEzLjQwNyA2LjI0MzcgMS4yNDg3LTIuNjgxMy0xMy40MDctNi4yNDM3LTEuMjQ4NyAyLjY4MTN6bS0xLjkxNSA2LjkyOTkgMTQuNDczIDMuMDQxOCAwLjYwODMtMi44OTQ3LTE0LjQ3My0zLjA0MTgtMC42MDgzMyAyLjg5NDd6IiBmaWxsPSIjZmZmIi8+Cjwvc3ZnPgo=");
+}
