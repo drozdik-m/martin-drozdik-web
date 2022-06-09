@@ -13,15 +13,13 @@ using MartinDrozdik.Models;
 
 namespace MartinDrozdik.Data.Models.Blog
 {
-    public class Article : EntityBase, IIdentifiable<int>, IOrderable, IHideable
+    public class Article : EntityBase, IIdentifiable<int>, IHideable
     {
         public int Id { get; set; }
 
         public string Name { get; set; } = string.Empty;
 
         public string UrlName { get; set; } = string.Empty;
-
-        public int OrderIndex { get; set; } = 0;
 
         public bool IsHidden { get; set; } = true;
 
@@ -32,6 +30,8 @@ namespace MartinDrozdik.Data.Models.Blog
         public bool IsArticleReference { get; set; } = false;
 
         public string ReferenceLink { get; set; } = string.Empty;
+
+        public DateTime? PublishDate { get; set; } = DateTime.Today;
 
         public ArticleMainImage MainImage { get; set; } = new();
 
@@ -48,7 +48,7 @@ namespace MartinDrozdik.Data.Models.Blog
         [ForeignKey("Author")]
         public int? AuthorId { get; set; }
 
-        public ICollection<ProjectHasTag> Tags { get; set; } = new List<ProjectHasTag>();
+        public ICollection<ArticleHasTag> Tags { get; set; } = new List<ArticleHasTag>();
 
 
     }

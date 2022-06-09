@@ -16,15 +16,12 @@ using Microsoft.EntityFrameworkCore;
 namespace MartinDrozdik.Data.Repositories.Models.Blog
 {
     public class ArticleRepository : CRUDRepository<Article, int, AppDb>,
-        IOrderableRepositoryTrait<Article, int, AppDb>,
         IHideableRepositoryTrait<Article, int, AppDb>
     {
-        readonly IOrderableRepositoryTrait<Article, int, AppDb> orderableTrait;
         readonly IHideableRepositoryTrait<Article, int, AppDb> hideableTrait;
 
         public ArticleRepository(AppDb context) : base(context)
         {
-            orderableTrait = this;
             hideableTrait = this;
         }
 
@@ -33,6 +30,12 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
         protected override Expression<Func<Article, bool>> IdPredicate(int targetId)
             => e => e.Id == targetId;
 
+        /// <summary>
+        /// Returns article based on Url Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="NotFoundException"></exception>
         public async Task<Article> GetAsync(string id)
         {
             var entities = EntitySet
@@ -47,6 +50,19 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
 
             //Return result entity
             return searchedEntity;
+        }
+
+        /// <summary>
+        /// Return all articles that have been published
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<Article>> GetPublishedAsync()
+        {
+            var allEntities = await IncludeRelationsAsync(EntitySet.AsNoTracking());
+            var published = allEntities
+                .Where(e => !e.PublishDate.HasValue || e.PublishDate >= DateTime.Now);
+            var processedEntities = await ProcessReturnedEntitiesAsync(published);
+            return await processedEntities.ToListAsync();
         }
 
         protected override Task<IQueryable<Article>> IncludeRelationsAsync(IQueryable<Article> entities)
@@ -67,7 +83,6 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
             entity = await base.ProcessNewEntityAsync(entity);
             Context.Entry(entity.Content).State = EntityState.Added;
             Context.Entry(entity.MainImage).State = EntityState.Added;
-            entity = await orderableTrait.SetInitialOrderAsync(entity);
             return entity;
         }
 
@@ -78,8 +93,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
             Context.Entry(entity.MainImage).State = EntityState.Modified;
             entity.AuthorId = entity.Author?.Id;
 
-            //await HandleManyToManyUpdate<ProjectTag, int>(entity, e => e.Tags, e => e.Tags);
-            await HandleManyToManyConnectorUpdate<ProjectHasTag, int>(entity, e => e.Tags, e => e.Tags);
+            await HandleManyToManyConnectorUpdate<ArticleHasTag, int>(entity, e => e.Tags, e => e.Tags);
 
             return entity;
         }
@@ -87,7 +101,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
         protected override async Task<IQueryable<Article>> ProcessReturnedEntitiesAsync(IQueryable<Article> entities)
         {
             entities = await base.ProcessReturnedEntitiesAsync(entities);
-            entities = orderableTrait.Order(entities);
+            entities = entities.OrderBy(e => e.CreatedAt);
             return entities;
         }
 
@@ -98,10 +112,6 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
             Context.Entry(entity.MainImage).State = EntityState.Deleted;
             return entity;
         }
-
-        #region Orderable trait
-        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
-        #endregion
 
         #region Hideable trait
         public Task<IEnumerable<Article>> GetVisibleAsync() => hideableTrait.TGetVisibleAsync();

@@ -31,7 +31,7 @@
     GetService="Service"
     AddService="Service" EntityCreator="() => new Article()"
     DeleteService="Service" 
-    ReorderService="Service" OrderExpression="e => e.OrderIndex"
+    CustomOrder="e => e.OrderBy(e => e.CreatedAt)"
     HideableService="Service">
 
     <DisplayItems>

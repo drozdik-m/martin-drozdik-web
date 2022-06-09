@@ -86,7 +86,9 @@ else
                     Variant="Variant.Outlined" Lines="8"
                     Immediate="true" HelperText="Abstract of the article (= the first paragraph)" />
 
-
+                <MudDatePicker Class="my-3" @bind-Date="context.Model.PublishDate" Disabled="context.Disabled"
+                                Label="Publication date" DateFormat="dd. MM. yyyy"
+                                HelperText="The article will not be listed before this date"/>
 
                 <MudTextField @bind-Value="context.Model.Keywords" Disabled="context.Disabled" Label="Keywords" Variant="Variant.Text" 
                                 Immediate="true" HelperText="Keywords separated by comma" />
@@ -130,6 +132,24 @@ else
                     </ImageDisplay>
 
                 </ImageEditor>
+            </MudTabPanel>
+
+            @* Tags *@
+            <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
+                <MudText Typo="Typo.h5" Class="mb-5">Article tags</MudText>
+                <ModelCollectionInput TConnector="ArticleHasTag" TKey="int" TModel="ArticleTag" @bind-Items="context.Model.Tags"
+                    GetOptionsService="TagService" Unique="true" IdGetter="e => e.Id"
+                    CustomOrder="e => e.OrderBy(f => f.Tag.OrderIndex)"
+                    ConnectorFactory="e => new ArticleHasTag(){ ArticlesId = entity.Id, Tag = e, TagsId = e.Id }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.TagsId == e.Id)"
+                    ReadOnly="context.Disabled">
+                    <DisplayItem Context="connection">
+                        <MudText>@connection.Tag.Name</MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Tag.Name}")" />
+                    </ReorderItem>
+                </ModelCollectionInput>
             </MudTabPanel>
         </MudTabs>
 

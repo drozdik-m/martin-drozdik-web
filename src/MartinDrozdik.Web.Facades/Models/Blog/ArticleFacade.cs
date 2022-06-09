@@ -18,10 +18,8 @@ using MartinDrozdik.Web.Facades.Traits;
 namespace MartinDrozdik.Web.Facades.Models.Blog
 {
     public class ArticleFacade : CRUDFacade<Article, int>,
-        IOrderableFacadeTrait<Article, int>,
         IHideableFacadeTrait<Article, int>
     {
-        readonly IOrderableFacadeTrait<Article, int> orderableTrait;
         readonly IHideableFacadeTrait<Article, int> hideableTrait;
 
         readonly ArticleRepository repository;
@@ -32,7 +30,6 @@ namespace MartinDrozdik.Web.Facades.Models.Blog
             ArticleMainImageFacade mainImageFacade,
             BlogMarkdownArticleFacade contentFacade) : base(repository)
         {
-            orderableTrait = this;
             hideableTrait = this;
             this.repository = repository;
             this.mainImageFacade = mainImageFacade;
@@ -40,7 +37,9 @@ namespace MartinDrozdik.Web.Facades.Models.Blog
         }
 
 
-        public async Task<Article> GetAsync(string id) => await repository.GetAsync(id);
+        public Task<Article> GetAsync(string id) => repository.GetAsync(id);
+
+        public Task<IEnumerable<Article>> GetPublishedAsync() => repository.GetPublishedAsync();
 
         public override async Task DeleteAsync(int id)
         {
@@ -61,12 +60,6 @@ namespace MartinDrozdik.Web.Facades.Models.Blog
 
             await base.UpdateAsync(id, item);
         }
-
-        #region Orderable trait
-        IOrderableRepository<Article, int> IOrderableFacadeTrait<Article, int>.OrderableRepository => repository;
-
-        public Task ReorderAsync(IEnumerable<int> newOrder) => orderableTrait.TReorderAsync(newOrder);
-        #endregion
 
         #region Hideable trait
         IHideableRepository<Article, int> IHideableFacadeTrait<Article, int>.HideableRepository => repository;
