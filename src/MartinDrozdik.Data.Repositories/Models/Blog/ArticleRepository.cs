@@ -52,6 +52,9 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
             return searchedEntity;
         }
 
+        protected Expression<Func<Article, bool>> IsPublished { get; set; }
+            = e => !e.PublishDate.HasValue || e.PublishDate >= DateTime.Now;
+
         /// <summary>
         /// Return all articles that have been published
         /// </summary>
@@ -60,11 +63,25 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
         {
             var allEntities = await IncludeRelationsAsync(EntitySet.AsNoTracking());
             var published = allEntities
-                .Where(e => !e.PublishDate.HasValue || e.PublishDate >= DateTime.Now);
+                .Where(IsPublished);
             var processedEntities = await ProcessReturnedEntitiesAsync(published);
             return await processedEntities.ToListAsync();
         }
 
+        /// <summary>
+        /// Return first n articles that have been published
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<Article>> GetFirstPublishedAsync(int count)
+        {
+            var allEntities = await IncludeRelationsAsync(EntitySet.AsNoTracking());
+            var published = allEntities
+                .Where(IsPublished)
+                .Take(count);
+            var processedEntities = await ProcessReturnedEntitiesAsync(published);
+            return await processedEntities.ToListAsync();
+        }
+        
         protected override Task<IQueryable<Article>> IncludeRelationsAsync(IQueryable<Article> entities)
         {
             entities = entities

@@ -24,6 +24,7 @@ using MartinDrozdik.Web.Facades.Models.People;
 using MartinDrozdik.Web.Facades.Models.Projects;
 using MartinDrozdik.Abstraction.Exceptions.Services.CRUD;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using MartinDrozdik.Web.Facades.Models.Blog;
 
 namespace Bonsai.Server.Controllers
 {
@@ -41,6 +42,7 @@ namespace Bonsai.Server.Controllers
         private readonly ProjectTagFacade projectTagFacade;
         private readonly ProjectFacade projectFacade;
         private readonly ProjectMarkdownArticleFacade projectMarkdownArticleFacade;
+        private readonly ArticleFacade articleFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
@@ -52,7 +54,8 @@ namespace Bonsai.Server.Controllers
             LanguageSkillFacade languageSkillFacade,
             ProjectTagFacade projectTagFacade,
             ProjectFacade projectFacade,
-            ProjectMarkdownArticleFacade projectMarkdownArticleFacade
+            ProjectMarkdownArticleFacade projectMarkdownArticleFacade,
+            ArticleFacade articleFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -66,6 +69,7 @@ namespace Bonsai.Server.Controllers
             this.projectTagFacade = projectTagFacade;
             this.projectFacade = projectFacade;
             this.projectMarkdownArticleFacade = projectMarkdownArticleFacade;
+            this.articleFacade = articleFacade;
         }
 
         public async Task<IActionResult> Index()
@@ -74,10 +78,12 @@ namespace Bonsai.Server.Controllers
             var educations = await educationFacade.GetAsync();
             var languageSkill = await languageSkillFacade.GetAsync();
             var projectTags = await projectTagFacade.GetAsync();
+            var previewArticles = await articleFacade.GetFirstPublishedAsync(3);
 
             var model = new IndexPageModel(cultureProvider, languageDictionary,
                 workExperiences, educations, languageSkill,
-                projectTags)
+                projectTags,
+                previewArticles)
             {
 
             };

@@ -41,6 +41,8 @@ namespace MartinDrozdik.Web.Facades.Models.Blog
 
         public Task<IEnumerable<Article>> GetPublishedAsync() => repository.GetPublishedAsync();
 
+        public Task<IEnumerable<Article>> GetFirstPublishedAsync(int count) => repository.GetFirstPublishedAsync(count);
+
         public override async Task DeleteAsync(int id)
         {
             var item = await repository.GetAsync(id);

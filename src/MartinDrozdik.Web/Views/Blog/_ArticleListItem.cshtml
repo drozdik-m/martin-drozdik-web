@@ -1,26 +1,29 @@
 ﻿@model ArticleListItemModel
 @inject ServerConfiguration ServerConfiguration
 
-<li class="external">
-    <a href="#" title="">
-        <div class="image" style="">
+<li class="@(Model.Article.IsArticleReference ? "external" : "")">
+    <a href="/blog/@Model.Article.UrlName" title="@Model.Article.Name" target="@(Model.Article.IsArticleReference ? "_blank" : "_self")" rel="@(Model.Article.IsArticleReference ? "noopener" : "")" >
+        <div class="image" style="@(Model.Article.MainImage.Uploaded ? $"background-color: url({Model.Article.MainImage.Uri});" : "")">
             <ul class="tags tagsSlim tagsTransparentWhite">
-                @*@foreach(var tag in Model.Project.Tags)
+                @foreach(var tag in Model.Article.Tags)
                 {
                     <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
-                }*@
-                <li><span>Tag 1</span></li>
-                <li><span>Tag tedy yep</span></li>
-                <li><span>Tag 3</span></li>
-                <li><span>Tag 1</span></li>
-                <li><span>Tag tedy yep</span></li>
-                <li><span>Tag 3</span></li>
+                }
             </ul>
         </div>
-        <h3>Zkušenosti s prací na více monitorech a kolik obrazovek je už příliš?</h3>
-        <p>Návrhové vzory popisují vhodná řešení častých programátorských problémů. Jedním takovým je i problém s notifikacemi a čekáním na události. Někdy potřebujeme reagovat na specifické situace, ale nevíme, kdy nastanou (jestli vůbec). Elegantní řešení pro tento problém nabízí návrhový vzor pozorovatel.</p>
+        <h3>@Model.Article.Name</h3>
+        <p>@Model.Article.Abstract</p>
         <div class="itemFooter">
-            <span class="date">6. 10. 2019</span>
+            <span class="date">
+                @if (Model.Article.PublishDate.HasValue)
+                {
+                    @Model.Article.PublishDate.Value.ToString("dd. MM. yyyy", CultureInfo.InvariantCulture)
+                }
+                else
+                {
+                    @("&nbsp;")
+                }
+            </span>
             <span class="readMore commonButton commonButtonSlim commonButtonRed">Celý článek</span>
         </div>
     </a>
