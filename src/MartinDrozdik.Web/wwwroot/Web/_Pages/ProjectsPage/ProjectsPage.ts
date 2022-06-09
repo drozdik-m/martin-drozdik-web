@@ -59,7 +59,7 @@ WindowEvents.OnDOMReady.Add(function ()
         entities: [],
         loadMoreButton: true,
         tagsFilter: true,
-        pageSize: 3,
+        pageSize: 9,
         initialSize: 0,
         noResultsMessage: "Žádné projekty nenalezeny"
     });

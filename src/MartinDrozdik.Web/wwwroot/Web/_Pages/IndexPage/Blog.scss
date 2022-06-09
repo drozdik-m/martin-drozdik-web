@@ -1,14 +1,14 @@
 ﻿@import "../../_Variables";
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
-@import "../../Blog/BlogList";
+@import "../../Blog/BlogListItem";
 
-/*
+
 #blog {
-    background-color: $black;
+    background-color: $blogBackground;
     position: relative;
 
-    &:before {
+    /*&:before {
         content: " ";
         font-size: 0;
         position: absolute;
@@ -23,18 +23,11 @@
         width: $dimensions;
         z-index: 1;
         pointer-events: none;
-    }
+    }*/
 
-    .projectList {
-        position: relative;
-        z-index: 2;
-        .tagsHeading {
-            margin-top: 3rem;
-        }
-    }
 }
 
-@media only screen and (max-width: 56.875rem){
+/*@media only screen and (max-width: 56.875rem){
     #projects {
         &:before {
             display: none;

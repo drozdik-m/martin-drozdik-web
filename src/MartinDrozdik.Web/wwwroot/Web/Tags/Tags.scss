@@ -3,6 +3,47 @@
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 
 
+@mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
+
+    li {
+        a, button, > span {
+            &, &:before {
+                color: $details;
+            }
+
+            background-color: $background;
+            border-color: $details;
+        }
+
+        &.selected {
+            a, button, > span {
+                &, &:before {
+                    color: $activeDetails;
+                }
+
+                background-color: $activeBackground;
+                border-color: $activeDetails;
+            }
+        }
+
+        &.unsuitable {
+            opacity: 0.6;
+        }
+
+        &:hover {
+            a, button {
+                &, &:before {
+                    color: $hoverDetails;
+                }
+
+                background-color: $hoverBackground;
+                border-color: $hoverDetails;
+            }
+        }
+    }
+}
+
+
 .tags {
     font-size: 0;
 
@@ -51,53 +92,18 @@
         }
     }
 
-    @mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
-
-        li {
-            a, button, > span {
-                &, &:before {
-                    color: $details;
-                }
-
-                background-color: $background;
-                border-color: $details;
-            }
-
-            &.selected {
-                a, button, > span {
-                    &, &:before {
-                        color: $activeDetails;
-                    }
-
-                    background-color: $activeBackground;
-                    border-color: $activeDetails;
-                }
-            }
-
-            &.unsuitable {
-                opacity: 0.6;
-            }
-
-            &:hover {
-                a, button {
-                    &, &:before {
-                        color: $hoverDetails;
-                    }
-
-                    background-color: $hoverBackground;
-                    border-color: $hoverDetails;
-                }
-            }
-        }
-    }
-
+    
     //SCHEMES
     &.tagsWhiteBlack {
         @include tagsScheme($black, #cfcfcf, #cfcfcf, $black, white, $black);
     }
-    //SCHEMES
+
     &.tagsBlackWhite {
-        @include tagsScheme($projectsBackground, $black, $black, white, $blackHover, white);
+        @include tagsScheme($projectsBackground, $black, $black, white, white, $black);
+    }
+
+    &.tagsTransparentWhite {
+        @include tagsScheme(rgba(0, 0, 0, 0), white, white, white, $blackHover, white);
     }
 }
 

@@ -13,7 +13,7 @@
     <ul class="projects entityList"></ul>
 
     <div class="extraActionButton">
-        <button type="button" href="@Url.Action("Projects", "Home")" class="loadMoreProjectsButton commonButton commonButtonThick @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonRed" : "commonButtonBlack") loadMoreProjectsButton">Načíst další</button>
+        <button type="button" class="loadMoreProjectsButton commonButton commonButtonThick @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonRed" : "commonButtonBlack") loadMoreProjectsButton">Načíst další</button>
     </div>
 
     @if (Model.ShowMoreProjectsButton)

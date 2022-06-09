@@ -39,5 +39,24 @@
 @{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }
 <partial name="_Biography" for="@biographyModel" />
 
+<div id="blog" class="backgroundBlock">
+    <div id="blogContent" class="block">
+        <h2 class="commonH commonHRed">Blog</h2>
+        <p class="commonP commonPRed">Rád píšu články a&nbsp;sdílím tak vědomosti. Mnohdy se při jejich tvorbě i&nbsp;něco dozvím a&nbsp;upřesním. Kromě <strong>výukových materiálů na&nbsp;programování</strong> uvažuji o&nbsp;věcech jako je <strong>podnikání</strong>, <strong>práce</strong> a&nbsp;<strong>štěstí v&nbsp;životě</strong>.</p>
+
+        <ul class="articles">
+            @*@foreach(var article in Model.Articles)
+            {
+                
+            }*@
+        </ul>
+
+        @*@{
+            var blogListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Dark);
+        }
+        <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />*@
+    </div>
+</div>
+
 <partial name="_Contact" for="@ContactModel.Default" />
 

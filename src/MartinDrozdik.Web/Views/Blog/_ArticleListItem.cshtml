@@ -1,4 +1,27 @@
 ﻿@model ArticleListItemModel
 @inject ServerConfiguration ServerConfiguration
 
-<p>Article @Model.Article.Id</p>
+<li class="external">
+    <a href="#" title="">
+        <div class="image" style="">
+            <ul class="tags tagsSlim tagsTransparentWhite">
+                @*@foreach(var tag in Model.Project.Tags)
+                {
+                    <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
+                }*@
+                <li><span>Tag 1</span></li>
+                <li><span>Tag tedy yep</span></li>
+                <li><span>Tag 3</span></li>
+                <li><span>Tag 1</span></li>
+                <li><span>Tag tedy yep</span></li>
+                <li><span>Tag 3</span></li>
+            </ul>
+        </div>
+        <h3>Zkušenosti s prací na více monitorech a kolik obrazovek je už příliš?</h3>
+        <p>Návrhové vzory popisují vhodná řešení častých programátorských problémů. Jedním takovým je i problém s notifikacemi a čekáním na události. Někdy potřebujeme reagovat na specifické situace, ale nevíme, kdy nastanou (jestli vůbec). Elegantní řešení pro tento problém nabízí návrhový vzor pozorovatel.</p>
+        <div class="itemFooter">
+            <span class="date">6. 10. 2019</span>
+            <span class="readMore commonButton commonButtonSlim commonButtonRed">Celý článek</span>
+        </div>
+    </a>
+</li>
