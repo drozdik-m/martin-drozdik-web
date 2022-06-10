@@ -25,11 +25,11 @@ WindowEvents.OnDOMReady.Add(function ()
         entities: [],
         loadMoreButton: true,
         tagsFilter: true,
-        pageSize: 12,
+        pageSize: 9,
         initialSize: 0,
         noResultsMessage: "Žádné články nenalezeny"
     }
     let blogList = new BlogList(articleListElement, config);
 
-    EntityList.InitiateViaAPI(blogList, config.pageSize, "/api/BlogList");
+    EntityList.InitiateViaAPI(blogList, config.pageSize, "/api/ArticleList");
 });

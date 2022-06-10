@@ -199,7 +199,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     {
         var result = "";
         for (let i = 0; i < entities.length; i++)
-            result += `<li>${entities[i].html}</li>`;
+            result += `${entities[i].html}`;
 
         this.entityListElement.insertAdjacentHTML("beforeend", result);
     }
@@ -509,6 +509,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 loading.Hide();
                 let projects: TEntity[] = JSON.parse(listEntities);
                 entityList.SetEntities(projects);
+                console.log(projects);
                 entityList.LoadMoreCount(initialCount);
             })
             .Catch(function (error: Error)

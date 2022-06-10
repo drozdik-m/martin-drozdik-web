@@ -96,15 +96,23 @@
     }
 
     &.tagsBlackWhite {
-        @include tagsScheme($projectsBackground, $black, $black, white, white, $black);
+        @include tagsScheme($projectsBackground, $black, $black, $projectsBackground, $blackHover, white);
     }
 
-    &.tagsTransparentWhite {
-        @include tagsScheme(rgba(0, 0, 0, 0), white, white, white, $blackHover, white);
+    &.tagsTransparentBlack {
+        @include tagsScheme(rgba(0, 0, 0, 0), white, white, $black, $blackHover, white);
     }
 
-    &.tagsDarkRedWhite {
+    /*&.tagsTransparentRed {
+        @include tagsScheme(rgba(0, 0, 0, 0), white, white, $red, $redHover, white);
+    }*/
+
+    /*&.tagsDarkRedWhite {
         @include tagsScheme($blogBackground, $darkRed, $darkRed, $blogBackground, $darkRed, $blogBackground);
+    }*/
+
+    &.tagsDarkerRedWhite {
+        @include tagsScheme($blogBackground, $darkerRed, $darkerRed, $blogBackground, $darkerRedHover, white);
     }
 }
 
