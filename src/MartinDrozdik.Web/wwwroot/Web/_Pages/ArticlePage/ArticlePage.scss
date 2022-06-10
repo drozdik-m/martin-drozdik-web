@@ -1,0 +1,43 @@
+﻿@import "../../_Variables.scss";
+@import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../../node_modules/@drozdik.m/common-mixins/_module";
+
+@import "../../Gallery/Gallery";
+@import "../../ContactMeStripe/ContactMeStripe";
+@import "../../Team/Team";
+@import "../../Technologies/Technologies";
+
+$articleBlockMaxWidth: 55rem;
+@import "../../Article/Article";
+
+body {
+    background-color: $blogBackground;
+}
+
+
+//--------------------------------------------------
+//---------PROJECT PAGE-----------------------------
+//--------------------------------------------------
+
+#article {
+    //max-width: $articleBlockMaxWidth;
+
+    > .commonP {
+        margin-bottom: $pxInRem-20;
+    }
+
+    .tags {
+        margin-bottom: $pxInRem-22;
+
+        &:after {
+            clear: both;
+            display: block;
+            content: " ";
+            font-size: 0;
+        }
+    }
+}
+
+@media only screen and (max-width: 72rem){
+    
+}

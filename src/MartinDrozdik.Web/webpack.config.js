@@ -17,6 +17,7 @@ module.exports = [
             ProjectsPage: "./wwwroot/_dist/Web/_Pages/ProjectsPage/ProjectsPage.js",
             ProjectPage: "./wwwroot/_dist/Web/_Pages/ProjectPage/ProjectPage.js",
             BlogPage: "./wwwroot/_dist/Web/_Pages/BlogPage/BlogPage.js",
+            ArticlePage: "./wwwroot/_dist/Web/_Pages/ArticlePage/ArticlePage.js",
             SitemapPage: "./wwwroot/_dist/Web/_Pages/SitemapPage/SitemapPage.js",
         },
 
@@ -59,6 +60,7 @@ module.exports = [
             ProjectsPage: "./wwwroot/Web/_Pages/ProjectsPage/ProjectsPage.scss",
             ProjectPage: "./wwwroot/Web/_Pages/ProjectPage/ProjectPage.scss",
             BlogPage: "./wwwroot/Web/_Pages/BlogPage/BlogPage.scss",
+            ArticlePage: "./wwwroot/Web/_Pages/ArticlePage/ArticlePage.scss",
             SitemapPage: "./wwwroot/Web/_Pages/SitemapPage/SitemapPage.scss",
         },
 

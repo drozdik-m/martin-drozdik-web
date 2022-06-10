@@ -10,9 +10,7 @@ namespace MartinDrozdik.Web.Views.Home
 {
     public class ProjectPageModel : ViewModelBase
     {
-        public IEnumerable<ProjectTag> ProjectTags { get; }
         public Data.Models.Projects.Project Project { get; }
-        public int CompletedProjectsCount { get; }
 
         public ProjectPageModel(ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,

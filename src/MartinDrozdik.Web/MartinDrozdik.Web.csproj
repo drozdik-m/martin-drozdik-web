@@ -8,12 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\_dist\Web\**" />
-    <Content Remove="wwwroot\_dist\Web\**" />
-    <EmbeddedResource Remove="wwwroot\_dist\Web\**" />
-    <None Remove="wwwroot\_dist\Web\**" />
     <TypeScriptCompile Remove="node_modules\**" />
-    <TypeScriptCompile Remove="wwwroot\_dist\Web\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -64,6 +59,7 @@
     <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
     <Content Remove="wwwroot\Web\Technologies\Technologies.scss" />
+    <Content Remove="wwwroot\Web\_Pages\ArticlePage\ArticlePage.scss" />
     <Content Remove="wwwroot\Web\_Pages\BlogPage\BlogPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Blog.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
@@ -73,7 +69,6 @@
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
     <Content Remove="wwwroot\Web\_Variables.scss" />
-    <Content Remove="wwwroot\_dist\temp.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -133,6 +128,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\IndexPage\Blog.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\ArticlePage\ArticlePage.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss">
@@ -270,7 +268,6 @@
 
   <ItemGroup>
     <Folder Include="Services\" />
-    <Folder Include="wwwroot\_dist\" />
   </ItemGroup>
 
   <ItemGroup>

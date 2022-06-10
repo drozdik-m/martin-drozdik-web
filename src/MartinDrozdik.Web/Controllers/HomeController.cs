@@ -149,7 +149,7 @@ namespace Bonsai.Server.Controllers
             return View(model);
         }
 
-        /*[Route("blog/{id}")]
+        [Route("blog/{id}")]
         public async Task<IActionResult> Article(string id)
         {
             try
@@ -170,7 +170,7 @@ namespace Bonsai.Server.Controllers
             {
                 return NotFound();
             }
-        }*/
+        }
 
         [HttpPost]
         public async Task<IActionResult> SendMail(ContactForm contactForm)

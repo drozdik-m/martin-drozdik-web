@@ -31,7 +31,7 @@
 }
 
 
-<article id="project" class="block">
+<div id="project" class="block">
     @{
         var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
         {
@@ -42,119 +42,121 @@
     }
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 
-    <!--HEADING-->
-    <h1 class="commonH">@Model.Project.Name</h1>
-    <div id="logo">
-        @if (Model.Project.Logo.Uploaded)
-        {
-            @*@Model.Project.Logo.Uri*@
-            <img src="@ServerConfiguration.ContentDomain@Model.Project.Logo.Uri" title="@Model.Project.Logo.Name" alt="@Model.Project.Logo.AlternativeText" />   
-        }
-        @if (Model.Project.HasGitHubLink)
-        {
-            <a href="@Model.Project.GitHubLink" title="@Model.Project.Name GitHub codebase" class="commonButton commonButtonBlack commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
-        }
+    <article>
+        <!--HEADING-->
+        <h1 class="commonH">@Model.Project.Name</h1>
+        <div id="logo">
+            @if (Model.Project.Logo.Uploaded)
+            {
+                @*@Model.Project.Logo.Uri*@
+                <img src="@ServerConfiguration.ContentDomain@Model.Project.Logo.Uri" title="@Model.Project.Logo.Name" alt="@Model.Project.Logo.AlternativeText" />   
+            }
+            @if (Model.Project.HasGitHubLink)
+            {
+                <a href="@Model.Project.GitHubLink" title="@Model.Project.Name GitHub codebase" class="commonButton commonButtonBlack commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
+            }
         
-        @if (Model.Project.HasLiveLink)
+            @if (Model.Project.HasLiveLink)
+            {
+                <a href="@Model.Project.LiveLink" title="@Model.Project.Name live" class="commonButton commonButtonBlack commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
+            }
+        </div>
+        <p class="commonP">@Model.Project.Abstract</p>
+        @if(Model.Project.IsFinished && Model.Project.FinishedTime.HasValue)
         {
-            <a href="@Model.Project.LiveLink" title="@Model.Project.Name live" class="commonButton commonButtonBlack commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
+            <span id="finishedDate">Dokončeno v @ProjectPageModel.FinishedDateToString(Model.Project.FinishedTime.Value)</span>
         }
-    </div>
-    <p class="commonP">@Model.Project.Abstract</p>
-    @if(Model.Project.IsFinished && Model.Project.FinishedTime.HasValue)
-    {
-        <span id="finishedDate">Dokončeno v @ProjectPageModel.FinishedDateToString(Model.Project.FinishedTime.Value)</span>
-    }
-    @if (Model.Project.Tags.Any())
-    {
-        <ul class="tags tagsBlackWhite">
-            @foreach(var tag in Model.Project.Tags)
-            {
-                <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
-            }
-        </ul>
-    }
-
-    <!--GALLERY-->
-    @if (Model.Project.GalleryImages.Any())
-    {
-        <ul class="gallery">
-            @foreach(var image in Model.Project.GalleryImages)
-            {
-                if (image.Uploaded)
+        @if (Model.Project.Tags.Any())
+        {
+            <ul class="tags tagsBlackWhite">
+                @foreach(var tag in Model.Project.Tags)
                 {
-                    <li>
-                        <a class="galleryImage magnifyingGlass" 
-                            href="@ServerConfiguration.ContentDomain@image.Uri" 
-                            style="background-image: url(@ServerConfiguration.ContentDomain@image.ThumbnailUri)"
-                            title="@image.AlternativeText">
-                            <span>@image.Name</span>
-                        </a>
-                    </li>
-                }
-            }
-        </ul>
-    }
-    
-
-    <!--CONTACT ME STRIPE-->
-    <div class="contactMeStripe">
-        Zalíbil se vám projekt? Chtěli byste podobný? <a class="contactMeStripeButton" href="/#contact" title="Kontaktní informace a formulář">Napište mi</a>
-    </div>
-
-
-    <!--TEAM-->
-    @if (Model.Project.Developers.Any())
-    {
-        <div id="projectTeam">
-            <h2 class="projectH2">Tým</h2>
-            <ul class="team">
-                @foreach(var member in Model.Project.Developers)
-                {
-                    <li class="@(member.Person.IsMe ? "teamMe" : "")">
-                        <div class="teamFace" style="@(member.Person.ProfileImage.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain + member.Person.ProfileImage.Uri})" : "")">&nbsp;</div>
-                        <div class="teamDescription">
-                            <span class="teamName">@member.Person.Name</span>
-                            @if(!string.IsNullOrWhiteSpace(member.Role))
-                            {
-                                <span class="teamPosition">@member.Role</span>
-                            }
-                        </div>
-                    </li>
+                    <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
                 }
             </ul>
-        </div>
-    }
-    
+        }
 
-    <!--CONTENT-->
-    <div class="article">
-        <h2>Práce na projektu</h2>
-        @Html.Raw(@Model.Project.Content.HTML)
-    </div>
-
-    <!--TECHNOLOGIES-->
-    @if (Model.Project.Technologies.Any())
-    {
-        <div id="projectTechnologies">
-            <h2 class="projectH2">Vybrané použité technologie</h2>
-            <ul class="technologies">
-                @foreach(var technology in Model.Project.Technologies)
+        <!--GALLERY-->
+        @if (Model.Project.GalleryImages.Any())
+        {
+            <ul class="gallery">
+                @foreach(var image in Model.Project.GalleryImages)
                 {
-                    <li>
-                        <div class="technologyLogo" style="@(technology.Technology.Logo.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain + technology.Technology.Logo.Uri})" : "")">&nbsp;</div>
-                        <div class="technologyDescription">
-                            <span class="technologyName">@technology.Technology.Name</span>
-                            <span class="technologyDetail">@technology.Technology.Description</span>
-                            @if(!string.IsNullOrWhiteSpace(technology.Usage))
-                            {
-                                <span class="technologyUsage">@technology.Usage</span>
-                            }
-                        </div>
-                    </li>
+                    if (image.Uploaded)
+                    {
+                        <li>
+                            <a class="galleryImage magnifyingGlass" 
+                                href="@ServerConfiguration.ContentDomain@image.Uri" 
+                                style="background-image: url(@ServerConfiguration.ContentDomain@image.ThumbnailUri)"
+                                title="@image.AlternativeText">
+                                <span>@image.Name</span>
+                            </a>
+                        </li>
+                    }
                 }
             </ul>
-        </div>
-    }
+        }
     
-</article>
+
+        <!--CONTACT ME STRIPE-->
+        <div class="contactMeStripe">
+            Zalíbil se vám projekt? Chtěli byste podobný? <a class="contactMeStripeButton" href="/#contact" title="Kontaktní informace a formulář">Napište mi</a>
+        </div>
+
+
+        <!--TEAM-->
+        @if (Model.Project.Developers.Any())
+        {
+            <div id="projectTeam">
+                <h2 class="projectH2">Tým</h2>
+                <ul class="team">
+                    @foreach(var member in Model.Project.Developers)
+                    {
+                        <li class="@(member.Person.IsMe ? "teamMe" : "")">
+                            <div class="teamFace" style="@(member.Person.ProfileImage.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain + member.Person.ProfileImage.Uri})" : "")">&nbsp;</div>
+                            <div class="teamDescription">
+                                <span class="teamName">@member.Person.Name</span>
+                                @if(!string.IsNullOrWhiteSpace(member.Role))
+                                {
+                                    <span class="teamPosition">@member.Role</span>
+                                }
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    
+
+        <!--CONTENT-->
+        <div class="article">
+            <h2>Práce na projektu</h2>
+            @Html.Raw(@Model.Project.Content.HTML)
+        </div>
+
+        <!--TECHNOLOGIES-->
+        @if (Model.Project.Technologies.Any())
+        {
+            <div id="projectTechnologies">
+                <h2 class="projectH2">Vybrané použité technologie</h2>
+                <ul class="technologies">
+                    @foreach(var technology in Model.Project.Technologies)
+                    {
+                        <li>
+                            <div class="technologyLogo" style="@(technology.Technology.Logo.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain + technology.Technology.Logo.Uri})" : "")">&nbsp;</div>
+                            <div class="technologyDescription">
+                                <span class="technologyName">@technology.Technology.Name</span>
+                                <span class="technologyDetail">@technology.Technology.Description</span>
+                                @if(!string.IsNullOrWhiteSpace(technology.Usage))
+                                {
+                                    <span class="technologyUsage">@technology.Usage</span>
+                                }
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        }
+    </article>
+    
+</div>

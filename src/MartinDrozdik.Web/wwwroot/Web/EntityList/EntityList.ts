@@ -509,7 +509,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 loading.Hide();
                 let projects: TEntity[] = JSON.parse(listEntities);
                 entityList.SetEntities(projects);
-                console.log(projects);
+                //console.log(projects);
                 entityList.LoadMoreCount(initialCount);
             })
             .Catch(function (error: Error)

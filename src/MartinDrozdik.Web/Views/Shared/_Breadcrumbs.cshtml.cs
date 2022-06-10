@@ -54,7 +54,7 @@ namespace MartinDrozdik.Web.Views.Shared
                 BreadcrumbType.Home => "home",
                 BreadcrumbType.Projects => "projects",
                 BreadcrumbType.Blog => "blog",
-                BreadcrumbType.Article => "article",
+                BreadcrumbType.Article => "anArticle",
                 _ => throw new Exception("Unknown type"),
             };
         }
