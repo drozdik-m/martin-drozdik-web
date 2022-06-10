@@ -1,68 +1,35 @@
-﻿/*
-
-
-WindowEvents.OnDOMReady.Add(function ()
-{
-    let listElementParent: HTMLElement = document.getElementById("projects");
-    if (listElementParent == null)
-    {
-        console.error(`#projects element not found`);
-        return;
-    }
-    
-    
-});*/
-
-import { WindowEvents } from "@drozdik.m/window-events";
-import { RegisterStatForAnimation } from "../../ImportantStats/ImportantStats";
-import { Ajax, AjaxResponse } from "@drozdik.m/ajax";
-import { Pipeline } from "@drozdik.m/pipeline";
-import { LoadingAnimation } from "@drozdik.m/loading-animation";
-import { StatusWindowError } from "../../StatusWindow/StatusWindowError";
-import { ProjectListEntity } from "../../Projects/ProjectListEntity";
-import { ProjectList } from "../../Projects/ProjectList";
-import { ProjectListConfig } from "../../Projects/ProjectListConfig";
+﻿import { WindowEvents } from "@drozdik.m/window-events";
 import { EntityList } from "../../EntityList/EntityList";
+import { BlogListConfig } from "../../Blog/BlogListConfig";
+import { BlogList } from "../../Blog/BlogList";
 
 
 WindowEvents.OnDOMReady.Add(function ()
 {
-    //Get #projects
-    let projectsElement = document.getElementById("projects");
-    if (!projectsElement)
+    //Get #blog
+    let blogElement = document.getElementById("blog");
+    if (!blogElement)
     {
-        console.error("No #projects element found");
+        console.error("No #blog element found");
         return;
     }
 
-    //Get #projectsStats
-    let projectsStatsElement = document.getElementById("projectsStats");
-    if (!projectsStatsElement)
+    //Article list
+    let articleListElement: HTMLElement = blogElement.querySelector(".articleList")
+    if (articleListElement == null)
     {
-        console.error("No #projectsStats element found");
+        console.error(`#blog .articleList element not found`);
         return;
     }
-
-    //Iterate over important stats and register them
-    let importantStats = projectsStatsElement.querySelectorAll(".importantStat");
-    for (let i = 0; i < importantStats.length; i++)
-        RegisterStatForAnimation(importantStats[i] as HTMLElement);
-
-    //Project list
-    let projectListElement: HTMLElement = projectsElement.querySelector(".projectList")
-    if (projectListElement == null)
-    {
-        console.error(`#projects .projectList element not found`);
-        return;
-    }
-    let blogList = new ProjectList(projectListElement, {
+    var config: BlogListConfig = {
         entities: [],
         loadMoreButton: true,
         tagsFilter: true,
         pageSize: 12,
         initialSize: 0,
         noResultsMessage: "Žádné články nenalezeny"
-    });
+    }
+    let blogList = new BlogList(articleListElement, config);
 
-    EntityList.InitiateViaAPI(blogList, "/api/BlogList");
+    EntityList.InitiateViaAPI(blogList, config.pageSize, "/api/BlogList");
 });

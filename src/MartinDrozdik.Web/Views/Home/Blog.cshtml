@@ -20,16 +20,16 @@
     @{
         var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
         {
-           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Black),
+           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Red),
            new BreadcrumbModel("Blog", string.Empty, BreadcrumbType.Blog, BreadcrumbScheme.White),
         });
     }
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 </div>
 
-<div id="projects" class="block">
-    <h1 class="commonH">Blog</h1>
-    <p class="commonP">Články, které jsem sepsal. Některé na tomto webu, jiné z externích zdrojů. Všechny jsou zajisté alespoň trochu zajímavé. Tvořím <strong>výukové materiály na programování</strong> a uvažuji o věcech jako je <strong>podnikání</strong>, <strong>práce</strong> a <strong>štěstí v životě</strong>.</p>
+<div id="blog" class="block">
+    <h1 class="commonH commonHRed">Blog</h1>
+    <p class="commonP commonPRed">Články, které jsem sepsal. Některé na tomto webu, jiné z externích zdrojů. Všechny jsou zajisté alespoň trochu zajímavé. Tvořím <strong>výukové materiály na programování</strong> a uvažuji o věcech jako je <strong>podnikání</strong>, <strong>práce</strong> a <strong>štěstí v životě</strong>.</p>
 
     @{
         var projectListModel = new ArticleListModel(Model.ArticleTags);

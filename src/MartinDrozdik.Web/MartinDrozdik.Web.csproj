@@ -24,8 +24,8 @@
     <Content Remove="wwwroot\Web\Article\Article.scss" />
     <Content Remove="wwwroot\Web\Article\Team.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
-    <Content Remove="wwwroot\Web\Blog\BlogList.scss" />
-    <Content Remove="wwwroot\Web\Blog\BlogListItems.scss" />
+    <Content Remove="wwwroot\Web\Blog\ArticleList.scss" />
+    <Content Remove="wwwroot\Web\Blog\ArticleListItems.scss" />
     <Content Remove="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss" />
     <Content Remove="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss" />
     <Content Remove="wwwroot\Web\Contact\Contact.scss" />
@@ -80,10 +80,10 @@
     <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Blog\BlogListItems.scss">
+    <None Include="wwwroot\Web\Blog\ArticleListItems.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Blog\BlogList.scss">
+    <None Include="wwwroot\Web\Blog\ArticleList.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Icon\StackOverflowIconWhite.scss">

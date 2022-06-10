@@ -29,14 +29,16 @@ WindowEvents.OnDOMReady.Add(function ()
         console.error(`#projects .projectList element not found`);
         return;
     }
-    let projectList = new ProjectList(projectListElement, {
+
+    let settings: ProjectListConfig = {
         entities: [],
         loadMoreButton: true,
         tagsFilter: true,
         pageSize: 3,
         initialSize: 0,
         noResultsMessage: "Žádné projekty nenalezeny"
-    });
+    }
+    let projectList = new ProjectList(projectListElement, settings);
 
-    EntityList.InitiateViaAPI(projectList, "/api/ProjectList?scheme=dark");
+    EntityList.InitiateViaAPI(projectList, settings.pageSize, "/api/ProjectList?scheme=dark");
 });

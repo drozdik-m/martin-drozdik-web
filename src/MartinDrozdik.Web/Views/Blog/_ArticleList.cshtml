@@ -2,7 +2,7 @@
 
 <div class="articleList">
     <span class="tagsHeading">Filtr tagů</span>
-    <ul class="tags listTags tagsRedWhite">
+    <ul class="tags listTags tagsDarkRedWhite">
         @foreach(var tag in Model.Tags)
         {
             <li><button type="button" data-id="@tag.Id">@tag.Name</button></li>
@@ -13,7 +13,7 @@
     <ul class="articles entityList"></ul>
 
     <div class="extraActionButton">
-        <button type="button" class="loadMoreArticlesButton commonButton commonButtonThick commonButtonRed loadMoreProjectsButton">Načíst další</button>
+        <button type="button" class="loadMoreButton commonButton commonButtonThick commonButtonRed loadMoreProjectsButton">Načíst další</button>
     </div>    
 
 </div>

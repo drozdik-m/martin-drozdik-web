@@ -90,8 +90,6 @@
             }
         }
     }
-
-    
     //SCHEMES
     &.tagsWhiteBlack {
         @include tagsScheme($black, #cfcfcf, #cfcfcf, $black, white, $black);
@@ -103,6 +101,10 @@
 
     &.tagsTransparentWhite {
         @include tagsScheme(rgba(0, 0, 0, 0), white, white, white, $blackHover, white);
+    }
+
+    &.tagsDarkRedWhite {
+        @include tagsScheme($blogBackground, $darkRed, $darkRed, $blogBackground, $darkRed, $blogBackground);
     }
 }
 

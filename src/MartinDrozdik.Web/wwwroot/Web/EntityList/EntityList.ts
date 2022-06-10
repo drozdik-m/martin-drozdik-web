@@ -488,7 +488,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
     }
 
     public static InitiateViaAPI<TEntity extends ListEntity, TConfig extends EntityListConfig<TEntity>>
-        (entityList: EntityList<TEntity, TConfig>, apiURI: string): void
+        (entityList: EntityList<TEntity, TConfig>, initialCount: number, apiURI: string): void
     {
         let projectAjax = new Ajax();
         let loading = new LoadingAnimation(entityList.listElement);
@@ -509,7 +509,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 loading.Hide();
                 let projects: TEntity[] = JSON.parse(listEntities);
                 entityList.SetEntities(projects);
-                entityList.LoadMoreCount(3);
+                entityList.LoadMoreCount(initialCount);
             })
             .Catch(function (error: Error)
             {

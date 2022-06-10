@@ -4,7 +4,7 @@
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
 
-@import "../../Projects/ProjectList";
+@import "../../Blog/ArticleList";
 /*@import "../../HeroHeader/HeroHeader";
 @import "../../AboutMe/AboutMe";
 @import "../../MySkills/MySkills";
@@ -19,21 +19,12 @@
 //---------PROJECTS PAGE----------------------------
 //--------------------------------------------------
 body {
-    background-color: $projectsBackground;
+    background-color: $blogBackground;
 }
 
-#projects {
+#blog {
     margin-bottom: 3rem;
 
-    .commonP {
-        color: $black;
-    }
-    //---STATS---
-    #projectsStats {
-        float: right;
-        margin-right: 8%;
-        //background-color: red;
-    }
     //---LIST---
     .projectList {
         margin-bottom: 1.5rem;
@@ -41,26 +32,7 @@ body {
 }
 
 @media only screen and (max-width: 69.5rem) {
-    #projects {
+    #blog {
         margin-bottom: 1rem;
-
-        #projectsStats {
-            margin: 1rem;
-            margin-top: 0;
-
-            .importantStat {
-                @include ImportantStats.importantStatNoIcon();
-            }
-        }
-    }
-}
-
-@media only screen and (max-width: 45rem){
-    #projects {
-        
-
-        #projectsStats {
-            display: none;
-        }
     }
 }

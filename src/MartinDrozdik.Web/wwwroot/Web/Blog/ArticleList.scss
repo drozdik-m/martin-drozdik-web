@@ -3,24 +3,13 @@
 @import "../_Variables";
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
-@import "BlogListItems";
+@import "ArticleListItems";
 
-.projectList {
+.articleList {
     max-width: 62rem;
     margin: 0rem auto;
     list-style: none;
-    //COLOR SCHEMES
-    &.darkMode {
-        .tagsHeading, p, h3 {
-            color: white;
-        }
-    }
 
-    &.lightMode {
-        .tagsHeading, p, h3 {
-            color: $black;
-        }
-    }
     //TAGS HEADING
     .tagsHeading {
         font-weight: $fontWeightExtraBold;
@@ -39,86 +28,12 @@
     .tags {
     }
 
-    .projects > li {
-        display: flex;
-        align-items: center;
-        margin: 1rem 0;
-        animation-name: FadeIn;
-        animation-duration: 0.3s;
-
-        .projectPreviewImage, .projectDescription {
-        }
-        //IMAGE
-        .projectPreviewImage {
-            @include box-shadow(0 0 $pxInRem-6 $pxInRem-2 rgba(0, 0, 0, 0.35));
-            @include border-radius($radiusSmall);
-            max-width: 100%;
-            $width: 24rem;
-            width: $width;
-            min-width: $width;
-            height: math.div($width, 16) * 9;
-            font-size: 0;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            margin-right: 1rem;
-        }
-        //DESCRIPTION
-        .projectDescription {
-            h3 {
-                font-weight: $fontWeightBold;
-                font-size: $pxInRem-24;
-                margin: $pxInRem-1 0 $pxInRem-12 0;
-
-                .finishedYear {
-                    &:before {
-                        content: "(";
-                    }
-
-                    &:after {
-                        content: ")";
-                    }
-
-                    margin-left: $pxInRem-2;
-                    font-size: $pxInRem-18;
-                    font-weight: $fontWeightRegular;
-                }
-            }
-
-            p {
-                font-size: $pxInRem-16;
-                margin-bottom: $pxInRem-8;
-            }
-
-            .tags {
-                margin-bottom: $pxInRem-10;
-            }
-
-            .projectActions {
-                .commonButton {
-                    vertical-align: bottom;
-                    margin: $pxInRem-6 $pxInRem-8;
-                }
-
-                .commonButtonLive, .commonButtonGithub {
-                    padding-top: $pxInRem-9;
-                    padding-bottom: $pxInRem-9;
-                }
-
-                .commonButtonLive {
-                    &:before {
-                        top: 52%;
-                    }
-                }
-            }
-        }
-    }
     //EXTRA BUTTONS
     .extraActionButton {
         text-align: center;
         margin-top: 2rem;
 
-        .loadMoreProjectsButton {
+        .loadMoreButton {
             margin-top: 1rem;
         }
     }
