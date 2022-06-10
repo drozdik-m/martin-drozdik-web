@@ -79,7 +79,6 @@ else
                     Label="Author" GetOptionsService="PersonService" Class="my-4" >
                     <Default>No author</Default>
                 </ModelInput>
-                <span>Author: @(context.Model.Author is not null ? context.Model.Author.Name : "null")</span>
 
                 <MudTextField @bind-Value="context.Model.Abstract" Disabled="context.Disabled" 
                     Label="Abstract" Class="my-4"

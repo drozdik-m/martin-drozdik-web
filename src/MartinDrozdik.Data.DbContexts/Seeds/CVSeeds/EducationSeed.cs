@@ -25,7 +25,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeeds
                 new Education()
                 {
                     Name = "ČVUT FIT v Praze (Ing.)",
-                    Specialization = "Softwarové inženýrstvý",
+                    Specialization = "Softwarové inženýrství",
                     StartedDate = new DateTime(2020, 9, 1),
                     Ended = true,
                     EndedDate = new DateTime(2022, 6, 1),
@@ -35,7 +35,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeeds
                 new Education()
                 {
                     Name = "ČVUT FIT v Praze (Bc.)",
-                    Specialization = "Softwarové inženýrstvý",
+                    Specialization = "Softwarové inženýrství",
                     StartedDate = new DateTime(2017, 9, 1),
                     Ended = true,
                     EndedDate = new DateTime(2020, 6, 1),

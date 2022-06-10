@@ -25,7 +25,7 @@
             }
         </ul>
         <div class="projectActions">
-            <a href="/projekty/@Model.Project.UrlName" title="Detail projektu @Model.Project.Name" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonRed" : "commonButtonDarkRed")">Detail projektu</a>
+            <a href="/projects/@Model.Project.UrlName" title="Detail projektu @Model.Project.Name" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonRed" : "commonButtonDarkRed")">Detail projektu</a>
             
             @if (Model.Project.HasGitHubLink)
             {

@@ -53,7 +53,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
         }
 
         protected Expression<Func<Article, bool>> IsPublished { get; set; }
-            = e => !e.PublishDate.HasValue || e.PublishDate >= DateTime.Now;
+            = e => (!e.PublishDate.HasValue || e.PublishDate <= DateTime.Now) && !e.IsHidden;
 
         /// <summary>
         /// Return all articles that have been published

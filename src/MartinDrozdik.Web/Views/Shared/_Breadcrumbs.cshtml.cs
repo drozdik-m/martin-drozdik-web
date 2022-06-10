@@ -53,7 +53,7 @@ namespace MartinDrozdik.Web.Views.Shared
             {
                 BreadcrumbType.Home => "home",
                 BreadcrumbType.Projects => "projects",
-                BreadcrumbType.Articles => "articles",
+                BreadcrumbType.Blog => "blog",
                 BreadcrumbType.Article => "article",
                 _ => throw new Exception("Unknown type"),
             };
@@ -73,7 +73,7 @@ namespace MartinDrozdik.Web.Views.Shared
     {
         Home,
         Projects,
-        Articles,
-        Article
+        Blog,
+        Article,
     }
 }

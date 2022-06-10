@@ -43,6 +43,8 @@ namespace Bonsai.Server.Controllers
         private readonly ProjectFacade projectFacade;
         private readonly ProjectMarkdownArticleFacade projectMarkdownArticleFacade;
         private readonly ArticleFacade articleFacade;
+        private readonly ArticleTagFacade articleTagFacade;
+        private readonly BlogMarkdownArticleFacade blogMarkdownArticleFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
@@ -55,7 +57,9 @@ namespace Bonsai.Server.Controllers
             ProjectTagFacade projectTagFacade,
             ProjectFacade projectFacade,
             ProjectMarkdownArticleFacade projectMarkdownArticleFacade,
-            ArticleFacade articleFacade
+            ArticleFacade articleFacade,
+            ArticleTagFacade articleTagFacade,
+            BlogMarkdownArticleFacade blogMarkdownArticleFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -70,6 +74,8 @@ namespace Bonsai.Server.Controllers
             this.projectFacade = projectFacade;
             this.projectMarkdownArticleFacade = projectMarkdownArticleFacade;
             this.articleFacade = articleFacade;
+            this.articleTagFacade = articleTagFacade;
+            this.blogMarkdownArticleFacade = blogMarkdownArticleFacade;
         }
 
         public async Task<IActionResult> Index()
@@ -92,7 +98,7 @@ namespace Bonsai.Server.Controllers
 
         }
 
-        [Route("projekty")]
+        [Route("projects")]
         public async Task<IActionResult> Projects()
         {
             var projectTags = await projectTagFacade.GetAsync();
@@ -106,7 +112,7 @@ namespace Bonsai.Server.Controllers
             return View(model);
         }
 
-        [Route("projekty/{id}")]
+        [Route("projects/{id}")]
         public async Task<IActionResult> Project(string id)
         {
             try
@@ -128,6 +134,43 @@ namespace Bonsai.Server.Controllers
                 return NotFound();
             }
         }
+
+        [Route("blog")]
+        public async Task<IActionResult> Blog()
+        {
+            var articleTags = await articleTagFacade.GetAsync();
+
+            var model = new BlogPageModel(cultureProvider, languageDictionary,
+                articleTags)
+            {
+
+            };
+
+            return View(model);
+        }
+
+        /*[Route("blog/{id}")]
+        public async Task<IActionResult> Article(string id)
+        {
+            try
+            {
+                var article = await articleFacade.GetAsync(id);
+                article.Content = blogMarkdownArticleFacade.WithUpdatedResourceLinks(article.Content,
+                    e => $"{serverConfig.ContentDomain}{e}");
+
+                var model = new ArticlePageModel(cultureProvider, languageDictionary,
+                    article)
+                {
+
+                };
+
+                return View(model);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+        }*/
 
         [HttpPost]
         public async Task<IActionResult> SendMail(ContactForm contactForm)

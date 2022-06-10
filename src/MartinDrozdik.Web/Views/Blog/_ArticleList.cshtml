@@ -1,0 +1,20 @@
+﻿@model ArticleListModel
+
+<div class="articleList">
+    <span class="tagsHeading">Filtr tagů</span>
+    <ul class="tags listTags tagsRedWhite">
+        @foreach(var tag in Model.Tags)
+        {
+            <li><button type="button" data-id="@tag.Id">@tag.Name</button></li>
+        }
+    </ul>
+
+    @* Article list *@
+    <ul class="articles entityList"></ul>
+
+    <div class="extraActionButton">
+        <button type="button" class="loadMoreArticlesButton commonButton commonButtonThick commonButtonRed loadMoreProjectsButton">Načíst další</button>
+    </div>    
+
+</div>
+

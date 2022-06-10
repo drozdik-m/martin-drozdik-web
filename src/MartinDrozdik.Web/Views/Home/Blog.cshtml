@@ -1,0 +1,39 @@
+﻿@model BlogPageModel
+@inject IFilePathProvider PathProvider
+
+@{
+    //Layout
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Styles
+{
+    <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/BlogPage.css")" />
+}
+
+@section Scripts
+{
+    <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/BlogPage.js")"></script>
+}
+
+<div class="block">
+    @{
+        var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
+        {
+           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Black),
+           new BreadcrumbModel("Blog", string.Empty, BreadcrumbType.Blog, BreadcrumbScheme.White),
+        });
+    }
+    <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
+</div>
+
+<div id="projects" class="block">
+    <h1 class="commonH">Blog</h1>
+    <p class="commonP">Články, které jsem sepsal. Některé na tomto webu, jiné z externích zdrojů. Všechny jsou zajisté alespoň trochu zajímavé. Tvořím <strong>výukové materiály na programování</strong> a uvažuji o věcech jako je <strong>podnikání</strong>, <strong>práce</strong> a <strong>štěstí v životě</strong>.</p>
+
+    @{
+        var projectListModel = new ArticleListModel(Model.ArticleTags);
+    }
+    <partial name="_ArticleList" for="@projectListModel" />
+
+</div>

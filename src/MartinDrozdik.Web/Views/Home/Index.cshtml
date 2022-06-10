@@ -52,10 +52,9 @@
             }
         </ul>
 
-        @*@{
-            var blogListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Dark);
-        }
-        <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />*@
+        <div class="moreArticles">
+            <a href="@Url.Action("Blog", "Home")" class="commonButton commonButtonRed commonButtonThick">Další články</a>
+        </div>
     </div>
 </div>
 

@@ -25,7 +25,7 @@
     <Content Remove="wwwroot\Web\Article\Team.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
     <Content Remove="wwwroot\Web\Blog\BlogList.scss" />
-    <Content Remove="wwwroot\Web\Blog\BlogListItem.scss" />
+    <Content Remove="wwwroot\Web\Blog\BlogListItems.scss" />
     <Content Remove="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss" />
     <Content Remove="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss" />
     <Content Remove="wwwroot\Web\Contact\Contact.scss" />
@@ -64,12 +64,12 @@
     <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
     <Content Remove="wwwroot\Web\Technologies\Technologies.scss" />
+    <Content Remove="wwwroot\Web\_Pages\BlogPage\BlogPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Blog.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
     <Content Remove="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss" />
-    <Content Remove="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
     <Content Remove="wwwroot\Web\_Variables.scss" />
@@ -80,7 +80,7 @@
     <None Include="package.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Blog\BlogListItem.scss">
+    <None Include="wwwroot\Web\Blog\BlogListItems.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Blog\BlogList.scss">
@@ -138,7 +138,7 @@
     <None Include="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss">
+    <None Include="wwwroot\Web\_Pages\BlogPage\BlogPage.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <TypeScriptCompile Include="tsconfig.json">

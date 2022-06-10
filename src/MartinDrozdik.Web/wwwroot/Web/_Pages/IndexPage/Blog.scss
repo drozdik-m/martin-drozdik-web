@@ -1,42 +1,60 @@
 ﻿@import "../../_Variables";
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
-@import "../../Blog/BlogListItem";
+@import "../../Blog/BlogListItems";
 
 
 #blog {
     background-color: $blogBackground;
     position: relative;
+    overflow: hidden;
 
-    /*&:before {
+    #blogContent{
+        position: relative;
+        z-index: 2;
+    }
+
+    .moreArticles {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    &:before {
         content: " ";
         font-size: 0;
         position: absolute;
-        bottom: 2rem;
-        right: 2rem;
-        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTYzIDU2MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSB0cmFuc2Zvcm09InJvdGF0ZSgxODAgNTE3LjIxIDUxNi43MikiIGN4PSI1MTcuMjEiIGN5PSI1MTYuNzIiIHI9IjQ1LjE1IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9Ii4wNSIvPgo8Y2lyY2xlIHRyYW5zZm9ybT0icm90YXRlKDE4MCAzNjAuMDIgNTE2LjcyKSIgY3g9IjM2MC4wMiIgY3k9IjUxNi43MiIgcj0iNDUuMTUiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjEiLz4KPGNpcmNsZSB0cmFuc2Zvcm09InJvdGF0ZSgxODAgMjAyLjgzIDUxNi43MikiIGN4PSIyMDIuODMiIGN5PSI1MTYuNzIiIHI9IjQ1LjE1IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9Ii4xIi8+CjxjaXJjbGUgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDQ1LjYzOSA1MTYuNzIpIiBjeD0iNDUuNjM5IiBjeT0iNTE2LjcyIiByPSI0NS4xNSIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuMSIvPgo8Y2lyY2xlIHRyYW5zZm9ybT0icm90YXRlKDE4MCA1MTcuMjEgMzU5LjUzKSIgY3g9IjUxNy4yMSIgY3k9IjM1OS41MyIgcj0iNDUuMTUiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjA1Ii8+CjxjaXJjbGUgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDM2MC4wMiAzNTkuNTMpIiBjeD0iMzYwLjAyIiBjeT0iMzU5LjUzIiByPSI0NS4xNSIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuMDUiLz4KPGNpcmNsZSB0cmFuc2Zvcm09InJvdGF0ZSgxODAgMjAyLjgzIDM1OS41MykiIGN4PSIyMDIuODMiIGN5PSIzNTkuNTMiIHI9IjQ1LjE1IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9Ii4xIi8+CjxjaXJjbGUgdHJhbnNmb3JtPSJyb3RhdGUoMTgwIDUxNy4yMSAyMDIuMzQpIiBjeD0iNTE3LjIxIiBjeT0iMjAyLjM0IiByPSI0NS4xNSIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuMSIvPgo8Y2lyY2xlIHRyYW5zZm9ybT0icm90YXRlKDE4MCAzNjAuMDIgMjAyLjM0KSIgY3g9IjM2MC4wMiIgY3k9IjIwMi4zNCIgcj0iNDUuMTUiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjAyNSIvPgo8Y2lyY2xlIHRyYW5zZm9ybT0icm90YXRlKDE4MCAyMDIuODMgMjAyLjM0KSIgY3g9IjIwMi44MyIgY3k9IjIwMi4zNCIgcj0iNDUuMTUiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iLjEiLz4KPGNpcmNsZSB0cmFuc2Zvcm09InJvdGF0ZSgxODAgNTE3LjIxIDQ1LjE1KSIgY3g9IjUxNy4yMSIgY3k9IjQ1LjE1IiByPSI0NS4xNSIgZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuMDE3NSIvPgo8Y2lyY2xlIHRyYW5zZm9ybT0icm90YXRlKDE4MCAzNjAuMDIgNDUuMTUpIiBjeD0iMzYwLjAyIiBjeT0iNDUuMTUiIHI9IjQ1LjE1IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9Ii4wMjUiLz4KPC9zdmc+Cg==");
+        $height: 72.75rem;
+        $width: 69.25rem;
+        height: $height;
+        width: $width;
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgODI1IDEwMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im03NzUgODUwLjM2Yy00NTAtODMuMTM0LTY0MS42Ny00MDcuMzYtNjQxLjY3LTQwNy4zNmwtMTMzLjMzIDY2LjUwN3MyMTYuNjcgMzkwLjczIDc1MCA0OTAuNDlsMjUtMTQ5LjY0eiIgZmlsbD0iI0MzMTQzMiIgZmlsbC1vcGFjaXR5PSIuMTUiLz4KPHBhdGggZD0ibTk1MCA2MzMuNzRjLTUwMC0xMzMuMDEtNjQxLjY3LTUyMy43NC02NDEuNjctNTIzLjc0bC0xNTguMzMgNTguMTkzczE1OC4zMyA0NjUuNTQgNzU4LjMzIDYzMS44MWw0MS42NjctMTY2LjI2eiIgZmlsbD0iI0MzMTQzMiIgZmlsbC1vcGFjaXR5PSIuMTUiLz4KPHBhdGggZD0ibTExMDggMzg0LjQ4Yy00MjQuNjItMTE2LjM0LTU2Ni4xNi01NDguNDgtNTY2LjE2LTU0OC40OGwtMTc0Ljg0IDQ5Ljg2MnMxNDEuNTQgNTIzLjU1IDY5MS4wNCA2NzMuMTRsNDkuOTYtMTc0LjUyeiIgZmlsbD0iI0MzMTQzMiIgZmlsbC1vcGFjaXR5PSIuMTUiLz4KPC9zdmc+Cg==");
         background-repeat: no-repeat;
+        background-size: $height $width;
         background-position: center center;
-        $dimensions: 34rem;
-        background-size: $dimensions $dimensions;
-        height: $dimensions;
-        width: $dimensions;
         z-index: 1;
         pointer-events: none;
-    }*/
-
+        top: -5%;
+        right: -8%;
+        opacity: 0.8;
+    }
 }
 
-/*@media only screen and (max-width: 56.875rem){
-    #projects {
+@media only screen and (max-width: 62.5rem) {
+    #blog {
         &:before {
             display: none;
+            background-image: none;
         }
+    }
+}
 
-        .projectList {
-            .tagsHeading {
-                margin-top: 2rem;
+@media only screen and (max-width: 41.25rem) {
+    #blog {
+        .moreArticles {
+            .commonButton {
+                padding: $pxInRem-16 $pxInRem-32;
+                font-size: $pxInRem-18;
             }
         }
     }
-}*/
+}

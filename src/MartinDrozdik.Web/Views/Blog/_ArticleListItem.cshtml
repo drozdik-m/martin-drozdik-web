@@ -2,8 +2,8 @@
 @inject ServerConfiguration ServerConfiguration
 
 <li class="@(Model.Article.IsArticleReference ? "external" : "")">
-    <a href="/blog/@Model.Article.UrlName" title="@Model.Article.Name" target="@(Model.Article.IsArticleReference ? "_blank" : "_self")" rel="@(Model.Article.IsArticleReference ? "noopener" : "")" >
-        <div class="image" style="@(Model.Article.MainImage.Uploaded ? $"background-color: url({Model.Article.MainImage.Uri});" : "")">
+    <a href="@(Model.Article.IsArticleReference ? Model.Article.ReferenceLink : $"/blog/{Model.Article.UrlName}")" title="@Model.Article.Name" target="@(Model.Article.IsArticleReference ? "_blank" : "_self")" rel="@(Model.Article.IsArticleReference ? "noopener" : "")" >
+        <div class="image" style="@(Model.Article.MainImage.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain}{Model.Article.MainImage.Uri});" : "")">
             <ul class="tags tagsSlim tagsTransparentWhite">
                 @foreach(var tag in Model.Article.Tags)
                 {
@@ -21,7 +21,7 @@
                 }
                 else
                 {
-                    @("&nbsp;")
+                    @(" ")
                 }
             </span>
             <span class="readMore commonButton commonButtonSlim commonButtonRed">Celý článek</span>
