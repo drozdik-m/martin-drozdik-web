@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MartinDrozdik.Data.DbContexts.Migrations
 {
     [DbContext(typeof(AppDb))]
-    [Migration("20220527172319_AddKeywords")]
-    partial class AddKeywords
+    [Migration("20220611145535_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,194 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.Article", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Abstract")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ArticleTagId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ContentId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsArticleReference")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsHidden")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Keywords")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MainImageId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("PublishDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ReferenceLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UrlName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticleTagId");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("ContentId");
+
+                    b.HasIndex("MainImageId");
+
+                    b.ToTable("Articles");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.ArticleHasTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("ArticlesId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ArticlesId");
+
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("ArticleHasTags");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.ArticleMainImage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AlternativeText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FileName")
+                        .IsRequired()
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderIndex")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Uploaded")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ArticleMainImages");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.ArticleTag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("OrderIndex")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ArticleTags");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.BlogMarkdownArticle", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("HTML")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("LastEditAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Markdown")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BlogMarkdownArticles");
+                });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.CV.Education", b =>
                 {
@@ -45,6 +233,10 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -223,7 +415,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ArticleId")
+                    b.Property<int>("ContentId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
@@ -284,7 +476,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleId");
+                    b.HasIndex("ContentId");
 
                     b.HasIndex("LogoId");
 
@@ -669,6 +861,54 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     b.ToTable("TechnologyLogos");
                 });
 
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.Article", b =>
+                {
+                    b.HasOne("MartinDrozdik.Data.Models.Blog.ArticleTag", null)
+                        .WithMany("Articles")
+                        .HasForeignKey("ArticleTagId");
+
+                    b.HasOne("MartinDrozdik.Data.Models.People.Person", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
+                    b.HasOne("MartinDrozdik.Data.Models.Blog.BlogMarkdownArticle", "Content")
+                        .WithMany()
+                        .HasForeignKey("ContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MartinDrozdik.Data.Models.Blog.ArticleMainImage", "MainImage")
+                        .WithMany()
+                        .HasForeignKey("MainImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Content");
+
+                    b.Navigation("MainImage");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.ArticleHasTag", b =>
+                {
+                    b.HasOne("MartinDrozdik.Data.Models.Blog.Article", "Project")
+                        .WithMany("Tags")
+                        .HasForeignKey("ArticlesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MartinDrozdik.Data.Models.Blog.ArticleTag", "Tag")
+                        .WithMany()
+                        .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Tag");
+                });
+
             modelBuilder.Entity("MartinDrozdik.Data.Models.People.Person", b =>
                 {
                     b.HasOne("MartinDrozdik.Data.Models.People.PersonProfileImage", "ProfileImage")
@@ -682,9 +922,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.Project", b =>
                 {
-                    b.HasOne("MartinDrozdik.Data.Models.Projects.ProjectMarkdownArticle", "Article")
+                    b.HasOne("MartinDrozdik.Data.Models.Projects.ProjectMarkdownArticle", "Content")
                         .WithMany()
-                        .HasForeignKey("ArticleId")
+                        .HasForeignKey("ContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -710,7 +950,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .WithMany("Projects")
                         .HasForeignKey("ProjectTagId");
 
-                    b.Navigation("Article");
+                    b.Navigation("Content");
 
                     b.Navigation("Logo");
 
@@ -796,6 +1036,16 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         .IsRequired();
 
                     b.Navigation("Logo");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.Article", b =>
+                {
+                    b.Navigation("Tags");
+                });
+
+            modelBuilder.Entity("MartinDrozdik.Data.Models.Blog.ArticleTag", b =>
+                {
+                    b.Navigation("Articles");
                 });
 
             modelBuilder.Entity("MartinDrozdik.Data.Models.Projects.Project", b =>

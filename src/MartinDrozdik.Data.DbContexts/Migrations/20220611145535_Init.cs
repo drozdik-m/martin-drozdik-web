@@ -10,6 +10,95 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
+                name: "ArticleMainImages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderIndex = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    FileName = table.Column<string>(type: "nvarchar(128)", maxLength: 128, nullable: false),
+                    Uploaded = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlternativeText = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleMainImages", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ArticleTags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OrderIndex = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleTags", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "BlogMarkdownArticles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Markdown = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HTML = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlogMarkdownArticles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Educations",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderIndex = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Specialization = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Ended = table.Column<bool>(type: "bit", nullable: false),
+                    EndedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Note = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Educations", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "LanguageSkills",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderIndex = table.Column<int>(type: "int", nullable: false),
+                    LanguageName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SkillLevel = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LanguageSkills", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PeopleProfileImages",
                 columns: table => new
                 {
@@ -132,6 +221,29 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "WorkExperiences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    OrderIndex = table.Column<int>(type: "int", nullable: false),
+                    WorkPosition = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlaceOfWork = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PlaceOfWorkHasWebsite = table.Column<bool>(type: "bit", nullable: false),
+                    PlaceOfWorkUri = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    StartedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Ended = table.Column<bool>(type: "bit", nullable: false),
+                    EndedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_WorkExperiences", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "People",
                 columns: table => new
                 {
@@ -166,6 +278,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     OrderIndex = table.Column<int>(type: "int", nullable: false),
                     IsHidden = table.Column<bool>(type: "bit", nullable: false),
                     Abstract = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsFinished = table.Column<bool>(type: "bit", nullable: false),
                     FinishedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     HasLiveLink = table.Column<bool>(type: "bit", nullable: false),
@@ -175,7 +288,7 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                     LogoId = table.Column<int>(type: "int", nullable: false),
                     OgImageId = table.Column<int>(type: "int", nullable: false),
                     PreviewImageId = table.Column<int>(type: "int", nullable: false),
-                    ArticleId = table.Column<int>(type: "int", nullable: false),
+                    ContentId = table.Column<int>(type: "int", nullable: false),
                     ProjectTagId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -190,8 +303,8 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Projects_ProjectMarkdownArticles_ArticleId",
-                        column: x => x.ArticleId,
+                        name: "FK_Projects_ProjectMarkdownArticles_ContentId",
+                        column: x => x.ContentId,
                         principalTable: "ProjectMarkdownArticles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -236,6 +349,54 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         principalTable: "TechnologyLogos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Articles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UrlName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsHidden = table.Column<bool>(type: "bit", nullable: false),
+                    Abstract = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsArticleReference = table.Column<bool>(type: "bit", nullable: false),
+                    ReferenceLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PublishDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    MainImageId = table.Column<int>(type: "int", nullable: false),
+                    ContentId = table.Column<int>(type: "int", nullable: false),
+                    AuthorId = table.Column<int>(type: "int", nullable: true),
+                    ArticleTagId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Articles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Articles_ArticleMainImages_MainImageId",
+                        column: x => x.MainImageId,
+                        principalTable: "ArticleMainImages",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Articles_ArticleTags_ArticleTagId",
+                        column: x => x.ArticleTagId,
+                        principalTable: "ArticleTags",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Articles_BlogMarkdownArticles_ContentId",
+                        column: x => x.ContentId,
+                        principalTable: "BlogMarkdownArticles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Articles_People_AuthorId",
+                        column: x => x.AuthorId,
+                        principalTable: "People",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -352,6 +513,64 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ArticleHasTags",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ArticlesId = table.Column<int>(type: "int", nullable: false),
+                    TagsId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEditAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArticleHasTags", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArticleHasTags_Articles_ArticlesId",
+                        column: x => x.ArticlesId,
+                        principalTable: "Articles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ArticleHasTags_ArticleTags_TagsId",
+                        column: x => x.TagsId,
+                        principalTable: "ArticleTags",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleHasTags_ArticlesId",
+                table: "ArticleHasTags",
+                column: "ArticlesId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArticleHasTags_TagsId",
+                table: "ArticleHasTags",
+                column: "TagsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articles_ArticleTagId",
+                table: "Articles",
+                column: "ArticleTagId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articles_AuthorId",
+                table: "Articles",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articles_ContentId",
+                table: "Articles",
+                column: "ContentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Articles_MainImageId",
+                table: "Articles",
+                column: "MainImageId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_People_ProfileImageId",
                 table: "People",
@@ -383,9 +602,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 column: "TagsId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_ArticleId",
+                name: "IX_Projects_ContentId",
                 table: "Projects",
-                column: "ArticleId");
+                column: "ContentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Projects_LogoId",
@@ -426,6 +645,15 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ArticleHasTags");
+
+            migrationBuilder.DropTable(
+                name: "Educations");
+
+            migrationBuilder.DropTable(
+                name: "LanguageSkills");
+
+            migrationBuilder.DropTable(
                 name: "ProjectDevelopers");
 
             migrationBuilder.DropTable(
@@ -438,7 +666,10 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 name: "ProjectTechnology");
 
             migrationBuilder.DropTable(
-                name: "People");
+                name: "WorkExperiences");
+
+            migrationBuilder.DropTable(
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Projects");
@@ -447,7 +678,16 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
                 name: "Technologies");
 
             migrationBuilder.DropTable(
-                name: "PeopleProfileImages");
+                name: "ArticleMainImages");
+
+            migrationBuilder.DropTable(
+                name: "ArticleTags");
+
+            migrationBuilder.DropTable(
+                name: "BlogMarkdownArticles");
+
+            migrationBuilder.DropTable(
+                name: "People");
 
             migrationBuilder.DropTable(
                 name: "ProjectLogos");
@@ -466,6 +706,9 @@ namespace MartinDrozdik.Data.DbContexts.Migrations
 
             migrationBuilder.DropTable(
                 name: "TechnologyLogos");
+
+            migrationBuilder.DropTable(
+                name: "PeopleProfileImages");
         }
     }
 }

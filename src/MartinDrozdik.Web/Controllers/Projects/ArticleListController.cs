@@ -42,7 +42,7 @@ namespace MartinDrozdik.Web.Controllers.Projects
             try
             {
                 //Get projects
-                var projects = await facade.GetVisibleAsync();
+                var projects = await facade.GetPublishedAsync();
                 var result = new List<ArticleListItem>();
                 foreach(var item in projects)
                 {
