@@ -13,6 +13,10 @@
     }
 }
 
+.breadcrumbsBlock{
+    
+}
+
 .breadcrumbs {
     margin: 1.5rem 0;
     font-size: 0;
@@ -26,11 +30,11 @@
             position: relative;
             display: block;
             color: white;
-            font-size: $pxInRem-20;
+            font-size: $pxInRem-18;
             text-decoration: none;
             padding: $pxInRem-7 $pxInRem-10;
-            padding-left: $pxInRem-40;
-            padding-right: $pxInRem-16;
+            padding-left: $pxInRem-33;
+            padding-right: $pxInRem-14;
             @include box-shadow(0 0 $pxInRem-8 rgba(0, 0, 0, 0.25));
             @include transition(background-color $transition);
             //@include border-radius($radiusSmall);
@@ -45,9 +49,9 @@
                 bottom: 0;
                 width: 2.4rem;
                 //background-color: red;
-                background-position: $pxInRem-12 center;
+                background-position: $pxInRem-11 center;
                 background-repeat: no-repeat;
-                background-size: $pxInRem-19 $pxInRem-19;
+                background-size: $pxInRem-16 $pxInRem-16;
             }
         }
         //---SCHEMES---
@@ -115,6 +119,7 @@
         &.home {
             a {
                 &:before {
+                    background-position-y: 48%;
                     background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMjAgMTkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0xOC40NiAxMC41OThjMC41NjE4IDRlLTMgMC44NDU5LTAuNzAxODIgMC40NDg1LTEuMTE0N2wtOC45NDE2LTkuMjkyNWMtMC4yNDUzOC0wLjI1NTAxLTAuNjQzMjUtMC4yNTUwMS0wLjg4ODY1IDBsLTguODIxNCA5LjE2NzZjLTAuMzk0MzkgMC40MDk4Ni0wLjExNzcgMS4xMTA4IDAuNDQwMDQgMS4xMTQ4bDEuMzQyIDAuMDA5NHY3LjUyNzFjMCAwLjU0NjYgMC40MjY0MiAwLjk4OTggMC45NTI0NSAwLjk4OThoMy43MDZ2LTUuNjgzM2MwLTAuNzY3OSAwLjU5ODk1LTEuMzkwNCAxLjMzNzktMS4zOTA0aDIuOTc0NmMwLjczODggMCAxLjMzNzkgMC42MjI1IDEuMzM3OCAxLjM5MDR2NS42ODMzaDMuNzA2MWMwLjUyNiAwIDAuOTUyNS0wLjQ0MzIgMC45NTI0LTAuOTg5OHYtNy40MjE5bDEuNDUzOCAwLjAxMDJ6IiBjbGlwLXJ1bGU9ImV2ZW5vZGQiIGZpbGw9IiNmZmYiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8L3N2Zz4K");
                 }
             }
@@ -149,7 +154,7 @@
 
 
             a {
-                padding-left: $pxInRem-40;
+                //padding-left: $pxInRem-40;
                 @include border-bottom-left-radius($radiusSmall);
                 @include border-top-left-radius($radiusSmall);
 

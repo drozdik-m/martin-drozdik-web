@@ -35,6 +35,15 @@
         background-color: $black;
     }
 
+    &.commonHSlim {
+        font-size: $pxInRem-44;
+        margin-bottom: $pxInRem-22;
+
+        &:after {
+            height: $pxInRem-3;
+        }
+    }
+
     &.commonHGradient {
         display: inline-block;
         @include commonHeadingScheme($red);
@@ -79,6 +88,14 @@
         &:after {
             height: $pxInRem-4;
             width: $pxInRem-46;
+        }
+
+        &.commonHSlim {
+            font-size: $pxInRem-28;
+            margin-bottom: $pxInRem-16;
+            &:after{
+                width: $pxInRem-36;
+            }
         }
     }
 }

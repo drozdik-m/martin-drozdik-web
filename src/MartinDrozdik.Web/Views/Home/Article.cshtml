@@ -30,12 +30,12 @@
 
 }
 
-
 <div id="article" class="articleBlock">
+    
     @{
         var breadcrumbsModel = new BreadcrumbsModel(new List<BreadcrumbModel>()
         {
-           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Black),
+           new BreadcrumbModel("Martin Drozdík", "/", BreadcrumbType.Home, BreadcrumbScheme.Red),
            new BreadcrumbModel("Blog", @Url.Action("Blog", "Home"), BreadcrumbType.Blog, BreadcrumbScheme.DarkRed),
            new BreadcrumbModel(Model.Article.Name, string.Empty, BreadcrumbType.Article, BreadcrumbScheme.White),
         });
@@ -43,13 +43,17 @@
     <partial name="_Breadcrumbs" for="@breadcrumbsModel" />
 
     <article>
+
+        <!--MAIN IMAGE-->
+        <img id="articleMainImage" src="@ServerConfiguration.ContentDomain@Model.Article.MainImage.Uri" title="@Model.Article.Name" alt="Ilustrativní obrázek" />
+
         <!--HEADING-->
-        <h1 class="commonH">@Model.Article.Name</h1>
+        <h1 class="commonH commonHSlim commonHRed">@Model.Article.Name</h1>
         <p class="commonP">@Model.Article.Abstract</p>
 
         @if (Model.Article.Tags.Any())
         {
-            <ul class="tags tagsBlackWhite">
+            <ul class="tags tagsDarkerRedWhite">
                 @foreach(var tag in Model.Article.Tags)
                 {
                     <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
@@ -63,6 +67,16 @@
         </div>
     
         <!--AUTHOR-->
+        <div id="author">
+            <div class="authorImage" style="@(Model.Article.Author.ProfileImage.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain}{Model.Article.Author.ProfileImage.Uri});" : "")">&nbsp;</div>
+            <div class="authorInfo">
+                <span class="authorName">@Model.Article.Author.Name</span>
+                @if (Model.Article.PublishDate.HasValue)
+                {
+                    <span class="publishDate">@Model.Article.PublishDate.Value.ToString("dd. MM. yyyy", CultureInfo.InvariantCulture)</span>
+                }
+            </div>
+        </div>
    
     </article>
 

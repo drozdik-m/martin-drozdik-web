@@ -26,7 +26,7 @@ $h6mobileFS: $pxInRem-14;
 //Line-heights
 $normalFS: $pxInRem-18;
 $mobileFS: $pxInRem-16;
-$normalLH: $pxInRem-30;
+$normalLH: $pxInRem-28;
 $mobileLH: $pxInRem-22;
 
 //Margins
@@ -56,18 +56,25 @@ $articleBlockPadding: 1rem;
 $linkColor: #1a0dab;
 $linkColorVisited: #8f0099;
 
+//Open sans font
+@include font-face (OpenSans, OpenSans, "/Fonts/OpenSans/", $fontWeightRegular, normal);
+@include font-face (OpenSans, OpenSans-Bold, "/Fonts/OpenSans/", $fontWeightBold, normal);
+@include font-face (OpenSans, OpenSans-Extrabold, "/Fonts/OpenSans/", $fontWeightExtraBold, normal);
+
 //--------------------------------------------------
 //---------BLOCK------------------------------------
 //--------------------------------------------------
 .articleBlock {
     max-width: $articleBlockMaxWidth;
     margin: 0 auto;
-    padding: $articleBlockPadding;
+    padding-left: $articleBlockPadding;
+    padding-right: $articleBlockPadding;
 }
 
 @media only screen and (max-width: $mobileBreakpoint) {
     .articleBlock {
-        padding: 1rem 0.5rem;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
     }
 }
 
@@ -76,6 +83,8 @@ $linkColorVisited: #8f0099;
 //---------TEXTS------------------------------------
 //--------------------------------------------------
 .article {
+    //font-weight: $fontWeightMedium;
+    font-family: 'OpenSans', 'Raleway', Verdana, sans-serif;
 
     p, span, a, q, li, table, cite {
         font-size: $normalFS;
@@ -353,7 +362,7 @@ $linkColorVisited: #8f0099;
         }
 
         p {
-            font-weight: $fontWeightSemiBold;
+            font-weight: $fontWeightBold; //Semi bold
             font-size: $pxInRem-24;
             line-height: $pxInRem-26;
             margin-top: $pxInRem-12;
@@ -393,7 +402,6 @@ $linkColorVisited: #8f0099;
             }
 
             p {
-                font-weight: $fontWeightSemiBold;
                 font-size: $pxInRem-18;
                 line-height: $pxInRem-22;
                 margin-top: $pxInRem-12;

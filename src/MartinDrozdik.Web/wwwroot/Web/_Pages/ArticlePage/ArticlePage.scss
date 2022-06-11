@@ -7,7 +7,7 @@
 @import "../../Team/Team";
 @import "../../Technologies/Technologies";
 
-$articleBlockMaxWidth: 55rem;
+//$articleBlockMaxWidth: 55rem;
 @import "../../Article/Article";
 
 body {
@@ -18,16 +18,29 @@ body {
 //--------------------------------------------------
 //---------PROJECT PAGE-----------------------------
 //--------------------------------------------------
+.breadcrumbsBlock{
+    max-width: $articleBlockMaxWidth;
+}
 
 #article {
     //max-width: $articleBlockMaxWidth;
+    margin-bottom: 1rem;
+    .commonP {
+        max-width: none;
+        font-family: 'OpenSans', 'Raleway', Verdana, sans-serif;
+        margin-bottom: $pxInRem-12;
+    }
 
-    > .commonP {
-        margin-bottom: $pxInRem-20;
+    #articleMainImage {
+        display: block;
+        @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-10 0 rgba(0, 0, 0, 0.5));
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+        @include border-radius($radiusSmall);
     }
 
     .tags {
-        margin-bottom: $pxInRem-22;
+        margin-bottom: $pxInRem-24;
 
         &:after {
             clear: both;
@@ -36,8 +49,55 @@ body {
             font-size: 0;
         }
     }
+
+    #author {
+        font-size: 0;
+        margin: 2rem 0;
+
+        .authorImage, .authorInfo{
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .authorImage {
+            background-image: url("/Web/Team/Default.png");
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            $dimensions: $pxInRem-73;
+            width: $dimensions;
+            height: $dimensions;
+            @include box-shadow(0 0 $pxInRem-10 $pxInRem-5 rgba(0, 0, 0, 0.25));
+            @include border-radius(50%);
+            margin-right: $pxInRem-20;
+        }
+
+        .authorInfo {
+            .authorName, .publishDate {
+                font-size: $pxInRem-18;
+                display: block;
+            }
+
+            .authorName {
+                color: $black;
+                font-weight: $fontWeightBold;
+            }
+
+            .publishDate {
+                color: #535353;
+                font-weight: $fontWeightSemiBold;
+            }
+        }
+    }
 }
 
-@media only screen and (max-width: 72rem){
-    
+@media only screen and (max-width: 72rem) {
+}
+
+@media only screen and (max-width: 46rem){
+    #article {
+        #articleMainImage {
+            margin-bottom: 1rem;
+            @include box-shadow($pxInRem-3 $pxInRem-3 $pxInRem-5 0 rgba(0, 0, 0, 0.5));
+        }
+    }
 }
