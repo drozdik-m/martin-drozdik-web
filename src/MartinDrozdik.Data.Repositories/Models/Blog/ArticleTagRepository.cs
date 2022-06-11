@@ -19,10 +19,5 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
 
         protected override DbSet<ArticleTag> EntitySet => Context.ArticleTags;
 
-        protected override Task<IQueryable<ArticleTag>> IncludeRelationsAsync(IQueryable<ArticleTag> entities)
-        {
-            entities = entities.Include(e => e.Articles);
-            return base.IncludeRelationsAsync(entities);
-        }
     }
 }

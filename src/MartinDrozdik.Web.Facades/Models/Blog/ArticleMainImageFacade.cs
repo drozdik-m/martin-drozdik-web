@@ -33,7 +33,7 @@ namespace MartinDrozdik.Web.Facades.Models.Blog
             IImageSaver imageSaver)
             : base(hostEnvironment, repository, imageSaver, new ImageConfiguration()
             {
-                MaxWidth = 1500,
+                MaxWidth = 1200,
                 Quality = 75
             })
         {

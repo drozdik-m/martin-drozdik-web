@@ -32,7 +32,6 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>Assigned projects</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -44,7 +43,6 @@
                         <tr>
                             <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
-                            <td><MudSkeleton /></td>
                         </tr>
                     }
                 }
@@ -52,7 +50,6 @@
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td>@item.Projects.Count</td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"

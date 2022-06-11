@@ -154,19 +154,28 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
         /// <returns></returns>
         public async Task AddSelectedToCollection()
         {
+            if (SelectedOption is null)
+            {
+                Snackbar.Add("No item selected", Severity.Warning);
+                return;
+            }
+
+            await AddToCollection(SelectedOption);
+
+            if (Unique)
+                SelectedOption = default;
+        }
+
+        /// <summary>
+        /// Adds the item to the Items collection
+        /// </summary>
+        /// <returns></returns>
+        public async Task AddToCollection(TModel toAdd)
+        {
             try
             {
-                if (SelectedOption is null)
-                {
-                    Snackbar.Add("No item selected", Severity.Warning);
-                    return;
-                }
-
-                Items.Add(ConnectorFactory(SelectedOption));
+                Items.Add(ConnectorFactory(toAdd));
                 await ItemsChanged.InvokeAsync(Items);
-
-                if (Unique)
-                    SelectedOption = default;
             }
             catch (Exception e)
             {
@@ -174,6 +183,7 @@ namespace MartinDrozdik.Web.Admin.Client.Components.CModelCollectionInput
                 lastException = e;
             }
         }
+
 
         public async Task AddNewToCollection()
         {

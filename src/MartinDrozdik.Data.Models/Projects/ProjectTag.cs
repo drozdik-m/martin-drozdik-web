@@ -9,6 +9,6 @@ namespace MartinDrozdik.Data.Models.Projects
 {
     public class ProjectTag : Tag
     {
-        public ICollection<Project> Projects { get; set; } = new List<Project>();
+        
     }
 }

@@ -18,10 +18,5 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
 
         protected override DbSet<ProjectTag> EntitySet => Context.ProjectTags;
 
-        protected override Task<IQueryable<ProjectTag>> IncludeRelationsAsync(IQueryable<ProjectTag> entities)
-        {
-            entities = entities.Include(e => e.Projects);
-            return base.IncludeRelationsAsync(entities);
-        }
     }
 }

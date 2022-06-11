@@ -25,7 +25,7 @@ WindowEvents.OnDOMReady.Add(function ()
         entities: [],
         loadMoreButton: true,
         tagsFilter: true,
-        pageSize: 9,
+        pageSize: 12,
         initialSize: 0,
         noResultsMessage: "Žádné články nenalezeny"
     }

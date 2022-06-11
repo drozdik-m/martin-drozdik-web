@@ -31,7 +31,6 @@
     GetService="Service"
     AddService="Service" EntityCreator="() => new Article()"
     DeleteService="Service" 
-    CustomOrder="e => e.OrderBy(e => e.CreatedAt)"
     HideableService="Service">
 
     <DisplayItems>
@@ -39,7 +38,9 @@
             <thead>
                 <tr>
                     <th>Name</th>
-                    <th>URI key</th>
+                    <th>Publication</th>
+                    @*<th>URI key</th>*@
+                    <th>Tags</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -52,6 +53,8 @@
                             <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
+                            @*<td><MudSkeleton /></td>*@
+                            <td><MudSkeleton /></td>
                         </tr>
                     }
                 }
@@ -59,7 +62,19 @@
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td>@item.UrlName</td>
+                        <td>
+                            @if (item.PublishDate.HasValue)
+                            {
+                                @(item.PublishDate.Value.ToString("dd. MM. yyyy", CultureInfo.InvariantCulture))
+                            }
+                        </td>
+                        @*<td>@item.UrlName</td>*@
+                        <td>
+                            @foreach(var tag in item.Tags)
+                            {
+                                <MudChip Color="Color.Primary">@tag.Tag.Name</MudChip>
+                            }
+                        </td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"

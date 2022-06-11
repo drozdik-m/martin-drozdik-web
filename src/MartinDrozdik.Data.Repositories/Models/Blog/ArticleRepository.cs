@@ -118,7 +118,7 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
         protected override async Task<IQueryable<Article>> ProcessReturnedEntitiesAsync(IQueryable<Article> entities)
         {
             entities = await base.ProcessReturnedEntitiesAsync(entities);
-            entities = entities.OrderBy(e => e.CreatedAt);
+            entities = entities.OrderByDescending(e => e.PublishDate);
             return entities;
         }
 

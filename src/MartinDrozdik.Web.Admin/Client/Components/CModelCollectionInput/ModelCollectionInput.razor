@@ -110,13 +110,17 @@
     @if (!ReadOnly)
     {
         @* Select an item to add *@
-        @if(optionsLoaded)
+        @if(GetOptionsService is not null)
         {
             <MudSelect T="TModel" Label="Item to add" Variant="Variant.Outlined" 
-                AnchorOrigin="Origin.BottomCenter" Class="my-4" @bind-Value="SelectedOption">
+                AnchorOrigin="Origin.BottomCenter" Class="my-4"
+                OnOpen="async _ => { if(!optionsLoaded) await ReloadOptionsAsync(); }"
+                @bind-Value="SelectedOption"
+                SelectedValuesChanged="async e => await AddSelectedToCollection()">
+             
                 @foreach(var item in ItemsToAdd)
                 {
-                    <MudSelectItem T="TModel" Value="item"/>
+                    <MudSelectItem T="TModel" Value="item" />
                 }
             </MudSelect>
         }
@@ -129,7 +133,7 @@
         <MudButtonGroup OverrideStyles="false" Class="mt-5">
 
             @* Add selected button*@
-            @if (GetOptionsService is not null && optionsLoaded && Options.Count != 0)
+            @if (GetOptionsService is not null && optionsLoaded && Options.Count != 0 && !Unique)
             {
                 <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Add" Color="Color.Primary" 
                         OnClick="async _ => await AddSelectedToCollection()" Disabled="@(AnyLoading || SelectedOption is null)">Add Selected</MudButton>
@@ -153,14 +157,7 @@
                 }
                 else
                 {
-                    @if (optionsLoaded)
-                    {
-                        <MudText>Reload options</MudText>
-                    }
-                    else
-                    {
-                        <MudText>Start adding</MudText>
-                    }
+                    <MudText>Reload options</MudText>
                 }
                 </MudButton>
             }

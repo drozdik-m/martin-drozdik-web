@@ -9,6 +9,6 @@ namespace MartinDrozdik.Data.Models.Blog
 {
     public class ArticleTag : Tag
     {
-        public ICollection<Article> Articles { get; set; } = new List<Article>();
+        
     }
 }
