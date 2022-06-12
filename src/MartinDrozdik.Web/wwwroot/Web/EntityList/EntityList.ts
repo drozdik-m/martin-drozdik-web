@@ -283,7 +283,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         removedTag.selected = false;
         removedTag.unsuitable = true;
         this.selectedTags = this.selectedTags.filter(function (e) { return e != removedTagId });
-
+        console.log("remove", removedTagId, removedTag);
         
         //Update filtered entities
         if (this.selectedTags.length == 0)
@@ -292,27 +292,71 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
             this.filteredEntities = this.entitiesByTags[this.selectedTags[0]];
         else
         {
-            for (let i = 0; i < this.entitiesByTags[removedTagId].length; i++)
+            //console.log("edge case", this.entitiesByTags[removedTagId]);
+
+            for (let i = 0; i < this.entities.length; i++)
             {
-                let candidateEntity = this.entitiesByTags[removedTagId][i];
+                let candidateEntity = this.entities[i];
 
                 //Check if the candidate entity has all selected tags
                 var suitableCandidate = true;
-                for (let t = 0; this.selectedTags.length; t++)
+                for (let t = 0; t < this.selectedTags.length; t++)
                 {
                     let selectedTag = this.selectedTags[t];
+
+                    //??? magic undefined appearing
+                    if (typeof selectedTag == "undefined") 
+                        continue;
+
                     if (candidateEntity.tags.indexOf(selectedTag) == -1)
                     {
                         suitableCandidate = false;
                         break;
-                    }             
+                    }
                 }
 
                 //Add the candidate entity if not already there
-                if (suitableCandidate && this.filteredEntities.indexOf(candidateEntity) == -1)
+                if (suitableCandidate)
                     this.filteredEntities.push(candidateEntity);
             }
         }
+            //Search by tag groups
+            // -- better do full search because
+            //      -> tags are dense
+            //      -> no need to sort
+            //      -> no need to check if the item is already selected
+            /*for (let s = 0; s < this.selectedTags.length; s++)
+            {
+                var candidateSelectedTag = this.selectedTags[s];
+                var candidateEntitySet = this.entitiesByTags[candidateSelectedTag];
+
+                for (let i = 0; i < candidateEntitySet.length; i++)
+                {
+                    let candidateEntity = candidateEntitySet[i];
+
+                    //Check if the candidate entity has all selected tags
+                    var suitableCandidate = true;
+                    for (let t = 0; t < this.selectedTags.length; t++)
+                    {
+                        let selectedTag = this.selectedTags[t];
+
+                        if (typeof selectedTag == "undefined")
+                            continue;
+
+                        if (candidateEntity.tags.indexOf(selectedTag) == -1)
+                        {
+                            suitableCandidate = false;
+                            break;
+                        }
+                    }
+
+                    //Add the candidate entity if not already there
+                    if (suitableCandidate && this.filteredEntities.indexOf(candidateEntity) == -1)
+                        this.filteredEntities.push(candidateEntity);
+                }
+            }
+        }*/
+        
 
         //Check unsuitable tag class
         if (!this.UpdateUnsuitableTagsCommon())
