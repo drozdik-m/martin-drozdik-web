@@ -26,6 +26,8 @@
         width: $width;
         $innerPadding: 0.5rem;
         margin: $pxInRem-20 0;
+        animation-name: FadeIn;
+        animation-duration: 0.3s;
 
         &.external {
             > a {

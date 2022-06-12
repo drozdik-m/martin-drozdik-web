@@ -76,10 +76,11 @@ namespace MartinDrozdik.Data.Repositories.Models.Blog
         {
             var allEntities = await IncludeRelationsAsync(EntitySet.AsNoTracking());
             var published = allEntities
-                .Where(IsPublished)
-                .Take(count);
+                .Where(IsPublished);
             var processedEntities = await ProcessReturnedEntitiesAsync(published);
-            return await processedEntities.ToListAsync();
+            return await processedEntities
+                .Take(count)
+                .ToListAsync();
         }
         
         protected override Task<IQueryable<Article>> IncludeRelationsAsync(IQueryable<Article> entities)

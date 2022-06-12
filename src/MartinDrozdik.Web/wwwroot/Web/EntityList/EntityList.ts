@@ -305,8 +305,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                     {
                         suitableCandidate = false;
                         break;
-                    }
-                        
+                    }             
                 }
 
                 //Add the candidate entity if not already there
