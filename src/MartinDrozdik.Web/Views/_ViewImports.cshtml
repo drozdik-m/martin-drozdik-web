@@ -1,6 +1,8 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
+@using System.Globalization
 @using Microsoft.AspNetCore.Http
+@using Bonsai.Utils.String
 
 @* Tag helpers *@
 @addTagHelper *, MartinDrozdik.Web
@@ -9,6 +11,11 @@
 @using MartinDrozdik.Web.Views
 @using MartinDrozdik.Web.Views.Home
 @using MartinDrozdik.Web.Views.Sitemap
+@using MartinDrozdik.Data.Models.Projects.Display
+@using MartinDrozdik.Data.Models.Projects
+@using MartinDrozdik.Web.Views.Projects
+@using MartinDrozdik.Web.Views.Shared
+@using MartinDrozdik.Web.Views.Blog
 
 @* File path provider *@
 @using MartinDrozdik.Services.FilePathProvider

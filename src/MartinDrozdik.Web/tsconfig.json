@@ -1,6 +1,13 @@
 {
   "compileOnSave": true,
 
+  "exclude": [
+    "node_modules",
+    "Components",
+    "obj",
+    "bin"
+  ],
+
   "compilerOptions": {
     "module": "commonjs",
     "noImplicitAny": true,
@@ -10,13 +17,6 @@
     "noImplicitUseStrict": true,
     "outDir": "wwwroot/_dist/"
     //"declaration": true
-  },
-
-  "exclude": [
-    "node_modules",
-    "Components",
-    "obj",
-    "bin"
-  ]
+  }
 
 }

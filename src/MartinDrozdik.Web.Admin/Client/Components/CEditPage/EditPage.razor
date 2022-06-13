@@ -1,0 +1,62 @@
+﻿@inherits RootComponent
+@typeparam TModel
+@typeparam TKey
+
+@* Error space *@
+@if(!(lastException is null))
+{
+    <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+}
+
+@* Reload *@
+<MudButtonGroup OverrideStyles="false">
+    <MudButton Variant="Variant.Outlined" 
+        Color="Color.Primary" 
+        Disabled="AnyLoading"
+        StartIcon="@Icons.Material.Filled.Cached" 
+        OnClick="async _ => await ReloadAsync(verbose: true)">
+        @if (reloadLoading)
+        {
+            <MudText Class="me-3">Reloading</MudText>
+            <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+        }
+        else
+        {
+            <MudText>Reload</MudText>
+        }
+    </MudButton>                 
+</MudButtonGroup>
+
+
+@* Edit *@
+@if(Entity is not null)
+{
+    <MudForm @ref="editForm" @bind-IsValid="@editFormValid" Class="my-4 py-1">
+
+        @Editor(new EditPageEditContext<TModel>(){
+            Model = Entity,
+            Disabled = Disabled
+        })
+
+        <MudButtonGroup OverrideStyles="false">
+            @if (!ReadOnly)
+            {
+                <MudButton Variant="Variant.Filled" Class="my-5"
+                    Color="Color.Primary" 
+                    Disabled="AnyLoading"
+                    StartIcon="@Icons.Material.Filled.Save" 
+                    OnClick="async _ => await SaveAsync()">
+                    @if (editLoading)
+                    {
+                        <MudText Class="me-3">Saving</MudText>
+                        <MudProgressCircular Class="ms-n1" Size="Size.Small" Indeterminate="true"/>
+                    }
+                    else
+                    {
+                        <MudText>Save changes</MudText>
+                    }
+                </MudButton>   
+            }
+        </MudButtonGroup>
+    </MudForm>
+}

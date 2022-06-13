@@ -1,0 +1,25 @@
+﻿@page "/error/offline"
+@model MartinDrozdik.Pages.Error.Areas.ErrorPages.Pages.OfflinePageModel
+@{
+    Layout = "_ErrorLayout";
+}
+
+
+@section Styles {
+    <link href="@Model.PathProvider.CleanPathTo("_out/css/OfflinePage.css", StaticResources.Namespace)" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script type="text/javascript" src="@Model.PathProvider.PathTo("_out/js/OfflinePage.js", StaticResources.Namespace)"></script>
+}
+
+<div id="errorWrapper">
+    <img id="errorIcon" src="@Model.IconPath" alt="Error" />
+    <h1>@Model.Header</h1>
+    <p id="errorText">@Model.Text</p>
+    <span id="errorNumber">Offline</span>
+    <span class="commonButtonWrapper">
+        <a id="backButton" class="commonButton" href="/" title="@Model.BackButtonText">@Model.BackButtonText</a>
+    </span>
+</div>
+

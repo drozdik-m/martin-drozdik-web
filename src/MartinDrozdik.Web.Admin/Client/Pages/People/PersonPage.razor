@@ -1,0 +1,80 @@
+﻿@page "/people"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject PersonService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("People", href: "/people", icon: MainLayout.PeopleIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<Person, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">People</MudText>
+<MudText Class="mb-4">People relevant in projects as developers and so on...</MudText>
+
+<ListPage @ref="listPage" TModel="Person" TKey="int" KeyGetter="e => e.Id"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new Person()"
+    DeleteService="Service"
+    CustomOrder="e => e.Where(e => e.IsMe).OrderBy(e => e.Name).Concat(e.Where(e => !e.IsMe).OrderBy(e => e.Name))">
+
+    <DisplayItems>
+        <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(context.DisplaySkeleton)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                        </tr>
+                    }
+                }
+                @foreach (var item in context.Models)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                            @if(item.IsMe)
+                            {
+                                <MudChip Color="Color.Secondary" Class="ml-3">Me</MudChip>
+                            }
+                        </td>
+                        <td>
+                            <ListControlButton Disabled="context.Loading" 
+                                OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                HrefEdit="@($"/people/{item.Id}")"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </DisplayItems>
+    
+    <AddInputs>
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The full name of this person" 
+                        Required="true" RequiredError="A name is required" />
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+    </ReorderItem>
+</ListPage>

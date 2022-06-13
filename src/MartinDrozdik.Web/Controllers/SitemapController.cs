@@ -7,6 +7,9 @@ using Microsoft.Extensions.Caching.Memory;
 using MartinDrozdik.Web.Configuration;
 using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Web.Views.Sitemap;
+using Microsoft.AspNetCore.Mvc.Routing;
+using MartinDrozdik.Web.Facades.Models.Blog;
+using System.Threading.Tasks;
 
 namespace Bonsai.Server.Controllers
 {
@@ -18,26 +21,50 @@ namespace Bonsai.Server.Controllers
         readonly ICultureProvider cultureProvider;
         readonly ILanguageDictionary languageDictionary;
         readonly IMemoryCache cache;
+        private readonly ArticleFacade articleFacade;
 
         public SitemapController(ServerConfiguration serverConfiguration,
             ICultureProvider cultureProvider,
             ILanguageDictionary languageDictionary,
-            IMemoryCache cache)
+            IMemoryCache cache,
+            ArticleFacade articleFacade)
         {
             this.serverConfiguration = serverConfiguration;
             this.cultureProvider = cultureProvider;
             this.languageDictionary = languageDictionary;
             this.cache = cache;
+            this.articleFacade = articleFacade;
         }
 
         /// <summary>
         /// Creates a sitemap of this web from scratch
         /// </summary>
         /// <returns></returns>
-        protected ISitemapNode CreateSitemapNode()
+        protected async Task<ISitemapNode> CreateSitemapNodeAsync()
         {
-            SitemapNode home = new SitemapNode(serverConfiguration.Web.Name, new Uri(serverConfiguration.Web.Domain), SitemapChangeFrequency.Monthly, 1);
+            //Home
+            SitemapNode home = new SitemapNode(serverConfiguration.Web.Name, new Uri(serverConfiguration.Domain), SitemapChangeFrequency.Weekly, 1);
 
+            //Blog
+            SitemapNode blog = new SitemapNode("Projekty", new Uri($"{serverConfiguration.Domain}/blog"), SitemapChangeFrequency.Weekly, 0.7);
+            var articles = await articleFacade.GetPublishedAsync();
+            var newestChange = DateTime.MinValue;
+            foreach(var article in articles)
+            {
+                //Save newest edit
+                if (article.LastEditAt > newestChange)
+                    newestChange = article.LastEditAt;
+
+                //Add article node
+                blog.AddChild(new SitemapNode(article.Name, new Uri($"{serverConfiguration.Domain}/blog/{article.UrlName}"), SitemapChangeFrequency.Monthly, lastModification: article.LastEditAt));
+            }
+            
+            //Set last modificatin for blog
+            if (newestChange != DateTime.MinValue)
+                blog.LastModification = newestChange;
+
+
+            home.AddChild(blog);
             return home;
         }
 
@@ -46,12 +73,12 @@ namespace Bonsai.Server.Controllers
         /// Handles caching etc.
         /// </summary>
         /// <returns></returns>
-        protected ISitemapNode GetSitemapRootNode()
+        protected async Task<ISitemapNode> GetSitemapRootNodeAsync()
         {
             //Cache not found
             if (!cache.TryGetValue(SITEMAP_NODES_CACHE_KEY, out var cacheEntry))
             {
-                cacheEntry = CreateSitemapNode();
+                cacheEntry = await CreateSitemapNodeAsync();
 
                 //Set cache options
                 var cacheEntryOptions = new MemoryCacheEntryOptions()
@@ -75,15 +102,15 @@ namespace Bonsai.Server.Controllers
         }
 
         [Route("/sitemap")]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(new SitemapPageModel(cultureProvider, languageDictionary, GetSitemapRootNode()));
+            return View(new SitemapPageModel(cultureProvider, languageDictionary, await GetSitemapRootNodeAsync()));
         }
 
         [Route("/sitemap.xml")]
-        public IActionResult SitemapFile()
+        public async Task<IActionResult> SitemapFile()
         {
-            var rootNode = GetSitemapRootNode();
+            var rootNode = await GetSitemapRootNodeAsync();
             var xml = rootNode.GenerateXML();
 
             return Content(xml.ToString(), "text/xml");

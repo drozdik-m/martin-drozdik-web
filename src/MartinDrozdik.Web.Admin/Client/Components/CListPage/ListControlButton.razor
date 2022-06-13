@@ -1,0 +1,54 @@
+﻿@inherits RootComponent
+
+@code{
+    [Parameter]
+    public Action<MouseEventArgs>? OnDelete { get; set; } = null;
+
+    [Parameter]
+    public Action<MouseEventArgs>? OnVisibilityToggle { get; set; } = null;
+
+    [Parameter]
+    public bool Visible { get; set; }
+
+    [Parameter]
+    public bool Disabled { get; set; }
+
+    [Parameter]
+    public string? HrefEdit { get; set; } = null;
+}
+
+<MudButtonGroup OverrideStyles="false">
+    @if(HrefEdit is not null)
+    {
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Edit" Color="Color.Info" 
+            Href="@HrefEdit">Edit</MudButton>
+    }
+
+    @if(OnVisibilityToggle is not null)
+    {
+        string icon = Icons.Material.Filled.Visibility;
+        if (Visible) { icon = Icons.Material.Filled.VisibilityOff; }
+
+        Color color = Color.Dark;
+        if (Visible) { color = Color.Secondary; }
+
+        <MudButton Variant="Variant.Filled" StartIcon="@icon" Color="@color" 
+            OnClick="OnVisibilityToggle" Disabled="Disabled">
+            @if(Visible)
+            {
+                @("Hide")
+            }
+            else
+            {
+                @("Show")
+            }
+        </MudButton>
+    }
+
+    @if(OnDelete is not null)
+    {
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" 
+            OnClick="OnDelete" Disabled="Disabled">Delete</MudButton>
+    }
+    
+</MudButtonGroup>

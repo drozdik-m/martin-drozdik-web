@@ -1,0 +1,41 @@
+﻿@model ProjectListItemModel
+@inject ServerConfiguration ServerConfiguration
+
+<li>
+    <div class="projectPreviewImage" style="background-image: url(@(Model.Project.PreviewImage.Uploaded ? ServerConfiguration.ContentDomain + Model.Project.PreviewImage.Uri : "/Web/Projects/Default.png"))">&nbsp;</div>
+    <div class="projectDescription">
+        @if (!string.IsNullOrWhiteSpace(Model.Project.Name))
+        {
+            <h3>
+                @Model.Project.Name
+                @if (Model.Project.IsFinished)
+                {
+                    <span class="finishedYear">@Model.Project.FinishedTime.Value.Year</span>
+                }
+            </h3>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.Project.Abstract))
+        {
+            <p>@Model.Project.Abstract</p>
+        }
+        <ul class="tags tagsSlim @(Model.Scheme == ProjectListItemScheme.Dark ? "tagsWhiteBlack" : "tagsBlackWhite")">
+            @foreach(var tag in Model.Project.Tags)
+            {
+                <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
+            }
+        </ul>
+        <div class="projectActions">
+            <a href="/projects/@Model.Project.UrlName" title="Detail projektu @Model.Project.Name" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonRed" : "commonButtonDarkRed")">Detail projektu</a>
+            
+            @if (Model.Project.HasGitHubLink)
+            {
+                <a href="@Model.Project.GitHubLink" title="@Model.Project.Name GitHub codebase" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonDarkRed" : "commonButtonBlack") commonButtonSlim commonButtonGithub iconGitHubWhite" target="_blank" rel="nofollow">GitHub</a>
+            }
+            
+            @if (Model.Project.HasLiveLink)
+            {
+                <a href="@Model.Project.LiveLink" title="@Model.Project.Name live" class="commonButton @(Model.Scheme == ProjectListItemScheme.Dark ? "commonButtonDarkRed" : "commonButtonBlack") commonButtonSlim commonButtonLive" target="_blank" rel="nofollow">Odkaz</a>
+            }
+        </div>
+    </div>
+</li>

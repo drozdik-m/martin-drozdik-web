@@ -2,6 +2,10 @@
 @inject IFilePathProvider PathProvider
 @inject ServerConfiguration ServerConfiguration
 
+@{
+    var url = $"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}{Context.Request.QueryString}";
+}
+
 <!DOCTYPE html>
 <html lang="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
 <head>
@@ -17,6 +21,12 @@
     <meta name="language" content="@Model.CultureProvider.Culture.TwoLetterISOLanguageName" />
     <meta name="robots" content="index, follow" />
     <meta name="copyright" content="@Model.ClientName" />
+    @RenderSection("Metas", required: false)
+    @if (Model.RevisionDate.HasValue)
+    {
+        <meta name="revised" content="@Model.RevisionDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)" />
+    }
+
 
     <!--TITLE-->
     <title>@Model.Title</title>
@@ -28,18 +38,20 @@
     <!--WINDOWS META TAGS-->
     <meta name="application-name" content="@Model.SiteName" />
 
-    <!--SOCIAL-->
-    <meta property="og:image" content="@ServerConfiguration.Web.Domain@Model.OgImage" />
-    <meta property="og:image:secure_url" content="@ServerConfiguration.Web.Domain@Model.OgImage" />
+    <!--OPEN GRAPH PROTOCOL-->
+    <meta property="og:image" content="@ServerConfiguration.Domain@Model.OgImage" />
+    <meta property="og:image:secure_url" content="@ServerConfiguration.Domain@Model.OgImage" />
     <meta property="og:type" content="@Model.PageType" />
     <meta property="og:description" content="@Model.Description" />
     <meta property="og:title" content="@Model.Title" />
     <meta property="og:site_name" content="@Model.SiteName" />
+    <meta property="og:locale" content="@Model.CultureProvider.Culture.TwoLetterISOLanguageName">
+    <meta property="og:url" content="@url">
 
     <!--TWITTER-->
     <meta name="twitter:title" content="@Model.Title" />
     <meta name="twitter:description" content="@Model.Description" />
-    <meta name="twitter:image" content="@ServerConfiguration.Web@Model.OgImage" />
+    <meta name="twitter:image" content="@ServerConfiguration.Domain@Model.OgImage" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image:alt" content="@Model.SiteName" />
 
@@ -63,14 +75,16 @@
     <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/Global.css")" />
 
     <!--SCRIPTS-->
-    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/common.js")"></script>
-    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/Global.js")"></script>
+    <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/common.js")"></script>
+    <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/Global.js")"></script>
     @RenderSection("Scripts", required: false)
 
 
 </head>
 <body>
-
+    @{
+        var menuListModel = MenuListModel.Default(Model.PageId);
+    }
     <!--MENU-->
     <div id="menu" class="desktopMenu closedMenu">
         <nav>
@@ -79,12 +93,7 @@
             </a>
 
             <ul>
-                <li><a href="/" title="Martin Drozdík">Martin Drozdík</a></li>
-                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#aboutMe" title="Kdo jsem?" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">O mně</a></li>
-                @*<li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>*@
-                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#biography" title="Životopis" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">CV</a></li>
-                @*<li><a href="@Url.Action("Blog", "Home")" title="Blog">Blog</a></li>*@
-                <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>
+                <partial name="_MenuList" for="@menuListModel" />
             </ul>
         </nav>
 
@@ -107,12 +116,8 @@
         <div class="block">
             <nav id="footerNav">
                 <ul>
-                    <li><a href="/" title="Martin Drozdík">Martin Drozdík</a></li>
-                    <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#aboutMe" title="Kdo jsem?" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">O mně</a></li>
-                    @*<li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>*@
-                    <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#biography" title="Životopis" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">CV</a></li>
-                    @*<li><a href="@Url.Action("Blog", "Home")" title="Blog">Blog</a></li>*@
-                    <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>
+                    
+                    <partial name="_MenuList" for="@menuListModel" />
                 </ul>
             </nav>
 
@@ -121,9 +126,9 @@
                     <span class="commonH commonHWhite">Kontakt</span>
                     <dl class="contactInfos">
                         <dt>Email</dt>
-                        <dd class="email"><a href="" data-email-link></a></dd>
+                        <dd class="email"><a href="" title="Kontaktní email" data-email-link></a></dd>
                         <dt>Telefon</dt>
-                        <dd class="phone"><a href="" data-phone-link></a></dd>
+                        <dd class="phone"><a href="" title="Kontaktní číslo" data-phone-link></a></dd>
                         <dt>Lokace</dt>
                         <dd class="location">Česká republika</dd>
                     </dl>
@@ -153,7 +158,7 @@
             </ul>
         </div>
 
-        <p id="credits">Copyright&nbsp;&copy;@DateTime.Now.Year Bc.&nbsp;Martin Drozdík. Web by&nbsp;me.</p>
+        <p id="credits">Copyright&nbsp;&copy;@DateTime.Now.Year Ing.&nbsp;Martin Drozdík. Web by&nbsp;me.</p>
     </footer>
 
 </body>

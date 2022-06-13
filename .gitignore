@@ -9,7 +9,9 @@ _pack
 # User-specific files
 *.rsuser
 *.suo
-*.user
+*PublishProfiles
+*.json.user
+*.csproj.user
 *.userosscache
 *.sln.docstates
 
@@ -351,4 +353,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
-/src/MartinDrozdik.Web/appsettings.Secrets.json
+
+# Secret files
+*appsettings.Secrets.json

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--GENERAL META TAGS-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Administration pages" />
+    <meta name="keywords" content="Admin, content management, CMS, content management system" />
+    <meta name="author" content="Martin Drozdík" />
+    <meta name="designer" content="Martin Drozdík" />
+    <meta name="language" content="en" />
+    <meta name="robots" content="noindex, nofollow" />
+
+    <!--TITLE-->
+    <title>Admin | Martin Drozdík</title>
+
+    <!--SOCIAL-->
+    <meta property="og:image" content="/AdminOG/Index.jpg" />
+    <meta property="og:image:secure_url" content="/AdminOG/Index.jpg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Administration pages" />
+    <meta property="og:title" content="Administration" />
+
+    <!--FAVICON-->
+    <link rel="apple-touch-icon" sizes="180x180" href="/Favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/Favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/Favicon/favicon-16x16.png">
+    <link rel="manifest" href="/Favicon/manifest.json">
+    <link rel="mask-icon" href="/Favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="/Favicon/favicon.ico">
+    <meta name="msapplication-TileColor" content="#b91d47">
+    <meta name="msapplication-config" content="/Favicon/browserconfig.xml">
+    <meta name="theme-color" content="#240B36">
+
+    <!--BASE-->
+    <base href="/" />
+
+    <!--MudBlazor-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+
+    <!--Styles-->
+    <link href="_dist/_pack/css/Global.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!--Loading-->
+    <div id="app">
+        <style>
+            body {
+                background: linear-gradient(to bottom right, #C31432, #240B36) !important;
+                height: 100vh;
+            }
+            #loadingAnimation {
+                margin: 0 auto;
+                display: block;
+                position: absolute;
+                top: 28%;
+                left: 50%;
+                margin-left: -4rem;
+                width: 8rem;
+                height: 11rem;
+                
+            }
+
+            .animDot {
+                animation: dotFlashing 0.6s infinite linear;
+            }
+
+            #animDot1{
+                animation-delay: 0;
+            }
+            #animDot2 {
+                animation-delay: 0.1s;
+            }
+            #animDot3 {
+                animation-delay: 0.2s;
+            }
+            #animDot4 {
+                animation-delay: 0.3s;
+            }
+            #animDot5 {
+                animation-delay: 0.4s;
+            }
+
+            @keyframes dotFlashing {
+                0% {
+                    fill-opacity: 1;
+                }
+
+                50%, 100% {
+                    fill-opacity: 0.2;
+                }
+            }
+        </style>
+        <svg id="loadingAnimation" width="406" height="519" viewBox="0 0 406 519" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M99 261.753C99 261.753 185.803 136.39 215.877 97.5079C245.951 58.6253 299.168 72.0331 299.168 97.5079V100.189L322.678 116.949L297.825 131.027C254.164 234.938 157.438 265.105 99 261.753ZM125.197 247.675C125.197 247.675 209.16 128.346 229.311 102.201C250.806 79.4074 286.406 84.7705 285.734 100.188V107.564L297.825 115.608L287.078 122.312C248.79 216.167 168.857 243.653 125.197 247.675Z" fill="white" />
+            <path d="M164.156 147.787C127.884 141.083 112.434 114.938 112.434 114.938L101.687 120.301C101.687 120.301 119.151 151.809 162.141 159.854L164.156 147.787Z" fill="white" />
+            <path d="M178.261 130.358C137.959 119.631 126.54 88.123 126.54 88.123L113.778 92.8158C113.778 92.8158 126.54 130.358 174.903 143.765L178.261 130.358Z" fill="white" />
+            <path d="M191.024 110.246C156.767 100.86 145.348 66 145.348 66L131.242 70.0223C131.242 70.0223 142.661 112.257 186.994 124.324L191.024 110.246Z" fill="white" />
+            <path d="M263.585 119.06C267.858 119.06 271.322 115.869 271.322 111.932C271.322 107.995 267.858 104.804 263.585 104.804C259.312 104.804 255.848 107.995 255.848 111.932C255.848 115.869 259.312 119.06 263.585 119.06Z" fill="white" />
+            <path d="M81.25 310.1H100.87L121.21 374H103.39L99.52 361.49H82.51L78.73 374H60.82L81.25 310.1ZM96.73 349.79L91.06 327.29L85.12 349.79H96.73ZM121.511 350.24C121.511 345.56 122.381 341.39 124.121 337.73C125.921 334.01 128.381 331.1 131.501 329C134.621 326.84 138.191 325.76 142.211 325.76C145.271 325.76 148.091 326.48 150.671 327.92C153.251 329.3 155.201 331.22 156.521 333.68V308.3H173.621V355.1C173.621 356.72 173.861 357.86 174.341 358.52C174.821 359.12 175.661 359.48 176.861 359.6V374C173.921 374.6 171.521 374.9 169.661 374.9C166.781 374.9 164.501 374.36 162.821 373.28C161.141 372.2 160.061 370.55 159.581 368.33L159.221 366.62C157.601 369.5 155.411 371.6 152.651 372.92C149.891 374.24 146.951 374.9 143.831 374.9C140.591 374.9 137.591 374.3 134.831 373.1C132.131 371.9 129.761 370.22 127.721 368.06C125.741 365.84 124.211 363.23 123.131 360.23C122.051 357.17 121.511 353.84 121.511 350.24ZM156.611 355.64V347.18C156.071 345.8 155.321 344.6 154.361 343.58C153.461 342.5 152.441 341.66 151.301 341.06C150.161 340.46 148.991 340.16 147.791 340.16C146.531 340.16 145.361 340.43 144.281 340.97C143.261 341.51 142.361 342.26 141.581 343.22C140.801 344.18 140.201 345.29 139.781 346.55C139.361 347.81 139.151 349.16 139.151 350.6C139.151 352.1 139.361 353.45 139.781 354.65C140.261 355.85 140.921 356.9 141.761 357.8C142.601 358.64 143.591 359.3 144.731 359.78C145.871 360.26 147.131 360.5 148.511 360.5C149.351 360.5 150.131 360.41 150.851 360.23C151.571 359.99 152.261 359.69 152.921 359.33C153.581 358.91 154.211 358.4 154.811 357.8C155.471 357.14 156.071 356.42 156.611 355.64ZM260.204 374H243.104V347.36C243.104 345.02 242.624 343.34 241.664 342.32C240.764 341.24 239.654 340.7 238.334 340.7C237.014 340.7 235.574 341.33 234.014 342.59C232.454 343.85 231.314 345.47 230.594 347.45V374H213.494V347.36C213.494 345.02 213.014 343.34 212.054 342.32C211.154 341.24 210.044 340.7 208.724 340.7C207.404 340.7 205.964 341.33 204.404 342.59C202.844 343.85 201.704 345.47 200.984 347.45V374H183.884V326.66H199.274V333.68C200.954 331.1 203.264 329.15 206.204 327.83C209.144 326.45 212.624 325.76 216.644 325.76C220.544 325.76 223.484 326.6 225.464 328.28C227.444 329.96 228.764 331.85 229.424 333.95C231.104 331.37 233.414 329.36 236.354 327.92C239.294 326.48 242.594 325.76 246.254 325.76C249.374 325.76 251.864 326.33 253.724 327.47C255.584 328.61 256.964 330.08 257.864 331.88C258.824 333.68 259.454 335.57 259.754 337.55C260.054 339.47 260.204 341.24 260.204 342.86V374ZM268.523 374V326.66H285.623V374H268.523ZM268.523 322.7V308.3H285.623V322.7H268.523ZM341.885 374H324.785V347.36C324.785 345.02 324.245 343.34 323.165 342.32C322.145 341.24 320.945 340.7 319.565 340.7C318.605 340.7 317.585 341 316.505 341.6C315.425 342.14 314.435 342.92 313.535 343.94C312.635 344.96 311.915 346.13 311.375 347.45V374H294.275V326.66H309.665V333.68C310.805 331.94 312.245 330.5 313.985 329.36C315.725 328.16 317.735 327.26 320.015 326.66C322.295 326.06 324.785 325.76 327.485 325.76C330.725 325.76 333.305 326.33 335.225 327.47C337.145 328.61 338.585 330.08 339.545 331.88C340.505 333.68 341.135 335.57 341.435 337.55C341.735 339.47 341.885 341.24 341.885 342.86V374Z" fill="white" />
+            <circle id="animDot4" class="animDot" cx="252" cy="437" r="15" fill="white" fill-opacity="0.2" />
+            <circle id="animDot5" class="animDot" cx="299" cy="437" r="15" fill="white" fill-opacity="0.2" />
+            <circle id="animDot3" class="animDot" cx="205" cy="437" r="15" fill="white" fill-opacity="0.2" />
+            <circle id="animDot2" class="animDot" cx="158" cy="437" r="15" fill="white" fill-opacity="0.2" />
+            <circle id="animDot1" class="animDot" cx="109" cy="437" r="15" fill="white" fill-opacity="0.2" />
+        </svg>
+
+    </div>
+
+    <!--Error-->
+    <div id="blazor-error-ui">
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <!--Blazor stuff-->
+    <script src="_framework/blazor.webassembly.js"></script>
+</body>
+
+</html>

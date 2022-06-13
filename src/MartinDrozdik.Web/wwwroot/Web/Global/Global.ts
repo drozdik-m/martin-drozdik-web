@@ -18,6 +18,6 @@ WindowEvents.OnDOMReady.Add(function ()
     SlowScroll.AnchorScroll("slowScroll");
 
     //Add google analytics
-    const googleAnalytics = new GoogleAnalytics("G-597EYKW04M", StorageType.Local, true);
+    const googleAnalytics = new GoogleAnalytics("UA-206361583-1", StorageType.Local, true);
     googleAnalytics.StartTracking();
 })

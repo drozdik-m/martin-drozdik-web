@@ -1,0 +1,45 @@
+﻿@page "/user/denied"
+@model Bonsai.RazorPages.User.Areas.UserPages.Pages.DeniedModel
+
+
+@{
+    Layout = "_UserPagesLayout";
+}
+
+
+@section Styles {
+    <link href="@Model.PathProvider.PathTo("/_out/css/Denied.css", StaticResources.Namespace)" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="@Model.PathProvider.PathTo("/_out/js/Denied.js", StaticResources.Namespace)"></script>
+}
+
+<div class="windowFormWrapper">
+
+    <!--FORM-->
+    <div id="deniedForm" class="windowForm">
+        <div class="windowFormIcon">&nbsp;</div>
+
+        @Html.AntiForgeryToken()
+
+        <h1>@Model.Heading</h1>
+
+        <partial name="_ValidationSummary" />
+
+        <p>@Model.DeniedText</p>
+
+        <div class="formBlock formSubmitBlock">
+            <div class="commonButtonWrapper">
+                <a href="@(string.IsNullOrWhiteSpace(Model.ReturnUrl) ? "/user/login" : $"/user/login?returnUrl={Model.ReturnUrl}")" class="commonButton userWindowRedButton">@Model.LoginButton</a>
+                <a href="/" class="commonButton userWindowCommonButton">@Model.WebButton</a>
+                @if (!string.IsNullOrWhiteSpace(Model.ReturnUrl))
+                {
+                    <a href="@Model.ReturnUrl" class="commonButton userWindowCommonButton">@Model.ReturnButton</a>
+                }
+            </div>
+        </div>
+    </div>
+
+    <partial name="_Credits" />
+</div>

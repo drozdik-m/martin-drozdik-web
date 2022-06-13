@@ -6,12 +6,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Styles{
+@section Styles
+{
     <link rel="stylesheet" href="@PathProvider.PathTo("/_dist/_pack/css/IndexPage.css")" />
 }
 
-@section Scripts{
-    <script type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/IndexPage.js")"></script>
+@section Scripts
+{
+    <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/IndexPage.js")"></script>
 }
 
 <partial name="_HeroHeader" for="@HeroHeaderModel.Default" />
@@ -20,135 +22,41 @@
 
 <partial name="_MySkills" for="@MySkillsModel.Default" />
 
-<!--div id="projects" class="backgroundBlock">
+@*<div id="projects" class="backgroundBlock">
     <div id="projectsContent" class="block">
         <h2 class="commonH commonHWhite">Dokončené projekty</h2>
-        <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z nichž část zajisté stojí za zmínku.</p>
+        <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z&nbsp;nichž část zajisté stojí za zmínku.</p>
 
-        <div class="projectList lightMode">
-            <span class="tagsHeading">Filtr tagů</span>
-            <ul class="tags tagsWhiteBlack">
-                <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
-                <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
-                <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
-                <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #grafika">grafika</a></li>
-                <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #hra">Hra</a></li>
-            </ul>
+        @{
+            var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Dark);
+            projectListModel.ShowMoreProjectsButton = true;
+        }
+        <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />
+    </div>
+</div>*@
 
-            @* Project list *@
-            <ul class="projects">
-                <li>
-                    <img src="https://via.placeholder.com/150" title="Projekt GIT Elekto" alt="Project GIT Elektro" />
-                    <h3>GIT Elektro</h3>
-                    <p></p>
-                    <ul class="tags tagsWhiteBlack">
-                        <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
-                    </ul>
-                    <div class="projectActions">
-                        <a href="https://git-elektro.cz/" title="Detail projektu GIT Elektro" class="commonButton commonButtonRed">Detail projektu</a>
-                        <a href="https://git-elektro.cz/" title="GIT Elektro codebase" class="commonButton commonButtonDarkRed commonButtonGithub">GitHub</a>
-                        <a href="https://git-elektro.cz/" title="GIT Elektro živý web" class="commonButton commonButtonDarkRed commonButtonLive">Odkaz</a>
-                    </div>
-                </li>
 
-                <li>
-                    <img src="https://via.placeholder.com/150" title="Projekt GIT Elekto" alt="Project GIT Elektro" />
-                    <h3>GIT Elektro</h3>
-                    <p></p>
-                    <ul class="tags tagsWhiteBlack">
-                        <li class="selected"><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #web">web</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #front-end">front-end</a></li>
-                        <li><a href="@Url.Action("Projects", "Home", new { tags="web" })" title="Tag #back-end">back-end</a></li>
-                    </ul>
-                </li>
+@{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }
+<partial name="_Biography" for="@biographyModel" />
 
-            </ul>
+<div id="blog" class="backgroundBlock">
+    <div id="blogContent" class="block">
+        <h2 class="commonH commonHRed">Blog</h2>
+        <p class="commonP commonPRed">Rád píšu články a&nbsp;sdílím tak vědomosti. Mnohdy se při jejich tvorbě i&nbsp;něco dozvím a&nbsp;upřesním. Kromě <strong>výukových materiálů na&nbsp;programování</strong> uvažuji o&nbsp;věcech jako je <strong>podnikání</strong>, <strong>práce</strong> a&nbsp;<strong>štěstí v&nbsp;životě</strong>.</p>
 
+        <ul class="articles">
+            @foreach(var article in Model.PreviewArticles)
+            {
+                var articleModel = new ArticleListItemModel(article); 
+                <partial name="_ArticleListItem" for="@articleModel" />
+            }
+        </ul>
+
+        <div class="moreArticles">
+            <a href="@Url.Action("Blog", "Home")" class="commonButton commonButtonRed commonButtonThick">Další články</a>
         </div>
     </div>
-</div-->
-
-<partial name="_Biography" for="@BiographyModel.Default" />
-
-<div id="contact" class="block blockMargin">
-    <h2 class="commonH commonHGradient">Kontakt</h2>
-    <p class="commonP commonPBlack">Neváhejte mě kontaktovat s&nbsp;jakoukoliv záležitostí. Ozvu&nbsp;se vám zpět hned jak to bude možné.</p>
-
-    <div id="contactBlocks">
-        <div id="contactInfo">
-            <h3>Kontaktní informace</h3>
-            <p>Můj email a telefonní číslo je vám k dispozici. Jakou myšlenku budeme realizovat?</p>
-
-            <svg id="contactInfoCircles" width="294" height="338" viewBox="0 0 294 338" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="293.5" cy="280.5" r="204" stroke="white" stroke-opacity="0.3" stroke-dasharray="20 20" />
-                <circle cx="329.5" cy="310.5" r="154" stroke="white" stroke-opacity="0.3" stroke-dasharray="20 20" />
-                <circle cx="272" cy="272" r="271.5" stroke="white" stroke-opacity="0.3" stroke-dasharray="20 20" />
-            </svg>
-
-            <span class="freeForWork">Volný pro práci</span>
-
-            <dl class="contactInfos">
-                <dt>Email</dt>
-                <dd class="email"><a href="" data-email-link></a></dd>
-                <dt>Telefon</dt>
-                <dd class="phone"><a href="" data-phone-link></a></dd>
-                <dt>Lokace</dt>
-                <dd class="location">Česká republika</dd>
-            </dl>
-
-            <div id="contactInfoLinks">
-                <a href="https://github.com/drozdik-m" title="Můj GitHub účet" target="_blank" rel="noopener"><i class="icon iconGitHubWhite">GitHub profil</i></a>
-                <a href="https://www.linkedin.com/in/martin-drozdik/" title="Můj LinkedIn profil" target="_blank" rel="noopener"><i class="icon iconLinkedInWhite">LinkedIn profil</i></a>
-            </div>
-
-        </div>
-
-        <div id="contactForm">
-            <h3>Kontaktní formulář</h3>
-            <p>Kontaktní formulář je zajisté nejrychlejší forma, jak mě kontaktovat. Neváhejte jej vyplnit a odeslat.</p>
-
-            <form id="contactFormElement" target="@Url.Action("SendMail", "Home")" method="post" class="form">
-
-                <div class="formBlock">
-                    <label for="contactNameAndSurname" class="mandatory">Jméno a přijmení</label>
-                    <input type="text" id="contactNameAndSurname" name="Name" placeholder="Jan Svoboda" />
-                    <ul id="contactNameAndSurnameErrorList" class="errorList"></ul>
-                </div>
-                <div class="formBlock">
-                    <label for="contactEmail" class="mandatory">Email</label>
-                    <input type="text" id="contactEmail" name="Email" placeholder="jan.svoboda@seznam.cz" />
-                    <ul id="contactEmailErrorList" class="errorList"></ul>
-                </div>
-                <div class="formBlock">
-                    <label for="contactSubject">Předmět</label>
-                    <input type="text" id="contactSubject" name="Subject" placeholder="Dotaz" />
-                    <ul id="contactSubjectErrorList" class="errorList"></ul>
-                </div>
-
-                <div class="formBlock">
-                    <label for="contactMessage" class="mandatory">Zpráva</label>
-                    <textarea id="contactMessage" name="Message" placeholder="Dobrý den, ..."></textarea>
-                    <ul id="messageErrorList" class="errorList"></ul>
-                </div>
-
-                <div class="submitButtonWrapperCenter">
-                    <button type="submit" class="commonButton commonButtonSlimFlat commonButtonRed">Odeslat</button>
-                </div>
-
-                <div id="contactFormRecaptchaDialogWindow" class="statusWindow">
-                    <span class="statusWindowHeading">Prosím ověřte, že nejste robot</span>
-                    <span class="statusWindowText">Je to nutné, abych neměl schránku přeplněnou spamem. Děkuji za pochopení.</span>
-                    <div class="formBlock recaptchaFormBlock">
-                        <div id="contactFormRecaptcha"></div>
-                    </div>
-                    <div class="commonButton commonButtonBlack dialogClose">Zavřít</div>
-                </div>
-
-            </form>
-
-        </div>
-    </div>
-
 </div>
+
+<partial name="_Contact" for="@ContactModel.Default" />
+

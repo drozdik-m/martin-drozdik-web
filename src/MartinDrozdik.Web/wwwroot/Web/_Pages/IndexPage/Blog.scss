@@ -1,0 +1,60 @@
+﻿@import "../../_Variables";
+@import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../../node_modules/@drozdik.m/common-mixins/_module";
+@import "../../Blog/ArticleListItems";
+
+
+#blog {
+    background-color: $blogBackground;
+    position: relative;
+    overflow: hidden;
+
+    #blogContent{
+        position: relative;
+        z-index: 2;
+    }
+
+    .moreArticles {
+        text-align: center;
+        margin-top: 2rem;
+    }
+
+    &:before {
+        content: " ";
+        font-size: 0;
+        position: absolute;
+        $height: 72.75rem;
+        $width: 69.25rem;
+        height: $height;
+        width: $width;
+        background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgODI1IDEwMDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im03NzUgODUwLjM2Yy00NTAtODMuMTM0LTY0MS42Ny00MDcuMzYtNjQxLjY3LTQwNy4zNmwtMTMzLjMzIDY2LjUwN3MyMTYuNjcgMzkwLjczIDc1MCA0OTAuNDlsMjUtMTQ5LjY0eiIgZmlsbD0iI0MzMTQzMiIgZmlsbC1vcGFjaXR5PSIuMTUiLz4KPHBhdGggZD0ibTk1MCA2MzMuNzRjLTUwMC0xMzMuMDEtNjQxLjY3LTUyMy43NC02NDEuNjctNTIzLjc0bC0xNTguMzMgNTguMTkzczE1OC4zMyA0NjUuNTQgNzU4LjMzIDYzMS44MWw0MS42NjctMTY2LjI2eiIgZmlsbD0iI0MzMTQzMiIgZmlsbC1vcGFjaXR5PSIuMTUiLz4KPHBhdGggZD0ibTExMDggMzg0LjQ4Yy00MjQuNjItMTE2LjM0LTU2Ni4xNi01NDguNDgtNTY2LjE2LTU0OC40OGwtMTc0Ljg0IDQ5Ljg2MnMxNDEuNTQgNTIzLjU1IDY5MS4wNCA2NzMuMTRsNDkuOTYtMTc0LjUyeiIgZmlsbD0iI0MzMTQzMiIgZmlsbC1vcGFjaXR5PSIuMTUiLz4KPC9zdmc+Cg==");
+        background-repeat: no-repeat;
+        background-size: $height $width;
+        background-position: center center;
+        z-index: 1;
+        pointer-events: none;
+        top: -5%;
+        right: -8%;
+        opacity: 0.8;
+    }
+}
+
+@media only screen and (max-width: 62.5rem) {
+    #blog {
+        &:before {
+            display: none;
+            background-image: none;
+        }
+    }
+}
+
+@media only screen and (max-width: 41.25rem) {
+    #blog {
+        .moreArticles {
+            .commonButton {
+                padding: $pxInRem-16 $pxInRem-32;
+                font-size: $pxInRem-18;
+            }
+        }
+    }
+}

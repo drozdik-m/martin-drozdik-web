@@ -1,0 +1,105 @@
+﻿@page "/work-experience/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject WorkExperienceService Service
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/work-experience/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        WorkExperiencePage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    WorkExperience entity;
+
+    protected void OnEntityLoad(WorkExperience entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.WorkPosition);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else 
+{
+    <MudText Typo="Typo.h3" Class="mb-4">
+        Editing: @entity.WorkPosition 
+    </MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+
+        <MudGrid Class="my-6">
+            <MudItem xs="3">
+                <MudTextField @bind-Value="context.Model.WorkPosition" Disabled="context.Disabled" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The position where I worked" 
+                        Required="true" RequiredError="A work position is required" />
+            </MudItem>
+            <MudItem xs="6">
+                    <MudTextField @bind-Value="context.Model.PlaceOfWork" Disabled="context.Disabled" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The place where I worked" />
+                </MudItem>
+        </MudGrid>
+
+        <MudGrid Class="my-3">
+            <MudItem xs="3">
+                <MudSwitch @bind-Checked="context.Model.PlaceOfWorkHasWebsite" Disabled="context.Disabled" 
+                    Class="my-4"
+                    Label="The place of work has a website"
+                    Color="@(context.Model.PlaceOfWorkHasWebsite ? Color.Primary : Color.Success)"/>
+            </MudItem>
+            @if (context.Model.PlaceOfWorkHasWebsite)
+            {
+                <MudItem xs="9">
+                     <MudTextField @bind-Value="context.Model.PlaceOfWorkUri" Disabled="context.Disabled" Label="Place of work website" Variant="Variant.Text" 
+                        Immediate="true" HelperText="If the company / place of work has a website, this is the link" />
+                </MudItem>
+            }
+        </MudGrid>
+        
+
+        <MudTextField @bind-Value="context.Model.Description" Disabled="context.Disabled" Label="Work description" 
+           Variant="Variant.Outlined" Lines="6"
+           Immediate="true" HelperText="Description of the work"  />
+
+        <MudDatePicker Class="my-3" @bind-Date="context.Model.StartedDate" Disabled="context.Disabled"
+                                Label="Work started date" DateFormat="dd. MM. yyyy" />
+
+
+        <MudGrid Class="my-3">
+            <MudItem xs="3">
+                <MudSwitch @bind-Checked="context.Model.Ended" Disabled="context.Disabled" 
+                    Class="my-4"
+                    Label="Work fisnihed"
+                    Color="@(context.Model.Ended ? Color.Primary : Color.Success)"/>
+            </MudItem>
+            @if (context.Model.Ended)
+            {
+                <MudItem xs="9">
+                    <MudDatePicker @bind-Date="context.Model.EndedDate" Disabled="context.Disabled"
+                                Label="Work finished date" DateFormat="dd. MM. yyyy" />
+                </MudItem>
+            }
+        </MudGrid>
+
+       
+
+        
+    </Editor>
+</EditPage>

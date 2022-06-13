@@ -58,12 +58,17 @@ namespace MartinDrozdik.Web.Views
         /// <summary>
         /// List of keywords for this page
         /// </summary>
-        public abstract string[] KeywordsList { get; }
+        public abstract IEnumerable<string> KeywordsList { get; }
 
         /// <summary>
         /// Name of the client (f.e. Bonsai Development)
         /// </summary>
-        public virtual string ClientName { get; } = "Martin Drozdík";
+        public virtual string ClientName { get; } = "Ing. Martin Drozdík";
+
+        /// <summary>
+        /// Author of this page
+        /// </summary>
+        public virtual string Author => ClientName;
 
         /// <summary>
         /// Name of the site (f.e. Bonsai Development Blog)
@@ -84,5 +89,10 @@ namespace MartinDrozdik.Web.Views
         /// Id of this page, f.e. "index"
         /// </summary>
         public abstract PageId PageId { get; }
+
+        /// <summary>
+        /// The last time the page has been updated/revisioned
+        /// </summary>
+        public virtual DateTime? RevisionDate { get; }
     }
 }

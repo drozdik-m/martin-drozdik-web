@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <AssemblyName>Bonsai_RazorPages_User</AssemblyName>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/_content/MartinDrozdik_Pages_User</StaticWebAssetBasePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
+    <Content Remove="tsconfig.json" />
+    <Content Remove="wwwroot\temp.ts" />
+    <Content Remove="wwwroot\Web\ChangePassword\ChangePassword.scss" />
+    <Content Remove="wwwroot\Web\ChangePassword\ChangePassword.ts" />
+    <Content Remove="wwwroot\Web\ConfirmLogout\ConfirmLogout.scss" />
+    <Content Remove="wwwroot\Web\ConfirmLogout\ConfirmLogout.ts" />
+    <Content Remove="wwwroot\Web\Denied\Denied.png" />
+    <Content Remove="wwwroot\Web\Denied\Denied.scss" />
+    <Content Remove="wwwroot\Web\Denied\Denied.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="builder.data.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package.json" />
+    <None Include="tsconfig.json" />
+    <None Include="wwwroot\Web\ChangePassword\ChangePassword.scss" />
+    <None Include="wwwroot\Web\ChangePassword\ChangePassword.ts" />
+    <None Include="wwwroot\Web\Denied\Denied.png" />
+    <None Include="wwwroot\Web\Denied\Denied.scss" />
+    <None Include="wwwroot\Web\Denied\Denied.ts" />
+    <None Include="wwwroot\Web\Global\Global.ts" />
+    <None Include="wwwroot\Web\Login\Login.ts" />
+    <None Include="wwwroot\Web\ConfirmLogout\ConfirmLogout.scss" />
+    <None Include="wwwroot\Web\ConfirmLogout\ConfirmLogout.ts" />
+    <None Include="wwwroot\Web\Register\Register.ts" />
+    <None Include="wwwroot\Web\Global\Global.scss" />
+    <None Include="wwwroot\Web\Login\Login.scss" />
+    <None Include="wwwroot\Web\Register\Register.scss" />
+    <None Include="wwwroot\Web\Global\UserPagesWindow.scss" />
+    <None Include="wwwroot\Web\_Functions.scss" />
+    <None Include="wwwroot\Web\_Variables.scss" />
+    <None Include="wwwroot\temp.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MartinDrozdik.Services.LanguageDictionary" Version="1.0.3" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MartinDrozdik.Data.Models\MartinDrozdik.Data.Models.csproj" />
+    <ProjectReference Include="..\MartinDrozdik.Services.FilePathProvider\MartinDrozdik.Services.FilePathProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\_out\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,59 @@
+﻿@use "sass:math";
+@import "../_Variables.scss";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+//--------------------------------------------------
+//---------CONTACT ME STRIPE------------------------
+//--------------------------------------------------
+
+.contactMeStripe {
+    background-color: $black;
+    margin: 1rem 0;
+    color: white;
+    font-size: $pxInRem-18;
+    font-weight: $fontWeightBold;
+    text-align: center;
+    padding: $pxInRem-12 $pxInRem-12;
+
+    &, .contactMeStripeButton {
+        @include border-radius($radiusSmall);
+    }
+
+    .contactMeStripeButton {
+        position: relative;
+        top: -$pxInRem-1;
+        border: $pxInRem-2 solid white;
+        padding: $pxInRem-5 $pxInRem-10;
+        color: white;
+        text-decoration: none;
+        margin-left: $pxInRem-8;
+        @include transition(backgroun-color $transition, color $transition);
+        display: inline-block;
+
+        &:active {
+            top: 0;
+        }
+
+        &:hover {
+            background-color: white;
+            color: $black;
+        }
+    }
+}
+
+@media only screen and (max-width: 40rem){
+    .contactMeStripe {
+        margin: 0.75rem 0;
+        font-size: $pxInRem-16;
+        padding: $pxInRem-10 $pxInRem-12;
+        line-height: $pxInRem-24;
+        .contactMeStripeButton {
+            border: none;
+            text-decoration: underline;
+            margin-left: $pxInRem-2;
+            padding: 0 $pxInRem-4;
+        }
+    }
+}

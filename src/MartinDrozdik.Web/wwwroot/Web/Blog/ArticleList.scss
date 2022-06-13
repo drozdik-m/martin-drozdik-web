@@ -1,0 +1,58 @@
+﻿@use "sass:math";
+
+@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+@import "ArticleListItems";
+
+.articleList {
+
+    //TAGS HEADING
+    .tagsHeading {
+        font-weight: $fontWeightExtraBold;
+        display: block;
+        font-size: $pxInRem-26;
+        margin-bottom: $pxInRem-6;
+        color: $darkerRed;
+    }
+    //NOT FOUND
+    .notFound {
+        text-align: left;
+        font-size: $pxInRem-20;
+        margin: 1rem 0;
+        font-weight: $fontWeightSemiBold;
+    }
+    //TAGS
+    .tags {
+        //margin-bottom: $pxInRem-20;
+    }
+
+    //EXTRA BUTTONS
+    .extraActionButton {
+        text-align: center;
+        margin-top: 2rem;
+
+        .loadMoreButton {
+            margin-top: 1rem;
+        }
+    }
+}
+
+@media only screen and (max-width: 56.875rem){
+    .projectList {
+        //EXTRA BUTTONS
+        .extraActionButton {
+            text-align: center;
+            margin-top: 1rem;
+
+            .loadMoreProjectsButton {
+                margin-top: 0.5rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 30rem){
+    .projectList {
+    }
+}

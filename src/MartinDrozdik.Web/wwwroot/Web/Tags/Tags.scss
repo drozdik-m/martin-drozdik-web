@@ -1,0 +1,140 @@
+﻿@import "../_Variables";
+@import "../../../node_modules/@drozdik.m/px-in-rem/_module";
+@import "../../../node_modules/@drozdik.m/common-mixins/_module";
+
+
+@mixin tagsScheme($background, $details, $activeBackground, $activeDetails, $hoverBackground, $hoverDetails) {
+
+    li {
+        a, button, > span {
+            &, &:before {
+                color: $details;
+            }
+
+            background-color: $background;
+            border-color: $details;
+        }
+
+        &.selected {
+            a, button, > span {
+                &, &:before {
+                    color: $activeDetails;
+                }
+
+                background-color: $activeBackground;
+                border-color: $activeDetails;
+            }
+        }
+
+        &.unsuitable {
+            opacity: 0.6;
+        }
+
+        &:hover {
+            a, button {
+                &, &:before {
+                    color: $hoverDetails;
+                }
+
+                background-color: $hoverBackground;
+                border-color: $hoverDetails;
+            }
+        }
+    }
+}
+
+.tags {
+    font-size: 0;
+
+    li {
+        display: inline-block;
+        list-style-type: none;
+        vertical-align: middle;
+        margin: $pxInRem-4 0;
+        margin-right: $pxInRem-7;
+        @include transition(opacity $transition);
+
+        button, a {
+            cursor: pointer;
+            @include transition(border-color $transition, background-color $transition, color $transition);
+
+            &:active {
+                top: $pxInRem-1;
+            }
+        }
+
+        button, a, > span {
+            display: block;
+            border-style: solid;
+            border-width: $pxInRem-1;
+            padding: $pxInRem-6 $pxInRem-12;
+            font-weight: $fontWeightBold;
+            font-size: $pxInRem-18;
+            @include border-radius($pxInRem-3);
+            text-decoration: none;
+            position: relative;
+            top: 0;
+
+            &:before {
+                content: "#";
+                @include transition(color $transition);
+            }
+        }
+    }
+
+    &.tagsSlim {
+        li {
+            a, button, > span {
+                padding: $pxInRem-4 $pxInRem-8;
+                font-size: $pxInRem-15;
+            }
+        }
+    }
+    //SCHEMES
+    &.tagsWhiteBlack {
+        @include tagsScheme($black, #cfcfcf, #cfcfcf, $black, white, $black);
+    }
+
+    &.tagsBlackWhite {
+        @include tagsScheme($projectsBackground, $black, $black, $projectsBackground, $blackHover, white);
+    }
+
+    &.tagsTransparentBlack {
+        @include tagsScheme(rgba(0, 0, 0, 0), white, white, $black, $blackHover, white);
+    }
+
+    /*&.tagsTransparentRed {
+        @include tagsScheme(rgba(0, 0, 0, 0), white, white, $red, $redHover, white);
+    }*/
+
+    /*&.tagsDarkRedWhite {
+        @include tagsScheme($blogBackground, $darkRed, $darkRed, $blogBackground, $darkRed, $blogBackground);
+    }*/
+
+    &.tagsDarkerRedWhite {
+        @include tagsScheme($blogBackground, $darkerRed, $darkerRed, $blogBackground, $darkerRedHover, white);
+    }
+}
+
+@media only screen and (max-width: 46rem) {
+    .tags {
+        li {
+            margin: $pxInRem-3 0;
+            margin-right: $pxInRem-4;
+
+            a, button, > span {
+                padding: $pxInRem-4 $pxInRem-8;
+                font-size: $pxInRem-16;
+            }
+        }
+
+        &.tagsSlim {
+            li {
+                a, button, > span {
+                    padding: $pxInRem-3 $pxInRem-6;
+                    font-size: $pxInRem-14;
+                }
+            }
+        }
+    }
+}

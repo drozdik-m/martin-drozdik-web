@@ -1,0 +1,37 @@
+﻿
+@code {
+    [Parameter, EditorRequired]
+    public string Heading { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Description { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Link { get; set; } = string.Empty;
+
+    [Parameter]
+    public string Icon { get; set; } = string.Empty;
+}
+
+
+<MudCard>
+    <MudCardContent>
+        
+        <MudText Typo="Typo.h5">
+            @if (!string.IsNullOrWhiteSpace(Icon))
+            {
+                <MudIcon Icon="@Icon" class="mr-2" Style="position: relative; top: 3px;" />
+            }
+            @Heading
+        </MudText>
+        <MudText Typo="Typo.body2">@Description</MudText>
+    </MudCardContent>
+
+    @if (!string.IsNullOrWhiteSpace(Link))
+    {
+        <MudCardActions Class="pt-0">
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@Link">Discover</MudButton>
+        </MudCardActions>
+    }
+    
+</MudCard>

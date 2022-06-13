@@ -1,0 +1,82 @@
+﻿@page "/technology"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject TechnologyService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("Technology", href: "/technology", icon: MainLayout.TechnologiesIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<Technology, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">Technology</MudText>
+<MudText Class="mb-4">For referencing when talking about projects and stuff.</MudText>
+
+<ListPage @ref="listPage" TModel="Technology" TKey="int" KeyGetter="e => e.Id"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new Technology()"
+    DeleteService="Service"
+    CustomOrder="e => e.OrderBy(e => e.Name)">
+
+    <DisplayItems>
+        <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(context.DisplaySkeleton)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                        </tr>
+                    }
+                }
+                @foreach (var item in context.Models)
+                {
+                    <tr>
+                        <td>
+                            @if (item.Logo.Uploaded)
+                            {
+                                var image = item.Logo;
+                                <MudImage Height="48" Src="@image.Uri" Alt="@image.AlternativeText" />
+                            }
+                        </td>
+                        <td>@item.Name</td>
+                        <td>
+                            <ListControlButton Disabled="context.Loading" 
+                                OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                HrefEdit="@($"/technology/{item.Id}")"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </DisplayItems>
+    
+    <AddInputs>
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The name of this technology" 
+                        Required="true" RequiredError="A name is required" />
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+    </ReorderItem>
+</ListPage>

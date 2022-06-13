@@ -1,0 +1,28 @@
+﻿@inherits RootComponent
+
+@code {
+    [Parameter]
+    public IEnumerable<string> Urls { get; set; }
+
+    protected List<string> Duplicities()
+    {
+        return Urls.GroupBy(x => x)
+                   .Where(group => group.Count() > 1)
+                   .Select(group => group.Key)
+                   .ToList();
+    }
+}
+
+
+@{
+    var duplicities = Duplicities();
+}
+
+@if(duplicities.Count > 0)
+{
+    <MudAlert Class="my-5" Severity="Severity.Warning" Variant="Variant.Filled">
+        Routing may not work as intended. There are duplicities found in URLs: @(string.Join(", ", duplicities))
+    </MudAlert>
+}
+
+

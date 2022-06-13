@@ -1,0 +1,75 @@
+﻿@page "/language-skill"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject LanguageSkillService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("Language skill", href: "/language-skill", icon: MainLayout.LanguageSkillsIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<LanguageSkill, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">Language skills</MudText>
+<MudText Class="mb-4">What languages I know and how well?</MudText>
+
+<ListPage @ref="listPage" TModel="LanguageSkill" TKey="int" KeyGetter="e => e.Id"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new LanguageSkill()"
+    DeleteService="Service"
+    ReorderService="Service" OrderExpression="e => e.OrderIndex">
+
+    <DisplayItems>
+        <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Language Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(context.DisplaySkeleton)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                        </tr>
+                    }
+                }
+                @foreach (var item in context.Models)
+                {
+                    <tr>
+                        <td>
+                            @item.LanguageName
+                        </td>
+                        <td>
+                            <ListControlButton Disabled="context.Loading" 
+                                OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                HrefEdit="@($"/language-skill/{item.Id}")"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </DisplayItems>
+    
+    <AddInputs>
+        <MudTextField @bind-Value="context.Model.LanguageName" Disabled="context.Loading" Label="Language name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The full name of this language" 
+                        Required="true" RequiredError="A name is required" />
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.LanguageName}")" />
+    </ReorderItem>
+</ListPage>

@@ -1,0 +1,55 @@
+﻿@page "/"
+@inherits RootPage
+
+
+
+<MudText Typo="Typo.h3">Martin Drozdík Admin</MudText>
+<MudText Class="mb-3">This is an administration of Martin Drozdíks' web portfolio.</MudText>
+
+<MudGrid>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="People" Icon="@MainLayout.PeopleIcon" Link="/people" Description="People for relevant positions such as a developer." />
+    </MudItem>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Technologies" Icon="@MainLayout.TechnologiesIcon" Link="/technology" Description="Technologies to reference in projects." />
+    </MudItem>
+</MudGrid>
+
+<MudText Typo="Typo.h4" Class="mt-7">Projects</MudText>
+<MudText Class="mb-3">Project-related admin sections. Projects are exciting pieces of work done by Martin Drozdík. </MudText>
+
+<MudGrid>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Projects" Icon="@MainLayout.ProjectsIcon" Link="/project" Description="Interesting finished projects to brag about." />
+    </MudItem>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Project tags" Icon="@MainLayout.ProjectTagsIcon" Link="/project-tag" Description="Tags for individual projects." />
+    </MudItem>
+</MudGrid>
+
+<MudText Typo="Typo.h4" Class="mt-7">Blog</MudText>
+<MudText Class="mb-3">Blog-related admin sections.</MudText>
+
+<MudGrid>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Articles" Icon="@MainLayout.ArticleIcon" Link="/article" Description="Interesting articles about interesting topics." />
+    </MudItem>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Article tags" Icon="@MainLayout.ArticleTagsIcon" Link="/article-tag" Description="Tags for individual articles." />
+    </MudItem>
+</MudGrid>
+
+<MudText Typo="Typo.h4" Class="mt-7">CV</MudText>
+<MudText Class="mb-3">CV admin sections. What have I done in my life related to work and school?</MudText>
+
+<MudGrid>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Work experiences" Icon="@MainLayout.WorkExperiencesIcon" Link="/work-experience" Description="Where I woked in my life." />
+    </MudItem>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Educations" Icon="@MainLayout.EducationsIcon" Link="/education" Description="Schools I attended in my life." />
+    </MudItem>
+    <MudItem xs="3">
+        <IndexSectionCard Heading="Language skills" Icon="@MainLayout.LanguageSkillsIcon" Link="/language-skill" Description="Languages I know and learned in my life." />
+    </MudItem>
+</MudGrid>

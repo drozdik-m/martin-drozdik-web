@@ -1,0 +1,64 @@
+﻿@page "/language-skill/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject LanguageSkillService Service
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/language-skill/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        LanguageSkillPage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    LanguageSkill entity;
+
+    protected void OnEntityLoad(LanguageSkill entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.LanguageName);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else 
+{
+    <MudText Typo="Typo.h3" Class="mb-4">
+        Editing: @entity.LanguageName 
+    </MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+
+        <MudTextField @bind-Value="context.Model.LanguageName" Disabled="context.Disabled" Label="Language name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The full name of this language" Class="my-3"
+                        Required="true" RequiredError="A name is required" />
+
+       <MudSelect T="LanguageSkillLevel" @bind-Value="context.Model.SkillLevel" Label="Language Skill" AnchorOrigin="Origin.BottomCenter" Class="my-3">
+            <MudSelectItem Value="LanguageSkillLevel.A1">A1</MudSelectItem>
+            <MudSelectItem Value="LanguageSkillLevel.A2">A2</MudSelectItem>
+            <MudSelectItem Value="LanguageSkillLevel.B1">B1</MudSelectItem>
+            <MudSelectItem Value="LanguageSkillLevel.B2">B2</MudSelectItem>
+            <MudSelectItem Value="LanguageSkillLevel.C1">C1</MudSelectItem>
+            <MudSelectItem Value="LanguageSkillLevel.C2">C2</MudSelectItem>
+            <MudSelectItem Value="LanguageSkillLevel.Native">Native</MudSelectItem>
+        </MudSelect>
+
+        
+    </Editor>
+</EditPage>

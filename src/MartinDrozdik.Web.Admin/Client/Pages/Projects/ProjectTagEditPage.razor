@@ -1,0 +1,50 @@
+﻿@page "/project-tag/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject ProjectTagService Service
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/project-tag/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        ProjectTagPage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    ProjectTag entity;
+
+    protected void OnEntityLoad(ProjectTag entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else 
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Editing: @entity.Name</MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
+            Variant="Variant.Text" 
+            Immediate="true" HelperText="The name of this tag" 
+            Required="true" RequiredError="A name is required" />
+    </Editor>
+</EditPage>

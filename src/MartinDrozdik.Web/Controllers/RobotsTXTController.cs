@@ -23,7 +23,7 @@ namespace Bonsai.Server.Controllers
             var builder = new RobotsTXTBuilder();
 
             //Add sitemap
-            var sitemapUri = new Uri(serverConfiguration.Web.Domain + "/sitemap.xml");
+            var sitemapUri = new Uri(serverConfiguration.Domain + "/sitemap.xml");
             builder.AddSitemap(sitemapUri);
 
             //Allow all

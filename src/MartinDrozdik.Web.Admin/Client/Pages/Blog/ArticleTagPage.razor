@@ -1,0 +1,73 @@
+﻿@page "/article-tag"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject ArticleTagService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("Article tags", href: "/article-tag", icon: MainLayout.ArticleTagsIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<ArticleTag, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">Article tags</MudText>
+<MudText Class="mb-4">Tags are for articles to group relevant topics.</MudText>
+
+<ListPage @ref="listPage" TModel="ArticleTag" TKey="int" KeyGetter="e => e.Id"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new ArticleTag()"
+    DeleteService="Service"
+    ReorderService="Service" OrderExpression="e => e.OrderIndex">
+
+    <DisplayItems>
+        <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(context.DisplaySkeleton)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                        </tr>
+                    }
+                }
+                @foreach (var item in context.Models)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>
+                            <ListControlButton Disabled="context.Loading" 
+                                OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                HrefEdit="@($"/article-tag/{item.Id}")"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </DisplayItems>
+    
+    <AddInputs>
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The name of this tag" 
+                        Required="true" RequiredError="A name is required" />
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+    </ReorderItem>
+</ListPage>

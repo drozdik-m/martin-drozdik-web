@@ -1,0 +1,11 @@
+﻿<div class="formBlock">
+    <ul asp-validation-summary="All" class="errorList">
+        @if (TempData["ErrorMessages"] != null)
+        {
+            foreach (string errorMessage in TempData["ErrorMessages"] as IList<string>)
+            {
+                <li>@errorMessage</li>
+            }
+        }
+    </ul>
+</div>

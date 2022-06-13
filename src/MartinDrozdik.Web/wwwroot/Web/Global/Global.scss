@@ -12,16 +12,21 @@
     padding: 0;
 }
 
+.loadingScreen{
+    @include border-radius($radiusSmall);
+}
 
 @import "Animations";
 @import "Block";
 @import "Font";
-@import "Tags";
+
 @import "CommonText";
+@import "MagnifyingGlass";
 
 @import "../Icon/Icon";
 @import "../Icon/GitHubIconWhite";
 @import "../Icon/LinkedInIconWhite";
+@import "../Icon/StackOverflowIconWhite";
 
 @import "../Form/CommonButton";
 
@@ -34,6 +39,7 @@
 @import "../Footer/Footer";
 @import "../Contact/ContactInfoLines";
 @import "../ImportantStats/ImportantStats";
-
+@import "../Breadcrumbs/Breadcrumbs";
+@import "../Tags/Tags";
 
 

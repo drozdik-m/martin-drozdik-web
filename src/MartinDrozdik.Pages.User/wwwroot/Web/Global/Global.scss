@@ -1,0 +1,48 @@
+﻿@import "../_Variables";
+@import "../_Functions";
+@import "@drozdik.m/common-button/module";
+@import "@drozdik.m/px-in-rem/_module";
+@import "@drozdik.m/common-mixins/_module";
+@import "@drozdik.m/form/module";
+@import "UserPagesWindow";
+
+//--------------------------------------------------
+//---------FONTS------------------------------------
+//--------------------------------------------------
+@include font-face (OpenSans, OpenSans-Extrabold, pathTo("/Fonts/OpenSans/"), bolder);
+@include font-face (OpenSans, OpenSans-Bold, pathTo("/Fonts/OpenSans/"), bold);
+@include font-face (OpenSans, OpenSans, pathTo("/Fonts/OpenSans/"), normal);
+
+
+html {
+    font-family: 'OpenSans', Verdana, sans-serif;
+    font-weight: normal;
+}
+
+h1, h2, h3, h4, h5, h6, h7, .b, .bold, strong, b {
+    font-weight: bold;
+}
+
+.i, .italic {
+    font-style: italic;
+}
+
+.u, .underline {
+    text-decoration: underline;
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+//--------------------------------------------------
+//----------GLOBAL CORRECTIONS----------------------
+//--------------------------------------------------
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: linear-gradient(to bottom right, $red, $black);
+}
+

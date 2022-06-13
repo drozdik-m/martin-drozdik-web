@@ -1,0 +1,58 @@
+﻿@page "/user/login"
+@model Bonsai.RazorPages.User.Areas.UserPages.Pages.LoginModel
+
+
+@{
+    Layout = "_UserPagesLayout";
+}
+
+
+@section Styles {
+    <link href="@Model.PathProvider.PathTo("/_out/css/Login.css", StaticResources.Namespace)" rel="stylesheet" />
+}
+
+@section Scripts{
+    <script src="@Model.PathProvider.PathTo("/_out/js/Login.js", StaticResources.Namespace)"></script>
+}
+
+<div class="windowFormWrapper">
+
+    <!--FORM-->
+    <form asp-controller="User" asp-action="Login" method="post" id="loginForm" class="windowForm" role="form">
+        <div class="windowFormIcon">&nbsp;</div>
+
+        @Html.AntiForgeryToken()
+
+        <h1>@Model.Heading</h1>
+
+        <partial name="_ValidationSummary" />
+
+        <div class="formBlock">
+            <label for="email">@Model.EmailLabel</label>
+            <input type="text" id="email" placeholder="@Model.EmailPlaceholder" name="email"
+                   value="@(TempData["UserIdentityEmail"] != null ? TempData["UserIdentityEmail"] : string.Empty)" />
+            <script>
+                var lang_emailNotEmpty = "@Model.EmailNotEmpty";
+                var lang_emailWrongFormat = "@Model.EmailWrongFormat";
+            </script>
+        </div>
+
+        <div class="formBlock">
+            <label for="password">@Model.PasswordLabel</label>
+            <input type="password" id="password" name="password" />
+            <script>
+                var lang_passwordNotEmpty = "@Model.PasswordNotEmpty";
+            </script>
+        </div>
+
+        <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
+        <div class="formBlock formSubmitBlock">
+            <div class="commonButtonWrapper">
+                <button type="submit" class="commonButton userWindowCommonButton">@Model.LoginButton</button>
+            </div>
+        </div>
+    </form>
+
+    <partial name="_Credits" />
+</div>

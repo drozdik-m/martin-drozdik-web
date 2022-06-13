@@ -1,0 +1,72 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <AssemblyName>MartinDrozdik.Pages.Error</AssemblyName>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <StaticWebAssetBasePath Condition="$(StaticWebAssetBasePath) == ''">/_content/MartinDrozdik_Pages_Error</StaticWebAssetBasePath>
+    <RootNamespace>MartinDrozdik.Pages.Error</RootNamespace>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\_dist\**" />
+    <Content Remove="wwwroot\_dist\**" />
+    <EmbeddedResource Remove="wwwroot\_dist\**" />
+    <None Remove="wwwroot\_dist\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="package-lock.json" />
+    <Content Remove="package.json" />
+    <Content Remove="tsconfig.json" />
+    <Content Remove="wwwroot\temp.ts" />
+    <Content Remove="wwwroot\Web\ErrorPage\ErrorPage.scss" />
+    <Content Remove="wwwroot\Web\ErrorPage\ErrorPage.ts" />
+    <Content Remove="wwwroot\Web\Global\Global.scss" />
+    <Content Remove="wwwroot\Web\Global\Global.ts" />
+    <Content Remove="wwwroot\Web\OfflinePage\OfflinePage.scss" />
+    <Content Remove="wwwroot\Web\OfflinePage\OfflinePage.ts" />
+    <Content Remove="wwwroot\Web\_Functions.scss" />
+    <Content Remove="wwwroot\Web\_Variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="package.json" />
+    <None Include="tsconfig.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\temp.ts" />
+    <None Include="wwwroot\Web\ErrorPage\ErrorPage.scss" />
+    <None Include="wwwroot\Web\ErrorPage\ErrorPage.ts" />
+    <None Include="wwwroot\Web\Global\Global.scss" />
+    <None Include="wwwroot\Web\Global\Global.ts" />
+    <None Include="wwwroot\Web\OfflinePage\OfflinePage.scss" />
+    <None Include="wwwroot\Web\OfflinePage\OfflinePage.ts" />
+    <None Include="wwwroot\Web\_Functions.scss" />
+    <None Include="wwwroot\Web\_Variables.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MartinDrozdik.Services.LanguageDictionary" Version="1.0.3" />
+    <PackageReference Include="MartinDrozdik.Utils.String" Version="1.5.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MartinDrozdik.Services.FilePathProvider\MartinDrozdik.Services.FilePathProvider.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\_out\" />
+  </ItemGroup>
+
+</Project>

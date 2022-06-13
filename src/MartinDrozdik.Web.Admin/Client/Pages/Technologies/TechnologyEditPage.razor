@@ -1,0 +1,86 @@
+﻿@page "/technology/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject TechnologyService Service
+@inject TechnologyLogoService LogoService
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/technology/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        TechnologyPage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    Technology entity;
+
+    protected void OnEntityLoad(Technology entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else 
+{
+    <MudText Typo="Typo.h3" Class="mb-4">
+        Editing: @entity.Name
+    </MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="false" PanelClass="pa-6" Color="@Color.Primary">
+
+            @* General info *@
+            <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
+                <MudText Typo="Typo.h5" Class="mb-5">General information</MudText>
+
+                <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
+                    Variant="Variant.Text"
+                    Immediate="true" HelperText="The name of this technology" 
+                    Required="true" RequiredError="A name is required" />
+
+                <MudTextField @bind-Value="context.Model.Description" Disabled="context.Disabled" Label="Description" 
+                    Variant="Variant.Text"
+                    Immediate="true" HelperText="Very short description of the technology" />
+
+            </MudTabPanel>
+
+            @* Technology image *@
+            <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Logo of the technology</MudText>
+                <ImageEditor Id="context.Model.LogoId" @bind-Image="context.Model.Logo"
+                    ReadOnly="context.Disabled"
+                    AddService="LogoService" 
+                    DeleteService="LogoService"
+                    GetService="LogoService"
+                    UpdateService="LogoService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="256" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+        </MudTabs>
+
+        
+    </Editor>
+</EditPage>

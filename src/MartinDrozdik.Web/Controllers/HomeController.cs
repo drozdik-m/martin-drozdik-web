@@ -19,6 +19,12 @@ using Bonsai.Utils.String;
 using Bonsai.Services.Email.Messages;
 using Bonsai.Services.RecaptchaV2.Abstraction;
 using Bonsai.Services.Email.Abstraction;
+using MartinDrozdik.Data.Models.CV;
+using MartinDrozdik.Web.Facades.Models.People;
+using MartinDrozdik.Web.Facades.Models.Projects;
+using MartinDrozdik.Abstraction.Exceptions.Services.CRUD;
+using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using MartinDrozdik.Web.Facades.Models.Blog;
 
 namespace Bonsai.Server.Controllers
 {
@@ -30,12 +36,30 @@ namespace Bonsai.Server.Controllers
         readonly ServerConfiguration serverConfig;
         readonly IRecaptchaV2Validator recaptchaValidator;
         readonly IEmailSender emailSender;
+        private readonly WorkExperienceFacade workExperienceFacade;
+        private readonly EducationFacade educationFacade;
+        private readonly LanguageSkillFacade languageSkillFacade;
+        private readonly ProjectTagFacade projectTagFacade;
+        private readonly ProjectFacade projectFacade;
+        private readonly ProjectMarkdownArticleFacade projectMarkdownArticleFacade;
+        private readonly ArticleFacade articleFacade;
+        private readonly ArticleTagFacade articleTagFacade;
+        private readonly BlogMarkdownArticleFacade blogMarkdownArticleFacade;
 
         public HomeController(ILanguageDictionary languageDictionary, 
             ICultureProvider cultureProvider,
             ServerConfiguration serverConfig,
             IRecaptchaV2Validator recaptchaValidator,
-            IEmailSender emailSender
+            IEmailSender emailSender,
+            WorkExperienceFacade workExperienceFacade,
+            EducationFacade educationFacade,
+            LanguageSkillFacade languageSkillFacade,
+            ProjectTagFacade projectTagFacade,
+            ProjectFacade projectFacade,
+            ProjectMarkdownArticleFacade projectMarkdownArticleFacade,
+            ArticleFacade articleFacade,
+            ArticleTagFacade articleTagFacade,
+            BlogMarkdownArticleFacade blogMarkdownArticleFacade
             )
         {
             this.languageDictionary = languageDictionary;
@@ -43,16 +67,115 @@ namespace Bonsai.Server.Controllers
             this.serverConfig = serverConfig;
             this.recaptchaValidator = recaptchaValidator;
             this.emailSender = emailSender;
+            this.workExperienceFacade = workExperienceFacade;
+            this.educationFacade = educationFacade;
+            this.languageSkillFacade = languageSkillFacade;
+            this.projectTagFacade = projectTagFacade;
+            this.projectFacade = projectFacade;
+            this.projectMarkdownArticleFacade = projectMarkdownArticleFacade;
+            this.articleFacade = articleFacade;
+            this.articleTagFacade = articleTagFacade;
+            this.blogMarkdownArticleFacade = blogMarkdownArticleFacade;
         }
 
         public async Task<IActionResult> Index()
         {
-            var indexModel = new IndexPageModel(cultureProvider, languageDictionary)
+            var workExperiences = await workExperienceFacade.GetAsync();
+            var educations = await educationFacade.GetAsync();
+            var languageSkill = await languageSkillFacade.GetAsync();
+            var projectTags = await projectTagFacade.GetAsync();
+            var previewArticles = await articleFacade.GetFirstPublishedAsync(3);
+
+            var model = new IndexPageModel(cultureProvider, languageDictionary,
+                workExperiences, educations, languageSkill,
+                projectTags,
+                previewArticles)
             {
 
             };
 
-            return View(indexModel);
+            return View(model);
+
+        }
+
+        [Route("projects")]
+        public async Task<IActionResult> Projects()
+        {
+            var projectTags = await projectTagFacade.GetAsync();
+
+            var model = new ProjectsPageModel(cultureProvider, languageDictionary,
+                projectTags, 30)
+            {
+
+            };
+
+            return View(model);
+        }
+
+        [Route("projects/{id}")]
+        public async Task<IActionResult> Project(string id)
+        {
+            try
+            {
+                var project = await projectFacade.GetAsync(id);
+                project.Content = projectMarkdownArticleFacade.WithUpdatedResourceLinks(project.Content,
+                    e => $"{serverConfig.ContentDomain}{e}");
+
+                var model = new ProjectPageModel(cultureProvider, languageDictionary,
+                    project)
+                {
+
+                };
+
+                return View(model);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [Route("blog")]
+        public async Task<IActionResult> Blog()
+        {
+            var articleTags = await articleTagFacade.GetAsync();
+
+            var model = new BlogPageModel(cultureProvider, languageDictionary,
+                articleTags)
+            {
+
+            };
+
+            return View(model);
+        }
+
+        [Route("blog/{id}")]
+        public async Task<IActionResult> Article(string id)
+        {
+            try
+            {
+                var article = await articleFacade.GetAsync(id);
+
+                //Redirect if reference
+                if (article.IsArticleReference)
+                    return Redirect(article.ReferenceLink);
+
+                //Return content
+                article.Content = blogMarkdownArticleFacade.WithUpdatedResourceLinks(article.Content,
+                    e => $"{serverConfig.ContentDomain}{e}");
+
+                var model = new ArticlePageModel(cultureProvider, languageDictionary,
+                    article)
+                {
+
+                };
+
+                return View(model);
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
         }
 
         [HttpPost]

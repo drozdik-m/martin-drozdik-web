@@ -1,0 +1,361 @@
+﻿@page "/project/{id:int}"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject ProjectService Service
+@inject ProjectLogoService LogoService
+@inject ProjectOgImageService OgImageService
+@inject ProjectTagService TagService
+@inject ProjectDeveloperService ProjectDeveloperService
+@inject PersonService PersonService
+@inject TechnologyService TechnologyService
+@inject ProjectPreviewImageService PreviewImageService
+@inject ProjectGalleryImageService GalleryImageService
+@inject ProjectMarkdownArticleService MarkdownArticleService
+@inject IJSRuntime JSRuntime
+
+@code{
+    [Parameter]
+    public int Id { get; set; }
+
+    public static BreadcrumbItem BreadcrumbItem(int id, string name)
+        => new(name, href: $"/project/{id}", icon: Icons.Material.Filled.Edit);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        ProjectPage.BreadcrumbItem,
+        PredefinedBreadcrumbs.Loading
+    };
+
+    Project entity;
+
+    protected void OnEntityLoad(Project entity)
+    {
+        this.entity = entity;
+        breadcrumbItems[breadcrumbItems.Count - 1] = BreadcrumbItem(entity.Id, entity.Name);
+        StateHasChanged();
+    }
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+@if(entity is null)
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Loading...</MudText>
+}
+else
+{
+    <MudText Typo="Typo.h3" Class="mb-4">Editing: @entity.Name</MudText>
+}
+
+<EditPage Id="Id" OnEntityLoad="OnEntityLoad"
+    GetService="Service"
+    UpdateService="Service">
+    <Editor>
+        <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="false" PanelClass="pa-6" Color="@Color.Primary">
+
+            @* General info *@
+            <MudTabPanel Text="General" Icon="@Icons.Material.Filled.Settings">
+                <MudText Typo="Typo.h5" Class="mb-5">General information</MudText>
+                <MudTextField @bind-Value="context.Model.Name" Disabled="context.Disabled" Label="Name" 
+                    Variant="Variant.Text" Class="my-3"
+                    Immediate="true" HelperText="The name of this project" 
+                    Required="true" RequiredError="A name is required" />
+
+                <MudSwitch @bind-Checked="context.Model.IsHidden" Disabled="context.Disabled" 
+                    Class="my-4"
+                    ThumbIconColor=@(context.Model.IsHidden ? Color.Dark : Color.Secondary)
+                    Label="@(context.Model.IsHidden ? "Hidden" : "Visible")"
+                    ThumbIcon="@(context.Model.IsHidden ? Icons.Material.Filled.VisibilityOff : Icons.Material.Filled.Visibility)"/>
+
+                <MudGrid>
+                    <MudItem xs="9">
+                        <MudTextField @bind-Value="context.Model.UrlName" Disabled="context.Disabled" Label="Url key" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The url key of this project" 
+                                Required="true" RequiredError="A url key is required" />
+                    </MudItem>
+                    <MudItem xs="3">
+                        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Info" Class="mt-5"
+                                OnClick="_ => { context.Model.UrlName = context.Model.Name.ToUrlFriendly(); }">Generate</MudButton>
+                    </MudItem>
+                </MudGrid> 
+
+                <MudTextField @bind-Value="context.Model.Abstract" Disabled="context.Disabled" 
+                    Label="Abstract" Class="my-4"
+                    Variant="Variant.Outlined" Lines="8"
+                    Immediate="true" HelperText="Abstract of the article (= the first paragraph)" />
+
+                <MudGrid>
+                    <MudItem xs="3">
+                        <MudSwitch @bind-Checked="context.Model.IsFinished" Disabled="context.Disabled" 
+                            Class="my-4"
+                            Label="Is finished"
+                            Color="@(context.Model.IsFinished ? Color.Primary : Color.Success)"/>
+                    </MudItem>
+                    @if (context.Model.IsFinished)
+                    {
+                        <MudItem xs="9">
+                            <MudDatePicker @bind-Date="context.Model.FinishedTime" Disabled="context.Disabled"
+                                Label="Project finished date" DateFormat="dd. MM. yyyy" />
+                        </MudItem>
+                    }
+                </MudGrid> 
+
+                <MudGrid>
+                    <MudItem xs="3">
+                        <MudSwitch @bind-Checked="context.Model.HasLiveLink" Disabled="context.Disabled" 
+                            Class="my-4"
+                            Label="Is live"
+                            Color="@(context.Model.HasLiveLink ? Color.Primary : Color.Success)"/>
+                    </MudItem>
+                    @if (context.Model.HasLiveLink)
+                    {
+                        <MudItem xs="9">
+                            <MudTextField @bind-Value="context.Model.LiveLink" Disabled="context.Disabled" Label="Live URL" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The link to the live version of the project" />
+                        </MudItem>
+                    }
+                </MudGrid> 
+
+                <MudGrid>
+                    <MudItem xs="3">
+                        <MudSwitch @bind-Checked="context.Model.HasGitHubLink" Disabled="context.Disabled" 
+                            Class="my-4"
+                            Label="Has public GitHub"
+                            Color="@(context.Model.HasGitHubLink ? Color.Primary : Color.Success)"/>
+                    </MudItem>
+                    @if (context.Model.HasGitHubLink)
+                    {
+                        <MudItem xs="9">
+                            <MudTextField @bind-Value="context.Model.GitHubLink" Disabled="context.Disabled" Label="GitHub link" Variant="Variant.Text" 
+                                Immediate="true" HelperText="The link to the public repository of the project" />
+                        </MudItem>
+                    }
+                </MudGrid>
+
+                <MudTextField @bind-Value="context.Model.Keywords" Disabled="context.Disabled" Label="Keywords" Variant="Variant.Text" 
+                                Immediate="true" HelperText="Keywords separated by comma" />
+                
+            </MudTabPanel>
+
+            @* Content *@
+            <MudTabPanel Text="Content" Icon="@Icons.Material.Filled.ContentPaste">
+                <MudText Typo="Typo.h5" Class="mb-5">Project description content</MudText>
+                <MarkdownArticleEditor @bind-Article="context.Model.Content" Id="context.Model.ContentId"
+                                        ReadOnly="context.Disabled"
+                                        ArticleService="MarkdownArticleService" />
+            </MudTabPanel>
+
+            @* Logo *@
+            <MudTabPanel Text="Logo" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Project logo</MudText>
+                <ImageEditor Id="context.Model.LogoId" @bind-Image="context.Model.Logo"
+                    ReadOnly="context.Disabled"
+                    AddService="LogoService" 
+                    DeleteService="LogoService"
+                    GetService="LogoService"
+                    UpdateService="LogoService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="512" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+
+            @* Preview image *@
+            <MudTabPanel Text="Preview image" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Project preview image</MudText>
+                <ImageEditor Id="context.Model.PreviewImageId" @bind-Image="context.Model.PreviewImage"
+                    ReadOnly="context.Disabled"
+                    AddService="PreviewImageService" 
+                    DeleteService="PreviewImageService"
+                    GetService="PreviewImageService"
+                    UpdateService="PreviewImageService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+
+            @* Og image *@
+            <MudTabPanel Text="OG image" Icon="@Icons.Material.Filled.ImageAspectRatio">
+                <MudText Typo="Typo.h5" Class="mb-5">Project OG image</MudText>
+                <ImageEditor Id="context.Model.OgImageId" @bind-Image="context.Model.OgImage"
+                    ReadOnly="context.Disabled"
+                    AddService="OgImageService" 
+                    DeleteService="OgImageService"
+                    GetService="OgImageService"
+                    UpdateService="OgImageService"> 
+
+                    <ImageDisplay Context="image">
+                        <MudImage Height="512" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                    </ImageDisplay>
+
+                </ImageEditor>
+            </MudTabPanel>
+
+            @* Gallery images *@
+            <MudTabPanel Text="Gallery images" Icon="@Icons.Material.Filled.Image">
+                <MudText Typo="Typo.h5" Class="mb-5">Project intro gallery</MudText>
+                <ModelCollectionInput TConnector="ProjectGalleryImage" TKey="int" TModel="ProjectGalleryImage" @bind-Items="context.Model.GalleryImages"
+                    IdGetter="e => e.Id"
+                    OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => new ProjectGalleryImage(){ ProjectId = entity.Id, OrderIndex = entity.GalleryImages.Count }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => e.Id == e.Id)" 
+                    ReadOnly="context.Disabled">
+
+                    <DisplayItem Context="connection">
+                        <MudText>
+                            @if (string.IsNullOrWhiteSpace(connection.Name))
+                            {
+                                @if(connection.Id == default)
+                                {
+                                    <i>New image</i>
+                                }
+                                else
+                                {
+                                    <b>Image @connection.Id</b>
+                                }
+                            }
+                            else
+                            {
+                                <b>@connection.Name</b>
+                            }
+                        </MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        @{
+                            var name = string.Empty;
+                            @if (string.IsNullOrWhiteSpace(connection.Name))
+                            {
+                                @if(connection.Id == default)
+                                {
+                                    name = "New image";
+                                }
+                                else
+                                {
+                                    name = $"Image {connection.Id}";
+                                }
+                            }
+                            else
+                            {
+                                name = connection.Name;
+                            }
+                        }
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{name}")" />
+                    </ReorderItem>
+                    <EditItem Context="connection">
+                        @if(connection.Model.Id == default)
+                        {
+                        <MudAlert Severity="Severity.Info">The image needs to be saved first </MudAlert>
+                        }
+                        else
+                        {
+
+                        <ImageEditor Id="connection.Model.Id" @bind-Image="connection.Model"
+                                    ReadOnly="connection.ReadOnly"
+                                    AddService="GalleryImageService" 
+                                    DeleteService="GalleryImageService"
+                                    GetService="GalleryImageService"
+                                    UpdateService="GalleryImageService"
+                                    OnMediaChange=@(async e => {
+                                        entity.GalleryImages.Remove(entity.GalleryImages.Where(f => f.Id == e.Id).Single());
+                                        entity.GalleryImages.Add(e);
+                                        StateHasChanged();
+                                    })> 
+
+                                    
+                                    <ImageDisplay Context="image">
+                                        <MudImage Height="300" Src="@image.Uri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                                        <MudImage Height="150" Src="@image.ThumbnailUri" Alt="@image.AlternativeText"  Elevation="25" Class="rounded-lg" />
+                                    </ImageDisplay>
+                                    
+
+                                </ImageEditor>
+                        }
+                    </EditItem>
+                </ModelCollectionInput>
+            </MudTabPanel>
+
+            @* Tags *@
+            <MudTabPanel Text="Tags" Icon="@Icons.Material.Filled.Tag">
+                <MudText Typo="Typo.h5" Class="mb-5">Project tags</MudText>
+                <ModelCollectionInput TConnector="ProjectHasTag" TKey="int" TModel="ProjectTag" @bind-Items="context.Model.Tags"
+                    GetOptionsService="TagService" Unique="true" IdGetter="e => e.Id"
+                    CustomOrder="e => e.OrderBy(f => f.Tag.OrderIndex)"
+                    ConnectorFactory="e => new ProjectHasTag(){ ProjectsId = entity.Id, Tag = e, TagsId = e.Id }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.TagsId == e.Id)"
+                    ReadOnly="context.Disabled">
+                    <DisplayItem Context="connection">
+                        <MudText>@connection.Tag.Name</MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Tag.Name}")" />
+                    </ReorderItem>
+                </ModelCollectionInput>
+            </MudTabPanel>
+
+            @* Developers *@
+            <MudTabPanel Text="Developers" Icon="@Icons.Material.Filled.Person">
+                <MudText Typo="Typo.h5" Class="mb-5">Project developers</MudText>
+                <ModelCollectionInput TConnector="ProjectDeveloper" TKey="int" TModel="Person" @bind-Items="context.Model.Developers"
+                    GetOptionsService="PersonService" Unique="true" IdGetter="e => e.Id"
+                    OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => new ProjectDeveloper(){ ProjectsId = entity.Id, Person = e, PersonsId = e.Id, OrderIndex = entity.Developers.Count }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.PersonsId == e.Id)" 
+                    ReadOnly="context.Disabled">
+                    <DisplayItem Context="connection">
+                        <MudText>
+                            <b>@connection.Person.Name</b>
+                            @if (!string.IsNullOrWhiteSpace(connection.Role))
+                            {
+                                @($"– {connection.Role}")
+                            }
+                         </MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Person.Name}")" />
+                    </ReorderItem>
+                    <EditItem Context="connection">
+                        <MudTextField @bind-Value="connection.Model.Role" Disabled="context.Disabled" Label="Role" 
+                            Variant="Variant.Text" Class="my-3"
+                            Immediate="true" HelperText="The role/position of this person in the project" />
+                    </EditItem>
+                </ModelCollectionInput>
+            </MudTabPanel>
+
+            @* Technologies *@
+            <MudTabPanel Text="Technologies" Icon="@Icons.Material.Filled.Analytics">
+                <MudText Typo="Typo.h5" Class="mb-5">Used technologies</MudText>
+                <ModelCollectionInput TConnector="ProjectTechnology" TKey="int" TModel="Technology" @bind-Items="context.Model.Technologies"
+                    GetOptionsService="TechnologyService" Unique="true" IdGetter="e => e.Id"
+                    OrderExpression="e => e.OrderIndex"
+                    ConnectorFactory="e => new ProjectTechnology(){ ProjectsId = entity.Id, Technology = e, TechnologiesId = e.Id, OrderIndex = entity.Technologies.Count }" 
+                    IsAlreadySelected="(e, c) => c.Any(f => f.TechnologiesId == e.Id)" 
+                    ReadOnly="context.Disabled">
+                    <DisplayItem Context="connection">
+                        <MudText>
+                            <b>@connection.Technology.Name</b> 
+                            @if (!string.IsNullOrWhiteSpace(connection.Usage))
+                            {
+                                @($"– {connection.Usage}")
+                            }
+                         </MudText>
+                    </DisplayItem>
+                    <ReorderItem Context="connection">
+                        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{connection.Technology.Name}")" />
+                    </ReorderItem>
+                    <EditItem Context="connection">
+                        <MudTextField @bind-Value="connection.Model.Usage" Disabled="context.Disabled" Label="Usage" 
+                            Variant="Variant.Text" Class="my-3"
+                            Immediate="true" HelperText="The usage of this technology (front-end, back-end, ...)" />
+                    </EditItem>
+                </ModelCollectionInput>
+            </MudTabPanel>
+        </MudTabs>
+
+    </Editor>
+</EditPage>

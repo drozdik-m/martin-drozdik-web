@@ -16,6 +16,10 @@ $blackHover: #000000;
 $mainTheme: $red;
 $mainThemeHover: $redHover;
 
+$projectsBackground: #F6F4FA;
+$blogBackground: #FCF8F8;
+$darkTransparentBackground: rgba(36, 11, 54, 0.7);
+
 $green: #90EE90;
 
 $lightBlack: #F8F4FB;
@@ -41,6 +45,7 @@ $blockMaxWidth: 80rem;
 
 //FONT WEIGHTS
 $fontWeightRegular: normal; //400
+//$fontWeightMedium: 500;
 $fontWeightSemiBold: 600;
 $fontWeightBold: bold; //700
 $fontWeightExtraBold: 800;

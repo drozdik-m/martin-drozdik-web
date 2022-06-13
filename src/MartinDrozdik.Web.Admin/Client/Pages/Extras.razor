@@ -1,0 +1,16 @@
+﻿@page "/extras"
+@inherits RootPage
+@inject EducationService EducationService
+@inject LanguageSkillService LanguageSkillService
+@inject WorkExperienceService WorkExperienceService
+
+
+<MudText Typo="Typo.h3">Development extras</MudText>
+<MudText Class="mb-3">Methods and functions that are not for plebian eyes.</MudText>
+
+<SeedsCaller Seeds=@(new List<(string, ISeedableService)>()
+{
+    ("Educations", EducationService),
+    ("Language skills", LanguageSkillService),
+    ("Work experiences", WorkExperienceService)
+}) />

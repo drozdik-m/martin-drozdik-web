@@ -14,6 +14,10 @@ module.exports = [
             //Scripts
             Global: "./wwwroot/_dist/Web/Global/Global.js",
             IndexPage: "./wwwroot/_dist/Web/_Pages/IndexPage/IndexPage.js",
+            ProjectsPage: "./wwwroot/_dist/Web/_Pages/ProjectsPage/ProjectsPage.js",
+            ProjectPage: "./wwwroot/_dist/Web/_Pages/ProjectPage/ProjectPage.js",
+            BlogPage: "./wwwroot/_dist/Web/_Pages/BlogPage/BlogPage.js",
+            ArticlePage: "./wwwroot/_dist/Web/_Pages/ArticlePage/ArticlePage.js",
             SitemapPage: "./wwwroot/_dist/Web/_Pages/SitemapPage/SitemapPage.js",
         },
 
@@ -53,6 +57,10 @@ module.exports = [
         entry: {
             Global: "./wwwroot/Web/Global/Global.scss",
             IndexPage: "./wwwroot/Web/_Pages/IndexPage/IndexPage.scss",
+            ProjectsPage: "./wwwroot/Web/_Pages/ProjectsPage/ProjectsPage.scss",
+            ProjectPage: "./wwwroot/Web/_Pages/ProjectPage/ProjectPage.scss",
+            BlogPage: "./wwwroot/Web/_Pages/BlogPage/BlogPage.scss",
+            ArticlePage: "./wwwroot/Web/_Pages/ArticlePage/ArticlePage.scss",
             SitemapPage: "./wwwroot/Web/_Pages/SitemapPage/SitemapPage.scss",
         },
 

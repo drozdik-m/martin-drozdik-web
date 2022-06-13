@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Bonsai.Services.Email.Configuration;
 using Bonsai.Services.RecaptchaV2.Configuration;
+using MartinDrozdik.Data.DbContexts.Configuration;
 
 namespace MartinDrozdik.Web.Configuration
 {
@@ -12,6 +13,16 @@ namespace MartinDrozdik.Web.Configuration
         /// Configuration regarding the website
         /// </summary>
         public WebConfiguration Web { get; set; }
+
+        /// <summary>
+        /// The domain where the website is currently running
+        /// </summary>
+        public string Domain { get; set; }
+
+        /// <summary>
+        /// The domain where all admin/dynamic content is located
+        /// </summary>
+        public string ContentDomain { get; set; }
 
         /// <summary>
         /// Email configuration for a sending email account
@@ -27,5 +38,10 @@ namespace MartinDrozdik.Web.Configuration
         /// Email that should recieve all important notifications
         /// </summary>
         public string MainNotificationRecipient { get; set; }
+
+        /// <summary>
+        /// Connection strings setup
+        /// </summary>
+        public ConnectionStringsConfiguration ConnectionStrings { get; set; }
     }
 }

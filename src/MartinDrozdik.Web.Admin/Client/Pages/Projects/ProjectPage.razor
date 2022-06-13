@@ -1,0 +1,106 @@
+﻿@page "/project"
+@inherits RootPage
+@attribute [Authorize(Roles = UserRoles.Developer + "," + UserRoles.Admin)]
+@inject ProjectService Service 
+
+@code {
+    public static BreadcrumbItem BreadcrumbItem { get; }
+        = new BreadcrumbItem("Projects", href: "/project", icon: MainLayout.ProjectsIcon);
+
+    protected List<BreadcrumbItem> breadcrumbItems = new()
+    {
+        MartinDrozdik.Web.Admin.Client.Pages.Index.BreadcrumbItem,
+        BreadcrumbItem,
+    };
+
+    ListPage<Project, int> listPage;
+}
+
+<MudBreadcrumbs Items="breadcrumbItems" />
+
+<MudText Typo="Typo.h3" Class="mb-1">Projects</MudText>
+<MudText Class="mb-4">Projects to display on the website.</MudText>
+
+@if(listPage is not null)
+{
+    <UrlComparator Urls="listPage.DisplayEntities.Select(e => e.UrlName)" />
+}
+
+<ListPage @ref="listPage" TModel="Project" TKey="int" KeyGetter="e => e.Id"
+    OnReload="() => StateHasChanged()"
+    GetService="Service"
+    AddService="Service" EntityCreator="() => new Project()"
+    DeleteService="Service" 
+    ReorderService="Service" OrderExpression="e => e.OrderIndex"
+    HideableService="Service">
+
+    <DisplayItems>
+        <MudSimpleTable Elevation="4" Hover="true" Striped="true" Dense="true" Style="overflow-x: auto;">
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Name</th>
+                    <th>URI key</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if(context.DisplaySkeleton)
+                {
+                    for(var i = 0; i < 10; i++)
+                    {
+                        <tr>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                            <td><MudSkeleton /></td>
+                        </tr>
+                    }
+                }
+                @foreach (var item in context.Models)
+                {
+                    <tr>
+                        <td>
+                            @if (item.Logo.Uploaded)
+                            {
+                                var image = item.Logo;
+                                <MudImage Height="48" Src="@image.Uri" Alt="@image.AlternativeText" />
+                            }
+                        </td>
+                        <td>@item.Name</td>
+                        <td>@item.UrlName</td>
+                        <td>
+                            <ListControlButton Disabled="context.Loading" 
+                                OnDelete="async _ => await listPage.DeleteAsync(item.Id)"
+                                HrefEdit="@($"/project/{item.Id}")"
+                                OnVisibilityToggle="async _ => await listPage.ToggleVisibilityAsync(item)"
+                                Visible="!item.IsHidden"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </MudSimpleTable>
+    </DisplayItems>
+    
+    <AddInputs>
+
+        <MudTextField @bind-Value="context.Model.Name" Disabled="context.Loading" Label="Name" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The name of this project" 
+                        Required="true" RequiredError="A name is required" />
+
+        <MudGrid>
+            <MudItem xs="9">
+                <MudTextField @bind-Value="context.Model.UrlName" Disabled="context.Loading" Label="Url key" Variant="Variant.Text" 
+                        Immediate="true" HelperText="The url key of this project" 
+                        Required="true" RequiredError="A url key is required" />
+            </MudItem>
+            <MudItem xs="3">
+                <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Refresh" Color="Color.Info" Class="mt-5"
+                        OnClick="_ => { context.Model.UrlName = context.Model.Name.ToUrlFriendly(); }">Generate</MudButton>
+            </MudItem>
+        </MudGrid> 
+    </AddInputs>
+
+    <ReorderItem>
+        <MudListItem Icon="@Icons.Material.Filled.DragHandle" Text="@($"{context.Name}")" />
+    </ReorderItem>
+</ListPage>

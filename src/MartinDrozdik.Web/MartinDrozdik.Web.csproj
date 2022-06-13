@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Deterministic>false</Deterministic>
     <AssemblyVersion>1.0.*</AssemblyVersion>
     <AssemblyName>MartinDrozdik.Web</AssemblyName>
@@ -21,8 +21,13 @@
     <Content Remove="package.json" />
     <Content Remove="tsconfig.json" />
     <Content Remove="wwwroot\Web\AboutMe\AboutMe.scss" />
-    <Content Remove="wwwroot\Web\Article\ArticleBase.scss" />
+    <Content Remove="wwwroot\Web\Article\Article.scss" />
+    <Content Remove="wwwroot\Web\Article\Team.scss" />
     <Content Remove="wwwroot\Web\Biography\Biography.scss" />
+    <Content Remove="wwwroot\Web\Blog\ArticleList.scss" />
+    <Content Remove="wwwroot\Web\Blog\ArticleListItems.scss" />
+    <Content Remove="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss" />
+    <Content Remove="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss" />
     <Content Remove="wwwroot\Web\Contact\Contact.scss" />
     <Content Remove="wwwroot\Web\Contact\ContactForm.scss" />
     <Content Remove="wwwroot\Web\Contact\ContactInfo.scss" />
@@ -31,8 +36,10 @@
     <Content Remove="wwwroot\Web\Footer\FooterContent.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterCredits.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterNav.scss" />
+    <Content Remove="wwwroot\Web\Form\CommonButton.scss" />
     <Content Remove="wwwroot\Web\Form\Form.scss" />
     <Content Remove="wwwroot\Web\Form\ResponsiveBorder.scss" />
+    <Content Remove="wwwroot\Web\Gallery\Gallery.scss" />
     <Content Remove="wwwroot\Web\Global\Animations.scss" />
     <Content Remove="wwwroot\Web\Global\Block.scss" />
     <Content Remove="wwwroot\Web\Global\CommonButton.scss" />
@@ -42,33 +49,82 @@
     <Content Remove="wwwroot\Web\Global\Global.scss" />
     <Content Remove="wwwroot\Web\Global\Icons.scss" />
     <Content Remove="wwwroot\Web\Global\LinkHover.scss" />
+    <Content Remove="wwwroot\Web\Global\MagnifyingGlass.scss" />
     <Content Remove="wwwroot\Web\Global\Tags.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\Circles.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
+    <Content Remove="wwwroot\Web\HeroHeader\InnerHTML_polyfill.js" />
     <Content Remove="wwwroot\Web\Icon\GitHubIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icon\Icon.scss" />
     <Content Remove="wwwroot\Web\Icon\LinkedInIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icon\StackOverflowIconWhite.scss" />
     <Content Remove="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss" />
     <Content Remove="wwwroot\Web\ImportantStats\ImportantStats.scss" />
     <Content Remove="wwwroot\Web\Menu\Desktop.scss" />
     <Content Remove="wwwroot\Web\Menu\Menu.scss" />
     <Content Remove="wwwroot\Web\Menu\Mobile.scss" />
     <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
-    <Content Remove="wwwroot\Web\Projects\ProjetList.scss" />
+    <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
+    <Content Remove="wwwroot\Web\Tags\Tags.scss" />
+    <Content Remove="wwwroot\Web\Team\Team.scss" />
+    <Content Remove="wwwroot\Web\Technologies\Technologies.scss" />
+    <Content Remove="wwwroot\Web\_Pages\ArticlePage\ArticlePage.scss" />
+    <Content Remove="wwwroot\Web\_Pages\BlogPage\BlogPage.scss" />
+    <Content Remove="wwwroot\Web\_Pages\IndexPage\Blog.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
+    <Content Remove="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss" />
+    <Content Remove="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
     <Content Remove="wwwroot\Web\_Variables.scss" />
     <Content Remove="wwwroot\_dist\temp.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\ArticlePage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\BlogPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\Global.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\IndexPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\ProjectPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\ProjectsPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\SitemapPage.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="package-lock.json">
+    <None Include="wwwroot\Web\Tags\Tags.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="package.json">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Blog\ArticleListItems.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Blog\ArticleList.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Form\CommonButton.scss" />
+    <None Include="wwwroot\Web\HeroHeader\InnerHTML_polyfill.js" />
+    <None Include="wwwroot\Web\Icon\Icon.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Icon\StackOverflowIconWhite.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Team\Team.scss" />
+    <None Include="wwwroot\Web\Technologies\Technologies.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <Page Include="wwwroot\Web\Team\Team.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <None Include="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\ContactMeStripe\ContactMeStripe.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Contact\ContactForm.scss">
@@ -83,25 +139,39 @@
     <None Include="wwwroot\Web\Form\ResponsiveBorder.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\Gallery\Gallery.scss" />
+    <None Include="wwwroot\Web\Global\MagnifyingGlass.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\Web\Icon\LinkedInIconWhite.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Icon\GitHubIconWhite.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Icon\Icon.scss">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Include="wwwroot\Web\StatusWindow\StatusWindow.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\_Pages\IndexPage\Blog.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\ArticlePage\ArticlePage.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\BlogPage\BlogPage.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss" />
     <TypeScriptCompile Include="tsconfig.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </TypeScriptCompile>
     <None Include="wwwroot\Web\AboutMe\AboutMe.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Article\ArticleBase.scss" />
+    <None Include="wwwroot\Web\Article\Article.scss" />
     <None Include="wwwroot\Web\Biography\Biography.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -127,9 +197,9 @@
     <None Include="wwwroot\Web\Global\Block.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Form\CommonButton.scss">
+    <Page Include="wwwroot\Web\Form\CommonButton.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
+    </Page>
     <None Include="wwwroot\Web\Global\CommonText.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -143,9 +213,6 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\Global\LinkHover.scss">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\Web\Global\Tags.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\HeroHeader\Circles.scss">
@@ -172,7 +239,7 @@
     <None Include="wwwroot\Web\MySkills\MySkills.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Projects\ProjetList.scss">
+    <None Include="wwwroot\Web\Projects\ProjectList.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\IndexPage\FreeForWork.scss">
@@ -202,9 +269,16 @@
     <PackageReference Include="MartinDrozdik.Services.RobotsTXT" Version="1.0.0" />
     <PackageReference Include="MartinDrozdik.Services.Sitemap" Version="1.0.0" />
     <PackageReference Include="MartinDrozdik.Utils.String" Version="1.5.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.18" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.18" />
-    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.3" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.6.2">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -212,11 +286,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MartinDrozdik.Services.Abstraction\MartinDrozdik.Services.FilePathProvider.csproj" />
+    <ProjectReference Include="..\MartinDrozdik.Data.DbContexts\MartinDrozdik.Data.DbContexts.csproj" />
+    <ProjectReference Include="..\MartinDrozdik.Pages.Error\MartinDrozdik.Pages.Error.csproj" />
+    <ProjectReference Include="..\MartinDrozdik.Services.FilePathProvider\MartinDrozdik.Services.FilePathProvider.csproj" />
+    <ProjectReference Include="..\MartinDrozdik.Web.Facades\MartinDrozdik.Web.Facades.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\_dist\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>

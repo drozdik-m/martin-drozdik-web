@@ -1,0 +1,37 @@
+﻿@inherits RootComponent
+@typeparam TModel
+@typeparam TKey
+
+<div class="@Class">
+    @* Error space *@
+    @if(!(lastException is null))
+    {
+        <MudAlert Severity="Severity.Error" Variant="Variant.Filled">@lastException.Message</MudAlert>
+    }
+
+    <MudSelect Value="Value" ValueChanged="ValueChanged" T="TModel" Label="@Label" Variant="Variant.Outlined" AnchorOrigin="Origin.BottomCenter"
+        OnOpen="@(async e => { if(!optionsLoaded) await ReloadOptionsAsync(); })"
+        Adornment="AnyLoading ? Adornment.End : Adornment.None" AdornmentText="Loading..."
+        Clearable="@Defaultable" OnClearButtonClick="@(async e => { await SetDefaultAsync(); })"
+        Disabled="ReadOnly || AnyLoading">
+        @if(Defaultable && Default is not null)
+        {
+            <MudSelectItem T="TModel" Value="default">
+                @Default
+            </MudSelectItem>
+        }
+        @foreach(var item in Options)
+        {
+            <MudSelectItem T="TModel" Value="@item" />
+        }
+    </MudSelect>
+
+    @if (AnyLoading)
+    {
+        <MudProgressLinear Color="Color.Primary" Indeterminate="true" />
+    }
+
+
+</div>
+
+

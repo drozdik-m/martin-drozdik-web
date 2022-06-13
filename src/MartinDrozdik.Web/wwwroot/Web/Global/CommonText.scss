@@ -21,7 +21,7 @@
     font-weight: $fontWeightBlack;
     color: $black;
     position: relative;
-    padding-block: $pxInRem-4;
+    padding-bottom: $pxInRem-6;
     margin-bottom: $pxInRem-28;
 
     &:after {
@@ -33,6 +33,15 @@
         height: $pxInRem-6;
         width: $pxInRem-57;
         background-color: $black;
+    }
+
+    &.commonHSlim {
+        font-size: $pxInRem-44;
+        margin-bottom: $pxInRem-22;
+
+        &:after {
+            height: $pxInRem-3;
+        }
     }
 
     &.commonHGradient {
@@ -72,13 +81,21 @@
 
 @media only screen and (max-width: 46rem) {
     .commonH {
-        font-size: $pxInRem-50;
-        padding-block: $pxInRem-4;
-        margin-bottom: $pxInRem-28;
+        font-size: $pxInRem-46;
+        padding-bottom: $pxInRem-6;
+        margin-bottom: $pxInRem-22;
 
         &:after {
             height: $pxInRem-4;
             width: $pxInRem-46;
+        }
+
+        &.commonHSlim {
+            font-size: $pxInRem-28;
+            margin-bottom: $pxInRem-16;
+            &:after{
+                width: $pxInRem-36;
+            }
         }
     }
 }
@@ -136,19 +153,22 @@
 //--------------------------------------------------
 //---------LINK-------------------------------------
 //--------------------------------------------------
+
+@mixin commonABackgroundSize($width, $bgSpace) {
+    background-size: $width $width;
+    padding-right: $width + $bgSpace;
+}
+
+
 .commonA, .commonP a {
     color: $linkFresh;
     text-decoration: none;
-
 
     &.external {
         background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyBmaWxsPSJub25lIiB2aWV3Qm94PSIwIDAgMTQgMTQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxwYXRoIGQ9Im0xMi40NDQgMi42NTIyLTguMDExMSA4LjAxMTFjLTAuMDcwMzEgMC4wODA5LTAuMTU2NTggMC4xNDY0LTAuMjUzNCAwLjE5MjQtMC4wOTY4MSAwLjA0NTktMC4yMDIwOCAwLjA3MTQtMC4zMDkyIDAuMDc0OC0wLjEwNzEyIDAuMDAzMy0wLjIxMzc4LTAuMDE1NS0wLjMxMzI5LTAuMDU1My0wLjA5OTUtMC4wMzk4LTAuMTg5NzEtMC4wOTk4LTAuMjY0OTUtMC4xNzYxLTAuMDc1MjUtMC4wNzYzLTAuMTMzOS0wLjE2NzQtMC4xNzIzLTAuMjY3NC0wLjAzODM5LTAuMTAwMS0wLjA1NTY5LTAuMjA3LTAuMDUwODItMC4zMTQgMC4wMDQ4OC0wLjEwNzEgMC4wMzE4NC0wLjIxMjAxIDAuMDc5MTctMC4zMDgxNiAwLjA0NzM0LTAuMDk2MTYgMC4xMTQwMy0wLjE4MTQ5IDAuMTk1OS0wLjI1MDY1bDcuOTk1Ni04LjAwMzNoLTIuNzg0NGMtMC4yMDYyOCAwLTAuNDA0MTItMC4wODE5NS0wLjU0OTk4LTAuMjI3ODFzLTAuMjI3OC0wLjM0MzY5LTAuMjI3OC0wLjU0OTk3YzAtMC4yMDYyOCAwLjA4MTk0LTAuNDA0MTEgMC4yMjc4LTAuNTQ5OTcgMC4xNDU4Ni0wLjE0NTg2IDAuMzQzNy0wLjIyNzgxIDAuNTQ5OTgtMC4yMjc4MWg0LjY2NjZjMC4yMDYzIDAgMC40MDQxIDAuMDgxOTQ0IDAuNTUgMC4yMjc4MSAwLjE0NTkgMC4xNDU4NiAwLjIyNzggMC4zNDM2OSAwLjIyNzggMC41NDk5N3Y0LjY2NjdjMCAwLjIwNjI4LTAuMDgxOSAwLjQwNDExLTAuMjI3OCAwLjU0OTk4LTAuMTQ1OSAwLjE0NTg2LTAuMzQzNyAwLjIyNzgtMC41NSAwLjIyNzhzLTAuNDA0MS0wLjA4MTk0LTAuNTUtMC4yMjc4Yy0wLjE0NTgtMC4xNDU4Ny0wLjIyNzgtMC4zNDM3LTAuMjI3OC0wLjU0OTk4di0yLjc5MjJ6bS0xLjU1NTUgNS45MDMzYzAtMC4yMDYyOCAwLjA4MTktMC40MDQxMiAwLjIyNzgtMC41NDk5OHMwLjM0MzctMC4yMjc4IDAuNTUtMC4yMjc4YzAuMjA2MiAwIDAuNDA0MSAwLjA4MTk0IDAuNTQ5OSAwLjIyNzggMC4xNDU5IDAuMTQ1ODYgMC4yMjc4IDAuMzQzNyAwLjIyNzggMC41NDk5OHYzLjg4ODhjMCAwLjQxMjYtMC4xNjM4IDAuODA4My0wLjQ1NTYgMS4xLTAuMjkxNyAwLjI5MTctMC42ODc0IDAuNDU1Ni0xLjA5OTkgMC40NTU2aC05LjMzMzNjLTAuNDEyNTYgMC0wLjgwODIyLTAuMTYzOS0xLjA5OTktMC40NTU2LTAuMjkxNzItMC4yOTE3LTAuNDU1NjEtMC42ODc0LTAuNDU1NjEtMS4xdi05LjMzMzNjMC0wLjg1NTU1IDAuNy0xLjU1NTYgMS41NTU2LTEuNTU1NmgzLjg4ODljMC4yMDYyOCAwIDAuNDA0MTEgMC4wODE5NCAwLjU0OTk4IDAuMjI3OCAwLjE0NTg2IDAuMTQ1ODYgMC4yMjc4IDAuMzQzNjkgMC4yMjc4IDAuNTQ5OTdzLTAuMDgxOTQgMC40MDQxMS0wLjIyNzggMC41NDk5OGMtMC4xNDU4NyAwLjE0NTg2LTAuMzQzNyAwLjIyNzgtMC41NDk5OCAwLjIyNzhoLTMuODg4OXY5LjMzMzNoOS4zMzMzdi0zLjg4ODh6IiBmaWxsPSIjODQ4NDg0Ii8+Cjwvc3ZnPgo=");
         background-repeat: no-repeat;
         background-position: right center;
-        $bgWidth: $pxInRem-16;
-        background-size: $bgWidth $bgWidth;
-        $bgSpace: $pxInRem-6;
-        padding-right: $bgWidth + $bgSpace;
+        @include commonABackgroundSize($pxInRem-16, $pxInRem-6);
     }
 
     &:hover {

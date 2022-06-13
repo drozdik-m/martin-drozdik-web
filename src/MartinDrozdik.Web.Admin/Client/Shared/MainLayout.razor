@@ -1,0 +1,118 @@
+﻿@inherits LayoutComponentBase
+
+@code {
+    bool drawerOpen = true;
+    private MudTheme theme = new();
+    private bool isDarkMode;
+
+    void DrawerToggle()
+    {
+        drawerOpen = !drawerOpen;
+    }
+
+    void ThemeModeToggle()
+    {
+        isDarkMode = !isDarkMode;
+    }
+
+    bool cvExpanded = true;
+    bool blogExpanded = true;
+    bool projectExpanded = true;
+
+    public static string ProjectsIcon = Icons.Filled.Code;
+    public static string ProjectTagsIcon = Icons.Filled.Tag;
+
+    public static string PeopleIcon = Icons.Filled.Person;
+
+    public static string ArticleIcon = Icons.Filled.Article;
+    public static string ArticleTagsIcon = Icons.Filled.Tag;
+
+    public static string TechnologiesIcon = Icons.Filled.Analytics;
+
+    public static string WorkExperiencesIcon = Icons.Filled.Work;
+    public static string LanguageSkillsIcon = Icons.Filled.Language;
+    public static string EducationsIcon = Icons.Filled.School;
+}
+
+@* MudBlazor *@
+<MudThemeProvider @bind-IsDarkMode="@isDarkMode" Theme="theme"/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
+
+@* Layout *@
+<MudLayout>
+
+    @* Top app bar *@
+    <MudAppBar Elevation="1" Dense="true">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@(e => DrawerToggle())" />
+        <MudSpacer />
+
+        @* Light/Dark mode *@
+        @if (!isDarkMode)
+        {
+            <MudTooltip Class="my-5" Text="Switch to dark mode">
+                <MudIconButton Icon="@Icons.Material.Outlined.DarkMode" Color="Color.Inherit" Edge="Edge.End"
+                               OnClick="@(e => ThemeModeToggle())"/>
+            </MudTooltip>
+        }
+        else
+        {
+            <MudTooltip Text="Switch to light mode">
+                <MudIconButton Icon="@Icons.Material.Filled.LightMode" Color="Color.Inherit" Edge="Edge.End"
+                               OnClick="@(e => ThemeModeToggle())"/>
+            </MudTooltip>
+        }
+
+        @* Repo link *@
+        <MudTooltip Text="GitHub repository">
+                <MudIconButton Icon="@Icons.Custom.Brands.GitHub" Color="Color.Inherit" Edge="Edge.End" 
+                               Target="_blank" Href="https://github.com/drozdik-m/martin-drozdik-web" />
+        </MudTooltip>
+
+        @* Web redirect *@
+        <MudTooltip Text="Open web">
+                <MudIconButton Icon="@Icons.Material.Filled.Home" Color="Color.Inherit" Edge="Edge.End" 
+                               Target="_blank" Href="/web/redirect" />
+        </MudTooltip>
+
+        @* More actions *@
+        <MudTooltip Text="Settings">
+            <MudMenu Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" >
+                <a href="/user/change-password"><MudMenuItem>Change password</MudMenuItem></a>
+                <MudMenuItem Href="/extras">Development extras</MudMenuItem>
+                <a href="/user/logout"><MudMenuItem>Logout</MudMenuItem></a>
+            </MudMenu>
+        </MudTooltip>
+    </MudAppBar>
+
+    @* Left drawer *@
+    <MudDrawer @bind-Open="drawerOpen" Elevation="2" Variant="@DrawerVariant.Mini" OpenMiniOnHover="true">
+        <MudNavMenu Bordered="true">
+            <MudNavLink Match="NavLinkMatch.All" Href="/" Icon="@Icons.Filled.Home">Admin</MudNavLink>
+            
+            <MudNavLink Match="NavLinkMatch.All" Href="/people" Icon="@MainLayout.PeopleIcon">People</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/technology" Icon="@MainLayout.TechnologiesIcon">Technologies</MudNavLink>
+            
+            <MudNavGroup Title="@(drawerOpen ? "Work" : "")" @bind-Expanded="projectExpanded">
+                <MudNavLink Match="NavLinkMatch.All" Href="/project" Icon="@MainLayout.ProjectsIcon">Projects</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/project-tag" Icon="@MainLayout.ProjectTagsIcon">Project tags</MudNavLink>
+            </MudNavGroup>
+
+            <MudNavGroup Title="@(drawerOpen ? "Blog" : "")" @bind-Expanded="blogExpanded">
+                <MudNavLink Match="NavLinkMatch.All" Href="/article" Icon="@MainLayout.ArticleIcon">Articles</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/article-tag" Icon="@MainLayout.ArticleTagsIcon">Article tags</MudNavLink>
+            </MudNavGroup>
+
+            <MudNavGroup Title="@(drawerOpen ? "CV" : "")" @bind-Expanded="cvExpanded">
+                <MudNavLink Match="NavLinkMatch.All" Href="/work-experience" Icon="@MainLayout.WorkExperiencesIcon">Work experiences</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/education" Icon="@MainLayout.EducationsIcon">Educations</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/language-skill" Icon="@MainLayout.LanguageSkillsIcon">Language skills</MudNavLink>
+            </MudNavGroup>
+
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent Class="pt-16 px-16">
+        @Body
+    </MudMainContent>
+</MudLayout>
+

@@ -12,10 +12,19 @@ using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using MartinDrozdik.Data.Models.UserIdentity;
+using MartinDrozdik.Data.DbContexts;
+using MartinDrozdik.Services.ImageSaving.Extensions;
+using MartinDrozdik.Data.Repositories;
+using MartinDrozdik.Web.Facades;
+using MartinDrozdik.Data.DbContexts.Seeds;
+using MartinDrozdik.Web.Services.ViewRenderer;
 
 namespace MartinDrozdik.Web
 {
@@ -28,6 +37,7 @@ namespace MartinDrozdik.Web
         public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Environment = environment;
+            Configuration = configuration;
 
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.ContentRootPath)
@@ -44,7 +54,13 @@ namespace MartinDrozdik.Web
             services.AddMvc().AddNewtonsoftJson();
 
             //Controllers view builder
-            var controllersViewBuilder = services.AddControllersWithViews();
+            var controllersViewBuilder = services
+                .AddControllersWithViews()
+                .AddRazorOptions(options =>
+                {
+                    options.ViewLocationFormats.Add("/Views/Projects/{0}.cshtml");
+                    options.ViewLocationFormats.Add("/Views/Blog/{0}.cshtml");
+                });
             if (Environment.IsDevelopment())
                 controllersViewBuilder.AddRazorRuntimeCompilation();
             controllersViewBuilder.AddNewtonsoftJson();
@@ -76,6 +92,13 @@ namespace MartinDrozdik.Web
             //Email sender
             services.AddEmailSender(serverConfiguration.EmailSender);
 
+            //Connection string
+            var connectionString = serverConfiguration.ConnectionStrings.Production;
+
+            //Database context
+            services.AddDbContext<AppDb>(options =>
+                options.UseSqlServer(connectionString));
+
             //File path provider service
             if (Environment.IsDevelopment())
                 services.AddSingleton<IFilePathProvider, RegularFilePathProvider>();
@@ -84,18 +107,36 @@ namespace MartinDrozdik.Web
 
             //Add languages
             services.AddLanguages();
+
+            //Add image saver
+            services.AddImageSaver();
+
+            //Repositories
+            services.AddRepositories();
+
+            //Seeds
+            services.AddSeeds();
+
+            //Facades
+            services.AddFacades();
+
+            //Add view render service
+            services.AddScoped<IViewRenderService, ViewRenderService>();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseResponseCompression();
 
-            //Exception pages
+
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
             else
+            {
                 app.UseStatusCodePagesWithReExecute("/error", "?code={0}");
-
+                app.UseHsts();
+            }
 
             //Add https redirect, files and auth
             app.UseHttpsRedirection();

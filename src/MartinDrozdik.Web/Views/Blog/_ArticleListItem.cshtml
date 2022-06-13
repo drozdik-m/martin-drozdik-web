@@ -1,0 +1,30 @@
+﻿@model ArticleListItemModel
+@inject ServerConfiguration ServerConfiguration
+
+<li class="@(Model.Article.IsArticleReference ? "external" : "")">
+    <a href="@(Model.Article.IsArticleReference ? Model.Article.ReferenceLink : $"/blog/{Model.Article.UrlName}")" title="@Model.Article.Name" target="@(Model.Article.IsArticleReference ? "_blank" : "_self")" rel="@(Model.Article.IsArticleReference ? "noopener" : "")" >
+        <div class="image" style="@(Model.Article.MainImage.Uploaded ? $"background-image: url({ServerConfiguration.ContentDomain}{Model.Article.MainImage.Uri});" : "")">
+            <ul class="tags tagsSlim tagsTransparentBlack">
+                @foreach(var tag in Model.Article.Tags)
+                {
+                    <li><span data-id="@tag.Tag.Id">@tag.Tag.Name</span></li>
+                }
+            </ul>
+        </div>
+        <h3>@Model.Article.Name</h3>
+        <p>@Model.Article.Abstract</p>
+        <div class="itemFooter">
+            <span class="date">
+                @if (Model.Article.PublishDate.HasValue)
+                {
+                    @Model.Article.PublishDate.Value.ToString("dd. MM. yyyy", CultureInfo.InvariantCulture)
+                }
+                else
+                {
+                    @(" ")
+                }
+            </span>
+            <span class="readMore commonButton commonButtonSlim commonButtonRed">Celý článek</span>
+        </div>
+    </a>
+</li>
