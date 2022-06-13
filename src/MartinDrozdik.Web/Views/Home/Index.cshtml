@@ -22,7 +22,7 @@
 
 <partial name="_MySkills" for="@MySkillsModel.Default" />
 
-<div id="projects" class="backgroundBlock">
+@*<div id="projects" class="backgroundBlock">
     <div id="projectsContent" class="block">
         <h2 class="commonH commonHWhite">Dokončené projekty</h2>
         <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z&nbsp;nichž část zajisté stojí za zmínku.</p>
@@ -33,7 +33,7 @@
         }
         <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />
     </div>
-</div>
+</div>*@
 
 
 @{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }
