@@ -283,7 +283,6 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
         removedTag.selected = false;
         removedTag.unsuitable = true;
         this.selectedTags = this.selectedTags.filter(function (e) { return e != removedTagId });
-        console.log("remove", removedTagId, removedTag);
         
         //Update filtered entities
         if (this.selectedTags.length == 0)
@@ -292,8 +291,6 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
             this.filteredEntities = this.entitiesByTags[this.selectedTags[0]];
         else
         {
-            //console.log("edge case", this.entitiesByTags[removedTagId]);
-
             for (let i = 0; i < this.entities.length; i++)
             {
                 let candidateEntity = this.entities[i];
@@ -368,7 +365,7 @@ export abstract class EntityList<TEntity extends ListEntity, TConfig extends Ent
                 //Skip suitable and selected
                 if (!tag.unsuitable || tag.selected)
                     continue;
-
+                
                 //Figure out if suitable
                 let shouldBeUnsuitable = true;
                 for (let i = 0; i < this.filteredEntities.length; i++)
