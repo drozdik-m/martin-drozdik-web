@@ -8,7 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\_dist\Web\**" />
+    <Content Remove="wwwroot\_dist\Web\**" />
+    <EmbeddedResource Remove="wwwroot\_dist\Web\**" />
+    <None Remove="wwwroot\_dist\Web\**" />
     <TypeScriptCompile Remove="node_modules\**" />
+    <TypeScriptCompile Remove="wwwroot\_dist\Web\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,6 +36,7 @@
     <Content Remove="wwwroot\Web\Footer\FooterContent.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterCredits.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterNav.scss" />
+    <Content Remove="wwwroot\Web\Form\CommonButton.scss" />
     <Content Remove="wwwroot\Web\Form\Form.scss" />
     <Content Remove="wwwroot\Web\Form\ResponsiveBorder.scss" />
     <Content Remove="wwwroot\Web\Gallery\Gallery.scss" />
@@ -47,7 +53,9 @@
     <Content Remove="wwwroot\Web\Global\Tags.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\Circles.scss" />
     <Content Remove="wwwroot\Web\HeroHeader\HeroHeader.scss" />
+    <Content Remove="wwwroot\Web\HeroHeader\InnerHTML_polyfill.js" />
     <Content Remove="wwwroot\Web\Icon\GitHubIconWhite.scss" />
+    <Content Remove="wwwroot\Web\Icon\Icon.scss" />
     <Content Remove="wwwroot\Web\Icon\LinkedInIconWhite.scss" />
     <Content Remove="wwwroot\Web\Icon\StackOverflowIconWhite.scss" />
     <Content Remove="wwwroot\Web\ImportantDottedList\ImportantDottedList.scss" />
@@ -58,6 +66,8 @@
     <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
     <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
+    <Content Remove="wwwroot\Web\Tags\Tags.scss" />
+    <Content Remove="wwwroot\Web\Team\Team.scss" />
     <Content Remove="wwwroot\Web\Technologies\Technologies.scss" />
     <Content Remove="wwwroot\Web\_Pages\ArticlePage\ArticlePage.scss" />
     <Content Remove="wwwroot\Web\_Pages\BlogPage\BlogPage.scss" />
@@ -66,9 +76,24 @@
     <Content Remove="wwwroot\Web\_Pages\IndexPage\IndexPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\IndexPage\Projects.scss" />
     <Content Remove="wwwroot\Web\_Pages\ProjectPage\ProjectPage.scss" />
+    <Content Remove="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\Sitemap.scss" />
     <Content Remove="wwwroot\Web\_Pages\SitemapPage\SitemapPage.scss" />
     <Content Remove="wwwroot\Web\_Variables.scss" />
+    <Content Remove="wwwroot\_dist\temp.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\ArticlePage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\BlogPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\Global.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\IndexPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\ProjectPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\ProjectsPage.js" />
+    <Content Remove="wwwroot\_dist\_pack\css\SitemapPage.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Web\Tags\Tags.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
@@ -81,15 +106,21 @@
     <None Include="wwwroot\Web\Blog\ArticleList.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\Form\CommonButton.scss" />
+    <None Include="wwwroot\Web\HeroHeader\InnerHTML_polyfill.js" />
+    <None Include="wwwroot\Web\Icon\Icon.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\Web\Icon\StackOverflowIconWhite.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\Team\Team.scss" />
     <None Include="wwwroot\Web\Technologies\Technologies.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Team\Team.scss">
+    <Page Include="wwwroot\Web\Team\Team.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
+    </Page>
     <None Include="wwwroot\Web\Breadcrumbs\Breadcrumbs.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
@@ -118,13 +149,7 @@
     <None Include="wwwroot\Web\Icon\GitHubIconWhite.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Icon\Icon.scss">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
     <None Include="wwwroot\Web\StatusWindow\StatusWindow.scss">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
-    <None Include="wwwroot\Web\Tags\Tags.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
     <None Include="wwwroot\Web\_Pages\IndexPage\Blog.scss">
@@ -139,6 +164,7 @@
     <None Include="wwwroot\Web\_Pages\BlogPage\BlogPage.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
+    <None Include="wwwroot\Web\_Pages\ProjectsPage\ProjectsPage.scss" />
     <TypeScriptCompile Include="tsconfig.json">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </TypeScriptCompile>
@@ -171,9 +197,9 @@
     <None Include="wwwroot\Web\Global\Block.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>
-    <None Include="wwwroot\Web\Form\CommonButton.scss">
+    <Page Include="wwwroot\Web\Form\CommonButton.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </None>
+    </Page>
     <None Include="wwwroot\Web\Global\CommonText.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

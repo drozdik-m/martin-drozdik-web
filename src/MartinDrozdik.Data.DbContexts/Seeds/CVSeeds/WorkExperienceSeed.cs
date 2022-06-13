@@ -28,7 +28,7 @@ namespace MartinDrozdik.Data.DbContexts.Seeds.CVSeeds
                     PlaceOfWork = "Bonsai Development",
                     PlaceOfWorkHasWebsite = true,
                     PlaceOfWorkUri = "https://bonsai-development.cz/",
-                    Description = "Popisem mé práce je tvorba a optimalizace webových stránek, organizace týmu a komunikace s klienty.",
+                    Description = "Popisem mé práce je tvorba a optimalizace webových stránek, administrací, webových aplikací, content management systémů, databází a následná správa v produkčním běhu. Mimo jiné i organizuji tým, komunikuji s klienty a věnuji se návrhu uživatelského prostředí se správnou přístupností dle byznysových potřeb.",
                     StartedDate = new DateTime(2016, 3, 1),
                     Ended = false,
                     //EndedDate = new DateTime(2019, 9, 1),
