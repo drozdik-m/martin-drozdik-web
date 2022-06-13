@@ -155,6 +155,12 @@ namespace Bonsai.Server.Controllers
             try
             {
                 var article = await articleFacade.GetAsync(id);
+
+                //Redirect if reference
+                if (article.IsArticleReference)
+                    return Redirect(article.ReferenceLink);
+
+                //Return content
                 article.Content = blogMarkdownArticleFacade.WithUpdatedResourceLinks(article.Content,
                     e => $"{serverConfig.ContentDomain}{e}");
 
