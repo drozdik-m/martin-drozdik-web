@@ -5,35 +5,28 @@
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 @import "../EntityList/EntityList";
 
-.projectList {
-    max-width: 62rem;
-    margin: 0rem auto;
+$projectMaxWidth: 62rem;
+
+.projects {
+    max-width: $projectMaxWidth;
+    margin-left: auto;
+    margin-right: auto;
     list-style: none;
     //COLOR SCHEMES
     &.darkMode {
-        .tagsHeading, p, h3 {
+        p, h3 {
             color: white;
         }
     }
 
     &.lightMode {
-        .tagsHeading, p, h3 {
+        p, h3 {
             color: $black;
         }
     }
-    //TAGS HEADING
-    .tagsHeading {
 
-    }
-    //NOT FOUND
-    .notFound {
-        
-    }
-    //TAGS
-    .tags {
-    }
 
-    .projects > li {
+    > li {
         display: flex;
         align-items: center;
         margin: 1rem 0;
@@ -107,16 +100,13 @@
             }
         }
     }
-    //EXTRA BUTTONS
-    .extraActionButton {
-    }
 }
 
 @media only screen and (max-width: 56.875rem){
-    .projectList {
+    .projects {
         //COLOR SCHEMES
         &.darkMode {
-            .projects > li {
+            li {
                 &:before {
                     background-color: white;
                 }
@@ -124,14 +114,14 @@
         }
 
         &.lightMode {
-            .projects > li {
+            li {
                 &:before {
                     background-color: $black;
                 }
             }
         }
 
-        .projects > li {
+        > li {
             padding-left: $pxInRem-12;
             //padding-right: $pxInRem-8;
             position: relative;
@@ -167,21 +157,10 @@
 }
 
 @media only screen and (max-width: 30rem){
-    .projectList {
-        .projects > li {
-
-            
-
-            .projectPreviewImage {
-                
-            }
-
+    .projects {
+        > li {
             .projectDescription {
                 .projectActions {
-                    .commonButton {
-                        
-                    }
-
                     .commonButtonLive, .commonButtonGithub {
                         display: none;
                     }

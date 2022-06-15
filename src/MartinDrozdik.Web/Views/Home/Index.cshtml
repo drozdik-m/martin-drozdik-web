@@ -32,13 +32,16 @@
             projectListModel.ShowMoreProjectsButton = true;
         }
         <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />*@
-        <ul class="projects">
+        <ul class="projects darkMode">
             @foreach(var project in Model.PreviewProjects)
             {
                 var projectModel = new ProjectListItemModel(project, ProjectListItemScheme.Dark); 
                 <partial name="_ProjectListItem" for="@projectModel" />
             }
         </ul>
+        <div class="moreProjects">
+            <a href="@Url.Action("Projects", "Home")" class="commonButton commonButtonRed commonButtonThick">Další projekty</a>
+        </div>
     </div>
 </div>
 

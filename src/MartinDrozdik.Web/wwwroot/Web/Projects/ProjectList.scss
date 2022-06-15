@@ -4,109 +4,36 @@
 @import "../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../node_modules/@drozdik.m/common-mixins/_module";
 @import "../EntityList/EntityList";
+@import "ProjectListItem";
+
 
 .projectList {
-    max-width: 62rem;
-    margin: 0rem auto;
-    list-style: none;
+    max-width: $projectMaxWidth;
+    margin: 0 auto;
+    
+
     //COLOR SCHEMES
     &.darkMode {
-        .tagsHeading, p, h3 {
+        .tagsHeading {
             color: white;
         }
     }
 
     &.lightMode {
-        .tagsHeading, p, h3 {
+        .tagsHeading {
             color: $black;
         }
     }
     //TAGS HEADING
     .tagsHeading {
-
     }
     //NOT FOUND
     .notFound {
-        
     }
     //TAGS
     .tags {
     }
 
-    .projects > li {
-        display: flex;
-        align-items: center;
-        margin: 1rem 0;
-        animation-name: FadeIn;
-        animation-duration: 0.3s;
-
-        .projectPreviewImage, .projectDescription {
-        }
-        //IMAGE
-        .projectPreviewImage {
-            @include box-shadow(0 0 $pxInRem-6 $pxInRem-2 rgba(0, 0, 0, 0.35));
-            @include border-radius($radiusSmall);
-            max-width: 100%;
-            $width: 24rem;
-            width: $width;
-            min-width: $width;
-            height: math.div($width, 16) * 9;
-            font-size: 0;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            margin-right: 1rem;
-        }
-        //DESCRIPTION
-        .projectDescription {
-            h3 {
-                font-weight: $fontWeightBold;
-                font-size: $pxInRem-24;
-                margin: $pxInRem-1 0 $pxInRem-12 0;
-
-                .finishedYear {
-                    &:before {
-                        content: "(";
-                    }
-
-                    &:after {
-                        content: ")";
-                    }
-
-                    margin-left: $pxInRem-2;
-                    font-size: $pxInRem-18;
-                    font-weight: $fontWeightRegular;
-                }
-            }
-
-            p {
-                font-size: $pxInRem-16;
-                margin-bottom: $pxInRem-8;
-            }
-
-            .tags {
-                margin-bottom: $pxInRem-10;
-            }
-
-            .projectActions {
-                .commonButton {
-                    vertical-align: bottom;
-                    margin: $pxInRem-6 $pxInRem-8;
-                }
-
-                .commonButtonLive, .commonButtonGithub {
-                    padding-top: $pxInRem-9;
-                    padding-bottom: $pxInRem-9;
-                }
-
-                .commonButtonLive {
-                    &:before {
-                        top: 52%;
-                    }
-                }
-            }
-        }
-    }
     //EXTRA BUTTONS
     .extraActionButton {
     }
@@ -114,79 +41,12 @@
 
 @media only screen and (max-width: 56.875rem){
     .projectList {
-        //COLOR SCHEMES
-        &.darkMode {
-            .projects > li {
-                &:before {
-                    background-color: white;
-                }
-            }
-        }
 
-        &.lightMode {
-            .projects > li {
-                &:before {
-                    background-color: $black;
-                }
-            }
-        }
-
-        .projects > li {
-            padding-left: $pxInRem-12;
-            //padding-right: $pxInRem-8;
-            position: relative;
-
-            &:before {
-                position: absolute;
-                content: " ";
-                font-size: 0;
-                left: 0;
-                top: 0;
-                bottom: 0;
-                background-color: white;
-                width: $pxInRem-1;
-            }
-
-            .projectPreviewImage {
-                display: none;
-                background-image: none !important;
-            }
-
-            .projectDescription {
-                .projectActions {
-                    .commonButton {
-                        margin: $pxInRem-4 $pxInRem-4;
-                    }
-
-                    .commonButtonLive, .commonButtonGithub {
-                    }
-                }
-            }
-        }
     }
 }
 
 @media only screen and (max-width: 30rem){
     .projectList {
-        .projects > li {
 
-            
-
-            .projectPreviewImage {
-                
-            }
-
-            .projectDescription {
-                .projectActions {
-                    .commonButton {
-                        
-                    }
-
-                    .commonButtonLive, .commonButtonGithub {
-                        display: none;
-                    }
-                }
-            }
-        }
     }
 }

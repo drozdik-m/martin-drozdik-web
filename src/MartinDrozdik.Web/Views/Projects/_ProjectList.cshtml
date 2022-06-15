@@ -10,7 +10,7 @@
     </ul>
 
     @* Project list *@
-    <ul class="projects entityList"></ul>
+    <ul class="projects entityList @(Model.Scheme == ProjectListScheme.Dark ? "darkMode" : "lightMode")"></ul>
 
     <div class="extraActionButton">
         <button type="button" class="loadMoreButton commonButton commonButtonThick @(Model.Scheme == ProjectListScheme.Dark ? "commonButtonRed" : "commonButtonBlack") loadMoreProjectsButton">Načíst další</button>
