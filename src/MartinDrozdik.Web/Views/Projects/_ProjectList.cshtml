@@ -1,6 +1,6 @@
 ﻿@model ProjectListModel
 
-<div class="projectList @(Model.Scheme == ProjectListScheme.Dark ? "darkMode" : "lightMode")">
+<div class="projectList entityListWithFilter @(Model.Scheme == ProjectListScheme.Dark ? "darkMode" : "lightMode")">
     <span class="tagsHeading">Filtr tagů</span>
     <ul class="tags listTags @(Model.Scheme == ProjectListScheme.Dark ? "tagsWhiteBlack" : "tagsBlackWhite")">
         @foreach(var tag in Model.Tags)
