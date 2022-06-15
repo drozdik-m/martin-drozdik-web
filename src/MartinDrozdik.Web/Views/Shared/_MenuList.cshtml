@@ -2,7 +2,7 @@
 
 <li><a href="/" title="Martin Drozdík">Martin Drozdík</a></li>
 <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#aboutMe" title="Kdo jsem?" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">O mně</a></li>
-@*<li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>*@
+<li><a href="@Url.Action("Projects", "Home")" title="Moje projekty">Projekty</a></li>
 <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#biography" title="Životopis" class="@(Model.PageId == PageId.Index ? "slowScroll" : "")">CV</a></li>
 <li><a href="@Url.Action("Blog", "Home")" title="Blog">Blog</a></li>
 <li><a href="@(Model.PageId == PageId.Index ? "" : "/")#contact" title="Kontaktní informace a formulář" class="contact@(Model.PageId == PageId.Index ? " slowScroll" : "")">Kontakt</a></li>

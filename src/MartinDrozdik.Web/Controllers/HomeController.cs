@@ -83,12 +83,12 @@ namespace Bonsai.Server.Controllers
             var workExperiences = await workExperienceFacade.GetAsync();
             var educations = await educationFacade.GetAsync();
             var languageSkill = await languageSkillFacade.GetAsync();
-            var projectTags = await projectTagFacade.GetAsync();
+            var previewProjects = await projectFacade.GetFirstVisibleAsync(3);
             var previewArticles = await articleFacade.GetFirstPublishedAsync(3);
 
             var model = new IndexPageModel(cultureProvider, languageDictionary,
                 workExperiences, educations, languageSkill,
-                projectTags,
+                previewProjects,
                 previewArticles)
             {
 

@@ -32,19 +32,19 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
 
         readonly IImageConfiguration regularImageConfig = new ImageConfiguration
         {
-            MaxWidth = 1400,
+            MaxWidth = 800,
             Quality = 75
         };
 
         readonly IImageConfiguration textWidthImageConfig = new ImageConfiguration
         {
-            MaxWidth = 1200,
+            MaxWidth = 1000,
             Quality = 75
         };
 
         readonly IImageConfiguration wideImageConfig = new ImageConfiguration
         {
-            MaxWidth = 800,
+            MaxWidth = 1300,
             Quality = 75
         };
 

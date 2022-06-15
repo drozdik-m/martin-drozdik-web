@@ -14,7 +14,7 @@ namespace MartinDrozdik.Web.Views.Home
         public IEnumerable<WorkExperience> WorkExperiences { get; }
         public IEnumerable<Education> Educations { get; }
         public IEnumerable<LanguageSkill> LanguageSkills { get; }
-        public IEnumerable<ProjectTag> ProjectTags { get; }
+        public IEnumerable<Project> PreviewProjects { get; }
         public IEnumerable<Article> PreviewArticles { get; }
 
         public IndexPageModel(ICultureProvider cultureProvider, 
@@ -22,14 +22,14 @@ namespace MartinDrozdik.Web.Views.Home
             IEnumerable<WorkExperience> workExperiences,
             IEnumerable<Education> educations,
             IEnumerable<LanguageSkill> languageSkills,
-            IEnumerable<ProjectTag> projectTags,
+            IEnumerable<Project> previewProjects,
             IEnumerable<Article> previewArticles)
             : base(cultureProvider, languageDictionary)
         {
             WorkExperiences = workExperiences;
             Educations = educations;
             LanguageSkills = languageSkills;
-            ProjectTags = projectTags;
+            PreviewProjects = previewProjects;
             PreviewArticles = previewArticles;
         }
 
