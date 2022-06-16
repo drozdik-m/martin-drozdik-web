@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bonsai.Services.LanguageDictionary.Abstraction;
 using Bonsai.Services.Sitemap.Abstraction;
 using Bonsai.Sitemap;
+using MartinDrozdik.Web.Configuration;
 
 namespace MartinDrozdik.Web.Views.Sitemap
 {
@@ -12,10 +13,12 @@ namespace MartinDrozdik.Web.Views.Sitemap
     {
         public ISitemapNode RootSitemapNode { get; }
 
-        public SitemapPageModel(ICultureProvider cultureProvider, 
+        public SitemapPageModel(
+            ServerConfiguration serverConfiguration,
+            ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,
             ISitemapNode rootSitemapNode)
-            : base(cultureProvider, languageDictionary)
+            : base(serverConfiguration, cultureProvider, languageDictionary)
         {
             RootSitemapNode = rootSitemapNode;
         }

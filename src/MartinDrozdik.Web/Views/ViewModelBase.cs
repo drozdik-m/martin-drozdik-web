@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Bonsai.Services.LanguageDictionary.Abstraction;
+using MartinDrozdik.Web.Configuration;
 
 namespace MartinDrozdik.Web.Views
 {
     public abstract class ViewModelBase
     {
+        /// <summary>
+        /// Configuration of the server
+        /// </summary>
+        public ServerConfiguration ServerConfiguration { get; }
+
         /// <summary>
         /// Culture provider for this page
         /// </summary>
@@ -18,14 +24,21 @@ namespace MartinDrozdik.Web.Views
         /// </summary>
         public ILanguageDictionary LanguageDictionary { get; }
 
-        public ViewModelBase(ICultureProvider cultureProvider, ILanguageDictionary languageDictionary)
+        public ViewModelBase(
+            ServerConfiguration serverConfiguration,
+            ICultureProvider cultureProvider, 
+            ILanguageDictionary languageDictionary)
         {
+            if (serverConfiguration is null)
+                throw new ArgumentNullException(nameof(serverConfiguration));
+
             if (cultureProvider is null)
                 throw new ArgumentNullException(nameof(cultureProvider));
 
             if (languageDictionary is null)
                 throw new ArgumentNullException(nameof(languageDictionary));
 
+            ServerConfiguration = serverConfiguration;
             CultureProvider = cultureProvider;
             LanguageDictionary = languageDictionary;
         }

@@ -6,6 +6,7 @@ using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Data.Models.Blog;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Web.Configuration;
 
 namespace MartinDrozdik.Web.Views.Home
 {
@@ -17,14 +18,16 @@ namespace MartinDrozdik.Web.Views.Home
         public IEnumerable<Project> PreviewProjects { get; }
         public IEnumerable<Article> PreviewArticles { get; }
 
-        public IndexPageModel(ICultureProvider cultureProvider, 
+        public IndexPageModel(
+            ServerConfiguration serverConfiguration,
+            ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,
             IEnumerable<WorkExperience> workExperiences,
             IEnumerable<Education> educations,
             IEnumerable<LanguageSkill> languageSkills,
             IEnumerable<Project> previewProjects,
             IEnumerable<Article> previewArticles)
-            : base(cultureProvider, languageDictionary)
+            : base(serverConfiguration, cultureProvider, languageDictionary)
         {
             WorkExperiences = workExperiences;
             Educations = educations;
@@ -50,7 +53,7 @@ namespace MartinDrozdik.Web.Views.Home
             "blog"
         };
 
-        public override string OgImage => "/Web/_Pages/IndexPage/IndexOG.png";
+        public override string OgImage => $"{ServerConfiguration.Domain}/Web/_Pages/IndexPage/IndexOG.png";
 
         public override PageId PageId => PageId.Index;
 

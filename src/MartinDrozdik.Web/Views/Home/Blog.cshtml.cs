@@ -6,6 +6,7 @@ using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Data.Models.Blog;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Web.Configuration;
 
 namespace MartinDrozdik.Web.Views.Home
 {
@@ -13,10 +14,12 @@ namespace MartinDrozdik.Web.Views.Home
     {
         public IEnumerable<ArticleTag> ArticleTags { get; }
 
-        public BlogPageModel(ICultureProvider cultureProvider, 
+        public BlogPageModel(
+            ServerConfiguration serverConfiguration,
+            ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,
             IEnumerable<ArticleTag> articleTags)
-            : base(cultureProvider, languageDictionary)
+            : base(serverConfiguration, cultureProvider, languageDictionary)
         {
             ArticleTags = articleTags;
         }
@@ -36,7 +39,7 @@ namespace MartinDrozdik.Web.Views.Home
             "aktuality",
         };
 
-        public override string OgImage => "/Web/_Pages/BlogPage/ProjectsPageOG.png";
+        public override string OgImage => $"{ServerConfiguration.Domain}/Web/_Pages/BlogPage/BlogPageOG.png";
 
         public override PageId PageId => PageId.Blog;
     }

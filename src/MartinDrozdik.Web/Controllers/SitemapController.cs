@@ -104,7 +104,7 @@ namespace Bonsai.Server.Controllers
         [Route("/sitemap")]
         public async Task<IActionResult> Index()
         {
-            return View(new SitemapPageModel(cultureProvider, languageDictionary, await GetSitemapRootNodeAsync()));
+            return View(new SitemapPageModel(serverConfiguration, cultureProvider, languageDictionary, await GetSitemapRootNodeAsync()));
         }
 
         [Route("/sitemap.xml")]

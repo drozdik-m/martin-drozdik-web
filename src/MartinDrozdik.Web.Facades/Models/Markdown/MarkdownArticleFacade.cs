@@ -62,6 +62,8 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
             .UseCitations()
             .UseFigures()
             .UseMediaLinks()
+            .UseAbbreviations()
+            .UseFootnotes()
             .Build();
 
 
@@ -105,7 +107,6 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         {
             article = UpdateHTML(article);
             RemoveUnusedMedia(article);
-
         }
 
         /// <summary>
@@ -207,14 +208,21 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         /// <returns></returns>
         public virtual void RemoveUnusedMedia(TArticle article)
         {
-            var usedMedia = ExtractUsedMedia(article);
-            var savedMedia = GetSavedMedia(article);
+            var usedMedia = ExtractUsedMedia(article, out var usedImages, out var usedFiles);
+            var savedImages = GetSavedImages(article);
+            var savedFiles = GetSavedFiles(article);
 
-            var mediaToDelete = savedMedia.Where(e => !usedMedia.Contains(e));
-
-            foreach(var media in mediaToDelete)
+            var imagesToDelete = savedImages.Where(e => !usedImages.Contains(e));
+            foreach (var media in imagesToDelete)
             {
                 var mediaRelativePath = article.GetImagePath(media);
+                DisposeContentFile(Path.Combine(ContentFolderPath, mediaRelativePath));
+            }
+
+            var filesToDelete = savedFiles.Where(e => !usedFiles.Contains(e));
+            foreach (var media in filesToDelete)
+            {
+                var mediaRelativePath = article.GetFilePath(media);
                 DisposeContentFile(Path.Combine(ContentFolderPath, mediaRelativePath));
             }
         }
@@ -224,7 +232,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        public virtual List<string> ExtractUsedMedia(TArticle article)
+        public virtual List<string> ExtractUsedMedia(TArticle article, out List<string> images, out List<string> files)
         {
             var result = new List<string>();
 
@@ -235,10 +243,11 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
                        .Descendants("img")
                        .Select(x => x.Attribute("src")?.Value)
                        .Where(e => e is not null)
-                       .OfType<string>()
                        .Select(Path.GetFileName)
+                       .OfType<string>()
                        .ToList();
             result.AddRange(imgSrcs);
+            images = imgSrcs;
 
             //Files
             var hrefLinks = xml
@@ -258,33 +267,37 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
                        
                        .ToList();
             result.AddRange(hrefLinks);
+            files = hrefLinks;
 
             return result;
         }
 
         /// <summary>
-        /// Returns list of all links and image sources
+        /// Returns name list of all image sources
         /// </summary>
         /// <param name="article"></param>
         /// <returns></returns>
-        public virtual List<string> GetSavedMedia(TArticle article)
+        public virtual List<string> GetSavedImages(TArticle article)
+            => GetSavedMedia(article, article.ImagesFolderPath);
+
+        /// <summary>
+        /// Returns name list of all links sources
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        public virtual List<string> GetSavedFiles(TArticle article)
+            => GetSavedMedia(article, article.FilesFolderPath);
+        /// <summary>
+        /// Returns name list of a saved media
+        /// </summary>
+        /// <param name="article"></param>
+        /// <returns></returns>
+        public virtual List<string> GetSavedMedia(TArticle article, string folderPath)
         {
             var result = new List<string>();
 
-            //Images
-            var imagesPath = Path.Combine(ContentFolderPath, article.ImagesFolderPath);
-            if (Directory.Exists(imagesPath))
-            {
-                IEnumerable<string> files = Directory.GetFiles(imagesPath);
-                files = files
-                    .Select(Path.GetFileName)
-                    .Where(e => e is not null)
-                    .OfType<string>();
-                result.AddRange(files);
-            }
-
             //Files
-            var filesPath = Path.Combine(ContentFolderPath, article.FilesFolderPath);
+            var filesPath = Path.Combine(ContentFolderPath, folderPath);
             if (Directory.Exists(filesPath))
             {
                 IEnumerable<string> files = Directory.GetFiles(filesPath);
@@ -297,6 +310,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
 
             return result;
         }
+
 
         /// <summary>
         /// Adds a file to the articles' file folder
