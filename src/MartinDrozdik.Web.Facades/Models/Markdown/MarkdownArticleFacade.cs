@@ -255,7 +255,8 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
                        .Where(e =>
                        {
                            var classVal = e.Attribute("class")?.Value;
-                           if (classVal is not null && classVal.Contains("file"))
+                           if (classVal is not null && classVal.Contains("file") 
+                                && !classVal.Contains("footnote-back-ref") && !classVal.Contains("footnote-ref"))
                                return true;
                            return false;
                        })

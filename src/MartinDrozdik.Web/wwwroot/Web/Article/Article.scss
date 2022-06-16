@@ -644,3 +644,57 @@ $linkColorVisited: #8f0099;
         }
     }
 }
+
+//--------------------------------------------------
+//---------FOOTNOTES--------------------------------
+//--------------------------------------------------
+
+.article {
+
+    a.footnote-ref {
+        text-decoration: none;
+
+        sup {
+            &:before {
+                content: "[";
+            }
+
+            &:after {
+                content: "]";
+            }
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .footnotes {
+
+        > hr {
+            margin-bottom: $pxInRem-16;
+            background: linear-gradient(to bottom right, $red, $black);
+            @include border-radius($radiusSmall);
+            height: $pxInRem-1;
+            margin-right: 66%;
+        }
+
+        > ol {
+            > li {
+                p {
+                    font-size: $pxInRem-16;
+                    margin-bottom: $pxInRem-4;
+
+                    .footnote-back-ref {
+                        margin-left: $pxInRem-6;
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
