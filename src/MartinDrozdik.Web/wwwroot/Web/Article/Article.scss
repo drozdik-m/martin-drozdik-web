@@ -91,6 +91,11 @@ $linkColorVisited: #8f0099;
         line-height: $normalLH;
     }
 
+    sup, sub{
+        font-size: $pxInRem-15;
+        line-height: $pxInRem-16;
+    }
+
     p {
         margin-bottom: $pMargin;
         line-height: $normalLH;
@@ -653,7 +658,9 @@ $linkColorVisited: #8f0099;
 
     a.footnote-ref {
         text-decoration: none;
-
+        margin-left: $pxInRem-1;
+        position: relative;
+        top: $pxInRem-1;
         sup {
             &:before {
                 content: "[";

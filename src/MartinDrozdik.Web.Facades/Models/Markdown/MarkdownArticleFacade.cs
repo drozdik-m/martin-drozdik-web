@@ -188,8 +188,11 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
 
                 if (href is not null)
                 {
-                    if (!isFile)
+                    if ((classVal is not null && !isFile && !classVal.Contains("footnote-back-ref") && !classVal.Contains("footnote-ref"))
+                        || (classVal is null && !isFile))
+                    {
                         link.SetAttributeValue("title", $"Link: {href}");
+                    }
                 }
             }
 
@@ -255,8 +258,7 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
                        .Where(e =>
                        {
                            var classVal = e.Attribute("class")?.Value;
-                           if (classVal is not null && classVal.Contains("file") 
-                                && !classVal.Contains("footnote-back-ref") && !classVal.Contains("footnote-ref"))
+                           if (classVal is not null && classVal.Contains("file"))
                                return true;
                            return false;
                        })
@@ -265,7 +267,6 @@ namespace MartinDrozdik.Web.Facades.Models.Markdown
                        .Select(Path.GetFileName)
                        .Where(e => e is not null)
                        .OfType<string>()
-                       
                        .ToList();
             result.AddRange(hrefLinks);
             files = hrefLinks;
