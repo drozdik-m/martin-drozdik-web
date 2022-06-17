@@ -17,6 +17,20 @@
     <script defer type="text/javascript" src="@PathProvider.PathTo("/_dist/_pack/js/ArticlePage.js")"></script>
 }
 
+@section DocumentEnd{
+    <link rel="stylesheet" href="@PathProvider.PathTo("/Web/Article/CodeHighlight_vs2015.min.css")" />
+    <script defer type="text/javascript" src="@PathProvider.PathTo("/Web/Article/CodeHighlight.min.js")"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+          hljs.highlightAll();
+          //document.querySelectorAll('pre code').forEach((el) => {
+          //  hljs.highlightElement(el);
+          //});
+        })
+    </script>
+    
+}
+
 @section Metas
 {
     <meta property="article:author" content="@Model.Author">
@@ -29,6 +43,8 @@
     }
 
 }
+
+
 
 <div id="article" class="articleBlock">
     
