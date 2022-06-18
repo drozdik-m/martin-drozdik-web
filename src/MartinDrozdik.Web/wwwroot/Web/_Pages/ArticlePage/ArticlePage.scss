@@ -25,13 +25,13 @@ body {
 #article {
     //max-width: $articleBlockMaxWidth;
     margin-bottom: 1rem;
-
+    //---ABSTRACT---
     .commonP {
         max-width: none;
         font-family: 'OpenSans', 'Raleway', Verdana, sans-serif;
         margin-bottom: $pxInRem-12;
     }
-
+    //---IMAGE---
     #articleMainImage {
         display: block;
         @include box-shadow($pxInRem-5 $pxInRem-5 $pxInRem-10 0 rgba(0, 0, 0, 0.5));
@@ -39,7 +39,7 @@ body {
         margin-bottom: 1.5rem;
         @include border-radius($radiusSmall);
     }
-
+    //---TAGS---
     .tags {
         margin-bottom: $pxInRem-24;
 
@@ -52,11 +52,32 @@ body {
     }
     //---ARTICLE---
     .article {
-        h1, h2, h3, h4, h5, h6 {
-            //color: $red;
+        $schemeColor: $darkRed;
+
+        h1, h2, h3, h4, h5, h6, strong, b, .important {
+            color: $schemeColor;
+        }
+
+        .highlighted {
+            background-color: $schemeColor;
+        }
+
+        .sidelined {
+            &:before {
+                background-color: $schemeColor;
+            }
+        }
+
+        blockquote {
+            color: $schemeColor;
+            background-color: rgba(214,60,115, 0.07);
+
+            &:before {
+                filter: brightness(0) saturate(100%) invert(15%) sepia(43%) saturate(3710%) hue-rotate(316deg) brightness(82%) contrast(103%);
+            }
         }
     }
-
+    //---AUTHOR---
     #author {
         font-size: 0;
         margin: 2rem 0;

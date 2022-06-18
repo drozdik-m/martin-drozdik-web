@@ -351,6 +351,7 @@ $linkColorVisited: #8f0099;
         position: relative;
         $quoteDimensions: 2rem;
         padding-left: $quoteDimensions + 1rem;
+        @include border-radius($radiusSmall);
 
         &:before {
             display: block;
@@ -481,7 +482,8 @@ $linkColorVisited: #8f0099;
             $width: $pxInRem-4;
             width: $pxInRem-4;
             //background-color: $mainTheme;
-            background: linear-gradient(to bottom, $red, $black);
+            //background: linear-gradient(to bottom, $red, $black);
+            background-color: $black;
             @include border-radius($width);
             content: " ";
             font-size: 0;
