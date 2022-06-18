@@ -10,6 +10,7 @@ using MartinDrozdik.Web.Views.Sitemap;
 using Microsoft.AspNetCore.Mvc.Routing;
 using MartinDrozdik.Web.Facades.Models.Blog;
 using System.Threading.Tasks;
+using MartinDrozdik.Web.Facades.Models.Projects;
 
 namespace Bonsai.Server.Controllers
 {
@@ -22,18 +23,21 @@ namespace Bonsai.Server.Controllers
         readonly ILanguageDictionary languageDictionary;
         readonly IMemoryCache cache;
         private readonly ArticleFacade articleFacade;
+        private readonly ProjectFacade projectFacade;
 
         public SitemapController(ServerConfiguration serverConfiguration,
             ICultureProvider cultureProvider,
             ILanguageDictionary languageDictionary,
             IMemoryCache cache,
-            ArticleFacade articleFacade)
+            ArticleFacade articleFacade,
+            ProjectFacade projectFacade)
         {
             this.serverConfiguration = serverConfiguration;
             this.cultureProvider = cultureProvider;
             this.languageDictionary = languageDictionary;
             this.cache = cache;
             this.articleFacade = articleFacade;
+            this.projectFacade = projectFacade;
         }
 
         /// <summary>
@@ -45,25 +49,44 @@ namespace Bonsai.Server.Controllers
             //Home
             SitemapNode home = new SitemapNode(serverConfiguration.Web.Name, new Uri(serverConfiguration.Domain), SitemapChangeFrequency.Weekly, 1);
 
+            //Projects
+            SitemapNode projects = new SitemapNode("Projekty", new Uri($"{serverConfiguration.Domain}/projects"), SitemapChangeFrequency.Weekly, 0.7);
+            var projectsList = await projectFacade.GetVisibleAsync();
+            var newestProjectChange = DateTime.MinValue;
+            foreach (var project in projectsList)
+            {
+                //Save newest edit
+                if (project.LastEditAt > newestProjectChange)
+                    newestProjectChange = project.LastEditAt;
+
+                //Add article node
+                projects.AddChild(new SitemapNode(project.Name, new Uri($"{serverConfiguration.Domain}/project/{project.UrlName}"), SitemapChangeFrequency.Monthly, lastModification: project.LastEditAt));
+            }
+
+            //Set last modificatin for projects
+            if (newestProjectChange != DateTime.MinValue)
+                projects.LastModification = newestProjectChange;
+
             //Blog
-            SitemapNode blog = new SitemapNode("Projekty", new Uri($"{serverConfiguration.Domain}/blog"), SitemapChangeFrequency.Weekly, 0.7);
+            SitemapNode blog = new SitemapNode("Blog", new Uri($"{serverConfiguration.Domain}/blog"), SitemapChangeFrequency.Weekly, 0.7);
             var articles = await articleFacade.GetPublishedAsync();
-            var newestChange = DateTime.MinValue;
+            var newestBlogChange = DateTime.MinValue;
             foreach(var article in articles)
             {
                 //Save newest edit
-                if (article.LastEditAt > newestChange)
-                    newestChange = article.LastEditAt;
+                if (article.LastEditAt > newestBlogChange)
+                    newestBlogChange = article.LastEditAt;
 
                 //Add article node
                 blog.AddChild(new SitemapNode(article.Name, new Uri($"{serverConfiguration.Domain}/blog/{article.UrlName}"), SitemapChangeFrequency.Monthly, lastModification: article.LastEditAt));
             }
             
             //Set last modificatin for blog
-            if (newestChange != DateTime.MinValue)
-                blog.LastModification = newestChange;
+            if (newestBlogChange != DateTime.MinValue)
+                blog.LastModification = newestBlogChange;
 
 
+            home.AddChild(projects);
             home.AddChild(blog);
             return home;
         }
