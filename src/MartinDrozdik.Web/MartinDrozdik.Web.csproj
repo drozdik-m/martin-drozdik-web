@@ -32,6 +32,7 @@
     <Content Remove="wwwroot\Web\Contact\ContactForm.scss" />
     <Content Remove="wwwroot\Web\Contact\ContactInfo.scss" />
     <Content Remove="wwwroot\Web\Contact\ContactInfoLines.scss" />
+    <Content Remove="wwwroot\Web\EntityList\EntityList.scss" />
     <Content Remove="wwwroot\Web\Footer\Footer.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterContent.scss" />
     <Content Remove="wwwroot\Web\Footer\FooterCredits.scss" />
@@ -65,6 +66,7 @@
     <Content Remove="wwwroot\Web\Menu\Mobile.scss" />
     <Content Remove="wwwroot\Web\MySkills\MySkills.scss" />
     <Content Remove="wwwroot\Web\Projects\ProjectList.scss" />
+    <Content Remove="wwwroot\Web\Projects\ProjectListItem.scss" />
     <Content Remove="wwwroot\Web\StatusWindow\StatusWindow.scss" />
     <Content Remove="wwwroot\Web\Tags\Tags.scss" />
     <Content Remove="wwwroot\Web\Team\Team.scss" />
@@ -91,6 +93,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\Web\EntityList\EntityList.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Web\Projects\ProjectListItem.scss">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
     <None Include="wwwroot\Web\Tags\Tags.scss">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </None>

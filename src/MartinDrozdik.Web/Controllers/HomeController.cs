@@ -83,12 +83,12 @@ namespace Bonsai.Server.Controllers
             var workExperiences = await workExperienceFacade.GetAsync();
             var educations = await educationFacade.GetAsync();
             var languageSkill = await languageSkillFacade.GetAsync();
-            var projectTags = await projectTagFacade.GetAsync();
+            var previewProjects = await projectFacade.GetFirstVisibleAsync(3);
             var previewArticles = await articleFacade.GetFirstPublishedAsync(3);
 
-            var model = new IndexPageModel(cultureProvider, languageDictionary,
+            var model = new IndexPageModel(serverConfig, cultureProvider, languageDictionary,
                 workExperiences, educations, languageSkill,
-                projectTags,
+                previewProjects,
                 previewArticles)
             {
 
@@ -103,7 +103,7 @@ namespace Bonsai.Server.Controllers
         {
             var projectTags = await projectTagFacade.GetAsync();
 
-            var model = new ProjectsPageModel(cultureProvider, languageDictionary,
+            var model = new ProjectsPageModel(serverConfig, cultureProvider, languageDictionary,
                 projectTags, 30)
             {
 
@@ -121,7 +121,7 @@ namespace Bonsai.Server.Controllers
                 project.Content = projectMarkdownArticleFacade.WithUpdatedResourceLinks(project.Content,
                     e => $"{serverConfig.ContentDomain}{e}");
 
-                var model = new ProjectPageModel(cultureProvider, languageDictionary,
+                var model = new ProjectPageModel(serverConfig, cultureProvider, languageDictionary,
                     project)
                 {
 
@@ -140,7 +140,7 @@ namespace Bonsai.Server.Controllers
         {
             var articleTags = await articleTagFacade.GetAsync();
 
-            var model = new BlogPageModel(cultureProvider, languageDictionary,
+            var model = new BlogPageModel(serverConfig, cultureProvider, languageDictionary,
                 articleTags)
             {
 
@@ -164,7 +164,7 @@ namespace Bonsai.Server.Controllers
                 article.Content = blogMarkdownArticleFacade.WithUpdatedResourceLinks(article.Content,
                     e => $"{serverConfig.ContentDomain}{e}");
 
-                var model = new ArticlePageModel(cultureProvider, languageDictionary,
+                var model = new ArticlePageModel(serverConfig, cultureProvider, languageDictionary,
                     article)
                 {
 

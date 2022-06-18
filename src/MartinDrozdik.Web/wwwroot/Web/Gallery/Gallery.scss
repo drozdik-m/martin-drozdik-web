@@ -53,8 +53,9 @@
             left: 0;
             right: 0;
             padding: $pxInRem-6;
-            background-color: $darkTransparentBackground;
+            background-color: $darkTransparentBackgroundDarker;
             color: white;
+            font-weight: $fontWeightSemiBold;
             text-align: center;
             font-size: $pxInRem-16;
             @include transition(background-color $transition);

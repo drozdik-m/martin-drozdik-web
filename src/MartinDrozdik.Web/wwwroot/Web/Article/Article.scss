@@ -10,11 +10,11 @@
 //--------------------------------------------------
 
 //Font-sizes
-$h1FS: $pxInRem-50;
+$h1FS: $pxInRem-46;
 $h1mobileFS: $pxInRem-28;
-$h2FS: $pxInRem-38;
+$h2FS: $pxInRem-34;
 $h2mobileFS: $pxInRem-24;
-$h3FS: $pxInRem-30;
+$h3FS: $pxInRem-28;
 $h3mobileFS: $pxInRem-20;
 $h4FS: $pxInRem-22;
 $h4mobileFS: $pxInRem-18;
@@ -49,7 +49,7 @@ $lightGray: #E0E0E0;
 $lighterGray: #F9F9F9;
 
 //Article block
-$articleBlockMaxWidth: 45rem !default;
+$articleBlockMaxWidth: 50rem !default;
 $articleBlockPadding: 1rem;
 
 //Link color
@@ -91,6 +91,11 @@ $linkColorVisited: #8f0099;
         line-height: $normalLH;
     }
 
+    sup, sub {
+        font-size: $pxInRem-15;
+        line-height: $pxInRem-16;
+    }
+
     p {
         margin-bottom: $pMargin;
         line-height: $normalLH;
@@ -110,6 +115,7 @@ $linkColorVisited: #8f0099;
         margin-bottom: $hMargin;
         color: $black;
         font-weight: $fontWeightBold;
+        font-family: 'Raleway', Verdana, sans-serif;
     }
 
     h1 {
@@ -345,6 +351,7 @@ $linkColorVisited: #8f0099;
         position: relative;
         $quoteDimensions: 2rem;
         padding-left: $quoteDimensions + 1rem;
+        @include border-radius($radiusSmall);
 
         &:before {
             display: block;
@@ -475,7 +482,8 @@ $linkColorVisited: #8f0099;
             $width: $pxInRem-4;
             width: $pxInRem-4;
             //background-color: $mainTheme;
-            background: linear-gradient(to bottom, $red, $black);
+            //background: linear-gradient(to bottom, $red, $black);
+            background-color: $black;
             @include border-radius($width);
             content: " ";
             font-size: 0;
@@ -567,9 +575,13 @@ $linkColorVisited: #8f0099;
         font-size: $normalFS;
         margin: $itemMargin auto;
         background-color: white;
-        padding: $pxInRem-8 $pxInRem-10;
-        @include border-radius($radiusSmall);
+
+        &, code {
+            @include border-radius($radiusSmall);
+        }
+
         code {
+            //@include border-radius($radiusSmall);
         }
     }
 }
@@ -641,6 +653,66 @@ $linkColorVisited: #8f0099;
     .article {
         .file {
   
+        }
+    }
+}
+
+//--------------------------------------------------
+//---------FOOTNOTES--------------------------------
+//--------------------------------------------------
+
+.article {
+
+    a.footnote-ref {
+        text-decoration: none;
+        margin-left: $pxInRem-1;
+        position: relative;
+        top: $pxInRem-1;
+
+        sup {
+            &:before {
+                content: "[";
+            }
+
+            &:after {
+                content: "]";
+            }
+        }
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .footnotes {
+
+        > hr {
+            margin-bottom: $pxInRem-16;
+            background: linear-gradient(to bottom right, $red, $black);
+            @include border-radius($radiusSmall);
+            height: $pxInRem-1;
+            margin-right: 66%;
+        }
+
+        > ol {
+            &, p, a, span, ol, ul, li {
+                font-size: $pxInRem-16;
+            }
+
+            > li {
+                p {
+                    margin-bottom: $pxInRem-4;
+
+                    .footnote-back-ref {
+                        margin-left: $pxInRem-6;
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+            }
         }
     }
 }

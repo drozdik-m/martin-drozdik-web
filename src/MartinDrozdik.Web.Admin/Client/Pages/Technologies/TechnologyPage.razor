@@ -33,6 +33,7 @@
                 <tr>
                     <th>Logo</th>
                     <th>Name</th>
+                    <th>Description</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -42,6 +43,7 @@
                     for(var i = 0; i < 10; i++)
                     {
                         <tr>
+                            <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
                             <td><MudSkeleton /></td>
@@ -59,6 +61,7 @@
                             }
                         </td>
                         <td>@item.Name</td>
+                        <td>@item.Description</td>
                         <td>
                             <ListControlButton Disabled="context.Loading" 
                                 OnDelete="async _ => await listPage.DeleteAsync(item.Id)"

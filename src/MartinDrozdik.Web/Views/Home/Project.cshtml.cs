@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Bonsai.Services.LanguageDictionary.Abstraction;
 using MartinDrozdik.Data.Models.CV;
 using MartinDrozdik.Data.Models.Projects;
+using MartinDrozdik.Web.Configuration;
 
 namespace MartinDrozdik.Web.Views.Home
 {
@@ -12,10 +13,12 @@ namespace MartinDrozdik.Web.Views.Home
     {
         public Data.Models.Projects.Project Project { get; }
 
-        public ProjectPageModel(ICultureProvider cultureProvider, 
+        public ProjectPageModel(
+            ServerConfiguration serverConfiguration,
+            ICultureProvider cultureProvider, 
             ILanguageDictionary languageDictionary,
             Data.Models.Projects.Project project)
-            : base(cultureProvider, languageDictionary)
+            : base(serverConfiguration, cultureProvider, languageDictionary)
         {
             Project = project;
         }
@@ -33,7 +36,7 @@ namespace MartinDrozdik.Web.Views.Home
             Project.Keywords
         }.Concat(Project.Tags.Select(e => e.Tag.Name));
 
-        public override string OgImage => Project.OgImage.Uri;
+        public override string OgImage => ServerConfiguration.ContentDomain + Project.OgImage.Uri;
 
         public override PageId PageId => PageId.Project;
 

@@ -48,6 +48,21 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
             return searchedEntity;
         }
 
+        /// <summary>
+        /// Return first n projects that are visible
+        /// </summary>
+        /// <returns></returns>
+        public async Task<IEnumerable<Project>> GetFirstVisibleAsync(int count)
+        {
+            var allEntities = await IncludeRelationsAsync(EntitySet.AsNoTracking());
+            var visible = allEntities
+                .Where(e => !e.IsHidden);
+            var processedEntities = await ProcessReturnedEntitiesAsync(visible);
+            return await processedEntities
+                .Take(count)
+                .ToListAsync();
+        }
+
         protected override Task<IQueryable<Project>> IncludeRelationsAsync(IQueryable<Project> entities)
         {
             entities = entities
@@ -58,10 +73,10 @@ namespace MartinDrozdik.Data.Repositories.Models.Projects
                 .Include(e => e.Content)
                 .Include(e => e.Tags.OrderBy(e => e.Tag.OrderIndex))
                     .ThenInclude(e => e.Tag)
-                .Include(e => e.Developers.OrderBy(e => e.Person.OrderIndex))
+                .Include(e => e.Developers.OrderBy(e => e.OrderIndex))
                     .ThenInclude(e => e.Person)
                         .ThenInclude(e => e.ProfileImage)
-                .Include(e => e.Technologies.OrderBy(e => e.Technology.OrderIndex))
+                .Include(e => e.Technologies.OrderBy(e => e.OrderIndex))
                     .ThenInclude(e => e.Technology)
                         .ThenInclude(e => e.Logo)
                 .Include(e => e.GalleryImages.OrderBy(e => e.OrderIndex))

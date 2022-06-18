@@ -22,18 +22,28 @@
 
 <partial name="_MySkills" for="@MySkillsModel.Default" />
 
-@*<div id="projects" class="backgroundBlock">
+<div id="projects" class="backgroundBlock">
     <div id="projectsContent" class="block">
         <h2 class="commonH commonHWhite">Dokončené projekty</h2>
         <p class="commonP commonPWhite">Za svou kariéru mám na kontě celou řadu zajímavých projektů, z&nbsp;nichž část zajisté stojí za zmínku.</p>
 
-        @{
+        @*@{
             var projectListModel = new ProjectListModel(Model.ProjectTags, ProjectListScheme.Dark);
             projectListModel.ShowMoreProjectsButton = true;
         }
-        <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />
+        <partial name="../Projects/_ProjectList.cshtml" for="@projectListModel" />*@
+        <ul class="projects darkMode">
+            @foreach(var project in Model.PreviewProjects)
+            {
+                var projectModel = new ProjectListItemModel(project, ProjectListItemScheme.Dark); 
+                <partial name="_ProjectListItem" for="@projectModel" />
+            }
+        </ul>
+        <div class="moreProjects">
+            <a href="@Url.Action("Projects", "Home")" class="commonButton commonButtonRed commonButtonThick">Další projekty</a>
+        </div>
     </div>
-</div>*@
+</div>
 
 
 @{ var biographyModel = new BiographyModel(Model.WorkExperiences, Model.Educations, Model.LanguageSkills); }

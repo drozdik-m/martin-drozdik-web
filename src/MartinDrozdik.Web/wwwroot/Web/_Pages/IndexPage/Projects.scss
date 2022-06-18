@@ -1,7 +1,7 @@
 ﻿@import "../../_Variables";
 @import "../../../../node_modules/@drozdik.m/px-in-rem/_module";
 @import "../../../../node_modules/@drozdik.m/common-mixins/_module";
-@import "../../Projects/ProjectList";
+@import "../../Projects/ProjectListItem";
 
 #projects {
     background-color: $black;
@@ -27,9 +27,17 @@
     .projectList {
         position: relative;
         z-index: 2;
+
         .tagsHeading {
             margin-top: 3rem;
         }
+    }
+
+    .moreProjects {
+        text-align: center;
+        margin-top: 3rem;
+        position: relative;
+        z-index: 2;
     }
 }
 
@@ -42,6 +50,19 @@
         .projectList {
             .tagsHeading {
                 margin-top: 2rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 41.25rem) {
+    #projects {
+        .moreProjects {
+            margin-top: 2rem;
+
+            .commonButton {
+                padding: $pxInRem-16 $pxInRem-32;
+                font-size: $pxInRem-18;
             }
         }
     }
