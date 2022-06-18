@@ -16,7 +16,7 @@ import { EntityList } from "../../EntityList/EntityList";
 
 WindowEvents.OnDOMReady.Add(function ()
 {
-    let listElementParent: HTMLElement = document.getElementById("projects");
+    /*let listElementParent: HTMLElement = document.getElementById("projects");
     if (listElementParent == null)
     {
         console.error(`#projects element not found`);
@@ -40,5 +40,5 @@ WindowEvents.OnDOMReady.Add(function ()
     }
     let projectList = new ProjectList(projectListElement, settings);
 
-    EntityList.InitiateViaAPI(projectList, settings.pageSize, "/api/ProjectList?scheme=dark");
+    EntityList.InitiateViaAPI(projectList, settings.pageSize, "/api/ProjectList?scheme=dark");*/
 });
