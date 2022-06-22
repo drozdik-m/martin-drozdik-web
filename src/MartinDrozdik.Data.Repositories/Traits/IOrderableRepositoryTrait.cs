@@ -58,7 +58,7 @@ namespace MartinDrozdik.Data.Repositories.Traits
             if (newOrder == null)
                 throw new ArgumentNullException(nameof(newOrder));
 
-            var i = 1;
+            var i = 0;
             foreach (var id in newOrder)
             {
                 if (Equals(id, default(TKey)))
@@ -67,6 +67,8 @@ namespace MartinDrozdik.Data.Repositories.Traits
                 var entities = EntitySet
                     .AsNoTracking()
                     .Where(IdPredicate(id));
+                //var includedEntities = await IncludeRelationsAsync(entities);
+                //var processedEntities = await ProcessReturnedEntitiesAsync(includedEntities);
                 var searchedEntity = await entities.FirstOrDefaultAsync();
 
                 //Not found
@@ -80,7 +82,7 @@ namespace MartinDrozdik.Data.Repositories.Traits
                 Context.Entry(searchedEntity).State = EntityState.Modified;
 
                 //Process before update
-                await ProcessUpdatedEntityAsync(searchedEntity);
+                //await ProcessUpdatedEntityAsync(searchedEntity);
 
                 //Save changes
                 await Context.SaveChangesAsync();

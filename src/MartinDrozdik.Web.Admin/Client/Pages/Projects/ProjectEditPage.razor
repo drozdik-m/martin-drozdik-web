@@ -312,7 +312,7 @@ else
                             <b>@connection.Person.Name</b>
                             @if (!string.IsNullOrWhiteSpace(connection.Role))
                             {
-                                @($"– {connection.Role}")
+                                @($" – {connection.Role}")
                             }
                          </MudText>
                     </DisplayItem>
@@ -341,7 +341,7 @@ else
                             <b>@connection.Technology.Name</b> 
                             @if (!string.IsNullOrWhiteSpace(connection.Usage))
                             {
-                                @($"– {connection.Usage}")
+                                @($" – {connection.Usage}")
                             }
                          </MudText>
                     </DisplayItem>
