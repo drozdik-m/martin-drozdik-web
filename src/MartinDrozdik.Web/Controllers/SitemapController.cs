@@ -60,7 +60,7 @@ namespace Bonsai.Server.Controllers
                     newestProjectChange = project.LastEditAt;
 
                 //Add article node
-                projects.AddChild(new SitemapNode(project.Name, new Uri($"{serverConfiguration.Domain}/project/{project.UrlName}"), SitemapChangeFrequency.Monthly, lastModification: project.LastEditAt));
+                projects.AddChild(new SitemapNode(project.Name, new Uri($"{serverConfiguration.Domain}/projects/{project.UrlName}"), SitemapChangeFrequency.Monthly, lastModification: project.LastEditAt));
             }
 
             //Set last modificatin for projects

@@ -1,6 +1,6 @@
 {
-  "name": "Martin Drozdík",
-  "short_name": "Martin Drozdík",
+  "name": "Martin Drozdï¿½k",
+  "short_name": "Martin Drozdï¿½k",
   "icons": [
     {
       "src": "/Favicon/android-chrome-36x36.png",
@@ -45,7 +45,7 @@
   ],
   "theme_color": "#240b36",
   "background_color": "#240b36",
-  "start_url": "http://martin-drozdik.cz",
+  "start_url": "https://martin-drozdik.cz",
   "scope": "/",
   "display": "standalone"
 }
